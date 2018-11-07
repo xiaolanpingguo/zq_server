@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="header">
+      <UniqueIdentifier>{f16d156a-fd00-453a-98a4-72981bd4f80d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="IClassModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="ICommonConfigModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="IComponentModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="ICoroutineModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="IElementModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="IEventModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="IHttpClientModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="IHttpServerModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="IKernelModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="ILogModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="IModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="IPropertyConfigModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="IPropertyModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="IPropertyTrailModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="platform.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="uuid.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="IWebsocketModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="ILib.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="ILibManager.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="IRedislModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="IMessageDispatcherModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="ILoginServerModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameServerModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="IMasterServerModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="ILuaScriptModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="IGateServerModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="IProtoJsonModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="ITestServerModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="ITimerModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="IMysqlModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="ILogServerModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="IDataAgentModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="IConsoleCommandModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="singleton.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="IWorldSSModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="INet.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="INetSSModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="INetCSModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="ILoginToWorldModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="ILoginCSModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameCSModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameSSModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameToWorldModule.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="IServerComm.h">
+      <Filter>header</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

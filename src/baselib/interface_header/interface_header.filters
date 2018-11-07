@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GUID.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IChatModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IClassModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ICommonConfigModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ICommonRedisModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IComponent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ICoroutineModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IElementModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IEventModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameServerConfigModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameServerModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameServerNet_ClientModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameServerNet_ServerModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameServerScriptModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameServerToWorldModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IHttpClientModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IHttpServerModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IKernelModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ILoginLogicModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ILoginNet_ServerModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ILoginToMasterModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ILogModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IMasterModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IMasterNet_HttpServerModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IMasterNet_ServerModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="INetClientModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="INetModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IPlugin.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IPluginManager.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IPropertyConfigModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IPropertyModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IPropertyTrailModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IProxyLogicModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IProxyServerNet_ServerModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IProxyServerToGameModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IProxyServerToWorldModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IScriptModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IWorldGuildBroadcastModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IWorldGuildDataModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IWorldGuildEctypeModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IWorldGuildModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IWorldLogicModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IWorldNet_ServerModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IWorldToMasterModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ISceneAOIModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ISceneProcessModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="IScheduleModule.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

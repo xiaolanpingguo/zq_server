@@ -1,0 +1,8 @@
+MESSAGE(STATUS "CMake game_ss_server")
+
+
+AUX_SOURCE_DIRECTORY(. SRC_LIST)
+
+ADD_LIBRARY(game_ss_server STATIC ${SRC_LIST})
+
+SET(LIBRARY_OUTPUT_PATH ${OutPutDir})

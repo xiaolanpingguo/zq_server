@@ -1,0 +1,8 @@
+MESSAGE(STATUS "CMake login_client_server")
+
+
+AUX_SOURCE_DIRECTORY(. SRC_LIST)
+
+ADD_LIBRARY(login_client_server STATIC ${SRC_LIST})
+
+SET(LIBRARY_OUTPUT_PATH ${OutPutDir})

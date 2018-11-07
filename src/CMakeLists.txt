@@ -1,0 +1,10 @@
+MESSAGE("CMake: src")
+
+ADD_SUBDIRECTORY(baselib)
+ADD_SUBDIRECTORY(server)
+ADD_SUBDIRECTORY(midware)
+ADD_SUBDIRECTORY(tools)
+
+
+
+

@@ -1,0 +1,14 @@
+F:/program/OSP/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/libprotobuf-lite.dir
+F:/program/OSP/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/protoc.dir
+F:/program/OSP/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/libprotoc.dir
+F:/program/OSP/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/libprotobuf.dir
+F:/program/OSP/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/lite-test.dir
+F:/program/OSP/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/gmock_main.dir
+F:/program/OSP/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/gmock.dir
+F:/program/OSP/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/tests.dir
+F:/program/OSP/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/test_plugin.dir
+F:/program/OSP/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/lite-arena-test.dir
+F:/program/OSP/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/check.dir
+F:/program/OSP/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/INSTALL.dir
+F:/program/OSP/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/ALL_BUILD.dir
+F:/program/OSP/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/ZERO_CHECK.dir

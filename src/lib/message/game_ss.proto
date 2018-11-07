@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package SSMsg;
+
+
+message JsonMsg
+{
+	string test_key1 = 1;
+	string test_key2 = 2;
+}
+
+
+enum SS_MSG_ID
+{
+	S2S_NONE = 0;
+
+	// 向某个server注册
+	S2S_SERVER_REGSTER_REQ = 2001;
+
+	// 服务器信息报告
+	S2S_SERVER_REPORT_REQ = 2002;
+
+	// 心跳
+	S2S_HEARTBEAT = 2003;
+
+	// 通知有新的server加入了
+	S2S_NEW_SERVER_ADD_GROUP_REQ = 2004;
+}
+
+message SSPacket
+{
+	int32 cmd_id = 1;
+
+	S2SServerRegisterReq server_regist_req = 2;  //S2S_SERVER_REGSTER_REQ
+	S2SServerReportReq server_report_req = 3;	  //S2S_SERVER_REPORT_REQ
+	S2SHeartBeat heart_beat = 4;   // S2S_HEARTBEAT
+	S2SNewServerAddGroupReq new_server_add_group_req = 5;   // S2S_NEW_SERVER_ADD_GROUP_REQ
+}
+
+
+
+// 组件基本信息
+message ServerInfo
+{
+	int32 server_type = 1; 
+	int32 server_id = 2; 
+	int32 int_port = 3; 
+	int32 ext_port = 4; 
+	string int_ip = 5;
+	string ext_ip = 6;
+}
+
+// 报告的组件信息
+message ServerReportInfo
+{
+	ServerInfo server_info = 1;
+	int32 state = 2;
+}
+
+// 向某个server注册
+message S2SServerRegisterReq
+{
+	ServerInfo server_info = 1;
+}
+
+
+
+//报告自己的信息
+message S2SServerReportReq
+{
+	ServerReportInfo server_report_info = 1; 
+}
+
+// 心跳
+message S2SHeartBeat
+{
+	int32 server_type = 1; 
+	int32 server_id = 2; 
+	int32 state = 3;
+}
+
+
+// 向某个server通知有新的server加入了
+message S2SNewServerAddGroupReq
+{
+	 repeated ServerInfo server_info = 1;
+}
+

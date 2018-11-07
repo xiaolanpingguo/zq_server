@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Text Include="CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dynlib.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="libmanager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="signal_handler.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="coroutine_manager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="dynlib.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="self_register_factory.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="libmanager.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="signal_handler.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="coroutine_manager.h">
+      <Filter>header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="header">
+      <UniqueIdentifier>{205e02bf-7608-445b-bcf9-f3eb2a429c3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{a8c667e5-cc83-4c10-bf08-f028b00623a8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
