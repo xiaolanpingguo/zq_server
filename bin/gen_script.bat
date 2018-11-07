@@ -1,0 +1,1 @@
+python .\gen_cfg.py datacfg\impl\Server.xml
