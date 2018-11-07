@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<XML>
+	<Propertys>
+		<Property Id="external_ip" Cache="0" Desc="外网IP" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="external_port" Cache="0" Desc="外网端口(-1表示不侦听外网端口)" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="http_port" Cache="0" Desc="http端口" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="internal_ip" Cache="0" Desc="内网IP" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="internal_port" Cache="0" Desc="内网端口" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="max_connect" Cache="0" Desc="最大连接数" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="name" Cache="0" Desc="服务器名字" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="string" Upload="0" />
+		<Property Id="server_id" Cache="0" Desc="服务器ID" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+		<Property Id="server_type" Cache="0" Desc="服务器类型" Force="0" Private="0" Public="0" Ref="0" Save="0" Type="int" Upload="0" />
+	</Propertys>
+	<Records>
+		<Record Id="need_conn_type" Cache="0"	 Col="4"	 Force="0"	 Private="0"	 Public="0"	 Ref="0"	 Row="256"	 Save="0"	 Upload="0"	 >
+			<Col Type ="int"	Tag="type1"/><!--- Desc-->
+			<Col Type ="int"	Tag="type2"/><!--- 需要连接的目标组件的类型-->
+			<Col Type ="int"	Tag="type3"/>
+			<Col Type ="int"	Tag="type4"/>
+		</Record>
+	</Records>
+</XML>
