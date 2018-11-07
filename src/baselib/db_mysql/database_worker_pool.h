@@ -1,6 +1,6 @@
 #pragma once
 
-#include "baselib/interface_header/platform.h"
+#include "interface_header/platform.h"
 #include "database_env_fwd.h"
 #include "basic_statement.h"
 #include "prepared_statement.h"

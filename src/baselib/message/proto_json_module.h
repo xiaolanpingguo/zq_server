@@ -1,6 +1,6 @@
 #pragma once
 
-#include "baselib/interface_header/IProtoJsonModule.h"
+#include "interface_header/IProtoJsonModule.h"
 
 
 namespace google

@@ -508,6 +508,20 @@ class ServerInfo : public ::google::protobuf::Message /* @@protoc_insertion_poin
   ::std::string* release_ext_ip();
   void set_allocated_ext_ip(::std::string* ext_ip);
 
+  // string name = 13;
+  void clear_name();
+  static const int kNameFieldNumber = 13;
+  const ::std::string& name() const;
+  void set_name(const ::std::string& value);
+  #if LANG_CXX11
+  void set_name(::std::string&& value);
+  #endif
+  void set_name(const char* value);
+  void set_name(const char* value, size_t size);
+  ::std::string* mutable_name();
+  ::std::string* release_name();
+  void set_allocated_name(::std::string* name);
+
   // int32 server_type = 1;
   void clear_server_type();
   static const int kServerTypeFieldNumber = 1;
@@ -532,16 +546,59 @@ class ServerInfo : public ::google::protobuf::Message /* @@protoc_insertion_poin
   ::google::protobuf::int32 ext_port() const;
   void set_ext_port(::google::protobuf::int32 value);
 
+  // int32 build = 7;
+  void clear_build();
+  static const int kBuildFieldNumber = 7;
+  ::google::protobuf::int32 build() const;
+  void set_build(::google::protobuf::int32 value);
+
+  // float population_level = 8;
+  void clear_population_level();
+  static const int kPopulationLevelFieldNumber = 8;
+  float population_level() const;
+  void set_population_level(float value);
+
+  // int32 icon = 9;
+  void clear_icon();
+  static const int kIconFieldNumber = 9;
+  ::google::protobuf::int32 icon() const;
+  void set_icon(::google::protobuf::int32 value);
+
+  // int32 time_zone = 10;
+  void clear_time_zone();
+  static const int kTimeZoneFieldNumber = 10;
+  ::google::protobuf::int32 time_zone() const;
+  void set_time_zone(::google::protobuf::int32 value);
+
+  // int32 allowed_security_level = 11;
+  void clear_allowed_security_level();
+  static const int kAllowedSecurityLevelFieldNumber = 11;
+  ::google::protobuf::int32 allowed_security_level() const;
+  void set_allowed_security_level(::google::protobuf::int32 value);
+
+  // int32 flag = 12;
+  void clear_flag();
+  static const int kFlagFieldNumber = 12;
+  ::google::protobuf::int32 flag() const;
+  void set_flag(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:SSMsg.ServerInfo)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr int_ip_;
   ::google::protobuf::internal::ArenaStringPtr ext_ip_;
+  ::google::protobuf::internal::ArenaStringPtr name_;
   ::google::protobuf::int32 server_type_;
   ::google::protobuf::int32 server_id_;
   ::google::protobuf::int32 int_port_;
   ::google::protobuf::int32 ext_port_;
+  ::google::protobuf::int32 build_;
+  float population_level_;
+  ::google::protobuf::int32 icon_;
+  ::google::protobuf::int32 time_zone_;
+  ::google::protobuf::int32 allowed_security_level_;
+  ::google::protobuf::int32 flag_;
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_game_5fss_2eproto::TableStruct;
 };
@@ -1620,6 +1677,143 @@ inline void ServerInfo::set_allocated_ext_ip(::std::string* ext_ip) {
   }
   ext_ip_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ext_ip);
   // @@protoc_insertion_point(field_set_allocated:SSMsg.ServerInfo.ext_ip)
+}
+
+// int32 build = 7;
+inline void ServerInfo::clear_build() {
+  build_ = 0;
+}
+inline ::google::protobuf::int32 ServerInfo::build() const {
+  // @@protoc_insertion_point(field_get:SSMsg.ServerInfo.build)
+  return build_;
+}
+inline void ServerInfo::set_build(::google::protobuf::int32 value) {
+  
+  build_ = value;
+  // @@protoc_insertion_point(field_set:SSMsg.ServerInfo.build)
+}
+
+// float population_level = 8;
+inline void ServerInfo::clear_population_level() {
+  population_level_ = 0;
+}
+inline float ServerInfo::population_level() const {
+  // @@protoc_insertion_point(field_get:SSMsg.ServerInfo.population_level)
+  return population_level_;
+}
+inline void ServerInfo::set_population_level(float value) {
+  
+  population_level_ = value;
+  // @@protoc_insertion_point(field_set:SSMsg.ServerInfo.population_level)
+}
+
+// int32 icon = 9;
+inline void ServerInfo::clear_icon() {
+  icon_ = 0;
+}
+inline ::google::protobuf::int32 ServerInfo::icon() const {
+  // @@protoc_insertion_point(field_get:SSMsg.ServerInfo.icon)
+  return icon_;
+}
+inline void ServerInfo::set_icon(::google::protobuf::int32 value) {
+  
+  icon_ = value;
+  // @@protoc_insertion_point(field_set:SSMsg.ServerInfo.icon)
+}
+
+// int32 time_zone = 10;
+inline void ServerInfo::clear_time_zone() {
+  time_zone_ = 0;
+}
+inline ::google::protobuf::int32 ServerInfo::time_zone() const {
+  // @@protoc_insertion_point(field_get:SSMsg.ServerInfo.time_zone)
+  return time_zone_;
+}
+inline void ServerInfo::set_time_zone(::google::protobuf::int32 value) {
+  
+  time_zone_ = value;
+  // @@protoc_insertion_point(field_set:SSMsg.ServerInfo.time_zone)
+}
+
+// int32 allowed_security_level = 11;
+inline void ServerInfo::clear_allowed_security_level() {
+  allowed_security_level_ = 0;
+}
+inline ::google::protobuf::int32 ServerInfo::allowed_security_level() const {
+  // @@protoc_insertion_point(field_get:SSMsg.ServerInfo.allowed_security_level)
+  return allowed_security_level_;
+}
+inline void ServerInfo::set_allowed_security_level(::google::protobuf::int32 value) {
+  
+  allowed_security_level_ = value;
+  // @@protoc_insertion_point(field_set:SSMsg.ServerInfo.allowed_security_level)
+}
+
+// int32 flag = 12;
+inline void ServerInfo::clear_flag() {
+  flag_ = 0;
+}
+inline ::google::protobuf::int32 ServerInfo::flag() const {
+  // @@protoc_insertion_point(field_get:SSMsg.ServerInfo.flag)
+  return flag_;
+}
+inline void ServerInfo::set_flag(::google::protobuf::int32 value) {
+  
+  flag_ = value;
+  // @@protoc_insertion_point(field_set:SSMsg.ServerInfo.flag)
+}
+
+// string name = 13;
+inline void ServerInfo::clear_name() {
+  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& ServerInfo::name() const {
+  // @@protoc_insertion_point(field_get:SSMsg.ServerInfo.name)
+  return name_.GetNoArena();
+}
+inline void ServerInfo::set_name(const ::std::string& value) {
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:SSMsg.ServerInfo.name)
+}
+#if LANG_CXX11
+inline void ServerInfo::set_name(::std::string&& value) {
+  
+  name_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:SSMsg.ServerInfo.name)
+}
+#endif
+inline void ServerInfo::set_name(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:SSMsg.ServerInfo.name)
+}
+inline void ServerInfo::set_name(const char* value, size_t size) {
+  
+  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:SSMsg.ServerInfo.name)
+}
+inline ::std::string* ServerInfo::mutable_name() {
+  
+  // @@protoc_insertion_point(field_mutable:SSMsg.ServerInfo.name)
+  return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* ServerInfo::release_name() {
+  // @@protoc_insertion_point(field_release:SSMsg.ServerInfo.name)
+  
+  return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void ServerInfo::set_allocated_name(::std::string* name) {
+  if (name != NULL) {
+    
+  } else {
+    
+  }
+  name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
+  // @@protoc_insertion_point(field_set_allocated:SSMsg.ServerInfo.name)
 }
 
 // -------------------------------------------------------------------

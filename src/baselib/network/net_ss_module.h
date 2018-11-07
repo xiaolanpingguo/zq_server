@@ -1,8 +1,8 @@
 #pragma once
 
 #include "internal_socket_mgr.hpp"
-#include "baselib/interface_header/INetSSModule.h"
-#include "baselib/interface_header/ILogModule.h"
+#include "interface_header/INetSSModule.h"
+#include "interface_header/ILogModule.h"
 
 
 namespace zq {

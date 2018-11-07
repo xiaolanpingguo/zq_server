@@ -1,9 +1,9 @@
 #pragma once
 
-#include "baselib/interface_header/IClassModule.h"
-#include "baselib/interface_header/ILogModule.h"
-#include "baselib/interface_header/IElementModule.h"
-#include "baselib/interface_header/IMysqlModule.h"
+#include "interface_header/IClassModule.h"
+#include "interface_header/ILogModule.h"
+#include "interface_header/IElementModule.h"
+#include "interface_header/IMysqlModule.h"
 
 #include "database_worker_pool.h"
 #include "query_callback.h"

@@ -1,8 +1,10 @@
 #pragma once 
 
 
-#include "baselib/interface_header/IComponentModule.h"
+#include "interface_header/IComponentModule.h"
 #include "baselib/network/internal_socket.hpp"
+
+#include "baselib/message/game_ss.pb.h"
 
 
 namespace SSMsg
@@ -24,9 +26,9 @@ public:
 	void onClose() override;
 	bool readDataHandler() override;
 
-	int getServerId() { return componentInfos_.server_id; }
-	int getServerType() { return componentInfos_.server_type; }
-	const ComponentInfos& getCompontent() { return componentInfos_; }
+	int getServerId() { return serverInfos_.server_id(); }
+	int getServerType() { return serverInfos_.server_type(); }
+	const SSMsg::ServerInfo& getServerInfo() { return serverInfos_; }
 
 public:
 	bool onS2SServerRegisterReq(const SSMsg::SSPacket& packet);
@@ -34,7 +36,7 @@ public:
 
 private:
 
-	ComponentInfos componentInfos_;
+	SSMsg::ServerInfo serverInfos_;
 };
 
 }

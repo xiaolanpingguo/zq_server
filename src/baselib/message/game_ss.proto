@@ -48,6 +48,14 @@ message ServerInfo
 	int32 ext_port = 4; 
 	string int_ip = 5;
 	string ext_ip = 6;
+
+	int32 build = 7;   // 版本
+	float population_level = 8;	 // 火爆程度
+	int32 icon = 9;			// 图标
+	int32 time_zone = 10;  // 时区
+	int32 allowed_security_level = 11;
+	int32 flag = 12;
+	string name = 13;
 }
 
 // 报告的组件信息
@@ -85,4 +93,6 @@ message S2SNewServerAddGroupReq
 {
 	 repeated ServerInfo server_info = 1;
 }
+
+
 

@@ -2,8 +2,8 @@
 import xml.dom.minidom
 import sys
 
-SERVER_NAME_LIST = ['master_server','world_server', 'login_server', 
-                    'game_server', 'gate_server', 'log_server', 'test_server']
+SERVER_NAME_LIST = ['master_ss_server','world_ss_server', 'login_cs_server', 
+                    'game_cs_server', 'gate_server', 'log_ss_server', 'test_server']
 
 class GenCfg(object):
 

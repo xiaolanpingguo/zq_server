@@ -1,8 +1,8 @@
 #pragma once
 
 
-#include "baselib/interface_header/IConsoleCommandModule.h"
-#include "baselib/interface_header/ILoginCSModule.h"
+#include "interface_header/IConsoleCommandModule.h"
+#include "interface_header/ILoginCSModule.h"
 
 namespace zq {
 

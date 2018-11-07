@@ -25,7 +25,7 @@ bool ConsoleCommandModule::run()
 bool ConsoleCommandModule::process(const std::string& cmd)
 {
 	std::string name = cmd.substr(cmd.find_last_of('=') + 1, cmd.length() - cmd.find_last_of('=') - 1);
-	loginCSModule_->_createAccount(name, name);
+	loginCSModule_->createAccount(name, name);
 	return true;
 }
 

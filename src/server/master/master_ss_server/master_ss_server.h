@@ -1,7 +1,7 @@
 #pragma once
 
-#include "baselib/interface_header/ILib.h"
-#include "baselib/interface_header/ILibManager.h"
+#include "interface_header/ILib.h"
+#include "interface_header/ILibManager.h"
 
 
 namespace zq {

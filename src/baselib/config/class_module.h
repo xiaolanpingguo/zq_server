@@ -8,9 +8,9 @@
 #include "baselib/core/record.h"
 #include "baselib/core/property_manager.h"
 #include "baselib/core/record_manager.h"
-#include "baselib/interface_header/IClassModule.h"
-#include "baselib/interface_header/IElementModule.h"
-#include "baselib/interface_header/ILibManager.h"
+#include "interface_header/IClassModule.h"
+#include "interface_header/IElementModule.h"
+#include "interface_header/ILibManager.h"
 
 namespace zq {
 

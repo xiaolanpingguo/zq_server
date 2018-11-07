@@ -1,10 +1,7 @@
 #pragma once
 
-#include <stdint.h>
-#include <type_traits>
-#include <functional>
-#include "baselib/interface_header/platform.h"
-#include "baselib/interface_header/IModule.h"
+
+#include "IModule.h"
 
 namespace zq {
 

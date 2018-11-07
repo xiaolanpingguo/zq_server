@@ -1,9 +1,9 @@
 #pragma once
 
-#include "baselib/interface_header/IClassModule.h"
-#include "baselib/interface_header/IElementModule.h"
-#include "baselib/interface_header/ILoginCSModule.h"
-#include "baselib/interface_header/IRedislModule.h"
+#include "interface_header/IClassModule.h"
+#include "interface_header/IElementModule.h"
+#include "interface_header/ILoginCSModule.h"
+#include "interface_header/IRedislModule.h"
 
 #include "baselib/network/socket_mgr.hpp"
 #include "login_cs_session.h"

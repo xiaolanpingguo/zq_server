@@ -1,10 +1,10 @@
 #pragma once 
 
-#include "baselib/interface_header/IClassModule.h"
-#include "baselib/interface_header/IElementModule.h"
-#include "baselib/interface_header/ITimerModule.h"
-#include "baselib/interface_header/IServerComm.h"
-#include "baselib/interface_header/ILoginToWorldModule.h"
+#include "interface_header/IClassModule.h"
+#include "interface_header/IElementModule.h"
+#include "interface_header/ITimerModule.h"
+#include "interface_header/IServerComm.h"
+#include "interface_header/ILoginToWorldModule.h"
 
 #include "login_to_world_session.h"
 

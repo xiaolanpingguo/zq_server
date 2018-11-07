@@ -1,12 +1,11 @@
 #pragma once
 
-#include <iostream>
-#include <string>
+
 #include <functional>
 #include "IModule.h"
 #include "baselib/core/IObject.h"
-#include "baselib/interface_header/uuid.h"
-#include "baselib/interface_header/IClassModule.h"
+#include "uuid.h"
+#include "IClassModule.h"
 
 namespace zq{
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "baselib/interface_header/platform.h"
+#include "interface_header/platform.h"
 #include "sql_operation.h"
 #include "query_result.h"
 #include "mysql_connection.h"

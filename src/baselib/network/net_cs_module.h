@@ -1,8 +1,8 @@
 #pragma once
 
 #include "external_socket.hpp"
-#include "baselib/interface_header/INetCSModule.h"
-#include "baselib/interface_header/ILogModule.h"
+#include "interface_header/INetCSModule.h"
+#include "interface_header/ILogModule.h"
 
 
 namespace zq {

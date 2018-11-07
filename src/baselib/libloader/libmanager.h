@@ -1,12 +1,13 @@
 #pragma once
 
+
 #include <map>
 #include <time.h>
 #include <unordered_map>
 #include "DynLib.h"
-#include "baselib/interface_header/IModule.h"
-#include "baselib/interface_header/ILibManager.h"
-#include "baselib/interface_header/singleton.hpp"
+#include "interface_header/IModule.h"
+#include "interface_header/ILibManager.h"
+#include "interface_header/singleton.hpp"
 
 namespace zq {
 

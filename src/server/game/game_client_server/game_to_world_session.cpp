@@ -1,9 +1,10 @@
 #include "game_to_world_session.h"
-#include "baselib/interface_header/ILoginCSModule.h"
+
 #include "baselib/libloader/libmanager.h"
 #include "baselib/base_code/format.h"
-
 #include "baselib/message/game_ss.pb.h"
+
+#include "interface_header/IGameCSModule.h"
 
 #include <unordered_map>
 #include <iostream>
@@ -66,10 +67,10 @@ bool GameToWorldSession::readDataHandler()
 }
 
 void GameToWorldSession::registerToComponent()
-{
+{					     
 	ILibManager* lib_manager = LibManager::get_instance_ptr();
-	ILoginCSModule* cs_module = lib_manager->findModule<ILoginCSModule>();
-
+	IGameCSModule* cs_module = lib_manager->findModule<IGameCSModule>();     
+																		  
 	// 注册到其他组件
 	SSMsg::SSPacket packet;
 	packet.set_cmd_id(SSMsg::S2S_SERVER_REGSTER_REQ);
@@ -82,6 +83,14 @@ void GameToWorldSession::registerToComponent()
 	server_info->set_ext_port(cs_module->getPort());
 	server_info->set_int_ip("");
 	server_info->set_ext_ip(cs_module->getIp());
+
+	server_info->set_build(0);
+	server_info->set_population_level(0.5);
+	server_info->set_icon(0);
+	server_info->set_time_zone(0);
+	server_info->set_allowed_security_level(0);
+	server_info->set_flag(0);
+	server_info->set_name("zq");
 
 	std::string str_data;
 	packet.SerializeToString(&str_data);

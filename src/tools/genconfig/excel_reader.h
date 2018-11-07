@@ -1,10 +1,9 @@
-#ifndef _TINYXLSX_H_
-#define _TINYXLSX_H_
+#pragma once
 
 #include <vector>
 #include <string>
 
-#include "baselib/interface_header/platform.h"
+#include "interface_header/platform.h"
 #include "dependencies/RapidXML/rapidxml.hpp"
 #include "dependencies/RapidXML/rapidxml_iterators.hpp"
 #include "dependencies/RapidXML/rapidxml_print.hpp"
@@ -84,4 +83,3 @@ private:
 }
 
 
-#endif

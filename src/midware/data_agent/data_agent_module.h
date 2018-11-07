@@ -1,8 +1,8 @@
 #pragma once
 
-#include "baselib/interface_header/IDataAgentModule.h"
-#include "baselib/interface_header/IKernelModule.h"
-#include "baselib/interface_header/IRedislModule.h"
+#include "interface_header/IDataAgentModule.h"
+#include "interface_header/IKernelModule.h"
+#include "interface_header/IRedislModule.h"
 
 namespace zq{
 

@@ -5,7 +5,7 @@
 #include <list>
 #include <functional> 
 #include <sstream>
-#include "baselib/interface_header/platform.h"
+#include "interface_header/platform.h"
 #include "crc32.hpp"
 
 namespace zq {

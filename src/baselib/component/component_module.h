@@ -1,12 +1,12 @@
 #pragma once
 
-#include "baselib/interface_header/IComponentModule.h"
-#include "baselib/interface_header/IKernelModule.h"
-#include "baselib/interface_header/INetSSModule.h"
-#include "baselib/interface_header/IClassModule.h"
-#include "baselib/interface_header/ILogModule.h"
-#include "baselib/interface_header/IElementModule.h"
-#include "baselib/interface_header/IHttpClientModule.h"
+#include "interface_header/IComponentModule.h"
+#include "interface_header/IKernelModule.h"
+#include "interface_header/INetSSModule.h"
+#include "interface_header/IClassModule.h"
+#include "interface_header/ILogModule.h"
+#include "interface_header/IElementModule.h"
+#include "interface_header/IHttpClientModule.h"
 #include "baselib/network/connector.hpp"
 
 #include "baselib/message/game_ss.pb.h"

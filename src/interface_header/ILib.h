@@ -2,8 +2,8 @@
 
 
 #include "baselib/core/map_ex.hpp"
-#include "baselib/interface_header/IModule.h"
-#include "baselib/interface_header/ILibManager.h"
+#include "IModule.h"
+
 
 namespace zq{
 

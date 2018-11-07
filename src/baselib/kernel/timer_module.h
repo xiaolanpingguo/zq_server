@@ -1,8 +1,8 @@
 #pragma once
 
 
-#include "baselib/interface_header/ITimerModule.h"
-#include "baselib/interface_header/ILogModule.h"
+#include "interface_header/ITimerModule.h"
+#include "interface_header/ILogModule.h"
 #include <map>
 
 namespace zq {

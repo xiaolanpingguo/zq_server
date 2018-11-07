@@ -5,7 +5,7 @@
 #include "baselib/core/IObject.h"
 #include "baselib/core/IRecordManager.h"
 #include "baselib/core/IPropertyManager.h"
-#include "baselib/interface_header/platform.h"
+#include "interface_header/platform.h"
 
 namespace zq {
 

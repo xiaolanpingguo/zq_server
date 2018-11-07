@@ -4,8 +4,8 @@
 #include "baselib/message/game_db_account.pb.h"
 #include "midware/cryptography/sha1.h"
 #include "midware/cryptography/totp.h"
-#include "lib/libloader/libmanager.h"
-#include "lib/interface_header/IDataAgentModule.h"
+#include "baselib/libloader/libmanager.h"
+#include "interface_header/IDataAgentModule.h"
 #include <unordered_map>
 #include <array>
 
@@ -253,7 +253,7 @@ void LoginCSSession::SendPacket(ByteBuffer& packet)
 
 bool LoginCSSession::HandleLogonChallenge()
 {
-	IDataAgentModule* data_agent = LibManager::get_instance().findModule<IDataAgentModule>();
+	//IDataAgentModule* data_agent = LibManager::get_instance().findModule<IDataAgentModule>();
 
     _status = STATUS_CLOSED;
 
@@ -282,8 +282,8 @@ bool LoginCSSession::HandleLogonChallenge()
 
 	// 去数据库查找帐号信息
 	std::string key = KEY_ACCOUNT + login_name;
-	DBAccount::UserAccount account_info;
-	if (!data_agent->getData(login_name, key, account_info))
+	DBAccount::DBUserAccount account_info;
+	//if (!data_agent->getData(login_name, key, account_info))
 	{
 		LOG_ERROR << "login faild, name: " << login_name;
 		error_code = WOW_FAIL_UNKNOWN_ACCOUNT;

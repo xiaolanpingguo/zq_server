@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <XML>
 	<Object Id="db_server_1" external_ip="127.0.0.1" external_port="-1" http_port="36001" internal_ip="127.0.0.1" internal_port="26001" max_connect="5000" name="db_server" server_id="6001" server_type="6" />
-	<Object Id="game_server_1" external_ip="127.0.0.1" external_port="16001" http_port="34001" internal_ip="127.0.0.1" internal_port="24001" max_connect="5000" name="game_server" server_id="4001" server_type="4" />
+	<Object Id="game_cs_server_1" external_ip="127.0.0.1" external_port="16001" http_port="34001" internal_ip="127.0.0.1" internal_port="24001" max_connect="5000" name="game_cs_server" server_id="4001" server_type="4" />
 	<Object Id="gate_server_1" external_ip="127.0.0.1" external_port="15001" http_port="35001" internal_ip="127.0.0.1" internal_port="25001" max_connect="5000" name="gate_server" server_id="5001" server_type="5" />
-	<Object Id="log_server_1" external_ip="127.0.0.1" external_port="-1" http_port="37001" internal_ip="127.0.0.1" internal_port="27001" max_connect="5000" name="log_server" server_id="7001" server_type="7" />
-	<Object Id="login_server_1" external_ip="127.0.0.1" external_port="14001" http_port="32001" internal_ip="127.0.0.1" internal_port="22001" max_connect="5000" name="login_server" server_id="2001" server_type="2" />
-	<Object Id="master_server_1" external_ip="127.0.0.1" external_port="-1" http_port="31001" internal_ip="127.0.0.1" internal_port="21001" max_connect="5000" name="master_server" server_id="1001" server_type="1" />
+	<Object Id="log_ss_server_1" external_ip="127.0.0.1" external_port="-1" http_port="37001" internal_ip="127.0.0.1" internal_port="27001" max_connect="5000" name="log_ss_server" server_id="7001" server_type="7" />
+	<Object Id="login_cs_server_1" external_ip="127.0.0.1" external_port="14001" http_port="32001" internal_ip="127.0.0.1" internal_port="22001" max_connect="5000" name="login_cs_server" server_id="2001" server_type="2" />
+	<Object Id="master_ss_server_1" external_ip="127.0.0.1" external_port="-1" http_port="31001" internal_ip="127.0.0.1" internal_port="21001" max_connect="5000" name="master_ss_server" server_id="1001" server_type="1" />
 	<Object Id="misc_server_1" external_ip="127.0.0.1" external_port="-1" http_port="38001" internal_ip="127.0.0.1" internal_port="28001" max_connect="5000" name="misc_server" server_id="8001" server_type="8" />
 	<Object Id="test_server_1" external_ip="192.168.0.169" external_port="19001" http_port="39001" internal_ip="192.168.0.169" internal_port="29001" max_connect="5000" name="test_server" server_id="9999" server_type="9" />
-	<Object Id="world_server_1" external_ip="127.0.0.1" external_port="-1" http_port="33001" internal_ip="127.0.0.1" internal_port="23001" max_connect="5000" name="world_server" server_id="3001" server_type="3" />
+	<Object Id="world_ss_server_1" external_ip="127.0.0.1" external_port="-1" http_port="33001" internal_ip="127.0.0.1" internal_port="23001" max_connect="5000" name="world_ss_server" server_id="3001" server_type="3" />
 </XML>

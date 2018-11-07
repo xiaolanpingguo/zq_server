@@ -4,7 +4,7 @@
 #include "socket_mgr.hpp"
 #include "connector.hpp"
 #include "internal_socket.hpp"
-#include "baselib/interface_header/INet.h"
+#include "interface_header/INet.h"
 
 namespace zq {
 

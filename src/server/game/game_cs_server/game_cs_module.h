@@ -1,8 +1,8 @@
 #pragma once
 
-#include "baselib/interface_header/IClassModule.h"
-#include "baselib/interface_header/IElementModule.h"
-#include "baselib/interface_header/IGameCSModule.h"
+#include "interface_header/IClassModule.h"
+#include "interface_header/IElementModule.h"
+#include "interface_header/IGameCSModule.h"
 
 #include "baselib/network/socket_mgr.hpp"
 #include "game_cs_session.h"

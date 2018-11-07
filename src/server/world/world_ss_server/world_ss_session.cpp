@@ -2,8 +2,8 @@
 #include "baselib/message/config_define.hpp"
 #include "baselib/message/game_ss.pb.h"
 #include "baselib/libloader/libmanager.h"
-#include "baselib/interface_header/IComponentModule.h"
-#include "baselib/interface_header/IWorldSSModule.h"
+#include "interface_header/IComponentModule.h"
+#include "interface_header/IWorldSSModule.h"
 #include "baselib/base_code/format.h"
 #include <iostream>
 
@@ -18,6 +18,7 @@ struct WorldSSSessionHandler
 std::unordered_map<int, WorldSSSessionHandler> const s_handlers
 {
 	{ SSMsg::S2S_HEARTBEAT,{ &WorldSSSession::onS2SHeartBeat } },
+	{ SSMsg::S2S_SERVER_REGSTER_REQ,{ &WorldSSSession::onS2SServerRegisterReq } },
 };
 
 WorldSSSession::WorldSSSession(tcp::socket&& socket)
@@ -37,7 +38,7 @@ void WorldSSSession::start()
 
 void WorldSSSession::onClose()
 {
-
+	std::cout << "client has disconnect, ip:" << getIp() << " port:" << getPort() << " id: " << getServerId() << std::endl;
 }
 
 bool WorldSSSession::readDataHandler()
@@ -69,17 +70,12 @@ bool WorldSSSession::onS2SServerRegisterReq(const SSMsg::SSPacket& packet)
 
 	const SSMsg::S2SServerRegisterReq& pReq = packet.server_regist_req();
 	const SSMsg::ServerInfo& server_info = pReq.server_info();
-	componentInfos_.server_type = server_info.server_type();
-	componentInfos_.server_id = server_info.server_id();
-	componentInfos_.int_port = server_info.int_port();
-	componentInfos_.ext_port = server_info.ext_port();
-	componentInfos_.int_ip = server_info.int_ip();
-	componentInfos_.ext_ip = server_info.ext_ip();
+	serverInfos_.CopyFrom(server_info);
 
 	// 添加的组件是game_server，要转发给所有的网关，因为网关会去连新加入的game_server
-	if (componentInfos_.server_type == SERVER_TYPES::ST_GAME_SERVER)
+	if (serverInfos_.server_type() == SERVER_TYPES::ST_GAME_SERVER)
 	{
-		SSMsg::SSPacket packet;
+		/*SSMsg::SSPacket packet;
 		packet.set_cmd_id(SSMsg::S2S_NEW_SERVER_ADD_GROUP_REQ);
 		SSMsg::S2SNewServerAddGroupReq* new_server_req = packet.mutable_new_server_add_group_req();
 		SSMsg::ServerInfo* new_server_info = new_server_req->add_server_info();
@@ -93,43 +89,39 @@ bool WorldSSSession::onS2SServerRegisterReq(const SSMsg::SSPacket& packet)
 		for (const auto& ref : session_list)
 		{
 			ref->sendData(str_data.data(), str_data.size());
-		}
+		}*/
 	}
 	// 添加的组件是gate_server，会把所有的gameserver的地址同步给它
-	else if (componentInfos_.server_type == SERVER_TYPES::ST_GATE_SERVER)
+	else if (serverInfos_.server_type() == SERVER_TYPES::ST_GATE_SERVER)
 	{
-		SSMsg::SSPacket packet;
-		packet.set_cmd_id(SSMsg::S2S_NEW_SERVER_ADD_GROUP_REQ);
-		SSMsg::S2SNewServerAddGroupReq* new_server_req = packet.mutable_new_server_add_group_req();
+		//SSMsg::SSPacket packet;
+		//packet.set_cmd_id(SSMsg::S2S_NEW_SERVER_ADD_GROUP_REQ);
+		//SSMsg::S2SNewServerAddGroupReq* new_server_req = packet.mutable_new_server_add_group_req();
 
-		// 获得所有的gameserver
-		{
-			WorldSSSessionList session_list;
-			worldss_module->getSessionByServerType(SERVER_TYPES::ST_GAME_SERVER, session_list);
-			for (const auto& ref : session_list)
-			{
-				const ComponentInfos& component_info = ref->getCompontent();
-				SSMsg::ServerInfo* new_server_info = new_server_req->add_server_info();
-				new_server_info->set_server_type(component_info.server_type);
-				new_server_info->set_server_id(component_info.server_id);
-				new_server_info->set_int_port(component_info.int_port);
-				new_server_info->set_ext_port(component_info.ext_port);
-				new_server_info->set_int_ip(component_info.int_ip);
-				new_server_info->set_ext_ip(component_info.ext_ip);
-			}
-		}
-		// 同步给gate			
-		std::string str_data;
-		packet.SerializeToString(&str_data);
+		//// 获得所有的gameserver
+		//{
+		//	WorldSSSessionList session_list;
+		//	worldss_module->getSessionByServerType(SERVER_TYPES::ST_GAME_SERVER, session_list);
+		//	for (const auto& ref : session_list)
+		//	{
+		//		const auto& server_info = ref->getServerInfo();
+		//		SSMsg::ServerInfo* new_server_info = new_server_req->add_server_info();
+		//		new_server_info->CopyFrom(server_info);
+		//	}
+		//}
 
-		{
-			WorldSSSessionList session_list;
-			worldss_module->getSessionByServerType(SERVER_TYPES::ST_GATE_SERVER, session_list);
-			for (const auto& ref : session_list)
-			{
-				ref->sendData(str_data.data(), str_data.size());
-			}
-		}
+		//// 同步给gate			
+		//std::string str_data;
+		//packet.SerializeToString(&str_data);
+
+		//{
+		//	WorldSSSessionList session_list;
+		//	worldss_module->getSessionByServerType(SERVER_TYPES::ST_GATE_SERVER, session_list);
+		//	for (const auto& ref : session_list)
+		//	{
+		//		ref->sendData(str_data.data(), str_data.size());
+		//	}
+		//}
 	}
 
 	return true;

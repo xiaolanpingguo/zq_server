@@ -4,8 +4,8 @@
 #include "IRecord.h"
 #include "IRecordManager.h"
 #include "IPropertyManager.h"
-#include "baselib/interface_header/platform.h"
-#include "baselib/interface_header/ILibManager.h"
+#include "interface_header/platform.h"
+#include "interface_header/ILibManager.h"
 
 namespace zq {
 
