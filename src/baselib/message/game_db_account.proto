@@ -3,10 +3,12 @@ syntax = "proto3";
 package DBAccount;
 
 
-message UserAccount
+
+
+message DBUserAccount
 {
 	string user_id = 1;
-	string account_name = 2;
+	string account_name = 2; //用户名
 	string password = 3;
 	string password_hash = 4;
 	string session_key = 5;
@@ -18,4 +20,18 @@ message UserAccount
 	string os = 11;
 	bool is_banned = 12;
 }
+
+
+message RoleInfo
+{
+	int32 server_id = 1;	// 服务器ID
+	string server_name = 2; // 服务器名字
+	string role_name = 3; // 角色名字
+}
+
+message DBRoleInfoList
+{
+	repeated RoleInfo role_list = 1;	// 角色列表
+}
+
 

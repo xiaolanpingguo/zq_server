@@ -3,6 +3,7 @@
 #include "baselib/interface_header/IClassModule.h"
 #include "baselib/interface_header/IElementModule.h"
 #include "baselib/interface_header/ILoginCSModule.h"
+#include "baselib/interface_header/IRedislModule.h"
 
 #include "baselib/network/socket_mgr.hpp"
 #include "login_cs_session.h"
@@ -22,6 +23,8 @@ public:
 	bool initEnd() override;
 	bool run() override;
 
+	bool createAccount(const std::string& account_name, const std::string& pwd) override;
+
 	const std::string& getIp() override { return BaseSockMgr::getIp(); };
 	uint16 getPort() override { return BaseSockMgr::getPort(); };
 
@@ -29,6 +32,7 @@ private:
 
 	IElementModule * elementModule_;
 	IClassModule* classModule_;
+	IRedisModule* redisModule_;
 };
 
 }

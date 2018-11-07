@@ -6,7 +6,7 @@ namespace zq{
 
 bool ConsoleCommandModule::init()
 {
-	//loginLogicModule_ = libManager_->findModule<ILoginLogicModule>();
+	loginCSModule_ = libManager_->findModule<ILoginCSModule>();
 	return true;
 }
 
@@ -24,8 +24,8 @@ bool ConsoleCommandModule::run()
 
 bool ConsoleCommandModule::process(const std::string& cmd)
 {
-	//std::string name = cmd.substr(cmd.find_last_of('=') + 1, cmd.length() - cmd.find_last_of('=') - 1);
-	//loginLogicModule_->_createAccount(name, name);
+	std::string name = cmd.substr(cmd.find_last_of('=') + 1, cmd.length() - cmd.find_last_of('=') - 1);
+	loginCSModule_->_createAccount(name, name);
 	return true;
 }
 
