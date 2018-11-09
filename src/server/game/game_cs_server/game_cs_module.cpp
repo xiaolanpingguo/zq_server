@@ -26,7 +26,7 @@ bool GameCSModule::initEnd()
 
 			int server_type = elementModule_->getPropertyInt(strId, config::Server::server_type());
 			int server_id = elementModule_->getPropertyInt(strId, config::Server::server_id());
-			if (server_type == SERVER_TYPES::ST_LOGIN_SERVER && libManager_->getServerID() == server_id)
+			if (server_type == SERVER_TYPES::ST_GAME_SERVER && libManager_->getServerID() == server_id)
 			{
 				//int max_conn = elementModule_->getPropertyInt(strId, config::Server::max_connect());
 				int ext_port = elementModule_->getPropertyInt(strId, config::Server::external_port());
@@ -57,7 +57,7 @@ bool GameCSModule::initEnd()
 
 bool GameCSModule::run()
 {
-
+	update();
 	return true;
 }
 

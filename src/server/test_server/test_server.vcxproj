@@ -80,7 +80,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\src\dependencies\boost_1_67_0;$(SolutionDir)\src\dependencies\openssl\include;$(SolutionDir)\src\dependencies\rapidjson-1.1.0\include;$(SolutionDir)\src;$(SolutionDir)\src\dependencies\protobuf-all-3.6.1\src;$(SolutionDir)\src\dependencies\libevent-2.1.8-stable_win\include;$(SolutionDir)\src\dependencies\libevent-2.1.8-stable_win\WIN32-Code;$(SolutionDir)\src\dependencies\libevent-2.1.8-stable_win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\src\dependencies\boost_1_67_0;$(SolutionDir)\src\dependencies\openssl\include;$(SolutionDir)\src\dependencies\rapidjson-1.1.0\include;$(SolutionDir)\src;$(SolutionDir)\src\dependencies\protobuf-all-3.6.1\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)\bin\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

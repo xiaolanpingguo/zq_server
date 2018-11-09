@@ -27,6 +27,15 @@
     <ClCompile Include="totp.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="auth_crypt.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="arc.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="hmacsha1.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="big_number.h">
@@ -36,6 +45,15 @@
       <Filter>header</Filter>
     </ClInclude>
     <ClInclude Include="totp.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="auth_crypt.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="arc4.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="hmacsha1.h">
       <Filter>header</Filter>
     </ClInclude>
   </ItemGroup>

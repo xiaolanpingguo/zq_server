@@ -6,6 +6,7 @@
 #include "midware/cryptography/totp.h"
 #include "baselib/libloader/libmanager.h"
 #include "interface_header/IDataAgentModule.h"
+#include "interface_header/IRedislModule.h"
 #include <unordered_map>
 #include <array>
 
@@ -152,7 +153,7 @@ _status(STATUS_CHALLENGE), _build(0), _expversion(0)
     N.SetHexStr("894B645E89E1535BBDAD5B8B290650530801B18EBFBF5E8FAB3C82872A3E9BB7");
     g.SetDword(7);
 
-	int num = 3;
+	int num = 1;
 	for (int i = 0; i < num; ++i)
 	{
 		GameSvrInfoPtr svr_info = std::make_unique<GameSvrInfo>();
@@ -161,9 +162,9 @@ _status(STATUS_CHALLENGE), _build(0), _expversion(0)
 		svr_info->flag = REALM_FLAG_NONE;
 		svr_info->icon = 0;
 		svr_info->populationLevel = 0.3f;
-		svr_info->time_zone = 1;
+		svr_info->time_zone = 4;
 		svr_info->ip = "127.0.0.1";
-		svr_info->port = 8035;
+		svr_info->port = 16001;
 		svr_info->name = "zq";
 		gameSvrList_.emplace_back(std::move(svr_info));
 	}
@@ -184,12 +185,6 @@ bool LoginCSSession::update()
 
 void LoginCSSession::readHandler()
 {
-	//ClientPktHeader* header = reinterpret_cast<ClientPktHeader*>(_headerBuffer.GetReadPointer());
-	//OpcodeClient opcode = static_cast<OpcodeClient>(header->cmd);
-
-	//WorldPacket packet(opcode, std::move(_packetBuffer));
-	//_worldSession->QueuePacket(new WorldPacket(std::move(packet)));
-
     MessageBuffer& packet = getReadBuffer();
     while (packet.getActiveSize())
     {
@@ -253,8 +248,6 @@ void LoginCSSession::SendPacket(ByteBuffer& packet)
 
 bool LoginCSSession::HandleLogonChallenge()
 {
-	//IDataAgentModule* data_agent = LibManager::get_instance().findModule<IDataAgentModule>();
-
     _status = STATUS_CLOSED;
 
     sAuthLogonChallenge_C* challenge = reinterpret_cast<sAuthLogonChallenge_C*>(getReadBuffer().getReadPointer());
@@ -266,31 +259,19 @@ bool LoginCSSession::HandleLogonChallenge()
 	pkt << uint8(AUTH_LOGON_CHALLENGE);
 	pkt << uint8(0x00);
 
-	// 检查版本
-	if (!IsAcceptedClientBuild(challenge->build))
-	{
-		pkt << WOW_FAIL_VERSION_INVALID;
-		SendPacket(pkt);
-		return false;
-	}
-	else
-	{
-		pkt << uint8(WOW_SUCCESS);
-	}
-
 	std::string login_name((char const*)challenge->I, challenge->I_len);
 
 	// 去数据库查找帐号信息
-	std::string key = KEY_ACCOUNT + login_name;
-	DBAccount::DBUserAccount account_info;
-	//if (!data_agent->getData(login_name, key, account_info))
+	std::string field_key = _KEY_ACCOUNT_ + login_name;
+	IDataAgentModule* data_agent = LibManager::get_instance().findModule<IDataAgentModule>();
+	if (!data_agent->getHashData(login_name, field_key, accountInfo_))
 	{
 		LOG_ERROR << "login faild, name: " << login_name;
 		error_code = WOW_FAIL_UNKNOWN_ACCOUNT;
 	}
 
 	// 是否被封号
-	if (account_info.is_banned())
+	if (accountInfo_.is_banned())
 	{
 		error_code = WOW_FAIL_BANNED;
 	}
@@ -299,7 +280,7 @@ bool LoginCSSession::HandleLogonChallenge()
 	{
 		pkt << error_code;
 		SendPacket(pkt);
-		return false;
+		return true;
 	}
 
 	// 版本
@@ -321,9 +302,9 @@ bool LoginCSSession::HandleLogonChallenge()
 		_localizationName[i] = challenge->country[4 - i - 1];
 	}
 
-	std::string databaseV = account_info.v();
-	std::string databaseS = account_info.s();
-	std::string rI = account_info.password_hash();
+	std::string databaseV = accountInfo_.v();
+	std::string databaseS = accountInfo_.s();
+	std::string rI = accountInfo_.password_hash();
 	if (databaseV.size() != size_t(BufferSizes::SRP_6_V) * 2 || databaseS.size() != size_t(BufferSizes::SRP_6_S) * 2)
 	{
 		s.SetRand(int32(BufferSizes::SRP_6_S) * 8);
@@ -344,8 +325,11 @@ bool LoginCSSession::HandleLogonChallenge()
 		x.SetBinary(sha.GetDigest(), sha.GetLength());
 		v = g.ModExp(x, N);
 
-		account_info.set_v(v.AsHexStr());
-		account_info.set_s(s.AsHexStr());
+		accountInfo_.set_v(v.AsHexStr());
+		accountInfo_.set_s(s.AsHexStr());
+
+		// 这里保存下
+		data_agent->setHashData(login_name, field_key, accountInfo_);
 	}
 	else
 	{
@@ -380,6 +364,7 @@ bool LoginCSSession::HandleLogonChallenge()
 	pkt.append(N.AsByteArray(32).get(), 32);
 	pkt.append(s.AsByteArray(int32(BufferSizes::SRP_6_S)).get(), size_t(BufferSizes::SRP_6_S));   // 32 bytes
 	pkt.append(unk3.AsByteArray(16).get(), 16);
+
 	uint8 securityFlags = 0;
 
 	// Check if token is used
@@ -415,13 +400,13 @@ bool LoginCSSession::HandleLogonProof()
 {
     _status = STATUS_CLOSED;
 
-    sAuthLogonProof_C *logonProof = reinterpret_cast<sAuthLogonProof_C*>(getReadBuffer().getReadPointer());
-
     // If the client has no valid version
     if (_expversion == NO_VALID_EXP_FLAG)
     {
-        return false;
+		return true;
     }
+
+	sAuthLogonProof_C *logonProof = reinterpret_cast<sAuthLogonProof_C*>(getReadBuffer().getReadPointer());
 
     // Continue the SRP6 calculation based on data received from the client
     BigNumber A;
@@ -482,7 +467,7 @@ bool LoginCSSession::HandleLogonProof()
     t3.SetBinary(hash, 20);
 
     sha.Initialize();
-    sha.UpdateData(_accountInfo.Login);
+    sha.UpdateData(accountInfo_.account_name());
     sha.Finalize();
     uint8 t4[SHA_DIGEST_LENGTH];
     memcpy(t4, sha.GetDigest(), SHA_DIGEST_LENGTH);
@@ -519,9 +504,9 @@ bool LoginCSSession::HandleLogonProof()
             }
         }
 
-        // Update the sessionkey, last_ip, last login time and reset number of failed logins in the account table for this account
-        // No SQL injection (escaped user name) and IP address as received by socket
-
+		// 更新sessionkey, last_ip, last login，然后保存一下 
+		IDataAgentModule* data_agent = LibManager::get_instance().findModule<IDataAgentModule>();
+		//data_agent->
         //PreparedStatement *stmt = LoginDatabase.GetPreparedStatement(LOGIN_UPD_LOGONPROOF);
         //stmt->setString(0, K.AsHexStr());
         //stmt->setString(1, GetRemoteIpAddress().to_string());
@@ -529,6 +514,8 @@ bool LoginCSSession::HandleLogonProof()
         //stmt->setString(3, _os);
         //stmt->setString(4, _accountInfo.Login);
         //LoginDatabase.DirectExecute(stmt);
+		accountInfo_.set_session_key(K.AsHexStr());
+		data_agent->setHashData(accountInfo_.account_name(), _KEY_ACCOUNT_ + accountInfo_.account_name(), accountInfo_);
 
         // Finish SRP6 and send the final result to the client
         sha.Initialize();
@@ -603,23 +590,24 @@ bool LoginCSSession::HandleReconnectChallenge()
 	ByteBuffer pkt;
 	pkt << uint8(AUTH_RECONNECT_CHALLENGE);
 
-	//if (!result)
-	//{
-	//	pkt << uint8(WOW_FAIL_UNKNOWN_ACCOUNT);
-	//	SendPacket(pkt);
-	//	return;
-	//}
+	// 查询数据库
+	std::string field_key = _KEY_ACCOUNT_ + login;
+	IDataAgentModule* data_agent = LibManager::get_instance().findModule<IDataAgentModule>();
+	if (!data_agent->getHashData(login, field_key, accountInfo_))
+	{
+		LOG_ERROR << "login faild, name: " << login;
+		pkt << uint8(WOW_FAIL_UNKNOWN_ACCOUNT);
+		SendPacket(pkt);
+		return true;
+	}
 
-	//Field* fields = result->Fetch();
+	K.SetHexStr(accountInfo_.tokon_key().c_str());
+	_reconnectProof.SetRand(16 * 8);
+	_status = STATUS_RECONNECT_PROOF;
 
-	//_accountInfo.LoadResult(fields);
-	//K.SetHexStr(fields[9].GetCString());
-	//_reconnectProof.SetRand(16 * 8);
-	//_status = STATUS_RECONNECT_PROOF;
-
-	//pkt << uint8(WOW_SUCCESS);
-	//pkt.append(_reconnectProof.AsByteArray(16).get(), 16);  // 16 bytes random
-	//pkt << uint64(0x00) << uint64(0x00);                    // 16 bytes zeros
+	pkt << uint8(WOW_SUCCESS);
+	pkt.append(_reconnectProof.AsByteArray(16).get(), 16);  // 16 bytes random
+	pkt << uint64(0x00) << uint64(0x00);                    // 16 bytes zeros
 
 	SendPacket(pkt);
 
@@ -632,7 +620,7 @@ bool LoginCSSession::HandleReconnectProof()
 
     sAuthReconnectProof_C *reconnectProof = reinterpret_cast<sAuthReconnectProof_C*>(getReadBuffer().getReadPointer());
 
-    if (_accountInfo.Login.empty() || !_reconnectProof.GetNumBytes() || !K.GetNumBytes())
+    if (accountInfo_.account_name().empty() || !_reconnectProof.GetNumBytes() || !K.GetNumBytes())
         return false;
 
     BigNumber t1;
@@ -640,7 +628,7 @@ bool LoginCSSession::HandleReconnectProof()
 
     SHA1Hash sha;
     sha.Initialize();
-    sha.UpdateData(_accountInfo.Login);
+    sha.UpdateData(accountInfo_.account_name());
     sha.UpdateBigNumbers(&t1, &_reconnectProof, &K, nullptr);
     sha.Finalize();
 
@@ -706,7 +694,7 @@ bool LoginCSSession::HandleRealmList()
 		pkt << name;
 		pkt << (svr_info.ip + ":" + std::to_string(svr_info.port));
 		pkt << float(svr_info.populationLevel);
-		pkt << uint8(1);		//角色数量
+		pkt << uint8(0);		//角色数量
 		pkt << uint8(svr_info.time_zone);                       // realm category，这个错误就会报客户端语言与版本不符
 		if (_expversion & POST_BC_EXP_FLAG)                 // 2.x and 3.x clients
 			pkt << uint8(i);			 // realmlist的table id

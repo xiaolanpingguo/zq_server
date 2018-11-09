@@ -124,12 +124,18 @@
     <Text Include="CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="arc.cpp" />
+    <ClCompile Include="auth_crypt.cpp" />
     <ClCompile Include="big_number.cpp" />
+    <ClCompile Include="hmacsha1.cpp" />
     <ClCompile Include="sha1.cpp" />
     <ClCompile Include="totp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="arc4.h" />
+    <ClInclude Include="auth_crypt.h" />
     <ClInclude Include="big_number.h" />
+    <ClInclude Include="hmacsha1.h" />
     <ClInclude Include="sha1.h" />
     <ClInclude Include="totp.h" />
   </ItemGroup>

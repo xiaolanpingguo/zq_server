@@ -129,6 +129,7 @@
     <ClInclude Include="modules.hpp" />
     <ClInclude Include="optional.hpp" />
     <ClInclude Include="producer_consumer_queue.hpp" />
+    <ClInclude Include="random.h" />
     <ClInclude Include="rapidjson_parse.hpp" />
     <ClInclude Include="sha1.h" />
     <ClInclude Include="util.h" />
@@ -140,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="base64.cpp" />
     <ClCompile Include="format.cpp" />
+    <ClCompile Include="random.cpp" />
     <ClCompile Include="sha1.cpp" />
     <ClCompile Include="util.cpp" />
   </ItemGroup>

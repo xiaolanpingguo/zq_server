@@ -35,12 +35,12 @@ const std::string LoginClientServerLib::getLibName()
 
 void LoginClientServerLib::install()
 {
-	REGISTER_MODULE(libManager_, ILoginToWorldModule, LoginToWorldModule)
+	//REGISTER_MODULE(libManager_, ILoginToWorldModule, LoginToWorldModule)
 }
 
 void LoginClientServerLib::uninstall()
 {
-	UNREGISTER_MODULE(libManager_, ILoginToWorldModule, LoginToWorldModule)
+	//UNREGISTER_MODULE(libManager_, ILoginToWorldModule, LoginToWorldModule)
 }
 
 }

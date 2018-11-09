@@ -22,7 +22,9 @@ public:
 
 public:
 
-	bool getRedisData(const std::string& user_id, const std::string& key, std::string& data);
+	bool setRedisHashData(const std::string& key, const std::string& field_key, const std::string& data) override;
+	bool getRedisHashData(const std::string& key, const std::string& field_key, std::string& data) override;
+	bool hexists(const std::string& user_id, const std::string& field_key) override;
 
 private:
 

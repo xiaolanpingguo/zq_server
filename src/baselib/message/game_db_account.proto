@@ -19,6 +19,7 @@ message DBUserAccount
 	string last_login_time = 10;
 	string os = 11;
 	bool is_banned = 12;
+	string tokon_key = 13;
 }
 
 

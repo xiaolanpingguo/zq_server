@@ -4,6 +4,7 @@
 #include "interface_header/IElementModule.h"
 #include "interface_header/ILoginCSModule.h"
 #include "interface_header/IRedislModule.h"
+#include "interface_header/IDataAgentModule.h"
 
 #include "baselib/network/socket_mgr.hpp"
 #include "login_cs_session.h"
@@ -33,6 +34,7 @@ private:
 	IElementModule * elementModule_;
 	IClassModule* classModule_;
 	IRedisModule* redisModule_;
+	IDataAgentModule* dataAgentModule_;
 };
 
 }

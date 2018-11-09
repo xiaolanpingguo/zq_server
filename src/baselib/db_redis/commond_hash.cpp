@@ -83,9 +83,12 @@ bool RedisClient::HGET(const std::string& key, const std::string& field, std::st
 	if (pReply->type == REDIS_REPLY_STRING)
 	{
 		value = std::string(pReply->str, pReply->len);
+		return true;
 	}
-
-	return true;
+	else
+	{
+		return false;
+	}
 }
 
 bool RedisClient::HGETALL(const std::string &key, std::vector<string_pair> &values)
@@ -106,9 +109,11 @@ bool RedisClient::HGETALL(const std::string &key, std::vector<string_pair> &valu
 			values.emplace_back(std::move(string_pair{ std::string(pReply->element[k]->str, pReply->element[k]->len),
 				std::string(pReply->element[k + 1]->str, pReply->element[k + 1]->len) }));
 		}
+
+		return true;
 	}
 
-	return true;
+	return false;
 }
 
 bool RedisClient::HINCRBY(const std::string &key, const std::string &field, const int by, int64_t& value)
@@ -127,9 +132,11 @@ bool RedisClient::HINCRBY(const std::string &key, const std::string &field, cons
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
 		value = pReply->integer;
+
+		return true;
 	}
 
-	return true;
+	return false;
 }
 
 bool RedisClient::HINCRBYFLOAT(const std::string &key, const std::string &field, const float by, float& value)
@@ -171,9 +178,11 @@ bool RedisClient::HKEYS(const std::string &key, std::vector<std::string> &fields
 		{
 			fields.emplace_back(std::move(std::string(pReply->element[k]->str, pReply->element[k]->len)));
 		}
+		
+		return true;
 	}
 
-	return true;
+	return false;
 }
 
 bool RedisClient::HLEN(const std::string &key, int& number)
@@ -190,9 +199,10 @@ bool RedisClient::HLEN(const std::string &key, int& number)
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
 		number = (int)pReply->integer;
+		return true;
 	}
 
-	return true;
+	return false;
 }
 
 bool RedisClient::HMGET(const std::string &key, const string_vector &fields, string_vector &values)
@@ -219,9 +229,11 @@ bool RedisClient::HMGET(const std::string &key, const string_vector &fields, str
 				values.emplace_back(std::move(std::string(pReply->element[k]->str, pReply->element[k]->len)));
 			}
 		}
+
+		return true;
 	}
 
-	return true;
+	return false;
 }
 
 bool RedisClient::HMSET(const std::string &key, const std::vector<string_pair> &values)
@@ -348,7 +360,8 @@ bool RedisClient::HSTRLEN(const std::string &key, const std::string &field, int&
 	if (pReply->type == REDIS_REPLY_INTEGER)
 	{
 		length = (int)pReply->integer;
+		return true;
 	}
 
-	return true;
+	return false;
 }

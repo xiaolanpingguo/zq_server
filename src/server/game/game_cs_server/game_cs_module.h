@@ -5,13 +5,13 @@
 #include "interface_header/IGameCSModule.h"
 
 #include "baselib/network/socket_mgr.hpp"
-#include "game_cs_session.h"
+#include "game_socket.h"
 
 namespace zq {
 
-class GameCSModule : public IGameCSModule, public SocketMgr<GameCSSession>
+class GameCSModule : public IGameCSModule, public SocketMgr<GameSocket>
 {
-	using BaseSockMgr = SocketMgr<GameCSSession>;
+	using BaseSockMgr = SocketMgr<GameSocket>;
 public:
 	GameCSModule(ILibManager* p)
 	{

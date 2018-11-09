@@ -81,7 +81,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\src\dependencies\boost_1_67_0;$(SolutionDir)\src\dependencies\openssl\include;$(SolutionDir)\src\dependencies\libevent-2.1.8-stable_win;$(SolutionDir)\src\dependencies\libevent-2.1.8-stable_win\WIN32-Code;$(SolutionDir)\src\dependencies\libevent-2.1.8-stable_win\include;$(SolutionDir)\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\src\dependencies\boost_1_67_0;$(SolutionDir)\src\dependencies\openssl\include;$(SolutionDir)\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -165,7 +165,6 @@
     <ClInclude Include="socket.hpp" />
     <ClInclude Include="socket_mgr.hpp" />
     <ClInclude Include="websocket_module.h" />
-    <ClInclude Include="world_packet.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />

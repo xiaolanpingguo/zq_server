@@ -109,6 +109,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DBAccount::DBUserAccount, last_login_time_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DBAccount::DBUserAccount, os_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DBAccount::DBUserAccount, is_banned_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DBAccount::DBUserAccount, tokon_key_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::DBAccount::RoleInfo, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -126,8 +127,8 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::DBAccount::DBUserAccount)},
-  { 17, -1, sizeof(::DBAccount::RoleInfo)},
-  { 25, -1, sizeof(::DBAccount::DBRoleInfoList)},
+  { 18, -1, sizeof(::DBAccount::RoleInfo)},
+  { 26, -1, sizeof(::DBAccount::DBRoleInfoList)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -157,20 +158,20 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\025game_db_account.proto\022\tDBAccount\"\352\001\n\rD"
+      "\n\025game_db_account.proto\022\tDBAccount\"\375\001\n\rD"
       "BUserAccount\022\017\n\007user_id\030\001 \001(\t\022\024\n\014account"
       "_name\030\002 \001(\t\022\020\n\010password\030\003 \001(\t\022\025\n\rpasswor"
       "d_hash\030\004 \001(\t\022\023\n\013session_key\030\005 \001(\t\022\t\n\001v\030\006"
       " \001(\t\022\t\n\001s\030\007 \001(\t\022\025\n\rregister_time\030\010 \001(\t\022\017"
       "\n\007last_ip\030\t \001(\t\022\027\n\017last_login_time\030\n \001(\t"
-      "\022\n\n\002os\030\013 \001(\t\022\021\n\tis_banned\030\014 \001(\010\"E\n\010RoleI"
-      "nfo\022\021\n\tserver_id\030\001 \001(\005\022\023\n\013server_name\030\002 "
-      "\001(\t\022\021\n\trole_name\030\003 \001(\t\"8\n\016DBRoleInfoList"
-      "\022&\n\trole_list\030\001 \003(\0132\023.DBAccount.RoleInfo"
-      "b\006proto3"
+      "\022\n\n\002os\030\013 \001(\t\022\021\n\tis_banned\030\014 \001(\010\022\021\n\ttokon"
+      "_key\030\r \001(\t\"E\n\010RoleInfo\022\021\n\tserver_id\030\001 \001("
+      "\005\022\023\n\013server_name\030\002 \001(\t\022\021\n\trole_name\030\003 \001("
+      "\t\"8\n\016DBRoleInfoList\022&\n\trole_list\030\001 \003(\0132\023"
+      ".DBAccount.RoleInfob\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 408);
+      descriptor, 427);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "game_db_account.proto", &protobuf_RegisterTypes);
 }
@@ -205,6 +206,7 @@ const int DBUserAccount::kLastIpFieldNumber;
 const int DBUserAccount::kLastLoginTimeFieldNumber;
 const int DBUserAccount::kOsFieldNumber;
 const int DBUserAccount::kIsBannedFieldNumber;
+const int DBUserAccount::kTokonKeyFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 DBUserAccount::DBUserAccount()
@@ -262,6 +264,10 @@ DBUserAccount::DBUserAccount(const DBUserAccount& from)
   if (from.os().size() > 0) {
     os_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.os_);
   }
+  tokon_key_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.tokon_key().size() > 0) {
+    tokon_key_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.tokon_key_);
+  }
   is_banned_ = from.is_banned_;
   // @@protoc_insertion_point(copy_constructor:DBAccount.DBUserAccount)
 }
@@ -278,6 +284,7 @@ void DBUserAccount::SharedCtor() {
   last_ip_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   last_login_time_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   os_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  tokon_key_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   is_banned_ = false;
 }
 
@@ -298,6 +305,7 @@ void DBUserAccount::SharedDtor() {
   last_ip_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   last_login_time_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   os_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  tokon_key_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void DBUserAccount::SetCachedSize(int size) const {
@@ -331,6 +339,7 @@ void DBUserAccount::Clear() {
   last_ip_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   last_login_time_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   os_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  tokon_key_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   is_banned_ = false;
   _internal_metadata_.Clear();
 }
@@ -535,6 +544,22 @@ bool DBUserAccount::MergePartialFromCodedStream(
         break;
       }
 
+      // string tokon_key = 13;
+      case 13: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(106u /* 106 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_tokon_key()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->tokon_key().data(), static_cast<int>(this->tokon_key().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "DBAccount.DBUserAccount.tokon_key"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -674,6 +699,16 @@ void DBUserAccount::SerializeWithCachedSizes(
   // bool is_banned = 12;
   if (this->is_banned() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(12, this->is_banned(), output);
+  }
+
+  // string tokon_key = 13;
+  if (this->tokon_key().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->tokon_key().data(), static_cast<int>(this->tokon_key().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "DBAccount.DBUserAccount.tokon_key");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      13, this->tokon_key(), output);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -816,6 +851,17 @@ void DBUserAccount::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(12, this->is_banned(), target);
   }
 
+  // string tokon_key = 13;
+  if (this->tokon_key().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->tokon_key().data(), static_cast<int>(this->tokon_key().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "DBAccount.DBUserAccount.tokon_key");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        13, this->tokon_key(), target);
+  }
+
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
@@ -910,6 +956,13 @@ size_t DBUserAccount::ByteSizeLong() const {
         this->os());
   }
 
+  // string tokon_key = 13;
+  if (this->tokon_key().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->tokon_key());
+  }
+
   // bool is_banned = 12;
   if (this->is_banned() != 0) {
     total_size += 1 + 1;
@@ -986,6 +1039,10 @@ void DBUserAccount::MergeFrom(const DBUserAccount& from) {
 
     os_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.os_);
   }
+  if (from.tokon_key().size() > 0) {
+
+    tokon_key_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.tokon_key_);
+  }
   if (from.is_banned() != 0) {
     set_is_banned(from.is_banned());
   }
@@ -1036,6 +1093,8 @@ void DBUserAccount::InternalSwap(DBUserAccount* other) {
   last_login_time_.Swap(&other->last_login_time_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   os_.Swap(&other->os_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  tokon_key_.Swap(&other->tokon_key_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(is_banned_, other->is_banned_);
   _internal_metadata_.Swap(&other->_internal_metadata_);

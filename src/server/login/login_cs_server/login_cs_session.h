@@ -5,10 +5,12 @@
 #include "baselib/network/locked_queue.hpp"
 #include "baselib/network/byte_buffer.hpp"
 
+#include "baselib/message/game_db_account.pb.h"
+
 namespace zq {
 
 
-static constexpr const char* KEY_ACCOUNT = "_account@";
+static constexpr const char* KEY_USER = "_account@";
 
 struct AuthHandler;
 struct RealmBuildInfo;
@@ -196,13 +198,15 @@ private:
 	BigNumber _reconnectProof;
 
 	AuthStatus _status;
-	AccountInfo _accountInfo;
+	//AccountInfo _accountInfo;
 	std::string _tokenKey;
 	std::string _localizationName;
 	std::string _os;
 	std::string _ipCountry;
 	uint16 _build;
 	uint8 _expversion;
+
+	DBAccount::DBUserAccount accountInfo_;
 
 	LockedQueue<WorldPacket*> _recvQueue;
 

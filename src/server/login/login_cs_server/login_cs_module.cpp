@@ -26,6 +26,7 @@ bool LoginCSModule::init()
 	elementModule_ = libManager_->findModule<IElementModule>();
 	classModule_ = libManager_->findModule<IClassModule>();
 	redisModule_ = libManager_->findModule<IRedisModule>();
+	dataAgentModule_ = libManager_->findModule<IDataAgentModule>();
 
 	return true;
 }
@@ -73,7 +74,7 @@ bool LoginCSModule::initEnd()
 
 bool LoginCSModule::run()
 {
-
+	update();
 	return true;
 }
 
@@ -84,15 +85,8 @@ bool LoginCSModule::createAccount(const std::string& account_name, const std::st
 	util::utf8ToUpperOnlyLatin(account);
 	util::utf8ToUpperOnlyLatin(password);
 
-	std::string key = KEY_ACCOUNT + account;
-
-	RedisClientPtr redis_client = redisModule_->getClientByHash(account);
-	if (redis_client == nullptr)
-	{
-		return false;
-	}
-
-	if (redis_client->EXISTS(key))
+	std::string field_key = _KEY_ACCOUNT_ + account;
+	if (dataAgentModule_->hexists(account, field_key))
 	{
 		return false;
 	}
@@ -102,10 +96,7 @@ bool LoginCSModule::createAccount(const std::string& account_name, const std::st
 	account_info.set_account_name(account);
 	account_info.set_password(password);
 	account_info.set_password_hash(calculateShaPassHash(account, password));
-
-	std::string data;
-	account_info.SerializeToString(&data);
-	redis_client->SET(key, data);
+	dataAgentModule_->setHashData(account, field_key, account_info);
 
 	return true;
 }

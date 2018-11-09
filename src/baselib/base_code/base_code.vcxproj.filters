@@ -60,6 +60,9 @@
     <ClInclude Include="modules.hpp">
       <Filter>header</Filter>
     </ClInclude>
+    <ClInclude Include="random.h">
+      <Filter>header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="format.cpp">
@@ -72,6 +75,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="util.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="random.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

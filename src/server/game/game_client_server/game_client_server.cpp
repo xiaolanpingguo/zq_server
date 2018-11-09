@@ -35,12 +35,12 @@ const std::string GameClientServerLib::getLibName()
 
 void GameClientServerLib::install()
 {
-	REGISTER_MODULE(libManager_, IGameToWorldModule, GameToWorldModule)
+	//REGISTER_MODULE(libManager_, IGameToWorldModule, GameToWorldModule)
 }
 
 void GameClientServerLib::uninstall()
 {
-	UNREGISTER_MODULE(libManager_, IGameToWorldModule, GameToWorldModule)
+	//UNREGISTER_MODULE(libManager_, IGameToWorldModule, GameToWorldModule)
 }
 
 }

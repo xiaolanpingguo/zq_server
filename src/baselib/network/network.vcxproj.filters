@@ -113,9 +113,6 @@
     <ClInclude Include="socket_mgr.hpp">
       <Filter>header</Filter>
     </ClInclude>
-    <ClInclude Include="world_packet.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
     <ClInclude Include="locked_queue.hpp">
       <Filter>header</Filter>
     </ClInclude>
