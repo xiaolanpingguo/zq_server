@@ -20,7 +20,7 @@ int main(int argc, const char *argv[])
 
 	FileProcess fp;
 	fp.setExcelPath(excelpath);
-	fp.setUTF8(false);//set it true to convert UTF8 to GBK for supporting chinese in NF to show. 
+	fp.setUTF8(false);//设置为true将支持中文显示
 	fp.loadDataFromExcel();
 	fp.save();
 

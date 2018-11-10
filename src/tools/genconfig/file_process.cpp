@@ -1,6 +1,7 @@
 #include "file_process.h"
 #include "utf8_to_gbk.h"
 #include <iostream>
+#include <sstream>
 #include <direct.h>
 #if ZQ_PLATFORM == ZQ_PLATFORM_WIN
 #include <io.h>
@@ -21,6 +22,7 @@ FileProcess::FileProcess()
 	strXMLStructPath_ = strExcelPath_ + STRUCT_DIR_NAME;
 	strXMLImplPath_ = strExcelPath_ + IMPL_DIR_NAME;
 	strCppPath_ = strExcelPath_ + CPP_DIR;
+	strXmlPath_ = strExcelPath_ + XML_NAME;
 }
 
 FileProcess::~FileProcess()
@@ -106,6 +108,8 @@ bool FileProcess::loadDataFromExcel(const std::string& strFile, const std::strin
 
 	// 这里把去除了后缀的文件名就抽象成类名
 	ClassData* pClassData = new ClassData();
+	pClassData->obj_name = class_name;
+
 	classData_[class_name] = pClassData;
 	pClassData->xStructData.strClassName = class_name;
 
@@ -117,13 +121,14 @@ bool FileProcess::loadDataFromExcel(const std::string& strFile, const std::strin
 		return false;
 	}
 
-	// 获得sheet，就是表格下面一栏的标签栏
+	// 获得所有的sheet(表格)，就是文件下面一栏的标签栏
 	std::vector<MiniExcelReader::Sheet>& sheets = xExcel->sheets();
 	for (MiniExcelReader::Sheet& sh : sheets)
 	{
 		std::cout << "begin load file: " << strFile << std::endl;
 		loadDataFromExcel(sh, pClassData);
 	}
+
 	return true;
 }
 
@@ -138,12 +143,8 @@ bool FileProcess::loadDataFromExcel(MiniExcelReader::Sheet& sheet, ClassData* pC
 	// 开始读取sheet的内容
 	if (strSheetName.find("property") != std::string::npos)
 	{
-		loadDataAndProcessProperty(sheet, pClassData);
-		loadIniData(sheet, pClassData);
-	}
-	else if (strSheetName.find("componen") != std::string::npos)
-	{
-		loadDataAndProcessComponent(sheet, pClassData);
+		readData(sheet, pClassData);
+		//loadIniData(sheet, pClassData);
 	}
 	else if (strSheetName.find("record") != std::string::npos)
 	{
@@ -168,10 +169,7 @@ bool FileProcess::loadIniData(MiniExcelReader::Sheet & sheet, ClassData * pClass
 	for (int c = dim.firstCol + 1; c <= dim.lastCol; c++)
 	{
 		MiniExcelReader::Cell* cell = sheet.getCell(dim.firstRow, c);
-		if (cell)
-		{
-			PropertyIndex[cell->value] = c;
-		}
+		PropertyIndex[cell->value] = c;
 	}
 
 	for (int r = dim.firstRow + PROPERTY_HEIGHT; r <= dim.lastRow; r++)
@@ -180,7 +178,7 @@ bool FileProcess::loadIniData(MiniExcelReader::Sheet & sheet, ClassData * pClass
 		if (pIDCell && !pIDCell->value.empty())
 		{
 			ClassElement::ElementData* pIniObject = new ClassElement::ElementData();
-			pClassData->xIniData.xElementList[pIDCell->value] = pIniObject;
+			pClassData->xEleData.xElementList[pIDCell->value] = pIniObject;
 
 			for (auto itProperty = PropertyIndex.begin(); itProperty != PropertyIndex.end(); ++itProperty)
 			{
@@ -203,119 +201,64 @@ bool FileProcess::loadIniData(MiniExcelReader::Sheet & sheet, ClassData * pClass
 	return false;
 }
 
-bool FileProcess::loadDataAndProcessProperty(MiniExcelReader::Sheet& sheet, ClassData* pClassData)
+bool FileProcess::readData(MiniExcelReader::Sheet& sheet, ClassData* pClassData)
 {
 	const MiniExcelReader::Range& dim = sheet.getDimension();
-	std::string strSheetName = sheet.getName();
-	transform(strSheetName.begin(), strSheetName.end(), strSheetName.begin(), ::tolower);
 
-	std::map<std::string, int> descIndex;
-	std::map<std::string, int> PropertyIndex;
+	// excel的读取是从第一行第一列开始，符合人类的习惯，因为不是从0开始
+	// 行，不读取第一行，接下来的读取都不用判断指针，好提前发现配置错误
+	auto obj = new ClassData::ObjectInfo();
+	auto property_info = new ClassData::PropertyInfo();
 
-	// 行，不读取第一行
-	for (int r = dim.firstRow + 1; r <= dim.firstRow + PROPERTY_HEIGHT - 1; r++)
+	// 读取属性名，从第二列开始读取
+	for (int col = dim.firstCol + 1; col <= dim.lastCol; ++col)
 	{
-		MiniExcelReader::Cell* cell = sheet.getCell(r, dim.firstCol);
-		if (cell)
-		{
-			descIndex[cell->value] = r;
-		}
-	}
+		ClassData::PropertyInfo::PropertyDescInfo property_desc_info;
 
-	// 列，不读取第一列
-	for (int c = dim.firstCol + 1; c <= dim.lastCol; c++)
-	{
-		MiniExcelReader::Cell* cell = sheet.getCell(dim.firstRow, c);
-		if (cell)
-		{
-			PropertyIndex[cell->value] = c;
-		}
-	}
-	
-	// 读取属性
-	for (auto itProperty = PropertyIndex.begin(); itProperty != PropertyIndex.end(); ++itProperty)
-	{
-		std::string strPropertyName = itProperty->first;
-		int nCol = itProperty->second;
+		// 第一行是该属性的名称
+		MiniExcelReader::Cell* cell_1 = sheet.getCell(1, col);
+		std::string property_name = cell_1->value;
 
-		ClassProperty* pClassProperty = new ClassProperty();
-		pClassData->xStructData.xPropertyList[strPropertyName] = pClassProperty;
-
-		for (auto itDesc = descIndex.begin(); itDesc != descIndex.end(); ++itDesc)
+		// 开始读取对该属性的描述，从第二行开始读取
+		for (int row = dim.firstRow + 1; row <= dim.lastRow; ++row)
 		{
-			std::string descName = itDesc->first;
-			int nRow = itDesc->second;
-		
-			MiniExcelReader::Cell* pCell = sheet.getCell(nRow, nCol);
-			if (pCell)
+			MiniExcelReader::Cell* cell_2 = sheet.getCell(row, col);
+
+			// 这里把它写死了的，第二行到PROPERTY_HEIGHT，全是对该属性的描述
+			if (row <= PROPERTY_HEIGHT)
 			{
-				std::string descValue = pCell->value;
+				// 描述的名称，配置是在第一列，比如type, save之类的
+				std::string desc_name = sheet.getCell(row, 1)->value;
 
-				pClassProperty->descList[descName] = descValue;
+				// 具体的值，一般是0或者1
+				std::string desc_value = cell_2->value;
+				property_desc_info.desc_name = desc_name;
+				property_desc_info.desc_value = desc_value;
+
+				property_info->propertys_map[desc_name] = property_desc_info;
 			}
-		}
-	}
-
-	return false;
-}
-
-bool FileProcess::loadDataAndProcessComponent(MiniExcelReader::Sheet & sheet, ClassData * pClassData)
-{
-	const MiniExcelReader::Range& dim = sheet.getDimension();
-	std::string strSheetName = sheet.getName();
-	transform(strSheetName.begin(), strSheetName.end(), strSheetName.begin(), ::tolower);
-
-	std::vector<std::string> colNames;
-	for (int c = dim.firstCol; c <= dim.lastCol; c++)
-	{
-		MiniExcelReader::Cell* cell = sheet.getCell(dim.firstRow, c);
-		if (cell)
-		{
-			colNames.push_back(cell->value);
-		}
-	}
-	for (int r = dim.firstRow + 1; r <= dim.lastRow; r++)
-	{
-		std::string testValue = "";
-		MiniExcelReader::Cell* cell = sheet.getCell(r, dim.firstCol);
-		if (cell)
-		{
-			testValue = cell->value;
-		}
-		if (testValue == "")
-		{
-			continue;
-		}
-		//auto componentNode = structDoc.allocate_node(rapidxml::node_element, "Component", NULL);
-		//componentNodes->append_node(componentNode);
-		std::string strType = "";
-		for (int c = dim.firstCol; c <= dim.lastCol; c++)
-		{
-			std::string name = colNames[c - 1];
-			std::string value = "";
-			MiniExcelReader::Cell* cell = sheet.getCell(r, c);
-			if (cell)
+			// 从PROPERTY_HEIGHT到最后一行，是具体的每个对象的配置
+			else
 			{
-				std::string valueCell = cell->value;
-				transform(valueCell.begin(), valueCell.end(), valueCell.begin(), ::toupper);
-				if (valueCell == "TRUE" || valueCell == "FALSE")
+				// 这里专门取下该属性的类型
 				{
-					value = valueCell == "TRUE" ? "1" : "0";
-				}
-				else
-				{
-					value = cell->value;
+					auto it = property_info->propertys_map.find("type");
+					property_info->type = it->second.desc_value;
 				}
 
-				if (name == "Type")
-				{
-					strType = value;
-				}
+				// 具体的属性的名称和对应的值
+				property_info->name = property_name;
+				property_info->value = cell_2->value;
 
+				// 添加一个属性
+				obj->vec_propertys.push_back(property_info);
+
+				// 添加一个对象
+				pClassData->obj_map[pClassData->obj_name] = obj;
 			}
-			//componentNode->append_attribute(structDoc.allocate_attribute(NewChar(name), NewChar(value)));
-		}
+		}	
 	}
+
 	return false;
 }
 
@@ -380,6 +323,7 @@ bool FileProcess::save()
 	saveForStruct();
 	saveForIni();
 	saveForLogicClass();
+	saveForXml();
 
 	return false;
 }
@@ -611,7 +555,7 @@ bool FileProcess::saveForIni()
 		std::string strFileHead = "<?xml version='1.0' encoding='utf-8' ?>\n<XML>\n";
 		fwrite(strFileHead.c_str(), strFileHead.length(), 1, iniWriter);
 
-		for (auto itElement = pClassDta->xIniData.xElementList.begin(); itElement != pClassDta->xIniData.xElementList.end(); ++itElement)
+		for (auto itElement = pClassDta->xEleData.xElementList.begin(); itElement != pClassDta->xEleData.xElementList.end(); ++itElement)
 		{
 			const std::string& strElementName = itElement->first;
 			ClassElement::ElementData* pIniData = itElement->second;
@@ -677,6 +621,57 @@ bool FileProcess::saveForLogicClass()
 	fclose(iniWriter);
 
 	return false;
+}
+
+bool FileProcess::saveForXml()
+{
+	for (auto it = classData_.begin(); it != classData_.end(); ++it)
+	{
+		const std::string& strClassName = it->first;
+		ClassData* pClassDta = it->second;
+
+		std::cout << "save for xml ---> " << strClassName << std::endl;
+
+		// 文件名，以类名命名
+		std::string strFileName = strXmlPath_ + strClassName + ".xml";
+		std::string strFileHead = "<?xml version='1.0' encoding='utf-8' ?>\n<XML>\n";
+
+		// xml头信息
+		FILE* fw = fopen(strFileName.c_str(), "w");
+		fwrite(strFileHead.c_str(), strFileHead.length(), 1, fw);
+
+		// 所有的对象
+		for (const auto& obj : pClassDta->obj_map)
+		{
+			const std::string& obj_name = obj.first;
+			ClassData::ObjectInfo* obj_info = obj.second;
+
+			std::ostringstream os;
+			os << "\t<" << obj_name << "\">\n\t";
+
+			// 该对象下的所有属性
+			for (const auto& property_info : obj_info->vec_propertys)
+			{
+				const std::string& name = property_info->name;
+				const std::string& type = property_info->type;
+				const std::string& value = property_info->value;
+
+				os << name + "=\"" + name + "\" ";
+				os << type + "=\"" + type + "\" ";
+				os << value + "=\"" + value + "\" ";
+			}
+
+			os << "</" << obj_name << ">\n\t";
+			fwrite(os.str().c_str(), os.str().length(), 1, fw);
+		}
+
+		// 关闭
+		std::string strFileEnd = "</XML>";
+		fwrite(strFileEnd.c_str(), strFileEnd.length(), 1, fw);
+		fclose(fw);
+	}
+
+	return true;
 }
 
 void FileProcess::setUTF8(const bool b)
@@ -764,4 +759,5 @@ void FileProcess::mkdir()
 	_mkdir(strXMLStructPath_.c_str());
 	_mkdir(strXMLImplPath_.c_str());
 	_mkdir(strCppPath_.c_str());
+	_mkdir(strXmlPath_.c_str());
 }
