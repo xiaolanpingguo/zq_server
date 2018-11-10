@@ -1,10 +1,10 @@
 #pragma once
 
-#include "interface_header/IClassModule.h"
-#include "interface_header/IElementModule.h"
-#include "interface_header/ILoginCSModule.h"
-#include "interface_header/IRedislModule.h"
-#include "interface_header/IDataAgentModule.h"
+#include "interface_header/base/IClassModule.h"
+#include "interface_header/base/IElementModule.h"
+#include "interface_header/base/ILoginCSModule.h"
+#include "interface_header/base/IRedislModule.h"
+#include "interface_header/base/IDataAgentModule.h"
 
 #include "baselib/network/socket_mgr.hpp"
 #include "login_cs_session.h"

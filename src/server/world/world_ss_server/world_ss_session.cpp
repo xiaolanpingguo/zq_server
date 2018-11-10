@@ -2,8 +2,8 @@
 #include "baselib/message/config_define.hpp"
 #include "baselib/message/game_ss.pb.h"
 #include "baselib/libloader/libmanager.h"
-#include "interface_header/IComponentModule.h"
-#include "interface_header/IWorldSSModule.h"
+#include "interface_header/base/IComponentModule.h"
+#include "interface_header/base/IWorldSSModule.h"
 #include "baselib/base_code/format.h"
 #include <iostream>
 

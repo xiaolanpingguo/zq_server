@@ -18,7 +18,7 @@
 #include "redis_commond.h"
 #include "redis_socket.h"
 
-#include "interface_header/IRedislModule.h"
+#include "interface_header/base/IRedislModule.h"
 
 #include <hiredis/hiredis.h>
 

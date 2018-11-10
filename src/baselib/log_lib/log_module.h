@@ -1,6 +1,6 @@
 #pragma once
 
-#include "interface_header/ILogModule.h"
+#include "interface_header/base/ILogModule.h"
 
 namespace zq {
 

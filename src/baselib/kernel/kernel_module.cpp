@@ -1,7 +1,7 @@
 #include "kernel_module.h"
 #include "baselib/core/object.h"
 #include "baselib/core/record.h"
-#include "interface_header/uuid.h"
+#include "interface_header/base/uuid.h"
 #include "baselib/message/config_define.hpp"
 #include <random>
 

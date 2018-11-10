@@ -1,6 +1,7 @@
 #include "network.h"
-#include "net_ss_module.h"
-using namespace zq;
+
+
+namespace zq{
 
 #ifdef ZQ_DYNAMIC_PLUGIN
 
@@ -30,10 +31,10 @@ const std::string NetworkLib::getLibName()
 
 void NetworkLib::install()
 {
-    REGISTER_MODULE(libManager_, INetSSModule, NetSSModule)
 }
 
 void NetworkLib::uninstall()
 {
-    UNREGISTER_MODULE(libManager_, INetSSModule, NetSSModule)
+}
+
 }

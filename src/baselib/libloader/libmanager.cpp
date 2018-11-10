@@ -3,12 +3,12 @@
 #include "dependencies/RapidXML/rapidxml_iterators.hpp"
 #include "dependencies/RapidXML/rapidxml_print.hpp"
 #include "dependencies/RapidXML/rapidxml_utils.hpp"
-#include "interface_header/ILib.h"
+#include "interface_header/base/ILib.h"
 #include "self_register_factory.hpp"
-#include "interface_header/IElementModule.h"
-#include "interface_header/IClassModule.h"
-#include "interface_header/ILogModule.h"
-#include "interface_header/IConsoleCommandModule.h"
+#include "interface_header/base/IElementModule.h"
+#include "interface_header/base/IClassModule.h"
+#include "interface_header/base/ILogModule.h"
+#include "interface_header/base/IConsoleCommandModule.h"
 #include "baselib/base_code/util.h"
 #include "baselib/message/config_define.hpp"
 #include "signal_handler.h"
@@ -627,7 +627,7 @@ bool LibManager::reLoadDynLib(const std::string & lib_name)
 	{
 		if (lib_name != itReloadInstance->first)
 		{
-			itReloadInstance->second->onReloadPlugin();
+			itReloadInstance->second->onReload();
 		}
 	}
 	return true;

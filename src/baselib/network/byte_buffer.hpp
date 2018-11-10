@@ -1,6 +1,6 @@
 #pragma once
 
-#include "interface_header/platform.h"
+
 #include "message_buffer.hpp"
 #include <string>
 #include <vector>
@@ -9,7 +9,6 @@
 
 namespace zq {
 
-class MessageBuffer;
 
 class ByteBufferException : public std::exception
 {

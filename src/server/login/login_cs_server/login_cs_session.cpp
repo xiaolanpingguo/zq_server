@@ -5,8 +5,8 @@
 #include "midware/cryptography/sha1.h"
 #include "midware/cryptography/totp.h"
 #include "baselib/libloader/libmanager.h"
-#include "interface_header/IDataAgentModule.h"
-#include "interface_header/IRedislModule.h"
+#include "interface_header/base/IDataAgentModule.h"
+#include "interface_header/base/IRedislModule.h"
 #include <unordered_map>
 #include <array>
 

@@ -4,12 +4,12 @@
 #include "baselib/core/IObject.h"
 #include "baselib/core/data_list.hpp"
 #include "baselib/core/IRecord.h"
-#include "interface_header/uuid.h"
-#include "interface_header/ILogModule.h"
-#include "interface_header/IKernelModule.h"
-#include "interface_header/IClassModule.h"
-#include "interface_header/IEventModule.h"
-#include "interface_header/IElementModule.h"
+#include "interface_header/base/uuid.h"
+#include "interface_header/base/ILogModule.h"
+#include "interface_header/base/IKernelModule.h"
+#include "interface_header/base/IClassModule.h"
+#include "interface_header/base/IEventModule.h"
+#include "interface_header/base/IElementModule.h"
 
 namespace zq {
 

@@ -19,8 +19,8 @@
 #include <fstream>
 #include <memory>
 #include "memory_counter.hpp"
-#include "interface_header/uuid.h"
-#include "interface_header/platform.h"
+#include "interface_header/base/uuid.h"
+#include "interface_header/base/platform.h"
 #include "baselib/base_code/variant.hpp"
 
 namespace zq{

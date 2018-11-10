@@ -5,6 +5,22 @@ namespace zq
 {
 namespace config
 {
+	class Addons
+	{
+	public:
+		//Class name
+		static const std::string& this_name(){ static std::string x = "Addons"; return x; };		// Object
+		static const std::string& class_name(){ static std::string x = "class_name"; return x; };// string
+		static const std::string& config_id(){ static std::string x = "config_id"; return x; };// string
+		static const std::string& group_id(){ static std::string x = "group_id"; return x; };// int
+		static const std::string& id(){ static std::string x = "id"; return x; };// string
+		static const std::string& scene_id(){ static std::string x = "scene_id"; return x; };// int
+		// Property
+		static const std::string& crc(){ static std::string x = "crc"; return x; };// int
+		static const std::string& name(){ static std::string x = "name"; return x; };// string
+		// Record
+
+	};
 	class Object
 	{
 	public:

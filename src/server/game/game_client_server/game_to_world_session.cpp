@@ -4,7 +4,7 @@
 #include "baselib/base_code/format.h"
 #include "baselib/message/game_ss.pb.h"
 
-#include "interface_header/IGameCSModule.h"
+#include "interface_header/base/IGameCSModule.h"
 
 #include <unordered_map>
 #include <iostream>

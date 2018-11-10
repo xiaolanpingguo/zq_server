@@ -1,14 +1,14 @@
 #pragma once
 
-#include "interface_header/IKernelModule.h"
-#include "interface_header/IClassModule.h"
-#include "interface_header/ILogModule.h"
-#include "interface_header/IElementModule.h"
-#include "interface_header/ITestServerModule.h"
-#include "interface_header/IEventModule.h"
-#include "interface_header/IHttpServerModule.h"
-#include "interface_header/IHttpClientModule.h"
-#include "interface_header/IMessageDispatcherModule.h"
+#include "interface_header/base/IKernelModule.h"
+#include "interface_header/base/IClassModule.h"
+#include "interface_header/base/ILogModule.h"
+#include "interface_header/base/IElementModule.h"
+#include "interface_header/base/ITestServerModule.h"
+#include "interface_header/base/IEventModule.h"
+#include "interface_header/base/IHttpServerModule.h"
+#include "interface_header/base/IHttpClientModule.h"
+#include "interface_header/base/IMessageDispatcherModule.h"
 
 
 namespace zq {

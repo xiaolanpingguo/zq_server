@@ -2,7 +2,7 @@
 
 #include "map_ex.hpp"
 #include "IProperty.h"
-#include "interface_header/platform.h"
+#include "interface_header/base/platform.h"
 
 namespace zq {
 

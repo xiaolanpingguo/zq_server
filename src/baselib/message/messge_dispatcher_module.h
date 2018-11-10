@@ -2,8 +2,8 @@
 
 #include <unordered_map>
 
-#include "interface_header/ILibManager.h"
-#include "interface_header/IMessageDispatcherModule.h"
+#include "interface_header/base/ILibManager.h"
+#include "interface_header/base/IMessageDispatcherModule.h"
 
 #include "game_ss.pb.h"
 

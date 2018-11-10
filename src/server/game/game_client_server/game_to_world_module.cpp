@@ -1,5 +1,4 @@
 #include "game_to_world_module.h"
-#include "interface_header/INetCSModule.h"
 #include "baselib/message/config_define.hpp"
 #include "baselib/base_code/format.h"
 #include "baselib/message/game_ss.pb.h"

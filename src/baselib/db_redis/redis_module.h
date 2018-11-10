@@ -1,9 +1,9 @@
 #pragma once
 
-#include "interface_header/IClassModule.h"
-#include "interface_header/ILogModule.h"
-#include "interface_header/IElementModule.h"
-#include "interface_header/IRedislModule.h"
+#include "interface_header/base/IClassModule.h"
+#include "interface_header/base/ILogModule.h"
+#include "interface_header/base/IElementModule.h"
+#include "interface_header/base/IRedislModule.h"
 
 namespace zq {
 

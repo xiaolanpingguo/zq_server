@@ -4,7 +4,7 @@
 #include "IRecord.h"
 #include "data_list.hpp"
 #include "map_ex.hpp"
-#include "interface_header/platform.h"
+#include "interface_header/base/platform.h"
 
 namespace zq {
 

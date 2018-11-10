@@ -13,7 +13,7 @@
 #include "baselib/libloader/coroutine_manager.h"
 ////#include "CoroBehaviour.h"
 
-//#include "interface_header/platform.h"
+//#include "interface_header/base/platform.h"
 //#include <google/protobuf/message.h>
 //#include "baselib/message/test.pb.h"
 //#include "baselib/core/map_ex.hpp"
@@ -57,16 +57,11 @@
 #pragma comment(lib, "core_d.lib")
 #pragma comment(lib, "config_d.lib")
 #pragma comment(lib, "network_d.lib")
-#pragma comment(lib, "log_d.lib")
+#pragma comment(lib, "log_lib_d.lib")
 #pragma comment(lib, "message_d.lib")
 #pragma comment(lib, "component_d.lib")
 #pragma comment(lib, "db_redis_d.lib")
 #pragma comment(lib, "db_mysql_d.lib")
-#pragma comment(lib, "master_server_d.lib")
-#pragma comment(lib, "world_server_d.lib")
-#pragma comment(lib, "login_server_d.lib")
-#pragma comment(lib, "game_server_d.lib")
-#pragma comment(lib, "gate_server_d.lib")
 #pragma comment(lib, "libloader_d.lib")
 #pragma comment(lib, "libeay32.lib")
 #pragma comment(lib, "ssleay32.lib")

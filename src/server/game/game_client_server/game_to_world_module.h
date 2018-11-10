@@ -1,10 +1,10 @@
 #pragma once 
 
-#include "interface_header/IClassModule.h"
-#include "interface_header/IElementModule.h"
-#include "interface_header/ITimerModule.h"
-#include "interface_header/IServerComm.h"
-#include "interface_header/IGameToWorldModule.h"
+#include "interface_header/base/IClassModule.h"
+#include "interface_header/base/IElementModule.h"
+#include "interface_header/base/ITimerModule.h"
+#include "interface_header/base/IServerComm.h"
+#include "interface_header/base/IGameToWorldModule.h"
 
 #include "game_to_world_session.h"
 

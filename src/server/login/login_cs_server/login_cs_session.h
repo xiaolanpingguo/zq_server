@@ -2,7 +2,6 @@
 
 #include "midware/cryptography/big_number.h"
 #include "baselib/network/socket.hpp"
-#include "baselib/network/locked_queue.hpp"
 #include "baselib/network/byte_buffer.hpp"
 
 #include "baselib/message/game_db_account.pb.h"
@@ -207,8 +206,6 @@ private:
 	uint8 _expversion;
 
 	DBAccount::DBUserAccount accountInfo_;
-
-	LockedQueue<WorldPacket*> _recvQueue;
 
 	GameSvrListT gameSvrList_;
 };

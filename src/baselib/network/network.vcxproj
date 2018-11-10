@@ -121,50 +121,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="channel.cpp" />
-    <ClCompile Include="httpclient.cpp" />
-    <ClCompile Include="httpclient_module.cpp" />
-    <ClCompile Include="httpserver.cpp" />
-    <ClCompile Include="httpserver_module.cpp" />
-    <ClCompile Include="net.cpp" />
-    <ClCompile Include="net_cs_module.cpp" />
-    <ClCompile Include="net_ss_module.cpp" />
     <ClCompile Include="network.cpp" />
-    <ClCompile Include="packet_handler.cpp" />
-    <ClCompile Include="websocket_module.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="acceptor.hpp" />
     <ClInclude Include="byte_buffer.hpp" />
-    <ClInclude Include="channel.h" />
     <ClInclude Include="client_socket.hpp" />
     <ClInclude Include="client_socket_mgr.hpp" />
     <ClInclude Include="connector.hpp" />
-    <ClInclude Include="external_socket.hpp" />
-    <ClInclude Include="httpclient.h" />
-    <ClInclude Include="httpclient_module.h" />
-    <ClInclude Include="httpserver.h" />
-    <ClInclude Include="httpserver_module.h" />
-    <ClInclude Include="IHttpClient.h" />
-    <ClInclude Include="IHttpServer.h" />
-    <ClInclude Include="INet.h" />
     <ClInclude Include="internal_socket.hpp" />
     <ClInclude Include="internal_socket_mgr.hpp" />
     <ClInclude Include="asio_fwd.hpp" />
-    <ClInclude Include="locked_queue.hpp" />
     <ClInclude Include="message_buffer.hpp" />
-    <ClInclude Include="mpsc_queue.hpp" />
-    <ClInclude Include="multipart_parser.h" />
-    <ClInclude Include="multipart_reader.h" />
-    <ClInclude Include="net.h" />
     <ClInclude Include="network_thread.hpp" />
-    <ClInclude Include="net_cs_module.h" />
-    <ClInclude Include="net_ss_module.h" />
     <ClInclude Include="network.h" />
-    <ClInclude Include="packet_handler.h" />
     <ClInclude Include="socket.hpp" />
     <ClInclude Include="socket_mgr.hpp" />
-    <ClInclude Include="websocket_module.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />

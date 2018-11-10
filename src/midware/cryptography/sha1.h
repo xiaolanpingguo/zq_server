@@ -1,6 +1,6 @@
 #pragma once
 
-#include "interface_header/platform.h"
+#include "interface_header/base/platform.h"
 #include <string>
 #include <openssl/sha.h>
 

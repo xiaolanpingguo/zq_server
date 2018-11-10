@@ -5,9 +5,9 @@
 #include <time.h>
 #include <unordered_map>
 #include "DynLib.h"
-#include "interface_header/IModule.h"
-#include "interface_header/ILibManager.h"
-#include "interface_header/singleton.hpp"
+#include "interface_header/base/IModule.h"
+#include "interface_header/base/ILibManager.h"
+#include "interface_header/base/singleton.hpp"
 
 namespace zq {
 

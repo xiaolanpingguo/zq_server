@@ -1,9 +1,8 @@
 #pragma once
 
-#include "interface_header/IClassModule.h"
-#include "interface_header/ILogModule.h"
-#include "interface_header/IElementModule.h"
-#include "interface_header/IMysqlModule.h"
+#include "interface_header/base/IClassModule.h"
+#include "interface_header/base/ILogModule.h"
+#include "interface_header/base/IElementModule.h"
 
 #include "database_worker_pool.h"
 #include "query_callback.h"
@@ -43,34 +42,34 @@ namespace zq {
 // 因为按照现在这个模块化设计的话，不应该出现全局变量，但是
 // 这里我暂时没想到一个又易用又好的接口的设计办法，暂时采用一个表是一个
 // 全局变量的形式，这种方式偏向于易用性
-class DatabaseLoader;
-class QueryCallbackProcessor;
-class MysqlModule : public IMysqlModule
-{
-	using DatabaseLoaderPtr = std::unique_ptr<DatabaseLoader>;
-	using QueryCallbackProcessorPtr = std::unique_ptr<QueryCallbackProcessor>;
-public:
-
-	MysqlModule(ILibManager* p);
-	virtual ~MysqlModule();
-
-	bool init() override;
-	bool initEnd() override;
-	bool run() override;
-	bool finalize() override;
-
-public:
-
-
-protected:
-
-	DatabaseLoaderPtr dbLoader_;
-	QueryCallbackProcessorPtr queryProcessor_;
-
-	IElementModule * elementModule_;
-	IClassModule* classModule_;
-	ILogModule* logModule_;
-};
+//class DatabaseLoader;
+//class QueryCallbackProcessor;
+//class MysqlModule : public IMysqlModule
+//{
+//	using DatabaseLoaderPtr = std::unique_ptr<DatabaseLoader>;
+//	using QueryCallbackProcessorPtr = std::unique_ptr<QueryCallbackProcessor>;
+//public:
+//
+//	MysqlModule(ILibManager* p);
+//	virtual ~MysqlModule();
+//
+//	bool init() override;
+//	bool initEnd() override;
+//	bool run() override;
+//	bool finalize() override;
+//
+//public:
+//
+//
+//protected:
+//
+//	DatabaseLoaderPtr dbLoader_;
+//	QueryCallbackProcessorPtr queryProcessor_;
+//
+//	IElementModule * elementModule_;
+//	IClassModule* classModule_;
+//	ILogModule* logModule_;
+//};
 
 
 }

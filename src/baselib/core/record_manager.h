@@ -6,7 +6,7 @@
 #include <vector>
 #include "record.h"
 #include "IRecordManager.h"
-#include "interface_header/platform.h"
+#include "interface_header/base/platform.h"
 
 namespace zq {
 

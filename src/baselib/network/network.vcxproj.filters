@@ -15,84 +15,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="httpclient.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="httpclient_module.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="httpserver.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="httpserver_module.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="net.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="websocket_module.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="channel.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="network.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="packet_handler.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="net_ss_module.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="net_cs_module.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="httpclient.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="httpclient_module.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="httpserver.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="httpserver_module.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="IHttpClient.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="IHttpServer.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="INet.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="net.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="websocket_module.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="channel.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="packet_handler.h">
-      <Filter>header</Filter>
-    </ClInclude>
     <ClInclude Include="network.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="multipart_parser.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="multipart_reader.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="byte_buffer.hpp">
       <Filter>header</Filter>
     </ClInclude>
     <ClInclude Include="message_buffer.hpp">
@@ -113,12 +41,6 @@
     <ClInclude Include="socket_mgr.hpp">
       <Filter>header</Filter>
     </ClInclude>
-    <ClInclude Include="locked_queue.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="mpsc_queue.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
     <ClInclude Include="asio_fwd.hpp">
       <Filter>header</Filter>
     </ClInclude>
@@ -128,19 +50,13 @@
     <ClInclude Include="internal_socket_mgr.hpp">
       <Filter>header</Filter>
     </ClInclude>
-    <ClInclude Include="net_ss_module.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="net_cs_module.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="external_socket.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
     <ClInclude Include="client_socket_mgr.hpp">
       <Filter>header</Filter>
     </ClInclude>
     <ClInclude Include="client_socket.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="byte_buffer.hpp">
       <Filter>header</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,9 +1,9 @@
 #pragma once
 
 
-#include "interface_header/IClassModule.h"
-#include "interface_header/IElementModule.h"
-#include "interface_header/IWorldSSModule.h"
+#include "interface_header/base/IClassModule.h"
+#include "interface_header/base/IElementModule.h"
+#include "interface_header/base/IWorldSSModule.h"
 
 #include "baselib/network/socket_mgr.hpp"
 

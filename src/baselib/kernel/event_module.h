@@ -1,9 +1,9 @@
 #pragma once
 
 #include "baselib/core/IObject.h"
-#include "interface_header/uuid.h"
-#include "interface_header/IEventModule.h"
-#include "interface_header/IKernelModule.h"
+#include "interface_header/base/uuid.h"
+#include "interface_header/base/IEventModule.h"
+#include "interface_header/base/IKernelModule.h"
 
 namespace zq {
 
