@@ -1,7 +1,6 @@
 #pragma once
 
 #include "interface_header/base/IClassModule.h"
-#include "interface_header/base/IElementModule.h"
 #include "interface_header/base/IGameCSModule.h"
 
 #include "baselib/network/socket_mgr.hpp"
@@ -27,7 +26,6 @@ public:
 
 private:
 
-	IElementModule * elementModule_;
 	IClassModule* classModule_;
 };
 

@@ -21,7 +21,7 @@ int main(int argc, const char *argv[])
 	FileProcess fp;
 	fp.setExcelPath(excelpath);
 	fp.setUTF8(false);//设置为true将支持中文显示
-	fp.loadDataFromExcel();
+	fp.load();
 	fp.save();
 
 	auto t2 = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
@@ -29,6 +29,6 @@ int main(int argc, const char *argv[])
 	std::cout << "Timespan: " << t2 - t1 << " us (" << (t2 - t1) / 1000000.0f << "s)" << std::endl;
 
 	std::cout << "press any key to exit..." << std::endl;
-	//std::getchar();
+	std::getchar();
 	return 0;
 }

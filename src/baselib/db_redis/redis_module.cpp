@@ -18,7 +18,6 @@ RedisModule::~RedisModule()
 bool RedisModule::init()
 {
 	classModule_ = libManager_->findModule<IClassModule>();
-	elementModule_ = libManager_->findModule<IElementModule>();
 	logModule_ = libManager_->findModule<ILogModule>();
 
 	return true;
@@ -26,19 +25,19 @@ bool RedisModule::init()
 
 bool RedisModule::initEnd()
 {
-	std::shared_ptr<IClass> logic_class = classModule_->getElement(config::Redis::this_name());
+	IClassPtr logic_class = classModule_->getClass(config::Redis::this_name());
 	if (logic_class)
 	{
-		const std::vector<std::string>& strIdList = logic_class->getIDList();
-		for (size_t i = 0; i < strIdList.size(); ++i)
+		const auto& objs = logic_class->getAllObjs();
+		for (const auto& obj : objs)
 		{
-			const std::string& strId = strIdList[i];
+			auto property_mgr = obj.second;
 
-			const int nPort = elementModule_->getPropertyInt(strId, config::Redis::port());
-			const std::string& strIP = elementModule_->getPropertyString(strId, config::Redis::ip());
-			const std::string& strAuth = elementModule_->getPropertyString(strId, config::Redis::auth());
+			const int nPort = property_mgr->getPropertyInt(config::Redis::port());
+			const std::string& strIP = property_mgr->getPropertyString(config::Redis::ip());
+			const std::string& strAuth = property_mgr->getPropertyString(config::Redis::auth());
 
-			if (!addServer(strId, strIP, nPort, false))
+			if (!addServer(obj.first, strIP, nPort, false))
 			{
 				ASSERT(false);
 				return false;

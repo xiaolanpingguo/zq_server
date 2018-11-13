@@ -1,15 +1,20 @@
 #pragma once
 
+
 #include "map_ex.hpp"
 #include "data_list.hpp"
 #include "IPropertyManager.h"
-#include "interface_header/base/platform.h"
 
 namespace zq {
 
-class ZQ_EXPORT PropertyManager : public IPropertyManager
+class PropertyManager : public IPropertyManager
 {
 public:
+
+	PropertyManager()
+	{
+
+	}
 	PropertyManager(const Guid& self)
 	{
 		mSelf = self;
@@ -25,15 +30,15 @@ public:
 
 	virtual const Guid& self();
 
-	virtual bool setProperty(const std::string& strPropertyName, const AbstractData& TData);
+	virtual bool setProperty(const std::string& strPropertyName, const VariantData& TData);
 
 	virtual bool setPropertyInt(const std::string& strPropertyName, const int64 nValue);
-	virtual bool setPropertyFloat(const std::string& strPropertyName, const double dwValue);
+	virtual bool setPropertyDouble(const std::string& strPropertyName, const double dwValue);
 	virtual bool setPropertyString(const std::string& strPropertyName, const std::string& strValue);
 	virtual bool setPropertyObject(const std::string& strPropertyName, const Guid& obj);
 
 	virtual int64 getPropertyInt(const std::string& strPropertyName);
-	virtual double getPropertyFloat(const std::string& strPropertyName);
+	virtual double getPropertyDouble(const std::string& strPropertyName);
 	virtual const std::string& getPropertyString(const std::string& strPropertyName);
 	virtual const Guid& getPropertyObject(const std::string& strPropertyName);
 

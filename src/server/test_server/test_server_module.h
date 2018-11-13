@@ -3,7 +3,6 @@
 #include "interface_header/base/IKernelModule.h"
 #include "interface_header/base/IClassModule.h"
 #include "interface_header/base/ILogModule.h"
-#include "interface_header/base/IElementModule.h"
 #include "interface_header/base/ITestServerModule.h"
 #include "interface_header/base/IEventModule.h"
 #include "interface_header/base/IHttpServerModule.h"
@@ -30,7 +29,7 @@ public:
 
 protected:
 
-	int onPropertyCallBackEvent(const Guid& self, const std::string& strProperty, const AbstractData& oldVar, const AbstractData& newVar);
+	int onPropertyCallBackEvent(const Guid& self, const std::string& strProperty, const VariantData& oldVar, const VariantData& newVar);
 
 	int onClassCallBackEvent(const Guid& self, const std::string& strClassName, const CLASS_OBJECT_EVENT event, const DataList& arg);
 	int onEvent(const Guid& self, const EnEventDefine event, const DataList& arg);
@@ -44,7 +43,6 @@ private:
 
 private:
 
-	IElementModule * elementModule_;
 	IKernelModule* kernelModule_;
 	IClassModule* classModule_;
 	ILogModule* logModule_;

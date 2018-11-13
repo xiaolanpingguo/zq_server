@@ -24,7 +24,6 @@
     <ClInclude Include="base\IConsoleCommandModule.h" />
     <ClInclude Include="base\ICoroutineModule.h" />
     <ClInclude Include="base\IDataAgentModule.h" />
-    <ClInclude Include="base\IElementModule.h" />
     <ClInclude Include="base\IEventModule.h" />
     <ClInclude Include="base\IGameCSModule.h" />
     <ClInclude Include="base\IGameServerModule.h" />
@@ -45,9 +44,6 @@
     <ClInclude Include="base\IMasterServerModule.h" />
     <ClInclude Include="base\IMessageDispatcherModule.h" />
     <ClInclude Include="base\IModule.h" />
-    <ClInclude Include="base\IPropertyConfigModule.h" />
-    <ClInclude Include="base\IPropertyModule.h" />
-    <ClInclude Include="base\IPropertyTrailModule.h" />
     <ClInclude Include="base\IProtoJsonModule.h" />
     <ClInclude Include="base\IRedislModule.h" />
     <ClInclude Include="base\IServerComm.h" />

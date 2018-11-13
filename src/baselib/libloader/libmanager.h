@@ -56,8 +56,7 @@ public:
 	const std::string& getServerName() const override { return serverName_; }
 
 	const std::string& getCfgRootDir() const override { return cfgRootDir_; }
-	const std::string& getCfgStructDir() const override  { return structDir_; } 
-	const std::string& getCfgImplDir() const override  { return implDir_; } 
+	const std::string& getCfgXmlDir() const override { return cfgXmlDir_; }
 
 	void setGetFileContentFunctor(GET_FILECONTENT_FUNCTOR fun) override;
 	bool getFileContent(const std::string &strFileName, std::string &strContent) override;
@@ -116,8 +115,7 @@ private:
 	std::string launchConfigName_;
 
 	std::string cfgRootDir_;
-	std::string structDir_;
-	std::string implDir_;
+	std::string cfgXmlDir_;
 
 	std::vector<std::string> staticLibVec_;
 

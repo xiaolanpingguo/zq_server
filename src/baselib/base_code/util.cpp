@@ -115,17 +115,13 @@ std::string toUpper(const std::string& str) {
 	return t;
 }
 
-
-// ×Ö·û´®Ìæ»»
-int zq_replace(std::string& str, const std::string& pattern, const std::string& newpat)
+int strReplace(std::string& str, const std::string& pattern, const std::string& newpat)
 {
 	int count = 0;
 	const size_t nsize = newpat.size();
 	const size_t psize = pattern.size();
 
-	for (size_t pos = str.find(pattern, 0);
-		pos != std::string::npos;
-		pos = str.find(pattern, pos + nsize))
+	for (size_t pos = str.find(pattern, 0); pos != std::string::npos; pos = str.find(pattern, pos + nsize))
 	{
 		str.replace(pos, psize, newpat);
 		count++;
@@ -134,7 +130,7 @@ int zq_replace(std::string& str, const std::string& pattern, const std::string& 
 	return count;
 }
 
-int zq_replace(std::wstring& str, const std::wstring& pattern, const std::wstring& newpat)
+int wstrReplace(std::wstring& str, const std::wstring& pattern, const std::wstring& newpat)
 {
 	int count = 0;
 	const size_t nsize = newpat.size();

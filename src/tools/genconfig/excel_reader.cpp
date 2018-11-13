@@ -135,7 +135,8 @@ namespace MiniExcelReader {
 		if (col < _dimension.firstCol || col > _dimension.lastCol)
 			return nullptr;
 
-		return _cells[toIndex(row, col)];
+		int index = toIndex(row, col);
+		return _cells[index];
 	}
 
 
@@ -297,7 +298,11 @@ namespace MiniExcelReader {
 		int vecsize = (sh._dimension.lastCol - sh._dimension.firstCol + 1) * (sh._dimension.lastRow - sh._dimension.firstRow + 1);
 
 		sh._cells.resize(vecsize);
-
+		for (size_t i = 0; i < sh._cells.size(); ++i)
+		{
+			Cell* cell = new Cell;
+			sh._cells[i] = cell;
+		}
 
 		while (row)
 		{
@@ -314,7 +319,8 @@ namespace MiniExcelReader {
 
 				v = c->first_node("v");
 
-				Cell* cell = new Cell;
+				//Cell* cell = new Cell;
+				Cell* cell = sh._cells[index];
 
 				if (v)
 				{

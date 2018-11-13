@@ -5,7 +5,6 @@
 #include "dependencies/RapidXML/rapidxml_utils.hpp"
 #include "interface_header/base/ILib.h"
 #include "self_register_factory.hpp"
-#include "interface_header/base/IElementModule.h"
 #include "interface_header/base/IClassModule.h"
 #include "interface_header/base/ILogModule.h"
 #include "interface_header/base/IConsoleCommandModule.h"
@@ -41,7 +40,6 @@
 #pragma comment(lib, "base_code_d.lib")
 #pragma comment(lib, "kernel_d.lib")
 #pragma comment(lib, "core_d.lib")
-#pragma comment(lib, "config_d.lib")
 #pragma comment(lib, "network_d.lib")
 #pragma comment(lib, "log_lib_d.lib")
 #pragma comment(lib, "message_d.lib")
@@ -57,8 +55,7 @@ using namespace zq;
 
 
 constexpr const char* ROOT_DIR_NAME = "../datacfg/";
-constexpr const char* STRUCT_DIR_NAME = "struct/";
-constexpr const char* IMPL_DIR_NAME = "impl/";
+constexpr const char* XML_DIR_NAME = "xml/";
 constexpr const char* LAUNCH_NAME = "launch.xml";
 
 constexpr int APPCMD_NOTHING_TODO = 0;          // É¶Ò²²»¸É
@@ -256,8 +253,7 @@ LibManager::LibManager() : ILibManager(),
 	nowTime_(0),
 	getFileContentFunctor_ (nullptr),
 	cfgRootDir_(ROOT_DIR_NAME),
-	structDir_(cfgRootDir_ + STRUCT_DIR_NAME) ,
-	implDir_(cfgRootDir_ + IMPL_DIR_NAME),
+	cfgXmlDir_(cfgRootDir_ + XML_DIR_NAME),
 	launchConfigName_(LAUNCH_NAME)
 {
 }
@@ -911,7 +907,6 @@ bool LibManager::reload(const std::string& cfg_name)
 void LibManager::registerCommLib()
 {
 	CREATE_LIB(this, KernelLib);
-	CREATE_LIB(this, ConfigLib);
 	CREATE_LIB(this, LogLib);
 	CREATE_LIB(this, NetworkLib);
 	CREATE_LIB(this, MessageLib);

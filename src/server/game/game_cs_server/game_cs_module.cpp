@@ -8,7 +8,6 @@ namespace zq {
 
 bool GameCSModule::init()
 {
-	elementModule_ = libManager_->findModule<IElementModule>();
 	classModule_ = libManager_->findModule<IClassModule>();
 
 	return true;
@@ -16,21 +15,21 @@ bool GameCSModule::init()
 
 bool GameCSModule::initEnd()
 {	
-	std::shared_ptr<IClass> logic_class = classModule_->getElement(config::Server::this_name());
+	IClassPtr logic_class = classModule_->getClass(config::Server::this_name());
 	if (logic_class)
 	{
-		const std::vector<std::string>& strIdList = logic_class->getIDList();
-		for (size_t i = 0; i < strIdList.size(); ++i)
+		const auto& objs = logic_class->getAllObjs();
+		for (const auto& obj : objs)
 		{
-			const std::string& strId = strIdList[i];
+			auto property_mgr = obj.second;
 
-			int server_type = elementModule_->getPropertyInt(strId, config::Server::server_type());
-			int server_id = elementModule_->getPropertyInt(strId, config::Server::server_id());
+			int server_type = property_mgr->getPropertyInt(config::Server::server_type());
+			int server_id = property_mgr->getPropertyInt(config::Server::server_id());
 			if (server_type == SERVER_TYPES::ST_GAME_SERVER && libManager_->getServerID() == server_id)
 			{
-				//int max_conn = elementModule_->getPropertyInt(strId, config::Server::max_connect());
-				int ext_port = elementModule_->getPropertyInt(strId, config::Server::external_port());
-				const std::string& ext_ip = elementModule_->getPropertyString(strId, config::Server::external_ip());
+				//int max_conn = property_mgr->getPropertyInt(config::Server::max_connect());
+				int ext_port = property_mgr->getPropertyInt(config::Server::external_port());
+				const std::string& ext_ip = property_mgr->getPropertyString(config::Server::external_ip());
 
 				if (ext_port != -1)
 				{
@@ -39,7 +38,7 @@ bool GameCSModule::initEnd()
 						ASSERT(false, "Cannot init external server net");
 						return false;
 					}
-					
+
 				}
 
 				std::ostringstream strLog;

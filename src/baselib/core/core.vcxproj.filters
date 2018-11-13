@@ -9,12 +9,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="record.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="record_manager.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="object.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -41,12 +35,6 @@
     <ClInclude Include="IPropertyManager.h">
       <Filter>header</Filter>
     </ClInclude>
-    <ClInclude Include="IRecord.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="IRecordManager.h">
-      <Filter>header</Filter>
-    </ClInclude>
     <ClInclude Include="map_ex.hpp">
       <Filter>header</Filter>
     </ClInclude>
@@ -60,12 +48,6 @@
       <Filter>header</Filter>
     </ClInclude>
     <ClInclude Include="property_manager.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="record.h">
-      <Filter>header</Filter>
-    </ClInclude>
-    <ClInclude Include="record_manager.h">
       <Filter>header</Filter>
     </ClInclude>
     <ClInclude Include="list.hpp">

@@ -46,14 +46,13 @@ std::shared_ptr<IProperty> PropertyManager::addProperty(const Guid& self, const 
     if (!pProperty)
     {
         pProperty = std::shared_ptr<IProperty>(new Property(self, strPropertyName, varType));
-
         this->addElement(strPropertyName, pProperty);
     }
 
     return pProperty;
 }
 
-bool PropertyManager::setProperty(const std::string& strPropertyName, const AbstractData& TData)
+bool PropertyManager::setProperty(const std::string& strPropertyName, const VariantData& TData)
 {
     std::shared_ptr<IProperty> pProperty = getElement(strPropertyName);
     if (pProperty)
@@ -82,12 +81,12 @@ bool PropertyManager::setPropertyInt(const std::string& strPropertyName, const i
     return false;
 }
 
-bool PropertyManager::setPropertyFloat(const std::string& strPropertyName, const double dwValue)
+bool PropertyManager::setPropertyDouble(const std::string& strPropertyName, const double dwValue)
 {
     std::shared_ptr<IProperty> pProperty = getElement(strPropertyName);
     if (pProperty)
     {
-        return pProperty->setFloat(dwValue);
+        return pProperty->setDouble(dwValue);
     }
 
     return false;
@@ -121,10 +120,10 @@ int64 PropertyManager::getPropertyInt(const std::string& strPropertyName)
 	return pProperty ? pProperty->getInt() : 0;
 }
 
-double PropertyManager::getPropertyFloat(const std::string& strPropertyName)
+double PropertyManager::getPropertyDouble(const std::string& strPropertyName)
 {
     std::shared_ptr<IProperty> pProperty = getElement(strPropertyName);
-	return pProperty ? pProperty->getFloat() : 0.0;
+	return pProperty ? pProperty->getDouble() : 0.0;
 }
 
 const std::string& PropertyManager::getPropertyString(const std::string& strPropertyName)

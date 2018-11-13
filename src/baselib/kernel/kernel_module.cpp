@@ -1,6 +1,5 @@
 #include "kernel_module.h"
 #include "baselib/core/object.h"
-#include "baselib/core/record.h"
 #include "interface_header/base/uuid.h"
 #include "baselib/message/config_define.hpp"
 #include <random>
@@ -50,9 +49,7 @@ bool KernelModule::init()
     mtDeleteSelfList.clear();
 
     classModule_ = libManager_->findModule<IClassModule>();
-    elementModule_ = libManager_->findModule<IElementModule>();
     logModule_ = libManager_->findModule<ILogModule>();
-	m_pEventModule = libManager_->findModule<IEventModule>();
 
     return true;
 }
@@ -112,15 +109,13 @@ std::shared_ptr<IObject> KernelModule::createObject(const Guid& self, const int 
     }
 
     std::shared_ptr<IPropertyManager> pStaticClassPropertyManager = classModule_->getClassPropertyManager(strClassName);
-    std::shared_ptr<IRecordManager> pStaticClassRecordManager = classModule_->getClassRecordManager(strClassName);
-    if (pStaticClassPropertyManager && pStaticClassRecordManager)
+    if (pStaticClassPropertyManager)
     {
 		// 创建对象并添加
         pObject = std::shared_ptr<IObject>(new CObject(ident, libManager_));
         addElement(ident, pObject);
 
-        std::shared_ptr<IPropertyManager> pPropertyManager = pObject->getPropertyManager();
-        std::shared_ptr<IRecordManager> pRecordManager = pObject->getRecordManager();
+        std::shared_ptr<IPropertyManager> pPropertyManager = pObject->getPropertyMgr();
  
         std::shared_ptr<IProperty> pStaticConfigPropertyInfo = pStaticClassPropertyManager->first();
         while (pStaticConfigPropertyInfo)
@@ -141,86 +136,63 @@ std::shared_ptr<IObject> KernelModule::createObject(const Guid& self, const int 
             pStaticConfigPropertyInfo = pStaticClassPropertyManager->next();
         }
 
-        std::shared_ptr<IRecord> pConfigRecordInfo = pStaticClassRecordManager->first();
-        while (pConfigRecordInfo)
-        {
-            std::shared_ptr<IRecord> xRecord =  pRecordManager->AddRecord(ident,
-                                      pConfigRecordInfo->getName(),
-                                      pConfigRecordInfo->getInitData(),
-                                      pConfigRecordInfo->getTag(),
-                                      pConfigRecordInfo->getRows());
-
-             xRecord->setPublic(pConfigRecordInfo->getPublic());
-             xRecord->setPrivate(pConfigRecordInfo->getPrivate());
-             xRecord->setSave(pConfigRecordInfo->getSave());
-             xRecord->setCache(pConfigRecordInfo->getCache());
-			 xRecord->setUpload(pConfigRecordInfo->getUpload());
-            
-            pObject->addRecordCallBack(pConfigRecordInfo->getName(), 
-				std::bind(&KernelModule::onRecordCommonEvent,this, _1, _2, _3, _4));
-
-            pConfigRecordInfo = pStaticClassRecordManager->next();
-        }
-
-		pObject->setPropertyObject(config::Object::id(), self);
-		pObject->setPropertyString(config::Object::config_id(), strConfigIndex);
-		pObject->setPropertyString(config::Object::class_name(), strClassName);
-		pObject->setPropertyInt(config::Object::scene_id(), nSceneID);
-		pObject->setPropertyInt(config::Object::group_id(), nGroupID);
+		//pObject->setPropertyObject(config::Object::id(), self);
+		//pObject->setPropertyString(config::Object::config_id(), strConfigIndex);
+		//pObject->setPropertyString(config::Object::class_name(), strClassName);
+		//pObject->setPropertyInt(config::Object::scene_id(), nSceneID);
+		//pObject->setPropertyInt(config::Object::group_id(), nGroupID);
 
 		// 此时对象已经创建了，但还没有数据
 		doEvent(ident, strClassName, pObject->getState(), arg);
 
          // 这里开始填充数据
-        std::shared_ptr<IPropertyManager> pConfigPropertyManager = elementModule_->getPropertyManager(strConfigIndex);
-        std::shared_ptr<IRecordManager> pConfigRecordManager = elementModule_->getRecordManager(strConfigIndex);
-        if (pConfigPropertyManager && pConfigRecordManager)
-        {
-            std::shared_ptr<IProperty> pConfigPropertyInfo = pConfigPropertyManager->first();
-            while (pConfigPropertyInfo)
-            {
-                if (pConfigPropertyInfo->changed())
-                {
-                    pPropertyManager->setProperty(pConfigPropertyInfo->getKey(), pConfigPropertyInfo->getValue());
-                }
+	   /* std::shared_ptr<IPropertyManager> pConfigPropertyManager = elementModule_->getPropertyMgr(strConfigIndex);
+		if (pConfigPropertyManager)
+		{
+			std::shared_ptr<IProperty> pConfigPropertyInfo = pConfigPropertyManager->first();
+			while (pConfigPropertyInfo)
+			{
+				if (pConfigPropertyInfo->changed())
+				{
+					pPropertyManager->setProperty(pConfigPropertyInfo->getKey(), pConfigPropertyInfo->getValue());
+				}
 
-                pConfigPropertyInfo = pConfigPropertyManager->next();
-            }
-        }
-
-        for (int i = 0; i < arg.GetCount() - 1; i += 2)
-        {
-            const std::string& strPropertyName = arg.String(i);
-            if (config::Object::config_id() != strPropertyName
-                && config::Object::class_name() != strPropertyName
-                && config::Object::scene_id() != strPropertyName
-				&& config::Object::id() != strPropertyName
-                && config::Object::group_id() != strPropertyName)
-            {
-                std::shared_ptr<IProperty> pArgProperty = pStaticClassPropertyManager->getElement(strPropertyName);
-                if (pArgProperty)
-                {
-                    switch (pArgProperty->getType())
-                    {
-                        case TDATA_INT:
-                            pObject->setPropertyInt(strPropertyName, arg.Int(i + 1));
-                            break;
-                        case TDATA_FLOAT:
-                            pObject->setPropertyFloat(strPropertyName, arg.Float(i + 1));
-                            break;
-                        case TDATA_STRING:
-                            pObject->setPropertyString(strPropertyName, arg.String(i + 1));
-                            break;
-                        case TDATA_OBJECT:
-                            pObject->setPropertyObject(strPropertyName, arg.Object(i + 1));
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
-        }
-
+				pConfigPropertyInfo = pConfigPropertyManager->next();
+			}
+		}
+*/
+		/*   for (int i = 0; i < arg.GetCount() - 1; i += 2)
+		   {
+			   const std::string& strPropertyName = arg.String(i);
+			   if (config::Object::config_id() != strPropertyName
+				   && config::Object::class_name() != strPropertyName
+				   && config::Object::scene_id() != strPropertyName
+				   && config::Object::id() != strPropertyName
+				   && config::Object::group_id() != strPropertyName)
+			   {
+				   std::shared_ptr<IProperty> pArgProperty = pStaticClassPropertyManager->getElement(strPropertyName);
+				   if (pArgProperty)
+				   {
+					   switch (pArgProperty->getType())
+					   {
+						   case TDATA_INT:
+							   pObject->setPropertyInt(strPropertyName, arg.Int(i + 1));
+							   break;
+						   case TDATA_FLOAT:
+							   pObject->setPropertyDouble(strPropertyName, arg.Float(i + 1));
+							   break;
+						   case TDATA_STRING:
+							   pObject->setPropertyString(strPropertyName, arg.String(i + 1));
+							   break;
+						   case TDATA_OBJECT:
+							   pObject->setPropertyObject(strPropertyName, arg.Object(i + 1));
+							   break;
+						   default:
+							   break;
+					   }
+				   }
+			   }
+		   }*/
 
 		pObject->setState(COE_CREATE_BEFORE_ATTACHDATA);
 		doEvent(ident, strClassName, pObject->getState(), arg);
@@ -288,12 +260,12 @@ bool KernelModule::setPropertyInt(const Guid& self, const std::string& strProper
     return false;
 }
 
-bool KernelModule::setPropertyFloat(const Guid& self, const std::string& strPropertyName, const double dValue)
+bool KernelModule::setPropertyDouble(const Guid& self, const std::string& strPropertyName, const double dValue)
 {
     std::shared_ptr<IObject> pObject = getElement(self);
     if (pObject)
     {
-        return pObject->setPropertyFloat(strPropertyName, dValue);
+        return pObject->setPropertyDouble(strPropertyName, dValue);
     }
 
     logModule_->logObject(ILogModule::NLL_ERROR_NORMAL, self, strPropertyName + "| There is no object", __FUNCTION__, __LINE__);
@@ -340,12 +312,12 @@ int64 KernelModule::getPropertyInt(const Guid& self, const std::string& strPrope
     return NULL_INT;
 }
 
-double KernelModule::getPropertyFloat(const Guid& self, const std::string& strPropertyName)
+double KernelModule::getPropertyDouble(const Guid& self, const std::string& strPropertyName)
 {
     std::shared_ptr<IObject> pObject = getElement(self);
     if (pObject)
     {
-        return pObject->getPropertyFloat(strPropertyName);
+        return pObject->getPropertyDouble(strPropertyName);
     }
 
     logModule_->logObject(ILogModule::NLL_ERROR_NORMAL, self, strPropertyName + "| There is no object", __FUNCTION__, __LINE__);
@@ -375,296 +347,6 @@ const Guid& KernelModule::getPropertyObject(const Guid& self, const std::string&
     }
 
     logModule_->logObject(ILogModule::NLL_ERROR_NORMAL, self, strPropertyName + "| There is no object", __FUNCTION__, __LINE__);
-
-    return NULL_OBJECT;
-}
-
-std::shared_ptr<IRecord> KernelModule::findRecord(const Guid& self, const std::string& strRecordName)
-{
-    std::shared_ptr<IObject> pObject = getElement(self);
-    if (pObject)
-    {
-        return pObject->getRecordManager()->getElement(strRecordName);
-    }
-
-    logModule_->logObject(ILogModule::NLL_ERROR_NORMAL, self, strRecordName + "| There is no object", __FUNCTION__, __LINE__);
-
-    return nullptr;
-}
-
-bool KernelModule::clearRecord(const Guid& self, const std::string& strRecordName)
-{
-    std::shared_ptr<IRecord> pRecord =  findRecord(self, strRecordName);
-    if (pRecord)
-    {
-        return pRecord->clear();
-    }
-
-    logModule_->logObject(ILogModule::NLL_ERROR_NORMAL, self, strRecordName + "| There is no record", __FUNCTION__, __LINE__);
-
-    return false;
-}
-
-bool KernelModule::setRecordInt(const Guid& self, const std::string& strRecordName, const int nRow, const int nCol, const int64 nValue)
-{
-    std::shared_ptr<IObject> pObject = getElement(self);
-    if (pObject)
-    {
-        if (!pObject->setRecordInt(strRecordName, nRow, nCol, nValue))
-        {
-            logModule_->normal(ILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error for row or col", __FUNCTION__, __LINE__);
-        }
-        else
-        {
-            return true;
-        }
-    }
-
-    logModule_->logObject(ILogModule::NLL_ERROR_NORMAL, self, strRecordName + "| There is no object", __FUNCTION__, __LINE__);
-
-    return false;
-}
-
-bool KernelModule::setRecordInt(const Guid& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const int64 value)
-{
-    std::shared_ptr<IObject> pObject = getElement(self);
-    if (pObject)
-    {
-        if (!pObject->setRecordInt(strRecordName, nRow, strColTag, value))
-        {
-            logModule_->normal(ILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error for row or col", __FUNCTION__, __LINE__);
-        }
-        else
-        {
-            return true;
-        }
-    }
-
-    logModule_->logObject(ILogModule::NLL_ERROR_NORMAL, self, strRecordName + "| There is no object", __FUNCTION__, __LINE__);
-
-    return false;
-}
-
-bool KernelModule::setRecordFloat(const Guid& self, const std::string& strRecordName, const int nRow, const int nCol, const double dwValue)
-{
-    std::shared_ptr<IObject> pObject = getElement(self);
-    if (pObject)
-    {
-        if (!pObject->setRecordFloat(strRecordName, nRow, nCol, dwValue))
-        {
-            logModule_->normal(ILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error setRecordFloat for row  or col", __FUNCTION__, __LINE__);
-        }
-        else
-        {
-            return true;
-        }
-    }
-
-    logModule_->logObject(ILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-
-    return false;
-}
-
-bool KernelModule::setRecordFloat(const Guid& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const double value)
-{
-    std::shared_ptr<IObject> pObject = getElement(self);
-    if (pObject)
-    {
-        if (!pObject->setRecordFloat(strRecordName, nRow, strColTag, value))
-        {
-            logModule_->normal(ILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error setRecordFloat for row  or col", __FUNCTION__, __LINE__);
-        }
-        else
-        {
-            return true;
-        }
-    }
-
-    logModule_->logObject(ILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-
-    return false;
-}
-
-bool KernelModule::setRecordString(const Guid& self, const std::string& strRecordName, const int nRow, const int nCol, const std::string& strValue)
-{
-    std::shared_ptr<IObject> pObject = getElement(self);
-    if (pObject)
-    {
-        if (!pObject->setRecordString(strRecordName, nRow, nCol, strValue))
-        {
-            logModule_->normal(ILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error setRecordString for row  or col", __FUNCTION__, __LINE__);
-        }
-        else
-        {
-            return true;
-        }
-    }
-
-    logModule_->logObject(ILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-
-    return false;
-}
-
-bool KernelModule::setRecordString(const Guid& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const std::string& value)
-{
-    std::shared_ptr<IObject> pObject = getElement(self);
-    if (pObject)
-    {
-        if (!pObject->setRecordString(strRecordName, nRow, strColTag, value))
-        {
-            logModule_->normal(ILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error setRecordObject for row  or col", __FUNCTION__, __LINE__);
-        }
-        else
-        {
-            return true;
-        }
-    }
-
-    logModule_->logObject(ILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-
-    return false;
-}
-
-bool KernelModule::setRecordObject(const Guid& self, const std::string& strRecordName, const int nRow, const int nCol, const Guid& objectValue)
-{
-    std::shared_ptr<IObject> pObject = getElement(self);
-    if (pObject)
-    {
-        if (!pObject->setRecordObject(strRecordName, nRow, nCol, objectValue))
-        {
-            logModule_->normal(ILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error setRecordObject for row  or col", __FUNCTION__, __LINE__);
-        }
-        else
-        {
-            return true;
-        }
-    }
-
-    logModule_->logObject(ILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-
-    return false;
-}
-
-bool KernelModule::setRecordObject(const Guid& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const Guid& value)
-{
-    std::shared_ptr<IObject> pObject = getElement(self);
-    if (pObject)
-    {
-        if (!pObject->setRecordObject(strRecordName, nRow, strColTag, value))
-        {
-            logModule_->normal(ILogModule::NLL_ERROR_NORMAL, self, strRecordName, "error setRecordObject for row  or col", __FUNCTION__, __LINE__);
-        }
-        else
-        {
-            return true;
-        }
-    }
-
-    logModule_->logObject(ILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-
-    return false;
-}
-
-int64 KernelModule::getRecordInt(const Guid& self, const std::string& strRecordName, const int nRow, const int nCol)
-{
-    std::shared_ptr<IObject> pObject = getElement(self);
-    if (pObject)
-    {
-        return pObject->getRecordInt(strRecordName, nRow, nCol);
-    }
-
-    logModule_->logObject(ILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-
-    return 0;
-}
-
-int64 KernelModule::getRecordInt(const Guid& self, const std::string& strRecordName, const int nRow, const std::string& strColTag)
-{
-    std::shared_ptr<IObject> pObject = getElement(self);
-    if (pObject)
-    {
-        return pObject->getRecordInt(strRecordName, nRow, strColTag);
-    }
-
-    logModule_->logObject(ILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-
-    return 0;
-}
-
-double KernelModule::getRecordFloat(const Guid& self, const std::string& strRecordName, const int nRow, const int nCol)
-{
-    std::shared_ptr<IObject> pObject = getElement(self);
-    if (pObject)
-    {
-        return pObject->getRecordFloat(strRecordName, nRow, nCol);
-    }
-
-    logModule_->logObject(ILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-
-    return 0.0;
-}
-
-double KernelModule::getRecordFloat(const Guid& self, const std::string& strRecordName, const int nRow, const std::string& strColTag)
-{
-    std::shared_ptr<IObject> pObject = getElement(self);
-    if (pObject)
-    {
-        return pObject->getRecordFloat(strRecordName, nRow, strColTag);
-    }
-
-    logModule_->logObject(ILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-
-    return 0.0;
-}
-
-const std::string& KernelModule::getRecordString(const Guid& self, const std::string& strRecordName, const int nRow, const int nCol)
-{
-    std::shared_ptr<IObject> pObject = getElement(self);
-    if (pObject)
-    {
-        return pObject->getRecordString(strRecordName, nRow, nCol);
-    }
-
-    logModule_->logObject(ILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-
-    return NULL_STR;
-}
-
-const std::string& KernelModule::getRecordString(const Guid& self, const std::string& strRecordName, const int nRow, const std::string& strColTag)
-{
-    std::shared_ptr<IObject> pObject = getElement(self);
-    if (pObject)
-    {
-        return pObject->getRecordString(strRecordName, nRow, strColTag);
-    }
-
-    logModule_->logObject(ILogModule::NLL_ERROR_NORMAL, self, "There is no object", __FUNCTION__, __LINE__);
-
-    return NULL_STR;
-}
-
-const Guid& KernelModule::getRecordObject(const Guid& self, const std::string& strRecordName, const int nRow, const int nCol)
-{
-    std::shared_ptr<IObject> pObject = getElement(self);
-    if (pObject)
-    {
-        return pObject->getRecordObject(strRecordName, nRow, nCol);
-    }
-
-    logModule_->logObject(ILogModule::NLL_ERROR_NORMAL, self, "There is no object",  __FUNCTION__, __LINE__);
-
-    return NULL_OBJECT;
-}
-
-const Guid& KernelModule::getRecordObject(const Guid& self, const std::string& strRecordName, const int nRow, const std::string& strColTag)
-{
-    std::shared_ptr<IObject> pObject = getElement(self);
-    if (pObject)
-    {
-        return pObject->getRecordObject(strRecordName, nRow, strColTag);
-    }
-
-    logModule_->logObject(ILogModule::NLL_ERROR_NORMAL, self, "There is no object",  __FUNCTION__, __LINE__);
 
     return NULL_OBJECT;
 }
@@ -722,33 +404,12 @@ bool KernelModule::logStack()
 
 bool KernelModule::info(const Guid ident)
 {  
-    std::shared_ptr<IObject> pObject = getObject(ident);
-    if (pObject)
-    {
-		int64 nSceneID = getPropertyInt(ident, config::Object::scene_id());
-		//int nGroupID = getPropertyInt(ident, config::Object::group_id());
-
-        logModule_->normal(ILogModule::NLL_INFO_NORMAL, ident, "//----------child object list-------- SceneID = ", nSceneID);
-
-        DataList valObjectList;
-		//GetGroupObjectList(nSceneID, nGroupID, valObjectList);
-        for (int i  = 0; i < valObjectList.GetCount(); i++)
-        {
-           Guid targetIdent = valObjectList.Object(i);
-           info(targetIdent);
-       }
-    }
-    else
-    {
-        logModule_->logObject(ILogModule::NLL_ERROR_NORMAL, ident, "", __FUNCTION__, __LINE__);
-    }
-
     return true;
 }
 
-int KernelModule::onPropertyCommonEvent(const Guid& self, const std::string& strPropertyName, const AbstractData& oldVar, const AbstractData& newVar)
+int KernelModule::onPropertyCommonEvent(const Guid& self, const std::string& strPropertyName, const VariantData& oldVar, const VariantData& newVar)
 {
-	std::shared_ptr<IObject> xObject = getElement(self);
+	/*std::shared_ptr<IObject> xObject = getElement(self);
 	if (xObject)
 	{
 		if (xObject->getState() >= CLASS_OBJECT_EVENT::COE_CREATE_HASDATA)
@@ -768,7 +429,7 @@ int KernelModule::onPropertyCommonEvent(const Guid& self, const std::string& str
 				}
 			}
 		}
-	}
+	}*/
 	
     return 0;
 }
@@ -840,34 +501,6 @@ bool KernelModule::destroySelf(const Guid& self)
     return true;
 }
 
-int KernelModule::onRecordCommonEvent(const Guid& self, const RECORD_EVENT_DATA& xEventData, const AbstractData& oldVar, const AbstractData& newVar)
-{
-	std::shared_ptr<IObject> xObject = getElement(self);
-	if (xObject)
-	{
-		if (xObject->getState() >= CLASS_OBJECT_EVENT::COE_CREATE_HASDATA)
-		{
-			for (auto it = mtCommonRecordCallBackList.begin(); it != mtCommonRecordCallBackList.end(); it++)
-			{
-				(*it)(self, xEventData, oldVar, newVar);
-			}
-		}
-
-		const std::string& strClassName = xObject->getPropertyString(config::Object::class_name());
-		auto itClass = mtClassRecordCallBackList.find(strClassName);
-		if (itClass != mtClassRecordCallBackList.end())
-		{
-			for (auto itList = itClass->second.begin(); itList != itClass->second.end(); itList++)
-			{
-				(*itList)(self, xEventData, oldVar, newVar);
-			}
-		}
-
-	}
-
-    return 0;
-}
-
 int KernelModule::onClassCommonEvent(const Guid& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const DataList& var)
 {
     for (auto it = mtCommonClassCallBackList.begin(); it != mtCommonClassCallBackList.end(); it++)
@@ -889,23 +522,10 @@ bool KernelModule::registerCommonPropertyEvent(PROPERTY_EVENT_FUNCTOR&& cb)
     mtCommonPropertyCallBackList.push_back(cb);
     return true;
 }
-
-bool KernelModule::registerCommonRecordEvent(RECORD_EVENT_FUNCTOR&& cb)
-{
-    mtCommonRecordCallBackList.push_back(cb);
-    return true;
-}
-
 bool KernelModule::registerClassPropertyEvent(const std::string& strClassName, PROPERTY_EVENT_FUNCTOR&& cb)
 {
 	mtClassPropertyCallBackList[strClassName].emplace_back(std::move(cb));
 	return false;
-}
-
-bool KernelModule::registerClassRecordEvent(const std::string& strClassName, RECORD_EVENT_FUNCTOR&& cb)
-{
-	mtClassRecordCallBackList[strClassName].emplace_back(std::move(cb));
-	return true;
 }
 
 bool KernelModule::logSelfInfo(const Guid ident)
@@ -917,13 +537,11 @@ bool KernelModule::initEnd()
 {
 	using namespace std::placeholders;
 
-    std::shared_ptr<IClass> pClass = classModule_->first();
-    while (pClass)
-    {
-        registerClassCallBack(pClass->getClassName(), std::bind(&KernelModule::onClassCommonEvent, this, _1, _2, _3, _4));
-
-        pClass = classModule_->next();
-    }
+	for (const auto& ref : classModule_->getAllClass())
+	{
+		auto pClass = ref.second;
+		registerClassCallBack(pClass->getClassName(), std::bind(&KernelModule::onClassCommonEvent, this, _1, _2, _3, _4));
+	}
 
     return true;
 }
@@ -950,10 +568,8 @@ bool KernelModule::beforeShut()
 	vecRandom_.clear();
 	mtCommonClassCallBackList.clear();
 	mtCommonPropertyCallBackList.clear();
-	mtCommonRecordCallBackList.clear();
 
 	mtClassPropertyCallBackList.clear();
-	mtClassRecordCallBackList.clear();
 
     return true;
 }

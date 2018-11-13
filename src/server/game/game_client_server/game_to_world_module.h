@@ -1,7 +1,6 @@
 #pragma once 
 
 #include "interface_header/base/IClassModule.h"
-#include "interface_header/base/IElementModule.h"
 #include "interface_header/base/ITimerModule.h"
 #include "interface_header/base/IServerComm.h"
 #include "interface_header/base/IGameToWorldModule.h"
@@ -38,7 +37,6 @@ protected:
 
 private:
 
-	IElementModule* elementModule_;
 	IClassModule* classModule_;
 	ITimerModule* timerModule_;
 

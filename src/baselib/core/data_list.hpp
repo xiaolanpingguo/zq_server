@@ -42,31 +42,42 @@ const static Guid NULL_OBJECT = Guid();
 const static double NULL_FLOAT = 0.0;
 const static int64 NULL_INT = 0;
 
-struct AbstractData
+
+inline bool invalidDataType(EN_DATA_TYPE type)
+{
+	if (type <= TDATA_UNKNOWN || type >= TDATA_MAX)
+	{
+		return  true;
+	}
+
+	return false;
+}
+
+struct VariantData
 {
 public:
-	AbstractData()
+	VariantData()
 	{
 		nType = TDATA_UNKNOWN;
 	}
 
-	AbstractData(EN_DATA_TYPE eType)
+	VariantData(EN_DATA_TYPE eType)
 	{
 		nType = eType;
 	}
 
-	AbstractData(const AbstractData& value)
+	VariantData(const VariantData& value)
 	{
 		nType = value.nType;
 		variantData = value.variantData;
 	}
 
-	~AbstractData()
+	~VariantData()
 	{
 		nType = TDATA_UNKNOWN;
 	}
 
-	inline bool operator==(const AbstractData& src) const
+	inline bool operator==(const VariantData& src) const
 	{
 		//&& src.variantData == variantData
 		if (src.getType() == getType())
@@ -83,7 +94,7 @@ public:
 			break;
 			case TDATA_FLOAT:
 			{
-				double fValue = getFloat() - src.getFloat();
+				double fValue = getDouble() - src.getDouble();
 				if (fValue < 0.001  && fValue > -0.001)
 				{
 					return true;
@@ -136,7 +147,7 @@ public:
 		break;
 		case TDATA_FLOAT:
 		{
-			double fValue = getFloat();
+			double fValue = getDouble();
 			if (fValue > 0.001 || fValue < -0.001)
 			{
 				bChanged = true;
@@ -181,7 +192,7 @@ public:
 		}
 	}
 
-	void setFloat(const double var)
+	void setDouble(const double var)
 	{
 		if (nType == TDATA_FLOAT || TDATA_UNKNOWN == nType)
 		{
@@ -219,7 +230,7 @@ public:
 		return NULL_INT;
 	}
 
-	double getFloat() const
+	double getDouble() const
 	{
 		if (TDATA_FLOAT == nType)
 		{
@@ -273,7 +284,7 @@ public:
 			break;
 
 		case TDATA_FLOAT:
-			strData = lexical_cast<std::string> (getFloat());
+			strData = lexical_cast<std::string> (getDouble());
 			break;
 
 		case TDATA_STRING:
@@ -302,7 +313,7 @@ public:
 				break;
 
 			case TDATA_FLOAT:
-				setFloat(lexical_cast<float> (strData));
+				setDouble(lexical_cast<float> (strData));
 				break;
 
 			case TDATA_STRING:
@@ -348,7 +359,7 @@ public:
         mvList.reserve(STACK_SIZE);
         for (int i = 0; i < STACK_SIZE; ++i)
         {
-            mvList.push_back(std::shared_ptr<AbstractData>(new AbstractData()));
+            mvList.push_back(std::shared_ptr<VariantData>(new VariantData()));
         }
     }
 
@@ -411,14 +422,14 @@ public:
 
 public:
 
-	virtual const std::shared_ptr<AbstractData> GetStack(const int index) const
+	virtual const std::shared_ptr<VariantData> GetStack(const int index) const
 	{
 		if (index < (int)mvList.size())
 		{
 			return mvList[index];
 		}
 
-		return std::shared_ptr<AbstractData>();
+		return std::shared_ptr<VariantData>();
 	}
 
 	virtual bool Concat(const DataList& src)
@@ -451,7 +462,7 @@ public:
 		return true;
 	}
     
-	virtual bool Append(const AbstractData& xData)
+	virtual bool Append(const VariantData& xData)
 	{
 		if (xData.getType() <= TDATA_UNKNOWN
 			|| xData.getType() >= TDATA_MAX)
@@ -465,7 +476,7 @@ public:
 			AddInt(xData.getInt());
 			break;
 		case TDATA_FLOAT:
-			AddFloat(xData.getFloat());
+			AddFloat(xData.getDouble());
 			break;
 		case TDATA_OBJECT:
 			AddObject(xData.getObject());
@@ -517,7 +528,7 @@ public:
 		}
 		else
 		{
-			const std::shared_ptr<AbstractData> pData = GetStack(index);
+			const std::shared_ptr<VariantData> pData = GetStack(index);
 			if (pData)
 			{
 				return pData->getType();
@@ -601,7 +612,7 @@ public:
 			AddStatck();
 		}
 
-		std::shared_ptr<AbstractData> var = GetStack(GetCount());
+		std::shared_ptr<VariantData> var = GetStack(GetCount());
 		if (var)
 		{
 			var->setInt(value);
@@ -620,10 +631,10 @@ public:
 			AddStatck();
 		}
 
-		std::shared_ptr<AbstractData> var = GetStack(GetCount());
+		std::shared_ptr<VariantData> var = GetStack(GetCount());
 		if (var)
 		{
-			var->setFloat(value);
+			var->setDouble(value);
 			mnUseSize++;
 
 			return true;
@@ -639,7 +650,7 @@ public:
 			AddStatck();
 		}
 
-		std::shared_ptr<AbstractData> var = GetStack(GetCount());
+		std::shared_ptr<VariantData> var = GetStack(GetCount());
 		if (var)
 		{
 			var->setString(value);
@@ -658,7 +669,7 @@ public:
 			AddStatck();
 		}
 
-		std::shared_ptr<AbstractData> var = GetStack(GetCount());
+		std::shared_ptr<VariantData> var = GetStack(GetCount());
 		if (var)
 		{
 			var->setObject(value);
@@ -674,7 +685,7 @@ public:
 	{
 		if (ValidIndex(index) && Type(index) == TDATA_INT)
 		{
-			std::shared_ptr<AbstractData> var = GetStack(index);
+			std::shared_ptr<VariantData> var = GetStack(index);
 			if (var)
 			{
 				var->setInt(value);
@@ -690,10 +701,10 @@ public:
 	{
 		if (ValidIndex(index) && Type(index) == TDATA_FLOAT)
 		{
-			std::shared_ptr<AbstractData> var = GetStack(index);
+			std::shared_ptr<VariantData> var = GetStack(index);
 			if (var)
 			{
-				var->setFloat(value);
+				var->setDouble(value);
 
 				return true;
 			}
@@ -706,7 +717,7 @@ public:
 	{
 		if (ValidIndex(index) && Type(index) == TDATA_STRING)
 		{
-			std::shared_ptr<AbstractData> var = GetStack(index);
+			std::shared_ptr<VariantData> var = GetStack(index);
 			if (var)
 			{
 				var->setString(value);
@@ -722,7 +733,7 @@ public:
 	{
 		if (ValidIndex(index) && Type(index) == TDATA_OBJECT)
 		{
-			std::shared_ptr<AbstractData> var = GetStack(index);
+			std::shared_ptr<VariantData> var = GetStack(index);
 			if (var)
 			{
 				var->setObject(value);
@@ -740,7 +751,7 @@ public:
 		{
 			if (Type(index) == TDATA_INT)
 			{
-				const std::shared_ptr<AbstractData> var = GetStack(index);
+				const std::shared_ptr<VariantData> var = GetStack(index);
 				return var->getInt();
 			}
 		}
@@ -757,10 +768,10 @@ public:
 	{
 		if (ValidIndex(index))
 		{
-			const std::shared_ptr<AbstractData> var = mvList[index];
+			const std::shared_ptr<VariantData> var = mvList[index];
 			if (var && TDATA_FLOAT == var->getType())
 			{
-				return var->getFloat();
+				return var->getDouble();
 			}
 		}
 
@@ -771,7 +782,7 @@ public:
 	{
 		if (ValidIndex(index))
 		{
-			const std::shared_ptr<AbstractData> var = mvList[index];
+			const std::shared_ptr<VariantData> var = mvList[index];
 			if (var && TDATA_STRING == var->getType())
 			{
 				return var->getString();
@@ -788,7 +799,7 @@ public:
 			EN_DATA_TYPE type = Type(index);
 			if (TDATA_OBJECT == type)
 			{
-				std::shared_ptr<AbstractData> var = GetStack(index);
+				std::shared_ptr<VariantData> var = GetStack(index);
 				if (var)
 				{
 					return var->getObject();
@@ -823,7 +834,7 @@ public:
     {
         return Set(index, value);
     }
-    bool setFloat(const int index, const double value)
+    bool setDouble(const int index, const double value)
     {
         return Set(index, value);
     }
@@ -940,7 +951,7 @@ protected:
 	{
 		for (int i = 0; i < STACK_SIZE; ++i)
 		{
-			std::shared_ptr<AbstractData> pData(new AbstractData());
+			std::shared_ptr<VariantData> pData(new VariantData());
 			mvList.push_back(pData);
 		}
 	}
@@ -972,10 +983,10 @@ protected:
 protected:
 
     int mnUseSize;
-    std::vector< std::shared_ptr<AbstractData> > mvList;
-    std::map<std::string, std::shared_ptr<AbstractData> > mxMap;
+    std::vector< std::shared_ptr<VariantData> > mvList;
+    std::map<std::string, std::shared_ptr<VariantData> > mxMap;
 };
 
-const static AbstractData NULL_TDATA = AbstractData();
+const static VariantData NULL_TDATA = VariantData();
 
 }

@@ -15,8 +15,8 @@ namespace MiniExcelReader{
 
 struct Cell
 {
-	std::string value;
-	std::string type;
+	std::string value{ "" };
+	std::string type{ "" };
 };
 
 struct Range

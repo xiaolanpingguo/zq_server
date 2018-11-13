@@ -3,13 +3,10 @@
 
 #include "baselib/core/IObject.h"
 #include "baselib/core/data_list.hpp"
-#include "baselib/core/IRecord.h"
 #include "interface_header/base/uuid.h"
 #include "interface_header/base/ILogModule.h"
 #include "interface_header/base/IKernelModule.h"
 #include "interface_header/base/IClassModule.h"
-#include "interface_header/base/IEventModule.h"
-#include "interface_header/base/IElementModule.h"
 
 namespace zq {
 
@@ -42,39 +39,15 @@ public:
 
 	// 设置属性
 	virtual bool setPropertyInt(const Guid& self, const std::string& strPropertyName, const int64 nValue);
-	virtual bool setPropertyFloat(const Guid& self, const std::string& strPropertyName, const double dValue);
+	virtual bool setPropertyDouble(const Guid& self, const std::string& strPropertyName, const double dValue);
 	virtual bool setPropertyString(const Guid& self, const std::string& strPropertyName, const std::string& strValue);
 	virtual bool setPropertyObject(const Guid& self, const std::string& strPropertyName, const Guid& objectValue);
 
 	// 获得属性
 	virtual int64 getPropertyInt(const Guid& self, const std::string& strPropertyName);
-	virtual double getPropertyFloat(const Guid& self, const std::string& strPropertyName);
+	virtual double getPropertyDouble(const Guid& self, const std::string& strPropertyName);
 	virtual const std::string& getPropertyString(const Guid& self, const std::string& strPropertyName);
 	virtual const Guid& getPropertyObject(const Guid& self, const std::string& strPropertyName);
-
-	// record相关
-	virtual std::shared_ptr<IRecord> findRecord(const Guid& self, const std::string& strRecordName);
-	virtual bool clearRecord(const Guid& self, const std::string& strRecordName);
-
-	virtual bool setRecordInt(const Guid& self, const std::string& strRecordName, const int nRow, const int nCol, const int64 nValue);
-	virtual bool setRecordFloat(const Guid& self, const std::string& strRecordName, const int nRow, const int nCol, const double dwValue);
-	virtual bool setRecordString(const Guid& self, const std::string& strRecordName, const int nRow, const int nCol, const std::string& strValue);
-	virtual bool setRecordObject(const Guid& self, const std::string& strRecordName, const int nRow, const int nCol, const Guid& objectValue);
-
-	virtual bool setRecordInt(const Guid& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const int64 value);
-	virtual bool setRecordFloat(const Guid& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const double value);
-	virtual bool setRecordString(const Guid& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const std::string& value);
-	virtual bool setRecordObject(const Guid& self, const std::string& strRecordName, const int nRow, const std::string& strColTag, const Guid& value);
-
-	virtual int64 getRecordInt(const Guid& self, const std::string& strRecordName, const int nRow, const int nCol);
-	virtual double getRecordFloat(const Guid& self, const std::string& strRecordName, const int nRow, const int nCol);
-	virtual const std::string& getRecordString(const Guid& self, const std::string& strRecordName, const int nRow, const int nCol);
-	virtual const Guid& getRecordObject(const Guid& self, const std::string& strRecordName, const int nRow, const int nCol);
-
-	virtual int64 getRecordInt(const Guid& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
-	virtual double getRecordFloat(const Guid& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
-	virtual const std::string& getRecordString(const Guid& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
-	virtual const Guid& getRecordObject(const Guid& self, const std::string& strRecordName, const int nRow, const std::string& strColTag);
 
 	// 获得一个guid
 	virtual Guid createGUID();
@@ -97,10 +70,8 @@ protected:
 
 	virtual bool registerCommonClassEvent(CLASS_EVENT_FUNCTOR&& cb);
 	virtual bool registerCommonPropertyEvent(PROPERTY_EVENT_FUNCTOR&& cb);
-	virtual bool registerCommonRecordEvent(RECORD_EVENT_FUNCTOR&& cb);
 
 	virtual bool registerClassPropertyEvent(const std::string& strClassName, PROPERTY_EVENT_FUNCTOR&& cb);
-	virtual bool registerClassRecordEvent(const std::string& strClassName, RECORD_EVENT_FUNCTOR&& cb);
 protected:
 
 	virtual bool registerClassCallBack(const std::string& strClassName, CLASS_EVENT_FUNCTOR&& cb);
@@ -108,8 +79,7 @@ protected:
 	void initRandom();
 
 	int onClassCommonEvent(const Guid& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const DataList& var);
-	int onPropertyCommonEvent(const Guid& self, const std::string& strPropertyName, const AbstractData& oldVar, const AbstractData& newVar);
-	int onRecordCommonEvent(const Guid& self, const RECORD_EVENT_DATA& xEventData, const AbstractData& oldVar, const AbstractData& newVar);
+	int onPropertyCommonEvent(const Guid& self, const std::string& strPropertyName, const VariantData& oldVar, const VariantData& newVar);
 
 	void processMemFree();
 
@@ -119,10 +89,8 @@ protected:
 
 	std::list<CLASS_EVENT_FUNCTOR> mtCommonClassCallBackList;
 	std::list<PROPERTY_EVENT_FUNCTOR> mtCommonPropertyCallBackList;
-	std::list<RECORD_EVENT_FUNCTOR> mtCommonRecordCallBackList;
 
 	std::map<std::string, std::list<PROPERTY_EVENT_FUNCTOR>> mtClassPropertyCallBackList;
-	std::map<std::string, std::list<RECORD_EVENT_FUNCTOR>> mtClassRecordCallBackList;
 
 private:
 	std::vector<float> vecRandom_;
@@ -134,8 +102,6 @@ private:
 
 	ILogModule* logModule_;
 	IClassModule* classModule_;
-	IElementModule* elementModule_;
-	IEventModule* m_pEventModule;
 };
 
 }

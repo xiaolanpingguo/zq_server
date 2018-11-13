@@ -5,8 +5,8 @@
 
 namespace zq {
 
-using PROPERTY_EVENT_FUNCTOR = std::function<int(const Guid&, const std::string&, const AbstractData&, const AbstractData&)>;
-class ZQ_EXPORT IProperty :public MemoryCounter<IProperty>
+using PROPERTY_EVENT_FUNCTOR = std::function<int(const Guid&, const std::string&, const VariantData&, const VariantData&)>;
+class IProperty :public MemoryCounter<IProperty>
 {
 public:
 	IProperty() : MemoryCounter(GET_CLASS_NAME(IProperty))
@@ -15,17 +15,23 @@ public:
 
 	virtual ~IProperty() {}
 
-	virtual void setValue(const AbstractData& TData) = 0;
+	virtual void setValue(const VariantData& TData) = 0;
 	virtual void setValue(const IProperty* pProperty) = 0;
 
 	virtual bool setInt(const int64 value) = 0;
-	virtual bool setFloat(const double value) = 0;
+	virtual bool setDouble(const double value) = 0;
 	virtual bool setString(const std::string& value) = 0;
 	virtual bool setObject(const Guid& value) = 0;
+
+	virtual int64 getInt() const = 0;
+	virtual double getDouble() const = 0;
+	virtual const std::string& getString() const = 0;
+	virtual const Guid& getObject() const = 0;
 
 	virtual const EN_DATA_TYPE getType() const = 0;
 	virtual const bool getUsed() const = 0;
 	virtual const std::string& getKey() const = 0;
+
 	virtual const bool getSave() const = 0;
 	virtual const bool getPublic() const = 0;
 	virtual const bool getPrivate() const = 0;
@@ -42,12 +48,7 @@ public:
 	virtual void setForce(bool bRef) = 0;
 	virtual void setUpload(bool bUpload) = 0;
 
-	virtual int64 getInt() const = 0;
-	virtual double getFloat() const = 0;
-	virtual const std::string& getString() const = 0;
-	virtual const Guid& getObject() const = 0;
-
-	virtual const AbstractData& getValue() const = 0;
+	virtual const VariantData& getValue() const = 0;
 	virtual const std::shared_ptr<std::list<std::string>> getEmbeddedList() const = 0;
 	virtual const std::shared_ptr<MapEx<std::string, std::string>> getEmbeddedMap() const = 0;
 

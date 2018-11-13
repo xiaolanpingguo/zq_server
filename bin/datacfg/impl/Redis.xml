@@ -1,4 +1,0 @@
-<?xml version='1.0' encoding='utf-8' ?>
-<XML>
-	<Object Id="RedisServer_1" auth="" ip="127.0.0.1" port="6379" />
-</XML>

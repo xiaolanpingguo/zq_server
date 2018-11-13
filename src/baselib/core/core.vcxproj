@@ -25,16 +25,12 @@
     <ClInclude Include="IObject.h" />
     <ClInclude Include="IProperty.h" />
     <ClInclude Include="IPropertyManager.h" />
-    <ClInclude Include="IRecord.h" />
-    <ClInclude Include="IRecordManager.h" />
     <ClInclude Include="list.hpp" />
     <ClInclude Include="map_ex.hpp" />
     <ClInclude Include="memory_counter.hpp" />
     <ClInclude Include="object.h" />
     <ClInclude Include="property.h" />
     <ClInclude Include="property_manager.h" />
-    <ClInclude Include="record.h" />
-    <ClInclude Include="record_manager.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
@@ -43,8 +39,6 @@
     <ClCompile Include="object.cpp" />
     <ClCompile Include="property.cpp" />
     <ClCompile Include="property_manager.cpp" />
-    <ClCompile Include="record.cpp" />
-    <ClCompile Include="record_manager.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

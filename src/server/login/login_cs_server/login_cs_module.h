@@ -1,7 +1,6 @@
 #pragma once
 
 #include "interface_header/base/IClassModule.h"
-#include "interface_header/base/IElementModule.h"
 #include "interface_header/base/ILoginCSModule.h"
 #include "interface_header/base/IRedislModule.h"
 #include "interface_header/base/IDataAgentModule.h"
@@ -31,7 +30,6 @@ public:
 
 private:
 
-	IElementModule * elementModule_;
 	IClassModule* classModule_;
 	IRedisModule* redisModule_;
 	IDataAgentModule* dataAgentModule_;

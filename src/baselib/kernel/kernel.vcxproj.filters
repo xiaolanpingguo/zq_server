@@ -13,6 +13,9 @@
     <ClCompile Include="timer_module.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="class_module.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
@@ -36,6 +39,9 @@
       <Filter>header</Filter>
     </ClInclude>
     <ClInclude Include="timer_module.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="class_module.h">
       <Filter>header</Filter>
     </ClInclude>
   </ItemGroup>

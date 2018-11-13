@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<property_desc>
+	<server_type type="int" save="0" desc="服务器类型"/>
+	<server_id type="int" save="0" desc="服务器ID"/>
+	<name type="string" save="0" desc="服务器名字"/>
+	<max_connect type="int" save="0" desc="最大连接数"/>
+	<external_ip type="string" save="0" desc="外网IP"/>
+	<external_port type="int" save="0" desc="外网端口(-1表示不侦听外网端口)"/>
+	<internal_ip type="string" save="0" desc="内网IP"/>
+	<internal_port type="int" save="0" desc="内网端口"/>
+	<http_port type="int" save="0" desc="http端口"/>
+</property_desc>
+<Server>
+	<master_ss_server_1 server_type="1" server_id="1001" name="master_ss_server" max_connect="5000" external_ip="127.0.0.1" external_port="-1" internal_ip="127.0.0.1" internal_port="21001" http_port="31001"/>
+	<login_cs_server_1 server_type="2" server_id="2001" name="login_cs_server" max_connect="5000" external_ip="127.0.0.1" external_port="14001" internal_ip="127.0.0.1" internal_port="22001" http_port="32001"/>
+	<world_ss_server_1 server_type="3" server_id="3001" name="world_ss_server" max_connect="5000" external_ip="127.0.0.1" external_port="-1" internal_ip="127.0.0.1" internal_port="23001" http_port="33001"/>
+	<game_cs_server_1 server_type="4" server_id="4001" name="game_cs_server" max_connect="5000" external_ip="127.0.0.1" external_port="16001" internal_ip="127.0.0.1" internal_port="24001" http_port="34001"/>
+	<gate_server_1 server_type="5" server_id="5001" name="gate_server" max_connect="5000" external_ip="127.0.0.1" external_port="15001" internal_ip="127.0.0.1" internal_port="25001" http_port="35001"/>
+	<db_server_1 server_type="6" server_id="6001" name="db_server" max_connect="5000" external_ip="127.0.0.1" external_port="-1" internal_ip="127.0.0.1" internal_port="26001" http_port="36001"/>
+	<log_ss_server_1 server_type="7" server_id="7001" name="log_ss_server" max_connect="5000" external_ip="127.0.0.1" external_port="-1" internal_ip="127.0.0.1" internal_port="27001" http_port="37001"/>
+	<misc_server_1 server_type="8" server_id="8001" name="misc_server" max_connect="5000" external_ip="127.0.0.1" external_port="-1" internal_ip="127.0.0.1" internal_port="28001" http_port="38001"/>
+	<test_server_1 server_type="9" server_id="9999" name="test_server" max_connect="5000" external_ip="192.168.0.169" external_port="19001" internal_ip="192.168.0.169" internal_port="29001" http_port="39001"/>
+</Server>
+

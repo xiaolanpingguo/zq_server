@@ -1,9 +1,8 @@
 #pragma once 
 
 
-#include "interface_header/base/IComponentModule.h"
-#include "baselib/network/internal_socket.hpp"
 
+#include "baselib/network/internal_socket.hpp"
 #include "baselib/message/game_ss.pb.h"
 
 

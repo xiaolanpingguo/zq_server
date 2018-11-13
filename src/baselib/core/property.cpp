@@ -36,10 +36,10 @@ Property::Property(const Guid& self, const std::string& strPropertyName, const E
 Property::~Property()
 {
 	propertyCb_.clear();
-	abstractData_.reset();
+	variantData_.reset();
 }
 
-void Property::setValue(const AbstractData& xData)
+void Property::setValue(const VariantData& xData)
 {
 	if (dataType_ != xData.getType() || xData.getType() == EN_DATA_TYPE::TDATA_UNKNOWN)
 	{
@@ -51,25 +51,25 @@ void Property::setValue(const AbstractData& xData)
 		return;
 	}
 
-	if (nullptr == abstractData_)
+	if (nullptr == variantData_)
 	{
-		abstractData_ = std::shared_ptr<AbstractData>(new AbstractData(xData));
+		variantData_ = std::shared_ptr<VariantData>(new VariantData(xData));
 	}
 
 	if (propertyCb_.size() == 0)
 	{
-		abstractData_->variantData = xData.variantData;
+		variantData_->variantData = xData.variantData;
 	}
 	else
 	{
 		// 值变化了，回调事件
-		AbstractData oldValue;
-		oldValue = *abstractData_;
+		VariantData oldValue;
+		oldValue = *variantData_;
 
-		abstractData_->variantData = xData.variantData;
+		variantData_->variantData = xData.variantData;
 
-		AbstractData newValue;
-		newValue = *abstractData_;
+		VariantData newValue;
+		newValue = *variantData_;
 
 		onEventHandler(oldValue, newValue);
 	}
@@ -81,11 +81,11 @@ void Property::setValue(const IProperty* pProperty)
 	setValue(pProperty->getValue());
 }
 
-const AbstractData& Property::getValue() const
+const VariantData& Property::getValue() const
 {
-	if (abstractData_)
+	if (variantData_)
 	{
-		return *abstractData_;
+		return *variantData_;
 	}
 
 	return NULL_TDATA;
@@ -168,42 +168,42 @@ void Property::setUpload(bool bUpload)
 
 int64 Property::getInt() const
 {
-	if (!abstractData_)
+	if (!variantData_)
 	{
 		return 0;
 	}
 
-	return abstractData_->getInt();
+	return variantData_->getInt();
 }
 
-double Property::getFloat() const
+double Property::getDouble() const
 {
-	if (!abstractData_)
+	if (!variantData_)
 	{
 		return 0.0;
 	}
 
-	return abstractData_->getFloat();
+	return variantData_->getDouble();
 }
 
 const std::string& Property::getString() const
 {
-	if (!abstractData_)
+	if (!variantData_)
 	{
 		return NULL_STR;
 	}
 
-	return abstractData_->getString();
+	return variantData_->getString();
 }
 
 const Guid& Property::getObject() const
 {
-	if (!abstractData_)
+	if (!variantData_)
 	{
 		return NULL_OBJECT;
 	}
 
-	return abstractData_->getObject();
+	return variantData_->getObject();
 }
 
 void Property::registerCallback(PROPERTY_EVENT_FUNCTOR&& cb)
@@ -211,7 +211,7 @@ void Property::registerCallback(PROPERTY_EVENT_FUNCTOR&& cb)
 	propertyCb_.push_back(cb);
 }
 
-int Property::onEventHandler(const AbstractData& oldVar, const AbstractData& newVar)
+int Property::onEventHandler(const VariantData& oldVar, const VariantData& newVar)
 {
 	if (propertyCb_.size() <= 0)
 	{
@@ -233,7 +233,7 @@ bool Property::setInt(const int64 value)
 		return false;
 	}
 
-	if (!abstractData_)
+	if (!variantData_)
 	{
 		
 		if (0 == value)
@@ -241,40 +241,40 @@ bool Property::setInt(const int64 value)
 			return false;
 		}
 
-		abstractData_ = std::shared_ptr<AbstractData>(new AbstractData(TDATA_INT));
-		abstractData_->setInt(0);
+		variantData_ = std::shared_ptr<VariantData>(new VariantData(TDATA_INT));
+		variantData_->setInt(0);
 	}
 
-	if (value == abstractData_->getInt())
+	if (value == variantData_->getInt())
 	{
 		return false;
 	}
 
 	if (propertyCb_.size() == 0)
 	{
-		abstractData_->setInt(value);
+		variantData_->setInt(value);
 	}
 	else
 	{
-		AbstractData oldValue;
-		oldValue = *abstractData_;
+		VariantData oldValue;
+		oldValue = *variantData_;
 
-		abstractData_->setInt(value);
+		variantData_->setInt(value);
 
-		onEventHandler(oldValue, *abstractData_);
+		onEventHandler(oldValue, *variantData_);
 	}
 
 	return true;
 }
 
-bool Property::setFloat(const double value)
+bool Property::setDouble(const double value)
 {
 	if (dataType_ != TDATA_FLOAT)
 	{
 		return false;
 	}
 
-	if (!abstractData_)
+	if (!variantData_)
 	{
 		
 		if (isZeroDouble(value))
@@ -282,27 +282,27 @@ bool Property::setFloat(const double value)
 			return false;
 		}
 
-		abstractData_ = std::shared_ptr<AbstractData>(new AbstractData(TDATA_FLOAT));
-		abstractData_->setFloat(0.0);
+		variantData_ = std::shared_ptr<VariantData>(new VariantData(TDATA_FLOAT));
+		variantData_->setDouble(0.0);
 	}
 
-	if (isZeroDouble(value - abstractData_->getFloat()))
+	if (isZeroDouble(value - variantData_->getDouble()))
 	{
 		return false;
 	}
 
 	if (propertyCb_.size() == 0)
 	{
-		abstractData_->setFloat(value);
+		variantData_->setDouble(value);
 	}
 	else
 	{
-		AbstractData oldValue;
-		oldValue = *abstractData_;
+		VariantData oldValue;
+		oldValue = *variantData_;
 
-		abstractData_->setFloat(value);
+		variantData_->setDouble(value);
 
-		onEventHandler(oldValue, *abstractData_);
+		onEventHandler(oldValue, *variantData_);
 	}
 
 	return true;
@@ -315,7 +315,7 @@ bool Property::setString(const std::string& value)
 		return false;
 	}
 
-	if (!abstractData_)
+	if (!variantData_)
 	{
 		
 		if (value.empty())
@@ -323,27 +323,27 @@ bool Property::setString(const std::string& value)
 			return false;
 		}
 
-		abstractData_ = std::shared_ptr<AbstractData>(new AbstractData(TDATA_STRING));
-		abstractData_->setString(NULL_STR);
+		variantData_ = std::shared_ptr<VariantData>(new VariantData(TDATA_STRING));
+		variantData_->setString(NULL_STR);
 	}
 
-	if (value == abstractData_->getString())
+	if (value == variantData_->getString())
 	{
 		return false;
 	}
 
 	if (propertyCb_.size() == 0)
 	{
-		abstractData_->setString(value);
+		variantData_->setString(value);
 	}
 	else
 	{
-		AbstractData oldValue;
-		oldValue = *abstractData_;
+		VariantData oldValue;
+		oldValue = *variantData_;
 
-		abstractData_->setString(value);
+		variantData_->setString(value);
 
-		onEventHandler(oldValue, *abstractData_);
+		onEventHandler(oldValue, *variantData_);
 	}
 
 	return true;
@@ -356,7 +356,7 @@ bool Property::setObject(const Guid& value)
 		return false;
 	}
 
-	if (!abstractData_)
+	if (!variantData_)
 	{
 		
 		if (value.isNull())
@@ -364,27 +364,27 @@ bool Property::setObject(const Guid& value)
 			return false;
 		}
 
-		abstractData_ = std::shared_ptr<AbstractData>(new AbstractData(TDATA_OBJECT));
-		abstractData_->setObject(Guid());
+		variantData_ = std::shared_ptr<VariantData>(new VariantData(TDATA_OBJECT));
+		variantData_->setObject(Guid());
 	}
 
-	if (value == abstractData_->getObject())
+	if (value == variantData_->getObject())
 	{
 		return false;
 	}
 
 	if (propertyCb_.size() == 0)
 	{
-		abstractData_->setObject(value);
+		variantData_->setObject(value);
 	}
 	else
 	{
-		AbstractData oldValue;
-		oldValue = *abstractData_;
+		VariantData oldValue;
+		oldValue = *variantData_;
 
-		abstractData_->setObject(value);
+		variantData_->setObject(value);
 
-		onEventHandler(oldValue, *abstractData_);
+		onEventHandler(oldValue, *variantData_);
 	}
 
 	return true;
@@ -402,7 +402,7 @@ const EN_DATA_TYPE Property::getType() const
 
 const bool Property::getUsed() const
 {
-	if (abstractData_)
+	if (variantData_)
 	{
 		return true;
 	}
@@ -420,7 +420,7 @@ std::string Property::toString()
 		strData = lexical_cast<std::string> (getInt());
 		break;
 	case TDATA_FLOAT:
-		strData = lexical_cast<std::string> (getFloat());
+		strData = lexical_cast<std::string> (getDouble());
 		break;
 	case TDATA_STRING:
 		strData = getString();
@@ -447,7 +447,7 @@ bool Property::fromString(const std::string& strData)
 			break;
 
 		case TDATA_FLOAT:
-			setFloat(lexical_cast<float> (strData));
+			setDouble(lexical_cast<float> (strData));
 			break;
 
 		case TDATA_STRING:
@@ -480,10 +480,10 @@ bool Property::deSerialization()
 	bool bRet = false;
 
 	const EN_DATA_TYPE dataType_ = getType();
-	if (dataType_ == TDATA_STRING && nullptr != abstractData_ && !abstractData_->IsNullValue())
+	if (dataType_ == TDATA_STRING && nullptr != variantData_ && !variantData_->IsNullValue())
 	{
 		DataList xDataList;
-		const std::string& strData = abstractData_->getString();
+		const std::string& strData = variantData_->getString();
 
 		xDataList.Split(strData.c_str(), ";");
 		if (xDataList.GetCount() <= 0)

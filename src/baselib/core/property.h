@@ -4,11 +4,10 @@
 #include "map_ex.hpp"
 #include "data_list.hpp"
 #include "IProperty.h"
-#include "interface_header/base/platform.h"
 
 namespace zq {
 
-class ZQ_EXPORT Property : public IProperty
+class Property : public IProperty
 {
 private:
 	Property();
@@ -18,13 +17,18 @@ public:
 
 	virtual ~Property();
 
-	virtual void setValue(const AbstractData& TData);
+	virtual void setValue(const VariantData& TData);
 	virtual void setValue(const IProperty* pProperty);
 
 	virtual bool setInt(const int64 value);
-	virtual bool setFloat(const double value);
+	virtual bool setDouble(const double value);
 	virtual bool setString(const std::string& value);
 	virtual bool setObject(const Guid& value);
+
+	virtual int64 getInt() const;
+	virtual double getDouble() const;
+	virtual const std::string& getString() const;
+	virtual const Guid& getObject() const;
 
 	virtual const EN_DATA_TYPE getType() const;
 	virtual const bool getUsed() const;
@@ -45,12 +49,7 @@ public:
 	virtual void setForce(bool bRef);
 	virtual void setUpload(bool bUpload);
 
-	virtual int64 getInt() const;
-	virtual double getFloat() const;
-	virtual const std::string& getString() const;
-	virtual const Guid& getObject() const;
-
-	virtual const AbstractData& getValue() const;
+	virtual const VariantData& getValue() const;
 	virtual const std::shared_ptr<std::list<std::string>> getEmbeddedList() const;
 	virtual const std::shared_ptr<MapEx<std::string, std::string>> getEmbeddedMap() const;
 
@@ -63,7 +62,7 @@ public:
 	virtual void registerCallback(PROPERTY_EVENT_FUNCTOR&& cb);
 
 private:
-	int onEventHandler(const AbstractData& oldVar, const AbstractData& newVar);
+	int onEventHandler(const VariantData& oldVar, const VariantData& newVar);
 
 private:
 	using VecPropertyCbT = std::vector<PROPERTY_EVENT_FUNCTOR>;
@@ -73,7 +72,7 @@ private:
 	std::string propertyName_;
 	EN_DATA_TYPE dataType_;
 
-	std::shared_ptr<AbstractData> abstractData_;
+	std::shared_ptr<VariantData> variantData_;
 	std::shared_ptr<MapEx<std::string, std::string>> embeddedMap_;
 	std::shared_ptr<std::list<std::string>> embeddedList_;
 

@@ -2,7 +2,6 @@
 
 
 #include "interface_header/base/IClassModule.h"
-#include "interface_header/base/IElementModule.h"
 #include "interface_header/base/IWorldSSModule.h"
 
 #include "baselib/network/socket_mgr.hpp"
@@ -30,7 +29,6 @@ protected:
 
 private:
 
-	IElementModule * elementModule_;
 	IClassModule* classModule_;
 };
 

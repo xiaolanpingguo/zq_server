@@ -1,8 +1,0 @@
-<?xml version='1.0' encoding='utf-8' ?>
-<XML>
-	<Class Id="Object"	Path="struct/Object.xml"	InstancePath="impl/Object.xml"	>
-		<Class Id="Addons"	Path="struct/Addons.xml"	InstancePath="impl/Addons.xml"	/>
-		<Class Id="Redis"	Path="struct/Redis.xml"	InstancePath="impl/Redis.xml"	/>
-		<Class Id="Server"	Path="struct/Server.xml"	InstancePath="impl/Server.xml"	/>
-	</Class>
-</XML>

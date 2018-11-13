@@ -13,7 +13,6 @@ LoginToWorldModule::LoginToWorldModule(ILibManager* p)
 
 bool LoginToWorldModule::init()
 {
-	elementModule_ = libManager_->findModule<IElementModule>();
 	classModule_ = libManager_->findModule<IClassModule>();
 	timerModule_ = libManager_->findModule<ITimerModule>();
 
@@ -25,30 +24,6 @@ bool LoginToWorldModule::initEnd()
 	// timer
 	timerModule_->addTimer(std::chrono::seconds(10), std::bind(&LoginToWorldModule::timerCheckConnect, this, std::placeholders::_1));
 	timerModule_->addTimer(std::chrono::seconds(10), std::bind(&LoginToWorldModule::timerSendHeartBeat, this, std::placeholders::_1));
-
-	std::shared_ptr<IClass> logic_class = classModule_->getElement(config::Server::this_name());
-	if (logic_class)
-	{
-		const std::vector<std::string>& strIdList = logic_class->getIDList();
-		for (size_t i = 0; i < strIdList.size(); ++i)
-		{
-			const std::string& strId = strIdList[i];
-
-			int server_type = elementModule_->getPropertyInt(strId, config::Server::server_type());
-			int server_id = elementModule_->getPropertyInt(strId, config::Server::server_id());
-			if (server_type == SERVER_TYPES::ST_WORLD_SERVER)
-			{
-				int int_port = elementModule_->getPropertyInt(strId, config::Server::internal_port());
-				const std::string& int_ip = elementModule_->getPropertyString(strId, config::Server::internal_ip());
-
-				if (int_port != -1)
-				{
-					ConnServerInfo info{ server_id ,int_ip, (uint16)int_port };
-					addConnInfo(info);
-				}
-			}
-		}										   
-	}
 
 	return true;
 }
