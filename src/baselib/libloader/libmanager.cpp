@@ -28,7 +28,6 @@
 #include "baselib/kernel/kernel.h"
 #include "baselib/network/network.h"
 #include "baselib/log_lib/log_lib.h"
-#include "baselib/config/config.h"
 #include "baselib/message/message_lib.h"
 #include "baselib/db_redis/redis_lib.h"
 #include "baselib/http_lib/http_lib.h"
