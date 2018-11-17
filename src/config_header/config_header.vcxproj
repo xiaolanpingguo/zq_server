@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -18,10 +18,15 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cfg_redis.hpp" />
+    <ClInclude Include="cfg_server.hpp" />
+    <ClInclude Include="csv_parser.hpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{731B0506-78DF-4EC0-9BAB-D0170B2E3042}</ProjectGuid>
-    <RootNamespace>KernelPlugin</RootNamespace>
+    <ProjectGuid>{C4E40BF2-2CFB-4FBF-9F3E-39758D30C63B}</ProjectGuid>
+    <RootNamespace>InterfaceHeader</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -70,18 +75,17 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IntDir>$(SolutionDir)_Objs\$(Configuration)_$(Platform)\$(ProjectName)\</IntDir>
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)_Objs\$(Configuration)_$(Platform)\$(ProjectName)\</IntDir>
     <TargetName>$(ProjectName)_d</TargetName>
-    <TargetExt>.lib</TargetExt>
+    <IncludePath>$(SolutionDir)\Src;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <SDLCheck>false</SDLCheck>
+      <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -120,25 +124,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="class_module.cpp" />
-    <ClCompile Include="config_module.cpp" />
-    <ClCompile Include="event_module.cpp" />
-    <ClCompile Include="kernel.cpp" />
-    <ClCompile Include="kernel_module.cpp" />
-    <ClCompile Include="timer_module.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="class_module.h" />
-    <ClInclude Include="config_module.h" />
-    <ClInclude Include="event_module.h" />
-    <ClInclude Include="kernel.h" />
-    <ClInclude Include="kernel_module.h" />
-    <ClInclude Include="timer_module.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="CMakeLists.txt" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

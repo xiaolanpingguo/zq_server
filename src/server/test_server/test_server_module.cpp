@@ -16,7 +16,6 @@ bool TestServerModule::init()
 	logModule_ = libManager_->findModule<ILogModule>();
 	httpServerModule_ = libManager_->findModule<IHttpServerModule>();
 	httpClientModule_ = libManager_->findModule<IHttpClientModule>();
-	eventModule_ = libManager_->findModule<IEventModule>();
 	messageDispatcherModule_ = libManager_->findModule<IMessageDispatcherModule>();
 
 	return true;
@@ -26,17 +25,6 @@ bool TestServerModule::initEnd()
 {
 
 	return true;
-}
-
-int TestServerModule::onEvent(const Guid& self, const EnEventDefine event, const DataList& arg)
-{
-
-	std::cout << "OnEvent EventID: " << event << " self: " << self.nData64 << " argList: " << arg.Int(0) << " " << " " << arg.String(1) << std::endl;
-
-	kernelModule_->setPropertyInt(self, "Hello", arg.Int(0));
-	kernelModule_->setPropertyString(self, "Hello", arg.String(1));
-
-	return 0;
 }
 
 bool TestServerModule::shut()

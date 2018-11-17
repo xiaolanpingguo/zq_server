@@ -52,10 +52,9 @@ public:
 	TimerModule(ILibManager* p);
 	virtual ~TimerModule();
 
-	virtual bool init() override;
-	virtual bool initEnd() override;
-	virtual bool run() override;
-
+	bool init() override;
+	bool initEnd() override;
+	bool run() override;
 
 public:
 

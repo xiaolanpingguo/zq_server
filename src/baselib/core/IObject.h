@@ -1,10 +1,10 @@
 #pragma once
 
 
-#include "data_list.hpp"
-#include "IPropertyManager.h"
+#include "property.h"
+#include "memory_counter.hpp"
 #include "interface_header/base/platform.h"
-#include "interface_header/base/ILibManager.h"
+#include "interface_header/base/uuid.h"
 
 namespace zq {
 
@@ -24,15 +24,12 @@ enum CLASS_OBJECT_EVENT
 	COE_DESTROY,
 };
 
+class IObject;
+using IObjectPtr = std::shared_ptr<IObject>;
 class IObject :public MemoryCounter<IObject>
 {
-private:
-	IObject() : MemoryCounter(GET_CLASS_NAME(IObject))
-	{
-	}
-
 public:
-	IObject(Guid self) : MemoryCounter(GET_CLASS_NAME(IObject))
+	IObject() : MemoryCounter(GET_CLASS_NAME(IObject))
 	{
 	}
 
@@ -40,33 +37,22 @@ public:
 	{
 	}
 
-	virtual bool run() = 0;
+	virtual const Guid& getGuid() = 0;
+	virtual const std::string& getObjName() = 0;
+	virtual const std::string& getClassName() = 0;
 
-	virtual Guid self() = 0;
+	virtual bool exsitProperty(const std::string& strPropertyName) = 0;
 
-	// »Øµ÷
-	virtual bool addPropertyCallBack(const std::string& strPropertyName, PROPERTY_EVENT_FUNCTOR&& cb) = 0;
+	virtual bool setValue(const std::string& strPropertyName, const int64 nValue) = 0;
+	virtual bool setValue(const std::string& strPropertyName, const double dwValue) = 0;
+	virtual bool setValue(const std::string& strPropertyName, const std::string& strValue) = 0;
+	virtual bool setValue(const std::string& strPropertyName, const Guid& obj) = 0;
 
-	virtual CLASS_OBJECT_EVENT getState() = 0;
-	virtual bool setState(const CLASS_OBJECT_EVENT eState) = 0;
+	virtual int64 getInt(const std::string& strPropertyName) = 0;
+	virtual double getDouble(const std::string& strPropertyName) = 0;
+	virtual std::string getString(const std::string& strPropertyName) = 0;
 
-	virtual bool findProperty(const std::string& strPropertyName) = 0;
-
-	virtual bool setPropertyInt(const std::string& strPropertyName, const int64 nValue) = 0;
-	virtual bool setPropertyDouble(const std::string& strPropertyName, const double dwValue) = 0;
-	virtual bool setPropertyString(const std::string& strPropertyName, const std::string& strValue) = 0;
-	virtual bool setPropertyObject(const std::string& strPropertyName, const Guid& obj) = 0;
-
-	virtual int64 getPropertyInt(const std::string& strPropertyName) = 0;
-	virtual double getPropertyDouble(const std::string& strPropertyName) = 0;
-	virtual const std::string& getPropertyString(const std::string& strPropertyName) = 0;
-	virtual const Guid& getPropertyObject(const std::string& strPropertyName) = 0;
-
-	virtual std::shared_ptr<IPropertyManager> getPropertyMgr() = 0;
-	virtual void setPropertyManager(std::shared_ptr<IPropertyManager> xPropertyManager) = 0;
-
-protected:
-	ILibManager * m_pPluginManager;
+	virtual bool addPropertyCallBack(const std::string& name, PropertyEventFunT&& cb) = 0;
 };
 
 }

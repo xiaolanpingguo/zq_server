@@ -1,6 +1,7 @@
 #include "game_cs_module.h"
 
 #include "baselib/message/config_define.hpp"
+#include "config_header/cfg_server.hpp"
 
 
 namespace zq {
@@ -9,41 +10,35 @@ namespace zq {
 bool GameCSModule::init()
 {
 	classModule_ = libManager_->findModule<IClassModule>();
+	configModule_ = libManager_->findModule<IConfigModule>();
 
 	return true;
 }
 
 bool GameCSModule::initEnd()
 {	
-	IClassPtr logic_class = classModule_->getClass(config::Server::this_name());
-	if (logic_class)
+	const auto& all_row = configModule_->getCsvRowAll<CSVServer>();
+	for (const auto& ele : *all_row)
 	{
-		const auto& objs = logic_class->getAllObjs();
-		for (const auto& obj : objs)
+		int server_type = ele.second->server_type;
+		int server_id = ele.second->server_id;
+		if (server_type == SERVER_TYPES::ST_GAME_SERVER && libManager_->getServerID() == server_id)
 		{
-			auto property_mgr = obj.second;
+			//int max_conn = ele.second->max_conn;
+			int ext_port = ele.second->external_port;
+			const std::string& ext_ip = ele.second->external_ip;
 
-			int server_type = property_mgr->getPropertyInt(config::Server::server_type());
-			int server_id = property_mgr->getPropertyInt(config::Server::server_id());
-			if (server_type == SERVER_TYPES::ST_GAME_SERVER && libManager_->getServerID() == server_id)
+			if (ext_port != -1)
 			{
-				//int max_conn = property_mgr->getPropertyInt(config::Server::max_connect());
-				int ext_port = property_mgr->getPropertyInt(config::Server::external_port());
-				const std::string& ext_ip = property_mgr->getPropertyString(config::Server::external_ip());
-
-				if (ext_port != -1)
+				if (!startNetwork(ext_ip, (uint16)ext_port))
 				{
-					if (!startNetwork(ext_ip, (uint16)ext_port))
-					{
-						ASSERT(false, "Cannot init external server net");
-						return false;
-					}
-
+					ASSERT(false, "Cannot init external server net");
+					return false;
 				}
 
 				std::ostringstream strLog;
 				strLog << std::endl;
-				strLog << "-----------login_server is listen on external net-----------" << std::endl;
+				strLog << "-----------game_cs_server is listen on external net-----------" << std::endl;
 				strLog << "listen ext_address: " << ext_ip + ":" + std::to_string(ext_port) << std::endl;
 				std::cout << strLog.str() << std::endl;
 				LOG_INFO << strLog.str();

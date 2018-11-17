@@ -2,6 +2,7 @@
 #include "redis_client.h"
 #include "redis_module.h"
 #include "baselib/message/config_define.hpp"
+#include "config_header/cfg_redis.hpp"
 using namespace zq;
 
 
@@ -19,31 +20,44 @@ bool RedisModule::init()
 {
 	classModule_ = libManager_->findModule<IClassModule>();
 	logModule_ = libManager_->findModule<ILogModule>();
+	configModule_ = libManager_->findModule<IConfigModule>();
+
+	configModule_->create<CSVRedis>("cfg_redis.csv");
 
 	return true;
 }
 
 bool RedisModule::initEnd()
 {
-	IClassPtr logic_class = classModule_->getClass(config::Redis::this_name());
+	const auto& all_row = configModule_->getCsvRowAll<CSVRedis>();
+	for (const auto& ele : *all_row)
+	{
+		if (!addServer(ele.second->name, ele.second->ip, ele.second->port, false))
+		{
+			ASSERT(false);
+			return false;
+		}
+	}
+
+	/*IClassPtr logic_class = classModule_->getClass(config::Redis::this_name());
 	if (logic_class)
 	{
-		const auto& objs = logic_class->getAllObjs();
-		for (const auto& obj : objs)
+		const auto& objs = logic_class->getAllStaticObjs();
+		for (const auto& ele : objs)
 		{
-			auto property_mgr = obj.second;
+			IObjectPtr obj = ele.second;
 
-			const int nPort = property_mgr->getPropertyInt(config::Redis::port());
-			const std::string& strIP = property_mgr->getPropertyString(config::Redis::ip());
-			const std::string& strAuth = property_mgr->getPropertyString(config::Redis::auth());
+			const int nPort = obj->getInt(config::Redis::port());
+			const std::string& strIP = obj->getString(config::Redis::ip());
+			const std::string& strAuth = obj->getString(config::Redis::auth());
 
-			if (!addServer(obj.first, strIP, nPort, false))
+			if (!addServer(obj->getObjName(), strIP, nPort, false))
 			{
 				ASSERT(false);
 				return false;
 			}
 		}
-	}
+	}*/
 
 	return true;
 }

@@ -3,6 +3,7 @@
 #include "event_module.h"
 #include "timer_module.h"
 #include "class_module.h"
+#include "config_module.h"
 using namespace zq;
 
 
@@ -35,15 +36,15 @@ const std::string KernelLib::getLibName()
 void KernelLib::install()
 {
 	REGISTER_MODULE(libManager_, IKernelModule, KernelModule)
-	//REGISTER_MODULE(libManager_, IEventModule, EventModule)
 	REGISTER_MODULE(libManager_, ITimerModule, TimerModule)
 	REGISTER_MODULE(libManager_, IClassModule, CClassModule)
+	REGISTER_MODULE(libManager_, IConfigModule, ConfigModule)
 }
 
 void KernelLib::uninstall()
 {
-	//UNREGISTER_MODULE(libManager_, IEventModule, EventModule)
 	UNREGISTER_MODULE(libManager_, IKernelModule, KernelModule)
 	UNREGISTER_MODULE(libManager_, ITimerModule, TimerModule)
 	UNREGISTER_MODULE(libManager_, IClassModule, CClassModule)
+	UNREGISTER_MODULE(libManager_, IConfigModule, ConfigModule)
 }

@@ -50,9 +50,6 @@
     <ClInclude Include="property_manager.h">
       <Filter>header</Filter>
     </ClInclude>
-    <ClInclude Include="list.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
     <ClInclude Include="crc32.hpp">
       <Filter>header</Filter>
     </ClInclude>

@@ -25,7 +25,6 @@
     <ClInclude Include="IObject.h" />
     <ClInclude Include="IProperty.h" />
     <ClInclude Include="IPropertyManager.h" />
-    <ClInclude Include="list.hpp" />
     <ClInclude Include="map_ex.hpp" />
     <ClInclude Include="memory_counter.hpp" />
     <ClInclude Include="object.h" />

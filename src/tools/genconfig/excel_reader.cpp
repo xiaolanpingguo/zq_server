@@ -298,11 +298,11 @@ namespace MiniExcelReader {
 		int vecsize = (sh._dimension.lastCol - sh._dimension.firstCol + 1) * (sh._dimension.lastRow - sh._dimension.firstRow + 1);
 
 		sh._cells.resize(vecsize);
-		for (size_t i = 0; i < sh._cells.size(); ++i)
-		{
-			Cell* cell = new Cell;
-			sh._cells[i] = cell;
-		}
+		//for (size_t i = 0; i < sh._cells.size(); ++i)
+		//{
+		//	Cell* cell = new Cell;
+		//	sh._cells[i] = cell;
+		//}
 
 		while (row)
 		{
@@ -319,8 +319,8 @@ namespace MiniExcelReader {
 
 				v = c->first_node("v");
 
-				//Cell* cell = new Cell;
-				Cell* cell = sh._cells[index];
+				Cell* cell = new Cell;
+				//Cell* cell = sh._cells[index];
 
 				if (v)
 				{
@@ -377,9 +377,12 @@ namespace MiniExcelReader {
 		readSharedStrings("xl/sharedStrings.xml");
 		readStyles("styles.xml");
 
-		for (auto& s : _sheets)
+		for (size_t i = 0; i < _sheets.size(); ++i)
 		{
-			readSheet(s);
+			if (_sheets[i].getName() == "1")
+			{
+				readSheet(_sheets[i]);
+			}
 		}
 
 		return true;

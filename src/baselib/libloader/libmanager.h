@@ -57,6 +57,7 @@ public:
 
 	const std::string& getCfgRootDir() const override { return cfgRootDir_; }
 	const std::string& getCfgXmlDir() const override { return cfgXmlDir_; }
+	const std::string& getCfgCsvDir() const override { return cfgCsvDir_; }
 
 	void setGetFileContentFunctor(GET_FILECONTENT_FUNCTOR fun) override;
 	bool getFileContent(const std::string &strFileName, std::string &strContent) override;
@@ -74,9 +75,6 @@ protected:
 
 	// 创建后台线程
 	bool createBackThread();
-
-	// 加载配置
-	bool loadConfig();
 
 	// 重载配置
 	bool reload(const std::string& cfg_name);
@@ -116,6 +114,7 @@ private:
 
 	std::string cfgRootDir_;
 	std::string cfgXmlDir_;
+	std::string cfgCsvDir_;
 
 	std::vector<std::string> staticLibVec_;
 

@@ -55,12 +55,13 @@ using namespace zq;
 
 constexpr const char* ROOT_DIR_NAME = "../datacfg/";
 constexpr const char* XML_DIR_NAME = "xml/";
+constexpr const char* CSV_DIR_NAME = "csv/";
 constexpr const char* LAUNCH_NAME = "launch.xml";
 
-constexpr int APPCMD_NOTHING_TODO = 0;          // 啥也不干
-constexpr int APPCMD_STOP_SERVICE = 1;          // 停止命令
-constexpr int APPCMD_RELOAD_CONFIG = 2;         // 重读配置命令
-constexpr int APPCMD_QUIT_SERVICE = 3;          // 立刻跳出循环
+constexpr const int APPCMD_NOTHING_TODO = 0;          // 啥也不干
+constexpr const int APPCMD_STOP_SERVICE = 1;          // 停止命令
+constexpr const int APPCMD_RELOAD_CONFIG = 2;         // 重读配置命令
+constexpr const int APPCMD_QUIT_SERVICE = 3;          // 立刻跳出循环
 
 
 static std::string s_lock_file_name;
@@ -253,6 +254,7 @@ LibManager::LibManager() : ILibManager(),
 	getFileContentFunctor_ (nullptr),
 	cfgRootDir_(ROOT_DIR_NAME),
 	cfgXmlDir_(cfgRootDir_ + XML_DIR_NAME),
+	cfgCsvDir_(cfgRootDir_ + CSV_DIR_NAME) ,
 	launchConfigName_(LAUNCH_NAME)
 {
 }
@@ -299,6 +301,10 @@ bool LibManager::launch(std::initializer_list<ILib*>& libs, SERVER_TYPES server_
 	initEnd();
 	checkConfig();
 
+	LOG_INFO << "----------------------------------";
+	LOG_INFO << "-----------server run------------------------";
+	LOG_INFO << "----------------------------------";
+
 	return true;
 }
 
@@ -309,16 +315,14 @@ bool LibManager::loop()
 	{
 		if (LibManager::cmdState_ == APPCMD_STOP_SERVICE)
 		{
-			ILogModule* logModule = ILibManager::findModule<ILogModule>();
-			logModule->info("Receive Command: APPCMD_STOP_SERVICE\n");
-			logModule->info("==============================================!\n");
+			LOG_INFO << "Receive Command: APPCMD_STOP_SERVICE\n";
+			LOG_INFO << "==============================================!\n";
 			break;
 		}
 		else if (LibManager::cmdState_ == APPCMD_RELOAD_CONFIG)
 		{
-			ILogModule* logModule = ILibManager::findModule<ILogModule>();
-			logModule->info("Receive Command: APPCMD_RELOAD_CONFIG\n");
-			logModule->info("==============================================!\n");
+			LOG_INFO << "Receive Command: APPCMD_RELOAD_CONFIG\n";
+			LOG_INFO << "==============================================!\n";
 			cmdState_ = APPCMD_NOTHING_TODO;
 		}
 
@@ -473,9 +477,6 @@ bool LibManager::createBackThread()
 
 bool LibManager::init()
 {
-	// 加载配置
-	//loadConfig();
-
 	// 用于动态库
 	for (auto it = veclibName_.begin(); it != veclibName_.end(); ++it)
 	{
@@ -490,33 +491,6 @@ bool LibManager::init()
 	}
 
 	return true;
-}
-
-bool LibManager::loadConfig()
-{
-	/*std::string strContent;
-	std::string strFilePath = launchConfigName_;
-	getFileContent(strFilePath, strContent);
-
-	rapidxml::xml_document<> xDoc;
-	xDoc.parse<0>((char*)strContent.c_str());
-
-	rapidxml::xml_node<>* pRoot = xDoc.first_node();
-	rapidxml::xml_node<>* pAppNameNode = pRoot->first_node(serverName_.c_str());
-	if (!pAppNameNode)
-	{
-		ASSERT(0, "There are no App ID", __FILE__, __FUNCTION__);
-		return false;
-	}
-
-	for (rapidxml::xml_node<>* pPluginNode = pAppNameNode->first_node("Lib"); pPluginNode; pPluginNode = pPluginNode->next_sibling("Lib"))
-	{
-		const char* lib_name = pPluginNode->first_attribute("Name")->value();
-
-		libNameMap_.insert(LibNameMap::value_type(lib_name, true));
-	}*/
-
-    return true;
 }
 
 void LibManager::registerLib(ILib* ilib)
@@ -641,7 +615,7 @@ ILib* LibManager::findLib(const std::string& lib_name)
 
 bool LibManager::run()
 {
-    nowTime_ = time(NULL);
+    nowTime_ = getTimestampMs();
 
     bool bRet = true;
 
@@ -660,7 +634,7 @@ void LibManager::tryRun()
 	__try
 	{
 #endif
-		LibManager::get_instance().run();
+		run();
 #if ZQ_PLATFORM == ZQ_PLATFORM_WIN
 	}
 	__except (applicationCrashHandler(GetExceptionInformation()))

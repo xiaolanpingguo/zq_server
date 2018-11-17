@@ -1,6 +1,7 @@
 #include "timer_module.h"
-using namespace zq;
 
+
+namespace zq{
 
 TimerModule::TimerModule(ILibManager* p)
 	:timeQueue_(),
@@ -261,4 +262,6 @@ void TimerHandle::cancel()
 	}
 }
 //-------------------------------------------------------
+
+}
 

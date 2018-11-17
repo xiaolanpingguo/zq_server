@@ -18,14 +18,52 @@
 #include "dependencies/RapidXML/rapidxml.hpp"
 #include "dependencies/RapidXML/rapidxml_iterators.hpp"
 #include "dependencies/RapidXML/rapidxml_print.hpp"
-#include "dependencies/RapidXML/rapidxml_utils.hpp"
+#include "dependencies/RapidXML/rapidxml_utils.hpp"	   
+
+#include "csv_parser.hpp"
+#include "csv_config.hpp"
+
+// 路径
+static const std::string STR_ROOT_DIR = "../datacfg/";
+static const std::string STR_EXCEL_DIR = STR_ROOT_DIR + "excel/";
+static const std::string STR_CPP_DIR = STR_ROOT_DIR + "cpp/";
+static const std::string STR_XML_DIR = STR_ROOT_DIR + "xml/";
+static const std::string STR_CSV_DIR = STR_ROOT_DIR + "csv/";
+
+// 写入到cpp的一些常量
+static const std::string BEGIN_NAMESPACE = "namespace zq\n{\nnamespace config\n{\n";
+static const std::string END_NAMESPACE = "\n}}\n";
+static const std::string THIS_NAME = "this_name";
+
+// 生成的cpp头文件名字
+static const std::string CPP_FILE_NAME = "excel_cfg_define.hpp";
+
+
+static constexpr int STATIC_EXCEL_HEIGHT_SEP = 3;
+
+
+struct CSV_Redis
+{
+	int id;
+	std::string name;
+	std::string ip;
+	int port;
+	std::string auth;
+};
+
+inline void zq::TCsvFile<CSV_Redis>::parseRow(zq::CsvParse&& parse)
+{
+	parse >> thisRow->id
+		>> thisRow->name
+		>> thisRow->ip
+		>> thisRow->port
+		>> thisRow->auth;
+}
 
 
 FileProcess::FileProcess()
 {
-	strRootDir_ = "../datacfg/";
-	strCppPath_ = strRootDir_ + CPP_DIR;
-	strXmlPath_ = strRootDir_ + XML_NAME;
+
 }
 
 FileProcess::~FileProcess()
@@ -40,8 +78,6 @@ void FileProcess::setExcelPath(const std::string& path)
 	{
 		strRootDir_ += "/";
 	}
-
-	std::cout << "xml_path:" << strXmlPath_ << std::endl;
 }
 
 bool FileProcess::load()
@@ -54,14 +90,95 @@ bool FileProcess::load()
 	// 创建要生成的文件夹路径
 	mkdir();
 
+	bool success = false;
+	do 
+	{
+		//if (!loadExcel(STR_EXCEL_DIR))
+		//{
+		//	std::cout << "loadDBCfgDir failed." << std::endl;
+		//	break;
+		//}
+
+		if (!loadCsv(STR_CSV_DIR))
+		{
+			std::cout << "loadDBCfgDir failed." << std::endl;
+			break;
+		}
+
+		success = true;
+	} while (0);
+
+	if (!success)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+bool FileProcess::loadCsv(const std::string& dir)
+{
 	// 先获得这个路径下的所有文件
-	auto fileList = getFileListInFolder(strRootDir_, 0);
+	std::vector<std::string> fileList;
+	getFileListInFolder(dir, fileList);
 	for (auto fileName : fileList)
 	{
 		stringReplace(fileName, "\\", "/");
 		stringReplace(fileName, "//", "/");
 
-		if ((int)(fileName.find("$")) != -1)
+		// 后缀名
+		auto strExt = fileName.substr(fileName.find_last_of('.') + 1, fileName.length() - fileName.find_last_of('.') - 1);
+		if (strExt != "csv")
+		{
+			continue;
+		}
+
+		readCsv(fileName);
+		//// 开始读取
+		//CfgExcelData* pExcelData = new CfgExcelData();
+		//if (!readCsv(fileName, pExcelData))
+		//{
+		//	std::cout << "read " + fileName + " failed!" << std::endl;
+		//	assert(0);
+		//	return false;
+		//}
+
+		//cfgExcelData_[fileName] = pExcelData;
+	}
+
+	return true;
+}
+
+bool FileProcess::readCsv(const std::string& strFile)
+{
+	using namespace zq;
+	ConfigSystem::get_instance().create<CSV_Redis>(strFile);
+
+	int id = ConfigSystem::get_instance().getCsvRow<CSV_Redis>(1)->id;
+	std::string name = ConfigSystem::get_instance().getCsvRow<CSV_Redis>(1)->name;
+	std::string ip = ConfigSystem::get_instance().getCsvRow<CSV_Redis>(1)->ip;
+	int port = ConfigSystem::get_instance().getCsvRow<CSV_Redis>(1)->port;
+	std::string auth = ConfigSystem::get_instance().getCsvRow<CSV_Redis>(1)->auth;
+
+	std::cout << "id: " << id << std::endl;
+	std::cout << "name: " << name << std::endl;
+	std::cout << "ip: " << ip << std::endl;
+	std::cout << "port: " << port << std::endl;
+	std::cout << "auth: " << auth << std::endl;
+	return true;
+}
+
+bool FileProcess::loadExcel(const std::string& dir)
+{
+	// 先获得这个路径下的所有文件
+	std::vector<std::string> fileList;
+	getFileListInFolder(dir, fileList);
+	for (auto fileName : fileList)
+	{
+		stringReplace(fileName, "\\", "/");
+		stringReplace(fileName, "//", "/");
+
+		if (fileName.find("$") != std::string::npos)
 		{
 			continue;
 		}
@@ -73,27 +190,26 @@ bool FileProcess::load()
 			continue;
 		}
 
-		// 去掉了后缀的文件名
-		auto strFileName = fileName.substr(fileName.find_last_of('/') + 1, fileName.find_last_of('.') - fileName.find_last_of('/') - 1);
-
 		// 开始读取
-		if (!loadDataFromExcel(fileName, strFileName))
+		CfgExcelData* pExcelData = new CfgExcelData();
+		if (!readExcel(fileName, pExcelData))
 		{
-			std::cout << "Create " + fileName + " failed!" << std::endl;
+			std::cout << "read " + fileName + " failed!" << std::endl;
+			assert(0);
 			return false;
 		}
+
+		cfgExcelData_[fileName] = pExcelData;
 	}
 
 	return true;
 }
 
-bool FileProcess::loadDataFromExcel(const std::string& strFile, const std::string& class_name)
+bool FileProcess::readExcel(const std::string& strFile, CfgExcelData* pClassData)
 {
-	if (classData_.find(class_name) != classData_.end())
-	{
-		std::cout << strFile << " exist!!!" << std::endl;
-		return false;
-	}
+	// 去掉了后缀的文件名
+	auto class_name = strFile.substr(strFile.find_last_of('/') + 1, strFile.find_last_of('.') - strFile.find_last_of('/') - 1);
+	pClassData->class_name = class_name;
 
 	// 打开文件
 	MiniExcelReader::ExcelFile* xExcel = new MiniExcelReader::ExcelFile();
@@ -103,104 +219,55 @@ bool FileProcess::loadDataFromExcel(const std::string& strFile, const std::strin
 		return false;
 	}
 
-	// 这里把去除了后缀的文件名就抽象成类名
-	ClassData* pClassData = new ClassData();
-	pClassData->class_name = class_name;
+	std::cout << "begin read file: " << strFile << std::endl;
 
 	// 获得所有的sheet(表格)，就是文件下面一栏的标签栏
 	std::vector<MiniExcelReader::Sheet>& sheets = xExcel->sheets();
-	for (MiniExcelReader::Sheet& sh : sheets)
+	for (size_t i =0; i < 1; ++i)
 	{
-		std::cout << "begin load file: " << strFile << std::endl;
-		loadDataFromExcel(sh, pClassData);
-	}
+		MiniExcelReader::Sheet& sh = sheets[i];
 
-	classData_[class_name] = pClassData;
+		std::cout << "---beginread sheet: " << sh.getName() << std::endl;
 
-	return true;
-}
+		// 转换一下，全部变为小写
+		std::string strSheetName = sh.getName();
+		transform(strSheetName.begin(), strSheetName.end(), strSheetName.begin(), ::tolower);
 
-bool FileProcess::loadDataFromExcel(MiniExcelReader::Sheet& sheet, ClassData* pClassData)
-{
-	const MiniExcelReader::Range& dim = sheet.getDimension();
-
-	// 转换一下，全部变为小写
-	std::string strSheetName = sheet.getName();
-	transform(strSheetName.begin(), strSheetName.end(), strSheetName.begin(), ::tolower);
-
-	// 开始读取sheet的内容
-	if (strSheetName.find("property") != std::string::npos)
-	{
-		readData(sheet, pClassData);
-	}
-	else
-	{
-		std::cout << pClassData->class_name << " " << strSheetName << std::endl;
-		assert(0);
+		// 开始读取sheet的内容
+		if (!readExcelSheet(sh, pClassData))
+		{
+			return false;
+		}
 	}
 
 	return true;
 }
 
-bool FileProcess::readData(MiniExcelReader::Sheet& sheet, ClassData* pClassData)
+bool FileProcess::readExcelSheet(MiniExcelReader::Sheet& sheet, CfgExcelData* pClassData)
 {
 	const MiniExcelReader::Range& dim = sheet.getDimension();
 
-	int separator_row = -1;
-	for (int row = dim.firstRow; row <= dim.lastRow; ++row)
-	{
-		std::string name = sheet.getCell(row, 1)->value;
-		if (name == STR_SEPARATOR)
-		{
-			separator_row = row;
-			break;
-		}
-	}
-	if (separator_row == -1)
-	{
-		assert(false);
-		return false;
-	}
-
-	// 先读取这个类的所有的成员属性的描述, 名字是第一列，值是第二列
-	for (int col = dim.firstCol + 1; col <= dim.lastCol; ++col)
-	{
-		ClassData::ClassPropertyDescInfo property_info;
-		property_info.property_name = sheet.getCell(1, col)->value;
-
-		for (int row = dim.firstRow + 1; row <= separator_row; ++row)
-		{
-			ClassData::ClassPropertyDescInfo::DescInfo property_desc_info;
-			property_desc_info.desc_name = sheet.getCell(row, 1)->value;
-
-			// 不写分隔符
-			if (property_desc_info.desc_name == STR_SEPARATOR)
-			{
-				continue;
-			}
-
-			property_desc_info.desc_value = sheet.getCell(row, col)->value;
-			property_info.vec_desc_info.emplace_back(property_desc_info);
-		}
-
-		pClassData->vec_desc.emplace_back(property_info);
-	}
-
-	// 再来读取每个对象
-	for (int row = separator_row + 1; row <= dim.lastRow; ++row)
+	// 每一行，从第STATIC_EXCEL_HEIGHT_SEP + 1开始
+	for (int row = STATIC_EXCEL_HEIGHT_SEP + 1; row <= dim.lastRow; ++row)
 	{
 		// 实例化出来的对象名字，在第一列
-		ClassData::ObjectInfo obj;
-		std::string obj_name = sheet.getCell(row, 1)->value;
-		obj.obj_name = obj_name;
+		CfgExcelData::ObjInfo obj;
+		obj.obj_name = sheet.getCell(row, 1)->value;
 
 		// 读取属性名，从第二列开始读取
 		for (int col = dim.firstCol + 1; col <= dim.lastCol; ++col)
 		{
-			ClassData::ObjectInfo::PropertyInfo property_info;
-			property_info.name = sheet.getCell(1, col)->value;	
-			auto aaa = sheet.getCell(row, col);
-			property_info.value = sheet.getCell(row, col)->value;
+			std::string prop_name = sheet.getCell(1, col)->value;
+			std::string prop_type = sheet.getCell(2, col)->value;
+			std::string prop_desc = sheet.getCell(3, col)->value;
+			std::string prop_value = sheet.getCell(row, col)->value;
+
+			CfgExcelData::ObjInfo::PropertyInfo property_info;
+			property_info.name = prop_name;
+			property_info.type = prop_type;
+			property_info.value = prop_value;
+			property_info.desc = prop_desc;
+
 			obj.vec_propertys.emplace_back(property_info);
 		}
 
@@ -213,83 +280,56 @@ bool FileProcess::readData(MiniExcelReader::Sheet& sheet, ClassData* pClassData)
 
 bool FileProcess::save()
 {
-	saveForObject();
-	saveForCPP();
 	saveForXml();
-
+	saveCPP();
 	return true;
 }
 
-bool FileProcess::saveForObject()
+bool FileProcess::saveCPP()
 {
-	return true;
-}
-
-bool FileProcess::saveForCPP()
-{
-	std::string filename = strCppPath_ + CPP_FILE_NAME;
-	std::ofstream out(filename);
-	if (!out.is_open())
+	// 所有的类
+	for (const auto& class_data : cfgExcelData_)
 	{
-		assert(false);
-		return false;
-	}
+		std::string class_name = class_data.second->class_name;
+		std::string filename = strCppPath_ + class_name + ".hpp";
+		std::ofstream out(filename);
+		if (!out.is_open())
+		{
+			assert(false);
+			return false;
+		}
 
-	std::string strFileHead = "#pragma once\n\n" + std::string("#include <string>\n\n") + BEGIN_NAMESPACE;
-	out << strFileHead;
-
-	for (auto it = classData_.begin(); it != classData_.end(); ++it)
-	{
-		ClassData* class_data = it->second;
-		std::string class_name = class_data->class_name;
+		std::string strFileHead = "#pragma once\n\n" + std::string("#include <string>\n\n") + BEGIN_NAMESPACE;
+		out << strFileHead;
 
 		out << "\tstruct " + class_name + "\n\t{\n";
 		out << "\t\tstatic const std::string& " + THIS_NAME + "(){ static std::string x = \"" + class_name + "\"; return x; };\n";
-		
-		for (const auto& property : class_data->vec_desc)
+		for (const auto& obj : class_data.second->vec_obj)
 		{
-			std::string property_name = property.property_name;
-			out << "\t\tstatic const std::string& " + property_name + "(){ static std::string x = \"" + property_name + "\"; return x; };\n";
+			for (const auto& prop : obj.vec_propertys)
+			{
+				std::string property_name = prop.name;
+				out << "\t\tstatic const std::string& " + property_name + "(){ static std::string x = \"" + property_name + "\"; return x; };\n";
+			}
+
+			out << "\t};\n";
 		}
 
-		out << "\t};\n";
+		out << END_NAMESPACE;
+		out.close();
 	}
 
-	out << END_NAMESPACE;
-
-	out.close();
-
-	return false;
+	return true;
 }
 
 bool FileProcess::saveForXml()
 {
 	// 所有的类
-	for (const auto& class_data : classData_)
+	for (const auto& class_data : cfgExcelData_)
 	{
 		rapidxml::xml_document<> doc;
 		rapidxml::xml_node<>* root = doc.allocate_node(rapidxml::node_pi, doc.allocate_string("xml version='1.0' encoding='utf-8'"));
 		doc.append_node(root);
-
-		rapidxml::xml_node<>* property_desc_node = doc.allocate_node(rapidxml::node_element, "property_desc", NULL);
-
-		// 写入该类的所有成员的描述
-		for (const auto& desc : class_data.second->vec_desc)
-		{
-			const std::string& property_name = desc.property_name;
-			rapidxml::xml_node<>* property_node = doc.allocate_node(rapidxml::node_element, property_name.c_str(), NULL);
-
-			for (const auto& desc_info : desc.vec_desc_info)
-			{
-				const std::string& desc_name = desc_info.desc_name;
-				const std::string& desc_value = desc_info.desc_value;
-				property_node->append_attribute(doc.allocate_attribute(desc_name.c_str(), desc_value.c_str()));
-			}
-
-			property_desc_node->append_node(property_node);
-		}
-
-		doc.append_node(property_desc_node);
 
 		// 开始写入每个对象的节点
 		std::string class_name = class_data.second->class_name;
@@ -303,9 +343,7 @@ bool FileProcess::saveForXml()
 			// 一个对象下的所有属性
 			for (const auto& prop : obj.vec_propertys)
 			{
-				const std::string& property_name = prop.name;
-				const std::string& property_valye = prop.value;
-				obj_node->append_attribute(doc.allocate_attribute(property_name.c_str(), property_valye.c_str()));
+				obj_node->append_attribute(doc.allocate_attribute(prop.name.c_str(), prop.value.c_str()));
 			}
 
 			// 加入到这个类
@@ -316,14 +354,16 @@ bool FileProcess::saveForXml()
 		doc.append_node(class_node);
 
 		// 写入文件
-		std::ofstream out(strXmlPath_ + class_name + ".xml");
+		std::string wfile = STR_XML_DIR + class_name + ".xml";
+		std::ofstream out(wfile);
 		if (!out.is_open())
 		{
-			std::cout << "open file faild, file: " << strXmlPath_ << std::endl;
+			std::cout << "!!!!!!open file faild, file: " << wfile << std::endl;
 			continue;
 		}
 
 		out << doc;
+		out.close();
 	}
 
 	return true;
@@ -334,10 +374,8 @@ void FileProcess::setUTF8(const bool b)
 	convertIntoUTF8_ = b;
 }
 
-std::vector<std::string> FileProcess::getFileListInFolder(std::string folderPath, int depth)
+void FileProcess::getFileListInFolder(std::string folderPath, std::vector<std::string>& result)
 {
-	std::vector<std::string> result;
-
 #if ZQ_PLATFORM == ZQ_PLATFORM_WIN
 	_finddata_t FileInfo;
 	std::string strfind = folderPath + "\\*";
@@ -392,8 +430,6 @@ std::vector<std::string> FileProcess::getFileListInFolder(std::string folderPath
 
 	std::sort(result.begin(), result.end());
 #endif
-
-	return result;
 }
 
 void FileProcess::stringReplace(std::string & strBig, const std::string & strsrc, const std::string & strdst)
@@ -411,6 +447,7 @@ void FileProcess::stringReplace(std::string & strBig, const std::string & strsrc
 
 void FileProcess::mkdir()
 {
-	_mkdir(strCppPath_.c_str());
-	_mkdir(strXmlPath_.c_str());
+	_mkdir(STR_EXCEL_DIR.c_str());
+	_mkdir(STR_CPP_DIR.c_str());
+	_mkdir(STR_XML_DIR.c_str());
 }

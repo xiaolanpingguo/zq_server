@@ -2,6 +2,7 @@
 
 #include "interface_header/base/IClassModule.h"
 #include "interface_header/base/IGameCSModule.h"
+#include "interface_header/base/IConfigModule.h"
 
 #include "baselib/network/socket_mgr.hpp"
 #include "game_socket.h"
@@ -27,6 +28,7 @@ public:
 private:
 
 	IClassModule* classModule_;
+	IConfigModule* configModule_;
 };
 
 }

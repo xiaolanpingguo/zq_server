@@ -1,59 +1,177 @@
 #pragma once
 
-#include <iostream>
-#include <string>
-#include "baselib/core/IObject.h"
-#include "baselib/core/IPropertyManager.h"
-#include "interface_header/base/platform.h"
+
+#include "property_manager.h"
+#include "IObject.h"
 
 namespace zq {
 
 class CObject : public IObject
 {
-private:
-	CObject() : IObject(Guid())
+public:
+	CObject(Guid id = NULL_GUID, const std::string& name = "")
+		:self_(id),name_(name)
 	{
-		mObjectEventState = COE_CREATE_NODATA;
+
+	}
+	virtual ~CObject()
+	{
+
 	}
 
-public:
-	CObject(Guid self, ILibManager* pLuginManager);
-	virtual ~CObject();
+	virtual bool exsitProperty(const std::string& strPropertyName)
+	{
+		return propertyMgr_.exsitProperty(strPropertyName);
+	}
 
-	virtual bool init();
-	virtual bool shut();
-	virtual bool run();
+	bool setValue(const std::string& strPropertyName, const int64 value) override
+	{
+		PropertyPtr pProperty = propertyMgr_.newProperty(strPropertyName, TDATA_INT64);
+		pProperty->setValue(value);
+		return true;
+	}
 
-	virtual Guid self();
+	bool setValue(const std::string& strPropertyName, const double value) override
+	{
+		PropertyPtr pProperty = propertyMgr_.newProperty(strPropertyName, TDATA_DOUBLE);
+		pProperty->setValue(value);
+		return true;
+	}
 
-	virtual CLASS_OBJECT_EVENT getState();
-	virtual bool setState(const CLASS_OBJECT_EVENT eState);
+	bool setValue(const std::string& strPropertyName, const std::string& value) override
+	{
+		PropertyPtr pProperty = propertyMgr_.newProperty(strPropertyName, TDATA_STRING);
+		pProperty->setValue(value);
+		return true;
+	}
 
-	virtual bool findProperty(const std::string& strPropertyName);
+	bool setValue(const std::string& strPropertyName, const Guid& value) override
+	{
+		PropertyPtr pProperty = propertyMgr_.newProperty(strPropertyName, TDATA_GUID);
+		pProperty->setValue(value);
+		return true;
+	}
 
-	virtual bool setPropertyInt(const std::string& strPropertyName, const int64 nValue);
-	virtual bool setPropertyDouble(const std::string& strPropertyName, const double dwValue);
-	virtual bool setPropertyString(const std::string& strPropertyName, const std::string& strValue);
-	virtual bool setPropertyObject(const std::string& strPropertyName, const Guid& obj);
+	int64 getInt(const std::string& strPropertyName) override
+	{
+		PropertyPtr pProperty = propertyMgr_.getProperty(strPropertyName);
+		if (pProperty == nullptr)
+		{
+			return VALID_INT;
+		}
 
-	virtual int64 getPropertyInt(const std::string& strPropertyName);
-	virtual double getPropertyDouble(const std::string& strPropertyName);
-	virtual const std::string& getPropertyString(const std::string& strPropertyName);
-	virtual const Guid& getPropertyObject(const std::string& strPropertyName);
+		return pProperty->getValue<int64>();
+	}
 
-	virtual std::shared_ptr<IPropertyManager> getPropertyMgr();
+	double getDouble(const std::string& strPropertyName) override
+	{
+		PropertyPtr pProperty = propertyMgr_.getProperty(strPropertyName);
+		if (pProperty == nullptr)
+		{
+			return VALID_FLOAT;
+		}
 
-	virtual void setPropertyManager(std::shared_ptr<IPropertyManager> xPropertyManager);
+		return pProperty->getValue<double>();
+	}
 
-protected:
+	std::string getString(const std::string& strPropertyName) override
+	{
+		PropertyPtr pProperty = propertyMgr_.getProperty(strPropertyName);
+		if (pProperty == nullptr)
+		{
+			return NULL_STR;
+		}
 
-	virtual bool addPropertyCallBack(const std::string& strCriticalName, PROPERTY_EVENT_FUNCTOR&& cb);
+		return pProperty->getValue<std::string>();
+	}
+
+	bool setArrayValueInt(const std::string& strPropertyName, const std::vector<int64>& vec)
+	{
+		/*for (size_t i = 0; i < vec.size(); ++i)
+		{
+			propertyMgr_.setArrayProperty(strPropertyName, vec);
+			if (pProperty == nullptr)
+			{
+				pProperty = std::make_shared<Property>(strPropertyName, TDATA_STRING);
+			}
+		}*/
+
+		return true;
+	}
+
+	void getArrayValueInt(const std::string& strPropertyName, std::vector<int64>& vec)
+	{
+		std::vector<PropertyPtr> out;
+		propertyMgr_.getArrayProperty(strPropertyName, out);
+
+		for (size_t i = 0; i < out.size(); ++i)
+		{
+			vec.emplace_back(out[i]->getValue<int64>());
+		}
+	}
+
+	void getArrayValueDouble(const std::string& strPropertyName, std::vector<double>& vec)
+	{
+		std::vector<PropertyPtr> out;
+		propertyMgr_.getArrayProperty(strPropertyName, out);
+
+		for (size_t i = 0; i < out.size(); ++i)
+		{
+			vec.emplace_back(out[i]->getValue<double>());
+		}
+	}
+
+	void getArrayValueDouble(const std::string& strPropertyName, std::vector<std::string>& vec)
+	{
+		std::vector<PropertyPtr> out;
+		propertyMgr_.getArrayProperty(strPropertyName, out);
+
+		for (size_t i = 0; i < out.size(); ++i)
+		{
+			vec.emplace_back(out[i]->getValue<std::string>());
+		}
+	}
+
+	void getArrayValueGuid(const std::string& strPropertyName, std::vector<Guid>& vec)
+	{
+		std::vector<PropertyPtr> out;
+		propertyMgr_.getArrayProperty(strPropertyName, out);
+
+		for (size_t i = 0; i < out.size(); ++i)
+		{
+			vec.emplace_back(out[i]->getValue<Guid>());
+		}
+	}
+
+	void getArrayValueInt(const std::string& strPropertyName, std::vector<int64>& vec, size_t size)
+	{
+		std::vector<PropertyPtr> out;
+		propertyMgr_.getArrayProperty(strPropertyName, out);
+
+		for (size_t i = 0; i < out.size(); ++i)
+		{
+			vec.emplace_back(out[i]->getValue<int64>());
+		}
+	}
+
+	bool addPropertyCallBack(const std::string& name, PropertyEventFunT&& cb) override
+	{
+		return propertyMgr_.registerCallback(name, std::move(cb));
+	}
+
+	const Guid& getGuid() override { return self_; }
+
+	void setObjName(const std::string& v) { name_ = v; }
+	const std::string& getObjName() override { return name_; }
+
+	void setClassName(const std::string& v) { name_ = v; }
+	const std::string& getClassName() override { return name_; }
 
 private:
-	Guid mSelf;
-	CLASS_OBJECT_EVENT mObjectEventState;
-	std::shared_ptr<IPropertyManager> propertyManager_;
 
+	Guid self_;
+	std::string name_;
+	PropertyManager propertyMgr_;
 };
 
 }

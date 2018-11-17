@@ -31,8 +31,7 @@ protected:
 
 	int onPropertyCallBackEvent(const Guid& self, const std::string& strProperty, const VariantData& oldVar, const VariantData& newVar);
 
-	int onClassCallBackEvent(const Guid& self, const std::string& strClassName, const CLASS_OBJECT_EVENT event, const DataList& arg);
-	int onEvent(const Guid& self, const EnEventDefine event, const DataList& arg);
+	int onClassCallBackEvent(const Guid& self, const std::string& strClassName, const CLASS_OBJECT_EVENT event);
 
 	void processMessage(IChannel* channel, const char* data, size_t len, int msgid);
 
@@ -46,7 +45,6 @@ private:
 	IKernelModule* kernelModule_;
 	IClassModule* classModule_;
 	ILogModule* logModule_;
-	IEventModule* eventModule_;
 	IHttpServerModule* httpServerModule_;
 	IHttpClientModule* httpClientModule_;
 	IMessageDispatcherModule* messageDispatcherModule_;

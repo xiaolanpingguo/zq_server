@@ -1,50 +1,169 @@
 #pragma once
 
 
-#include "map_ex.hpp"
-#include "data_list.hpp"
-#include "IPropertyManager.h"
+//#include "map_ex.hpp"
+//#include "data_list.hpp"
+//#include "IPropertyManager.h"
+#include "property.h"
+
+#include <unordered_map>
 
 namespace zq {
 
-class PropertyManager : public IPropertyManager
+class PropertyManager 
 {
 public:
 
-	PropertyManager()
+	PropertyManager() 
 	{
-
 	}
-	PropertyManager(const Guid& self)
+
+	virtual ~PropertyManager()
 	{
-		mSelf = self;
+		propertys_.clear();
+		propertyArray_.clear();
 	};
 
-	virtual ~PropertyManager();
+	PropertyPtr newProperty(const std::string& strPropertyName, const EN_DATA_TYPE varType)
+	{
+		auto it = propertys_.find(strPropertyName);
+		if (it == propertys_.end())
+		{
+			auto new_prop = std::make_shared<Property>(strPropertyName, varType);
+			propertys_[strPropertyName] = new_prop;
+			return new_prop;
+		}
 
-	virtual bool registerCallback(const std::string& strProperty, PROPERTY_EVENT_FUNCTOR&& cb);
+		return it->second;
+	}
 
-	virtual std::shared_ptr<IProperty> addProperty(const Guid& self, std::shared_ptr<IProperty> pProperty);
+	PropertyPtr getProperty(const std::string& strPropertyName)
+	{
+		auto it = propertys_.find(strPropertyName);
+		if (it == propertys_.end())
+		{
+			return nullptr;
+		}
 
-	virtual std::shared_ptr<IProperty> addProperty(const Guid& self, const std::string& strPropertyName, const EN_DATA_TYPE varType);
+		return it->second;
+	}
 
-	virtual const Guid& self();
+	void appenArrayPropertyData(const std::string& strPropertyName, int64 value)
+	{
+		PropertyArrayPtr prop_arry = nullptr;
+		auto it = propertyArray_.find(strPropertyName);
+		if (it == propertyArray_.end())
+		{
+			prop_arry = std::make_shared<PropertyArray>(strPropertyName);
+		}
 
-	virtual bool setProperty(const std::string& strPropertyName, const VariantData& TData);
+		prop_arry->appenValue(value);
+		propertyArray_[strPropertyName] = prop_arry;
+	}
 
-	virtual bool setPropertyInt(const std::string& strPropertyName, const int64 nValue);
-	virtual bool setPropertyDouble(const std::string& strPropertyName, const double dwValue);
-	virtual bool setPropertyString(const std::string& strPropertyName, const std::string& strValue);
-	virtual bool setPropertyObject(const std::string& strPropertyName, const Guid& obj);
+	void setArrayPropertyDataOnPos(const std::string& strPropertyName, int64 value, size_t pos)
+	{
+		auto it = propertyArray_.find(strPropertyName);
+		if (it == propertyArray_.end())
+		{
+			return;
+		}
 
-	virtual int64 getPropertyInt(const std::string& strPropertyName);
-	virtual double getPropertyDouble(const std::string& strPropertyName);
-	virtual const std::string& getPropertyString(const std::string& strPropertyName);
-	virtual const Guid& getPropertyObject(const std::string& strPropertyName);
+		PropertyArrayPtr prop_arry = it->second;
+		prop_arry->setValue(value, pos);
+	}
+
+	void getArrayProperty(const std::string& strPropertyName, std::vector<PropertyPtr>& out, int begin = -1, int end = -1)
+	{
+		//auto it = propertyArray_.find(strPropertyName);
+		//if (it == propertyArray_.end())
+		//{
+		//	return;
+		//}
+
+		//// begin和end都以下标来计算
+		//std::vector<PropertyPtr>& vec = it->second;
+		//if (begin == -1 && end == -1)
+		//{
+		//	for (const auto& prop : vec)
+		//	{
+		//		out.emplace_back(prop);
+		//	}
+
+		//	return;
+		//}
+
+		//if (begin == -1 && end != -1)
+		//{
+		//	if ((int)vec.size() > end)
+		//	{
+		//		for (size_t i = 0; i <= end; ++i)
+		//		{
+		//			out.emplace_back(vec[i]);
+		//		}
+		//	}
+
+		//	return;
+		//}
+
+		//if (begin != -1 && end == -1)
+		//{
+		//	if ((int)vec.size() > begin)
+		//	{
+		//		for (size_t i = begin; i < vec.size(); ++i)
+		//		{
+		//			out.emplace_back(vec[i]);
+		//		}
+		//	}
+
+		//	return;
+		//}
+
+		//if (begin != -1 && end != -1)
+		//{	
+		//	if ((int)vec.size() > end && (int)vec.size() > begin)
+		//	{
+		//		for (size_t i = begin; i < end; ++i)
+		//		{
+		//			out.emplace_back(vec[i]);
+		//		}
+		//	}
+
+		//	return;
+		//}
+	}
+
+	bool exsitProperty(const std::string& name)
+	{
+		return exsitBaseProperty(name) || exsitArrayProperty(name);
+	}
+
+	bool exsitBaseProperty(const std::string& name)
+	{
+		return propertyArray_.find(name) != propertyArray_.end();
+	}
+
+	bool exsitArrayProperty(const std::string& name)
+	{
+		return propertyArray_.find(name) != propertyArray_.end();
+	}
+
+	bool registerCallback(const std::string& strPropertyName, PropertyEventFunT&& cb)
+	{
+		auto it = propertys_.find(strPropertyName);
+		if (it == propertys_.end())
+		{
+			return false;
+		}
+
+		it->second->registerCallback(std::move(cb));
+		return true;
+	}
 
 private:
-	Guid mSelf;
-	std::map<std::string, int> mxPropertyIndexMap;
+
+	std::unordered_map<std::string, PropertyPtr> propertys_;   // 基本类型
+	std::unordered_map<std::string, PropertyArrayPtr> propertyArray_;  // 数组类型
 };
 
 }

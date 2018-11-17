@@ -2,7 +2,9 @@
 #include <iostream>
 #include <chrono>
 #include <cassert>
+#include "csv_config.hpp"
 using namespace std;
+
 
 
 int main(int argc, const char *argv[])
