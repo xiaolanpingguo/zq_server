@@ -3,7 +3,9 @@
 #include "redis_module.h"
 #include "baselib/message/config_define.hpp"
 #include "config_header/cfg_redis.hpp"
-using namespace zq;
+
+
+namespace zq{
 
 
 RedisModule::RedisModule(ILibManager* p)
@@ -32,32 +34,12 @@ bool RedisModule::initEnd()
 	const auto& all_row = configModule_->getCsvRowAll<CSVRedis>();
 	for (const auto& ele : *all_row)
 	{
-		if (!addServer(ele.second->name, ele.second->ip, ele.second->port, false))
+		if (!addServer(ele.second.name, ele.second.ip, ele.second.port, true))
 		{
 			ASSERT(false);
 			return false;
 		}
 	}
-
-	/*IClassPtr logic_class = classModule_->getClass(config::Redis::this_name());
-	if (logic_class)
-	{
-		const auto& objs = logic_class->getAllStaticObjs();
-		for (const auto& ele : objs)
-		{
-			IObjectPtr obj = ele.second;
-
-			const int nPort = obj->getInt(config::Redis::port());
-			const std::string& strIP = obj->getString(config::Redis::ip());
-			const std::string& strAuth = obj->getString(config::Redis::auth());
-
-			if (!addServer(obj->getObjName(), strIP, nPort, false))
-			{
-				ASSERT(false);
-				return false;
-			}
-		}
-	}*/
 
 	return true;
 }
@@ -106,7 +88,7 @@ bool RedisModule::addServer(const std::string& id, const std::string& ip, unsign
 RedisClientPtr RedisModule::getClientById(const std::string& strID)
 {
 	ClientPtr client = serverMap_.getElement(strID);
-	if (client && client->enable())
+	if (client && client->isConnect())
 	{
 		return std::dynamic_pointer_cast<IRedisClient>(client);
 	}
@@ -117,7 +99,7 @@ RedisClientPtr RedisModule::getClientById(const std::string& strID)
 RedisClientPtr RedisModule::getClientBySuitConsistent()
 {
 	ClientPtr client = serverMap_.getElementBySuitConsistent();
-	if (client && client->enable())
+	if (client && client->isConnect())
 	{
 		return std::dynamic_pointer_cast<IRedisClient>(client);
 	}
@@ -128,12 +110,14 @@ RedisClientPtr RedisModule::getClientBySuitConsistent()
 RedisClientPtr RedisModule::getClientByHash(const std::string& hash)
 {
 	ClientPtr client = serverMap_.getElementBySuit(hash);
-	if (client && client->enable())
+	if (client && client->isConnect())
 	{
 		return std::dynamic_pointer_cast<IRedisClient>(client);
 	}
 
 	return nullptr;
+}
+
 }
 
 

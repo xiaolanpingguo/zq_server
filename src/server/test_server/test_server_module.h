@@ -8,6 +8,7 @@
 #include "interface_header/base/IHttpServerModule.h"
 #include "interface_header/base/IHttpClientModule.h"
 #include "interface_header/base/IMessageDispatcherModule.h"
+#include "interface_header/base/IRedislModule.h"
 
 
 namespace zq {
@@ -48,6 +49,7 @@ private:
 	IHttpServerModule* httpServerModule_;
 	IHttpClientModule* httpClientModule_;
 	IMessageDispatcherModule* messageDispatcherModule_;
+	IRedisModule* redisModule_;;
 };
 
 }

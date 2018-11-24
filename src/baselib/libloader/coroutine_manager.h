@@ -3,97 +3,38 @@
 
 #include <list>
 #include "interface_header/base/platform.h"
-
-#if ZQ_PLATFORM != ZQ_PLATFORM_WIN
-#include <ucontext.h>
-#endif
+#include <boost/coroutine2/all.hpp>
 
 namespace zq {
 
 
-#define MAX_COROUTINE_STACK_SIZE (1024 * 512)
-#define MAX_COROUTINE_CAPACITY   (128 * 1)
 
-using CoroutineFunction = void(*)(void* arg);
-
-enum CoroutineState
-{
-    FREE,
-    SUSPEND
-};
-
-
-class CoroutineManager;
-class Coroutine
-{
-public:
-	Coroutine(CoroutineManager* p, int id)
-    {
-        pSchdule = p;
-        state = CoroutineState::FREE;
-        nID = id;
-        nYieldTime = 0;
-    }
-
-    CoroutineFunction func;
-    int64_t nYieldTime;
-    void* arg;
-    enum CoroutineState state;
-    int nID;
-    CoroutineManager* pSchdule;
-
-#if ZQ_PLATFORM != ZQ_PLATFORM_WIN
-    ucontext_t ctx;
-#endif
-    char stack[MAX_COROUTINE_STACK_SIZE];
-};
-
-class CoroutineManager
+namespace coro_t = boost::coroutines2;
+using CoroutineFun = std::function<void(coro_t::coroutine<void>::pull_type&)>;
+struct Coroutine;
+class CoroutineMgr
 {
 public:
 
-	CoroutineManager();
+	static CoroutineMgr& get_instance()
+	{
+		static CoroutineMgr ins;
+		return ins;
+	}
 
-    virtual ~CoroutineManager();
+	void init();
 
-    void init(CoroutineFunction func);
+	void yieldCo();
 
-    void removeRunningID(int id);
+	void schedule();
 
-    void yieldCo();
+	void newCoroutine(CoroutineFun&& fun);
 
-    void yieldCo(const int32_t nSecond);
+private:
 
-    void scheduleJob();
-
-protected:
-
-    void newMainCoroutine();
-
-    void resume(int id);
-
-    Coroutine* allotCoroutine();
-
-	Coroutine* getCoroutine(int id);
-	Coroutine* getRunningCoroutine();
-
-
-
-protected:
-    CoroutineFunction mainFunc_;
-    void* mainArg_;
-
-#if ZQ_PLATFORM != ZQ_PLATFORM_WIN
-    ucontext_t mainCtx_;
-#endif
-    int runningCoroutineId_;
-    int mainId_;
-
-    std::vector<Coroutine*> coroutineList_;
-    std::list<int> runningList_;
-
-
+	std::list<coro_t::coroutine<void>::push_type> pushList_;
 };
+
 
 
 }

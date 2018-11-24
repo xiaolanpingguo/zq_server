@@ -23,6 +23,8 @@ public:
 
 	void start() override;
 	void onClose() override;
+
+	bool readHandler() override;
 	bool readDataHandler() override;
 
 	int getServerId() { return serverInfos_.server_id(); }

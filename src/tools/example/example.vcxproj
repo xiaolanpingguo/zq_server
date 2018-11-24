@@ -81,7 +81,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\src\dependencies\boost_1_67_0;$(SolutionDir)\src\dependencies\mysql\include;$(SolutionDir)\src\dependencies\openssl\include;$(SolutionDir)\src\dependencies\hiredis\hiredis_win;$(SolutionDir)\src\dependencies\protobuf-all-3.6.1\src;$(SolutionDir)\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\src\dependencies\libgo_win\windows;$(SolutionDir)\src\dependencies\libgo_win;$(SolutionDir)\src\dependencies;$(SolutionDir)\src\dependencies\boost_1_67_0;$(SolutionDir)\src\dependencies\mysql\include;$(SolutionDir)\src\dependencies\openssl\include;$(SolutionDir)\src\dependencies\hiredis\hiredis_win;$(SolutionDir)\src\dependencies\protobuf-all-3.6.1\src;$(SolutionDir)\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>/std:c++17 %(AdditionalOptions)</AdditionalOptions>
@@ -128,9 +128,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="test_libgo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="test_spawn.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

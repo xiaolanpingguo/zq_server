@@ -1,6 +1,6 @@
 #pragma once
 
-#include "interface_header/base/platform.h"
+
 #include "query_callback.h"
 #include <algorithm>
 #include <vector>

@@ -7,6 +7,6 @@ ADD_LIBRARY(db_mysql STATIC ${SRC_LIST})
 
 SET(LIBRARY_OUTPUT_PATH ${OutPutDir})
 
-add_dependencies(db_mysql kernel core config network log_lib base_code)
+add_dependencies(db_mysql base_code)
 
 

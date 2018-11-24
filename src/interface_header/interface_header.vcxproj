@@ -111,7 +111,7 @@
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)_Objs\$(Configuration)_$(Platform)\$(ProjectName)\</IntDir>
     <TargetName>$(ProjectName)_d</TargetName>
-    <IncludePath>$(SolutionDir)\Src;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\src\dependencies\boost_1_67_0;$(SolutionDir)\src;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>

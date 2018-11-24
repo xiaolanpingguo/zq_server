@@ -25,7 +25,7 @@ public:
 
 public:
 
-	void readHandler() override
+	virtual void readHandler() override
 	{
 		if (!isOpen())
 			return;

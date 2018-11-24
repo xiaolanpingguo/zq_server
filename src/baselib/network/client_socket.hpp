@@ -12,7 +12,7 @@ class ClientSocket : public Socket<ClientSocket>
 public:
 	using BaseSocket = Socket<ClientSocket>;
 
-	ClientSocket(Asio::IoContext& ios, const std::string& ip, uint16 port) 
+	ClientSocket(io_context_t& ios, const std::string& ip, uint16 port) 
 		: Socket(ios, ip, port),
 		ioContext_(ios)
 	{
@@ -31,14 +31,14 @@ public:
 			return false;
 		}
 
-		boost::system::error_code ec;
+		error_code_t ec;
 		ioContext_.poll(ec);
 		return true;
 	}
 
 	void asynConnect()
 	{
-		getSocket().async_connect(getEndpoint(), [this](const boost::system::error_code& ec)
+		getSocket().async_connect(getEndpoint(), [this](const error_code_t& ec)
 		{
 			if (!ec)
 			{
@@ -59,7 +59,7 @@ public:
 		{
 			update();
 
-			boost::system::error_code ec;
+			error_code_t ec;
 			getSocket().connect(getEndpoint(), ec);
 			if (!ec)
 			{
@@ -143,7 +143,7 @@ protected:
 	MessageBuffer headerLengthBuffer_;
 	MessageBuffer packetBuffer_;
 
-	Asio::IoContext& ioContext_;
+	io_context_t& ioContext_;
 };
 
 

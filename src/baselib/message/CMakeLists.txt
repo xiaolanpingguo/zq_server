@@ -7,6 +7,6 @@ ADD_LIBRARY(message STATIC ${SRC_LIST})
 
 SET(LIBRARY_OUTPUT_PATH ${OutPutDir})
 
-add_dependencies(message kernel core config network log_lib base_code)
+add_dependencies(message kernel core network log_lib base_code)
 
 

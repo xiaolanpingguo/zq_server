@@ -13,20 +13,46 @@ class RedisCommand
 public:
 	RedisCommand(const std::string& cmd)
 	{
-		vecParam_.push_back(cmd);
+		vecParam_.emplace_back(std::move(cmd));
 	}
 
-	~RedisCommand()
+	RedisCommand(RedisCommand&& right)
+		:vecParam_(std::move(right.vecParam_))
 	{
-
 	}
+
+	RedisCommand& operator=(RedisCommand&& right)
+	{
+		if (this != &right)
+		{
+			vecParam_ = std::move(right.vecParam_);
+		}
+
+		return *this;
+	}
+
+	RedisCommand(const RedisCommand& right)
+		:vecParam_(right.vecParam_)
+	{}
+
+	RedisCommand& operator=(const RedisCommand& right)
+	{
+		if (this != &right)
+		{
+			vecParam_ = right.vecParam_;
+		}
+
+		return *this;
+	}
+
+	~RedisCommand() = default;
 
 	template <typename T>
 	RedisCommand& operator<<(const T& t)
 	{
 		std::stringstream str;
 		str << t;
-		vecParam_.push_back(str.str());
+		vecParam_.emplace_back(std::move(str.str()));
 		return *this;
 	}
 

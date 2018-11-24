@@ -7,11 +7,11 @@ namespace zq{
 
 
 using OnSuccessFunT = std::function<void(tcp::socket&& socket)>;
-using OnFaildFunT = std::function<void(const boost::system::error_code&)>;
+using OnFaildFunT = std::function<void(const error_code_t&)>;
 class Connector
 {
 public:
-	Connector(Asio::IoContext& ios): socket_(ios) {}
+	Connector(io_context_t& ios): socket_(ios) {}
 	~Connector() = default;
 
 	void startConnect(const tcp::endpoint& endpoint, OnSuccessFunT&& on_success, OnFaildFunT&& on_fail, bool async = true)
@@ -20,7 +20,7 @@ public:
 		onFaildCb_ = std::move(on_fail);
 		if (async)
 		{
-			socket_.async_connect(endpoint, [this](const boost::system::error_code& ec)
+			socket_.async_connect(endpoint, [this](const error_code_t& ec)
 			{
 				if (!ec)
 				{
@@ -40,7 +40,7 @@ public:
 		}
 		else
 		{
-			boost::system::error_code ec;
+			error_code_t ec;
 			socket_.connect(endpoint, ec);
 			if (!ec)
 			{

@@ -1,0 +1,6 @@
+[submodule "src/dependencies/asio"]
+	path = src/dependencies/asio
+	url = https://github.com/chriskohlhoff/asio.git
+[submodule "src/dependencies/iguana"]
+	path = src/dependencies/iguana
+	url = https://github.com/qicosmos/iguana.git

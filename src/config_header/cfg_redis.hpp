@@ -14,6 +14,7 @@ struct CSVRedis
 	std::string auth;
 };
 
+template<>
 inline void TCsvFile<CSVRedis>::parseRow(CsvParse&& parse)
 {
 	parse >> thisRow->id

@@ -11,7 +11,7 @@ class ClientSocketMgr
 {
 	using SocketMapT = std::map<tcp::endpoint, std::shared_ptr<SocketType>>;
 public:
-	ClientSocketMgr() : ioContext_(Asio::getDefaultIoContextObj())
+	ClientSocketMgr() : ioContext_(getDefaultIoContextObj())
 	{
 	}
 
@@ -22,7 +22,7 @@ public:
 
 	virtual int poll()
 	{
-		boost::system::error_code ec;
+		error_code_t ec;
 		size_t num = ioContext_.poll(ec);
 		if (ec)
 		{
@@ -41,7 +41,7 @@ public:
 	template<typename... Agrs>
 	void startConnect(const std::string& ip, uint16 port, bool is_asyn, Agrs... args)
 	{
-		boost::system::error_code ec;
+		error_code_t ec;
 		auto addr = boost::asio::ip::make_address(ip, ec);
 		if (ec)
 		{
@@ -84,7 +84,7 @@ protected:
 	ConnectorPtr connector_;
 	SocketMapT socketMap_;
 
-	Asio::IoContext& ioContext_;
+	io_context_t& ioContext_;
 };
 
 

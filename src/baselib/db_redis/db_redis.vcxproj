@@ -82,7 +82,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\src\dependencies\boost_1_67_0;$(SolutionDir)\src\dependencies\libevent-2.1.8-stable_win\WIN32-Code;$(SolutionDir)\src\dependencies\libevent-2.1.8-stable_win;$(SolutionDir)\src\dependencies\libevent-2.1.8-stable_win\include;$(SolutionDir)\src;$(SolutionDir)\src\dependencies\hiredis\hiredis_win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\src\dependencies\asio\asio\include;$(SolutionDir)\src;$(SolutionDir)\src\dependencies\hiredis\hiredis_win;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -126,24 +126,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="redis_client.cpp" />
-    <ClCompile Include="commond_hash.cpp" />
-    <ClCompile Include="commond_key.cpp" />
     <ClCompile Include="redis_lib.cpp" />
-    <ClCompile Include="commond_list.cpp" />
     <ClCompile Include="redis_module.cpp" />
-    <ClCompile Include="commond_pubsub.cpp" />
-    <ClCompile Include="commond_server.cpp" />
-    <ClCompile Include="commond_set.cpp" />
-    <ClCompile Include="redis_socket.cpp" />
-    <ClCompile Include="commond_sort.cpp" />
-    <ClCompile Include="commond_string.cpp" />
+    <ClCompile Include="commond.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="redis_client.h" />
     <ClInclude Include="redis_commond.h" />
     <ClInclude Include="redis_lib.h" />
     <ClInclude Include="redis_module.h" />
-    <ClInclude Include="redis_socket.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

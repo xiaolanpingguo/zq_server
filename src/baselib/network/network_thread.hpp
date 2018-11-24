@@ -146,7 +146,7 @@ private:
     std::mutex newSocketsLock_;
     SocketContainer newSockets_;
 
-    Asio::IoContext ioContext_;
+    io_context_t ioContext_;
     tcp::socket acceptSocket_;
     boost::asio::deadline_timer updateTimer_;
 };

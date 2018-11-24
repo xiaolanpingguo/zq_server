@@ -252,7 +252,7 @@ public:
 	{
 		VariantData	vd(TDATA_DOUBLE);
 		vd.variantData_ = (double)v;
-		setData(std::move(vd));
+		setData(std::move(vd), pos);
 	}
 
 	template <typename T>
@@ -262,7 +262,7 @@ public:
 		{
 			VariantData	vd(TDATA_STRING);
 			vd.variantData_ = std::string(v);
-			setData(std::move(vd));
+			setData(std::move(vd), pos);
 		}
 
 		return nullptr;
@@ -273,7 +273,7 @@ public:
 	{
 		VariantData	vd(TDATA_STRING);
 		vd.variantData_ = (std::string)(v);
-		setData(std::move(vd));
+		setData(std::move(vd), pos);
 	}
 
 	template <typename T>
@@ -281,7 +281,7 @@ public:
 	{
 		VariantData	vd(TDATA_OBJECT);
 		vd.variantData_ = (Guid)v;
-		setData(std::move(vd));
+		setData(std::move(vd), pos);
 	}
 
 	const std::string& getName() const { return propertyName_; }

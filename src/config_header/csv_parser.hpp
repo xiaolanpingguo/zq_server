@@ -235,7 +235,7 @@ template<class T>
 class TCsvFile : public CsvFile
 {
 public:
-	using CsvRowsMap = std::map<int, std::shared_ptr<T>>;
+	using CsvRowsMap = std::map<int, T>;
 
 	TCsvFile<T>() = default;
 	virtual ~TCsvFile<T>()
@@ -308,10 +308,8 @@ protected:
 				}
 			}
 			m_mapCol[id] = mapColItem;
-
-			thisRow = std::make_shared<T>();
+			thisRow = &m_mapData[id];
 			parseRow(std::move(parse));
-			m_mapData[id] = std::move(thisRow);
 		}
 
 		return true;
@@ -320,7 +318,7 @@ protected:
 	virtual void parseRow(CsvParse&& parse);
 
 public:
-	std::shared_ptr<T> thisRow;
+	T* thisRow;
 
 protected:
 

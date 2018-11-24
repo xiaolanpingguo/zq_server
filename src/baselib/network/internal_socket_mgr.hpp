@@ -13,7 +13,7 @@ template<typename SockType>
 class InternalSocketMgr : public SocketMgr<SockType>
 {
 	using BaseSocketMgr = SocketMgr<SockType>;
-	using InternalSocketMapT = std::map<tcp::endpoint, InternalSocketPtr>;
+	using InternalSocketMapT = std::map<tcp_t::endpoint, InternalSocketPtr>;
 public:
 	InternalSocketMgr() {}
 	virtual ~InternalSocketMgr()
@@ -56,16 +56,16 @@ public:
 		}
 	}
 
-	void onAccept(tcp::socket&& sock, uint32 threadIndex)
+	void onAccept(tcp_t::socket&& sock, uint32 threadIndex)
 	{
 		onSocketOpen(std::move(sock));
 	}
 
-	void startConnect(const tcp::endpoint& ep, bool is_asyn = true)
+	void startConnect(const tcp_t::endpoint& ep, bool is_asyn = true)
 	{
 		//connector_.reset(new Connector(ioContext_));
 		//connector_->startConnect(ep,
-		//	[this](tcp::socket&& sock)
+		//	[this](tcp_t::socket&& sock)
 		//{
 		//	this->onSocketOpen(std::move(sock));
 		//	//connCb_(newSocket.get(), true);		
@@ -80,12 +80,12 @@ public:
 
 protected:
 
-	void onSocketOpen(tcp::socket&& sock)
+	void onSocketOpen(tcp_t::socket&& sock)
 	{
 		InternalSocketPtr newSocket = std::make_shared<SockType>(std::move(sock));
 		if (BaseSocketMgr::socketSystemSendBufferSize_ > 0)
 		{
-			boost::system::error_code err;
+			error_code_t err;
 			sock.set_option(boost::asio::socket_base::send_buffer_size(BaseSocketMgr::socketSystemSendBufferSize_), err);
 			if (err && err != boost::system::errc::not_supported)
 			{
@@ -100,7 +100,7 @@ protected:
 
 	bool removeSocket(InternalSocketPtr socket)
 	{
-		const tcp::endpoint& ep = socket->getEndpoint();
+		const tcp_t::endpoint& ep = socket->getEndpoint();
 		auto it = intSocketMap_.find(ep);
 		if (it != intSocketMap_.end())
 		{

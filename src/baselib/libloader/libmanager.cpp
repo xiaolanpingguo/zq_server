@@ -251,7 +251,6 @@ LibManager::LibManager() : ILibManager(),
 	serverName_(""),
 	initTime_(0),
 	nowTime_(0),
-	getFileContentFunctor_ (nullptr),
 	cfgRootDir_(ROOT_DIR_NAME),
 	cfgXmlDir_(cfgRootDir_ + XML_DIR_NAME),
 	cfgCsvDir_(cfgRootDir_ + CSV_DIR_NAME) ,
@@ -644,18 +643,8 @@ void LibManager::tryRun()
 #endif
 }
 
-void LibManager::setGetFileContentFunctor(GET_FILECONTENT_FUNCTOR fun)
-{
-	getFileContentFunctor_ = fun;
-}
-
 bool LibManager::getFileContent(const std::string &strFileName, std::string &strContent)
 {
-	if (getFileContentFunctor_)
-	{
-		return getFileContentFunctor_(strFileName, strContent);
-	}
-
 	FILE *fp = fopen(strFileName.c_str(), "rb");
 	if (!fp)
 	{
@@ -891,3 +880,8 @@ void LibManager::processConsoleCmd(const std::string& cmd)
 {
 	ILibManager::findModule<IConsoleCommandModule>()->process(cmd);
 }
+
+//void LibManager::go(CoroutineFun&& fun)
+//{
+//	coroutineMgr_.go(std::move(fun));
+//}

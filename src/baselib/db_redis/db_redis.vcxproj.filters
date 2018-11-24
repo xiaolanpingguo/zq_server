@@ -27,31 +27,7 @@
     <ClCompile Include="redis_module.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="redis_socket.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="commond_string.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="commond_sort.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="commond_set.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="commond_server.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="commond_pubsub.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="commond_list.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="commond_key.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="commond_hash.cpp">
+    <ClCompile Include="commond.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -66,9 +42,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="redis_module.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="redis_socket.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

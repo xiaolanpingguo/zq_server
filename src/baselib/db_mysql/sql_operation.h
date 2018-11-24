@@ -4,39 +4,15 @@
 
 namespace zq {
 
-//- Union that holds element data
-union SQLElementUnion
-{
-	PreparedStatement* stmt;
-	const char* query;
-};
-
-//- Type specifier of our element data
-enum SQLElementDataType
-{
-	SQL_ELEMENT_RAW,
-	SQL_ELEMENT_PREPARED
-};
-
-//- The element
-struct SQLElementData
-{
-	SQLElementUnion element;
-	SQLElementDataType type;
-};
-
-//- For ambigious resultsets
-union SQLResultSetUnion
-{
-	PreparedResultSet* presult;
-	ResultSet* qresult;
-};
 
 class MySQLConnection;
 class SQLOperation
 {
 public:
-	SQLOperation() : conn_(nullptr) { }
+	SQLOperation(const char* sql) 
+		:sql_(sql),
+		conn_(nullptr) 
+	{ }
 	virtual ~SQLOperation() { }
 
 	virtual int call()
@@ -44,7 +20,7 @@ public:
 		execute();
 		return 0;
 	}
-	virtual bool execute() = 0;
+	virtual bool execute() {}
 	virtual void setConnection(MySQLConnection* con) { conn_ = con; }
 
 	MySQLConnection* conn_;
@@ -52,6 +28,8 @@ public:
 private:
 	SQLOperation(SQLOperation const& right) = delete;
 	SQLOperation& operator=(SQLOperation const& right) = delete;
+
+	const char* sql_;
 };
 
 

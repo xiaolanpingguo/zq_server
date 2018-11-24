@@ -17,13 +17,21 @@ bool TestServerModule::init()
 	httpServerModule_ = libManager_->findModule<IHttpServerModule>();
 	httpClientModule_ = libManager_->findModule<IHttpClientModule>();
 	messageDispatcherModule_ = libManager_->findModule<IMessageDispatcherModule>();
+	redisModule_ = libManager_->findModule<IRedisModule>();
 
 	return true;
 }
 
 bool TestServerModule::initEnd()
 {
+	static int i = 0;
 
+	auto before = getMSTime();
+	std::string out;
+	redisModule_->getClientBySuitConsistent()->GET(std::to_string(i++), out);
+	//redisModule_->getClientBySuitConsistent()->GET(std::to_string(i++), out);
+
+	cout << "time: " << GetMSTimeDiffToNow(before) << endl;
 	return true;
 }
 

@@ -3,6 +3,7 @@
 
 #include "interface_header/base/IClassModule.h"
 #include "interface_header/base/IWorldSSModule.h"
+#include "interface_header/base/IConfigModule.h"
 
 #include "baselib/network/socket_mgr.hpp"
 
@@ -30,6 +31,7 @@ protected:
 private:
 
 	IClassModule* classModule_;
+	IConfigModule* configModule_;
 };
 
 }

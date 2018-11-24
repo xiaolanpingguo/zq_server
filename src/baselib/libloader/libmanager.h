@@ -5,6 +5,7 @@
 #include <time.h>
 #include <unordered_map>
 #include "DynLib.h"
+#include "coroutine_manager.h"
 #include "interface_header/base/IModule.h"
 #include "interface_header/base/ILibManager.h"
 #include "interface_header/base/singleton.hpp"
@@ -59,7 +60,6 @@ public:
 	const std::string& getCfgXmlDir() const override { return cfgXmlDir_; }
 	const std::string& getCfgCsvDir() const override { return cfgCsvDir_; }
 
-	void setGetFileContentFunctor(GET_FILECONTENT_FUNCTOR fun) override;
 	bool getFileContent(const std::string &strFileName, std::string &strContent) override;
 
 	// 用于信号
@@ -84,6 +84,9 @@ protected:
 
 	// 处理后台命令
 	void processConsoleCmd(const std::string& cmd);
+
+	// corotine
+	//void go(CoroutineFun&& fun);
 
 	IModule* _findModule(const std::string& strModuleName);
 
@@ -116,6 +119,8 @@ private:
 	std::string cfgXmlDir_;
 	std::string cfgCsvDir_;
 
+	//CoroutineMgr coroutineMgr_;
+
 	std::vector<std::string> staticLibVec_;
 
 	using VecLibName = std::vector<std::string>;
@@ -129,8 +134,6 @@ private:
 	DynLibMap libMap_;
 	LibInstanceMap libInstanceMap_;
 	ModuleInstanceMap moduleInstanceMap_;
-
-	GET_FILECONTENT_FUNCTOR getFileContentFunctor_;
 };
 
 }

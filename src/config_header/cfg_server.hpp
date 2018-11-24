@@ -20,6 +20,7 @@ struct CSVServer
 	int http_port;
 };
 
+template<>
 inline void TCsvFile<CSVServer>::parseRow(CsvParse&& parse)
 {
 	parse >> thisRow->id

@@ -18,7 +18,7 @@ static constexpr int BUFFER_MAX_READ = 65535;
 static constexpr int INT_HEADER_LENTH = 4;
 static constexpr int INT_BUFFER_MAX_READ = 65535;
 
-#ifdef BOOST_ASIO_HAS_IOCP
+#ifdef ASIO_HAS_IOCP
 #define ZQ_SOCKET_USE_IOCP
 #endif
 
@@ -43,7 +43,6 @@ inline bool partialProcessPacket(SockType* handler, bool(SockType::*processMetho
 		return false;
 	}
 
-	// 我们收到了这个buffer所需要的字节数
 	if (!(handler->*processMethod)())
 	{
 		handler->closeSocket();
@@ -57,10 +56,10 @@ template<class T>
 class Socket : public std::enable_shared_from_this<T>
 {
 public:
-	explicit Socket(tcp::socket&& socket) : socket_(std::move(socket)), 
+	explicit Socket(tcp_t::socket&& socket) : socket_(std::move(socket)), 
 		readBuffer_(), closed_(false), closing_(false), isWritingAsync_(false)
 	{
-		boost::system::error_code ec;
+		error_code_t ec;
 		endpoint_ = socket_.remote_endpoint(ec);
 		if (!ec)
 		{
@@ -76,14 +75,14 @@ public:
 	}
 
 	// for client
-	explicit Socket(Asio::IoContext& ioContext, const std::string& ip, uint16 port) :
+	explicit Socket(io_context_t& ioContext, const std::string& ip, uint16 port) :
 		socket_(ioContext), readBuffer_(), closed_(false), closing_(false), isWritingAsync_(false)
 	{
-		boost::system::error_code ec;
-		remoteAddress_ = boost::asio::ip::make_address(ip, ec);
+		error_code_t ec;
+		remoteAddress_ = asio::ip::make_address(ip, ec);
 		if (!ec)
 		{
-			endpoint_ = tcp::endpoint(remoteAddress_, port);
+			endpoint_ = tcp_t::endpoint(remoteAddress_, port);
 			remotePort_ = endpoint_.port();
 		}
 		else
@@ -97,7 +96,7 @@ public:
 	virtual ~Socket()
 	{
 		closed_ = true;
-		boost::system::error_code error;
+		error_code_t error;
 		socket_.close(error);
 	}
 
@@ -139,18 +138,18 @@ public:
 
 		readBuffer_.normalize();
 		readBuffer_.ensureFreeSpace();
-		socket_.async_read_some(boost::asio::buffer(readBuffer_.getWritePointer(), readBuffer_.getRemainingSpace()),
+		socket_.async_read_some(asio::buffer(readBuffer_.getWritePointer(), readBuffer_.getRemainingSpace()),
 			std::bind(&Socket<T>::readHandlerInternal, this->shared_from_this(), std::placeholders::_1, std::placeholders::_2));
 	}
 
-	void asyncReadWithCallback(void (T::*callback)(boost::system::error_code, std::size_t))
+	void asyncReadWithCallback(void (T::*callback)(error_code_t, std::size_t))
 	{
 		if (!isOpen())
 			return;
 
 		readBuffer_.normalize();
 		readBuffer_.ensureFreeSpace();
-		socket_.async_read_some(boost::asio::buffer(readBuffer_.getWritePointer(), readBuffer_.getRemainingSpace()),
+		socket_.async_read_some(asio::buffer(readBuffer_.getWritePointer(), readBuffer_.getRemainingSpace()),
 			std::bind(callback, this->shared_from_this(), std::placeholders::_1, std::placeholders::_2));
 	}
 
@@ -161,14 +160,14 @@ public:
 		if (closed_.exchange(true))
 			return;
 
-		boost::system::error_code shutdownError;
-		socket_.shutdown(boost::asio::socket_base::shutdown_send, shutdownError);
+		error_code_t shutdownError;
+		socket_.shutdown(asio::socket_base::shutdown_send, shutdownError);
 		onClose();
 	}
 
 	void setNoDelay(bool enable)
 	{
-		boost::system::error_code err;
+		error_code_t err;
 		socket_.set_option(tcp::no_delay(enable), err);
 	}
 
@@ -177,12 +176,12 @@ public:
 
 	MessageBuffer& getReadBuffer() { return readBuffer_; }
 
-	tcp::socket& getSocket() { return socket_; }
+	tcp_t::socket& getSocket() { return socket_; }
 
-	const tcp::endpoint& getEndpoint() const { return endpoint_; }
+	const tcp_t::endpoint& getEndpoint() const { return endpoint_; }
 	std::string getIp() const 
 	{
-		boost::system::error_code ec;
+		error_code_t ec;
 		return remoteAddress_.to_string(ec);
 	}
 	uint16 getPort() const { return remotePort_; }
@@ -219,10 +218,10 @@ protected:
 
 #ifdef ZQ_SOCKET_USE_IOCP
 		MessageBuffer& buffer = writeQueue_.front();
-		socket_.async_write_some(boost::asio::buffer(buffer.getReadPointer(), buffer.getActiveSize()), std::bind(&Socket<T>::writeHandler,
+		socket_.async_write_some(asio::buffer(buffer.getReadPointer(), buffer.getActiveSize()), std::bind(&Socket<T>::writeHandler,
 			this->shared_from_this(), std::placeholders::_1, std::placeholders::_2));
 #else
-		socket_.async_write_some(boost::asio::null_buffers(), std::bind(&Socket<T>::writeHandlerWrapper,
+		socket_.async_write_some(asio::null_buffers(), std::bind(&Socket<T>::writeHandlerWrapper,
 			this->shared_from_this(), std::placeholders::_1, std::placeholders::_2));
 #endif
 
@@ -230,7 +229,7 @@ protected:
 	}
 
 private:
-	void readHandlerInternal(boost::system::error_code error, size_t transferredBytes)
+	void readHandlerInternal(error_code_t error, size_t transferredBytes)
 	{
 		if (error)
 		{
@@ -249,7 +248,7 @@ private:
 
 #ifdef ZQ_SOCKET_USE_IOCP
 
-	void writeHandler(boost::system::error_code error, std::size_t transferedBytes)
+	void writeHandler(error_code_t error, std::size_t transferedBytes)
 	{
 		if (!error)
 		{
@@ -269,7 +268,7 @@ private:
 
 #else
 
-	void writeHandlerWrapper(boost::system::error_code /*error*/, std::size_t /*transferedBytes*/)
+	void writeHandlerWrapper(error_code_t /*error*/, std::size_t /*transferedBytes*/)
 	{
 		isWritingAsync_ = false;
 		handleQueue();
@@ -284,11 +283,11 @@ private:
 
 		std::size_t bytesToSend = queuedMessage.getActiveSize();
 
-		boost::system::error_code error;
-		std::size_t bytesSent = socket_.write_some(boost::asio::buffer(queuedMessage.getReadPointer(), bytesToSend), error);
+		error_code_t error;
+		std::size_t bytesSent = socket_.write_some(asio::buffer(queuedMessage.getReadPointer(), bytesToSend), error);
 		if (error)
 		{
-			if (error == boost::asio::error::would_block || error == boost::asio::error::try_again)
+			if (error == asio::error::would_block || error == asio::error::try_again)
 				return asyncProcessQueue();
 
 			writeQueue_.pop();
@@ -320,10 +319,10 @@ private:
 
 #endif
 
-	tcp::socket socket_;
+	tcp_t::socket socket_;
 
-	tcp::endpoint endpoint_;
-	boost::asio::ip::address remoteAddress_;
+	tcp_t::endpoint endpoint_;
+	address_t remoteAddress_;
 	uint16 remotePort_;
 	std::string addressStr_;
 

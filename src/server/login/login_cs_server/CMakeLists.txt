@@ -10,4 +10,8 @@ SET(EXECUTABLE_OUTPUT_PATH ${OutPutDir})
 add_dependencies(login_cs_server ${COMM_DEP_LIB} data_agent cryptography)
 
 # Á´½Ó 
-TARGET_LINK_LIBRARIES(login_cs_server login_client_server data_agent cryptography ${COMM_LINK_LIB})
+TARGET_LINK_LIBRARIES(login_cs_server 
+login_client_server 
+${COMM_LINK_LIB} 
+${MIDWARE_LINK_LIB}
+)

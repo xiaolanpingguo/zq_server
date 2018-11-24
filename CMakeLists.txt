@@ -40,8 +40,8 @@ endif()
 #linux平台
 IF(UNIX)
 	
-	set(CMAKE_CXX_FLAGS "-m64 -g -Wall -Wno-reorder -ldl -fPIC -std=c++14")
-	set(CMAKE_C_FLAGS "-m64 -g -Wall -Wno-reorder -ldl -fPIC -std=c++14")
+	set(CMAKE_CXX_FLAGS "-m64 -g -Wall -Wno-reorder -ldl -fPIC -std=c++17")
+	set(CMAKE_C_FLAGS "-m64 -g -Wall -Wno-reorder -ldl -fPIC -std=c++17")
 	set(LDFLAGS "$ENV{LDFLAGS} -stdlib=libc++")
 	
 ENDIF()
@@ -85,6 +85,7 @@ else()
 	
 	INCLUDE_DIRECTORIES(
 		${SolutionDir}/src/dependencies/hiredis/hiredis_linux
+		${SolutionDir}/src/dependencies/libgo
 		)
 endif()
 
@@ -93,6 +94,7 @@ INCLUDE_DIRECTORIES(
 	${SolutionDir}/src/dependencies/protobuf-all-3.6.1/src
 	${SolutionDir}/src/dependencies/rapidjson-1.1.0/include
 	${SolutionDir}/src/dependencies/boost_1_67_0
+	${SolutionDir}/src/dependencies/iguana
 	
 	# 第三方库
 	${MYSQL_INCLUDE_DIR}
@@ -125,12 +127,10 @@ SET(COMM_LINK_LIB
 	libloader
 	http_lib
 	network
-	component
 	db_redis
 	message
 	kernel
 	log_lib
-	config
 	core	
 	hiredis
 	protobuf
@@ -141,7 +141,7 @@ SET(COMM_LINK_LIB
 )
 
 # 需要依赖的库的名字
-SET(COMM_DEP_LIB kernel core config network log_lib base_code message component db_redis http_lib libloader)
+SET(COMM_DEP_LIB kernel core network log_lib base_code message db_redis http_lib libloader)
 	
 # 链接的库所在的路径
 link_directories(

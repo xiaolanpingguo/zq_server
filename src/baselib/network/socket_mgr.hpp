@@ -34,7 +34,7 @@ protected:
 	virtual int update()
 	{
 		updateSocket();
-		boost::system::error_code ec;
+		error_code_t ec;
 		size_t num = ioContext_.poll(ec);
 		return (int)num;
 	}
@@ -181,7 +181,7 @@ protected:
 	AsyncAcceptor* acceptor_;
 	NetworkThread<SocketType>* threads_;
 	int32 threadCount_;
-	Asio::IoContext& ioContext_;
+	io_context_t& ioContext_;
 
 	std::string ip_;
 	uint16 port_;

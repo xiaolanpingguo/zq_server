@@ -150,13 +150,14 @@ __m128i const &c, __m128i const &d, __m128i const &mask) {
     return z2;
 }
 
-namespace boost {
-    template <typename T> class thread_specific_ptr;
-}
+//namespace boost {
+//    template <typename T> class thread_specific_ptr;
+//}
 
 // Class for SFMT generator
-class SFMTRand {                              // Encapsulate random number generator
-    friend class boost::thread_specific_ptr<SFMTRand>;
+class SFMTRand 
+{                              // Encapsulate random number generator
+   // friend class boost::thread_specific_ptr<SFMTRand>;
 
 public:
     SFMTRand()

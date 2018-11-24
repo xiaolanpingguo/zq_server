@@ -15,39 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="mysql_connection.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="prepared_statement.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="transaction.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="mysql_module.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="database_env_fwd.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="database_loader.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="database_worker.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="database_worker_pool.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="field.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="mysql_connection.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="prepared_statement.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="query_callback.h">
@@ -56,23 +32,29 @@
     <ClInclude Include="query_callback_processor.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="query_holder.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="query_result.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="sql_operation.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="transaction.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="mysql_module.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="basic_statement.h">
+    <ClInclude Include="dbng.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="mysql.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="type_mapping.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="utility.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMakeLists.txt" />
   </ItemGroup>
 </Project>

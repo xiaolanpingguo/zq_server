@@ -40,6 +40,11 @@ void WorldSSSession::onClose()
 	std::cout << "client has disconnect, ip:" << getIp() << " port:" << getPort() << " id: " << getServerId() << std::endl;
 }
 
+bool WorldSSSession::readHandler()
+{
+	return true;
+}
+
 bool WorldSSSession::readDataHandler()
 {
 	SSMsg::SSPacket packet;

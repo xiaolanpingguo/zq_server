@@ -18,8 +18,16 @@
     <ClCompile Include="main.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="test_libgo.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="test_spawn.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

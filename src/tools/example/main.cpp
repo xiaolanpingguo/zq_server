@@ -9,11 +9,20 @@
 #include <array>
 #include <sstream>
 #include <thread>
-#include <boost/coroutine2/all.hpp>
-#include "baselib/libloader/coroutine_manager.h"
+
+//#include "baselib/libloader/coroutine_manager.h"
+//#include "baselib/db_redis/redis_module.h"
 ////#include "CoroBehaviour.h"
 
+//#include <boost/coroutine2/all.hpp>
+//#include <boost/asio/io_context.hpp>
+//#include <boost/asio/ip/tcp.hpp>
+//#include <boost/asio/spawn.hpp>
+//#include <boost/asio/steady_timer.hpp>
+//#include <boost/asio/write.hpp>
+//
 //#include "interface_header/base/platform.h"
+//#include "baselib/db_redis/redis_commond.h"
 //#include <google/protobuf/message.h>
 //#include "baselib/message/test.pb.h"
 //#include "baselib/core/map_ex.hpp"
@@ -49,7 +58,6 @@
 #pragma comment(lib, "dbghelp.lib")
 #pragma comment(lib, "ws2_32.lib")	 
 #pragma comment(lib, "libprotobuf_d.lib")	
-#pragma comment(lib, "libprotobuf_d.lib")	
 #pragma comment(lib, "libeay32.lib")
 #pragma comment(lib, "ssleay32.lib")
 #pragma comment(lib, "base_code_d.lib")
@@ -68,7 +76,7 @@
 #endif
 
 using namespace std;
-using namespace zq;
+//using namespace zq;
 
 
 //int test_ssl_server()
@@ -521,173 +529,32 @@ void test_type_trait()
 //}
 
 
-//class ExampleBehaviour : public CoroBehaviour
+
+
+//int main()
 //{
-//private:
-//	std::stringstream Stream;
+////#ifdef _WIN32
+////	WSADATA WSAData;
+////	WSAStartup(0x101, &WSAData);
+////#endif
 //
-//public:
-//	//Enumerator TaskA()
-//	//{
-//	//	return [=](CoroPush& yield_return)
-//	//	{
-//	//		Stream << "A1 ";
-//	//		yield_return(nullptr);
+//	//zqlog::LogSingle::getInstance().init(zqlog::GuaranteedLogger(), "log/", "test_log");
+//	//LibManager::get_instance().launch(argc, argv);
 //
-//	//		Stream << "A2 ";
-//	//	};
-//	//}
+//	// test_log();
+//	//test_mysql();
+//	//test_type_trait();
+//	//test_http_client();
+//	//test_ssl_server();
 //
-//	Enumerator TaskB(float Param)
-//	{
-//		return [=](CoroPush& yield_return)
-//		{
-//			cout << "TaskB1 " << endl;
-//			yield_return(new WaitForSeconds(Param));
-//		};
-//	}
+//	//test_libgo();
+//	//co_sched.RunUntilNoTask();
 //
-//	//Enumerator TaskC(float Param)
-//	//{
-//	//	return [=](CoroPush& yield_return)
-//	//	{
-//	//		Stream << "C1 ";
-//	//		yield_return(StartCoroutine(TaskA()));
+//	
+//	std::getchar();
+//	return 0;
+//}
 //
-//	//		Stream << "C2 ";
-//	//		yield_return(StartCoroutine(TaskB(Param)));
-//
-//	//		Stream << "C3 ";
-//	//	};
-//	//}
-//
-//	//Enumerator TaskD(int Param)
-//	//{
-//	//	return [=](CoroPush& yield_return)
-//	//	{
-//	//		for (int i = 1; i < Param; i++)
-//	//		{
-//	//			Stream << "D" << i << " ";
-//	//			yield_return(new WaitForSeconds(0.5f));
-//	//		}
-//	//		Stream << "D" << Param << " ";
-//	//	};
-//	//}
-//
-//	void Test()
-//	{
-//		/*while (1)
-//		{
-//			std::this_thread::sleep_for(std::chrono::seconds(1));
-//			cout << 11 << endl;
-//
-//			foo.StartCoroutine(foo.TaskB(5.0f));
-//
-//			while (HasCoroutines())
-//			{
-//				ResumeCoroutines();
-//
-//				auto str = Stream.str();
-//				if (str.size() > 0)
-//				{
-//					std::cout << str << std::endl;
-//					Stream.str("");
-//				}
-//			}
-//		}*/
-//	}
-//};
-
-void test_coroutine()
-{
-	/*auto foo = [](boost::coroutines2::coroutine<void>::push_type& sink) {
-	std::this_thread::sleep_for(std::chrono::seconds(5));
-	std::cout << "a ";
-	};
-
-	while (1)
-	{
-	boost::coroutines2::coroutine<void>::pull_type source(foo);
-	while (source)
-	{
-	std::this_thread::sleep_for(std::chrono::seconds(1));
-	cout << "while" << endl;
-	}
-	}*/
-
-	//ExampleBehaviour foo;
-	////foo.StartCoroutine(foo.TaskA());
-	////foo.StartCoroutine(foo.TaskB(5.0f));
-	////foo.StartCoroutine(foo.TaskC(2.0f));
-	////foo.StartCoroutine(foo.TaskD(10));
-	//foo.Test();
-
-	//while (1)
-	//{
-	//	std::this_thread::sleep_for(std::chrono::seconds(1));
-	//	cout << 11 << endl;
-
-	//	foo.StartCoroutine(foo.TaskB(5.0f));
-
-	//	while (foo.HasCoroutines())
-	//	{
-	//		foo.ResumeCoroutines();
-	//	}
-	//}
-}
-
-
-CoroutineManager cm;
-int cal_num = 0;
-
-void cal_count()
-{
-	cm.yieldCo();
-	for (int i = 0; i < 1000000; ++i)
-	{
-		if (cal_num >= 5)
-		{
-			cout << "cal_count finish" << endl;
-			break;
-		}
-	}
-}
-void run(void*)
-{
-	std::this_thread::sleep_for(std::chrono::seconds(1));
-	cout << "run" << endl;
-	cal_num++;
-
-	cal_count();
-}
-int main()
-{
-#ifdef _WIN32
-	WSADATA WSAData;
-	WSAStartup(0x101, &WSAData);
-#endif
-
-	zqlog::LogSingle::getInstance().init(zqlog::GuaranteedLogger(), "log/", "test_log");
-	//LibManager::get_instance().launch(argc, argv);
-
-	// test_log();
-	//test_mysql();
-	//test_type_trait();
-	//test_http_client();
-	//test_ssl_server();
-
-	//test_coroutine();
-
-	cm.init(run);
-	while (1)
-	{
-		cm.scheduleJob();
-	}
-	
-	std::getchar();
-	return 0;
-}
-
 
 
 

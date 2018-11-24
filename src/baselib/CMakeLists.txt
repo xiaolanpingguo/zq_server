@@ -1,8 +1,6 @@
 MESSAGE(STATUS "CMake baselib")
 
 add_subdirectory(base_code)
-add_subdirectory(component)
-add_subdirectory(config)
 add_subdirectory(core)
 add_subdirectory(db_redis)
 add_subdirectory(db_mysql)

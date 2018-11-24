@@ -7,19 +7,15 @@
 
 namespace zq {
 
-#if BOOST_VERSION >= 106600
-#define MAX_LISTEN_CONNECTIONS boost::asio::socket_base::max_listen_connections
-#else
-#define MAX_LISTEN_CONNECTIONS boost::asio::socket_base::max_connections
-#endif
+#define MAX_LISTEN_CONNECTIONS asio::socket_base::max_connections
 
 class AsyncAcceptor
 {
 public:
-    using AcceptCallbackT = std::function<void(boost::asio::ip::tcp::socket&& newSocket, uint32 threadIndex)>;
+    using AcceptCallbackT = std::function<void(tcp_t::socket&& newSocket, uint32 threadIndex)>;
 
-    AsyncAcceptor(Asio::IoContext& ioContext, std::string const& bindIp, uint16 port) :
-        acceptor_(ioContext), endpoint_(boost::asio::ip::address::from_string(bindIp), port),
+    AsyncAcceptor(io_context_t& ioContext, std::string const& bindIp, uint16 port) :
+        acceptor_(ioContext), endpoint_(address_t::from_string(bindIp), port),
         socket_(ioContext), closed_(false), socketFactory_(std::bind(&AsyncAcceptor::defeaultSocketFactory, this))
     {
     }
@@ -27,7 +23,7 @@ public:
     template<class T>
 	void asyncAccept()
 	{
-		acceptor_.async_accept(socket_, [this](boost::system::error_code error)
+		acceptor_.async_accept(socket_, [this](error_code_t error)
 		{
 			if (!error)
 			{
@@ -50,10 +46,10 @@ public:
 
     void asyncAcceptWithCallback()
     {
-		boost::asio::ip::tcp::socket* socket;
+		tcp_t::socket* socket;
         uint32 threadIndex;
         std::tie(socket, threadIndex) = socketFactory_();
-        acceptor_.async_accept(*socket, [this, socket, threadIndex](boost::system::error_code error)
+        acceptor_.async_accept(*socket, [this, socket, threadIndex](const error_code_t& error)
         {
             if (!error)
             {
@@ -64,7 +60,7 @@ public:
 					if (acceptCb_)
 						acceptCb_(std::move(*socket), threadIndex);
                 }
-                catch (boost::system::system_error const& err)
+                catch (const sys_err_t& err)
                 {
                     LOG_ERROR << "Failed to initialize client's socket, err: " << err.what();
                 }
@@ -77,7 +73,7 @@ public:
 
     bool bind()
     {
-        boost::system::error_code errorCode;
+		error_code_t errorCode;
         acceptor_.open(endpoint_.protocol(), errorCode);
         if (errorCode)
         {
@@ -108,21 +104,21 @@ public:
         if (closed_.exchange(true))
             return;
 
-        boost::system::error_code err;
+        error_code_t err;
         acceptor_.close(err);
     }
 
-    void setSocketFactory(std::function<std::pair<boost::asio::ip::tcp::socket*, uint32>()>&& func) { socketFactory_ = std::move(func); }
+    void setSocketFactory(std::function<std::pair<tcp_t::socket*, uint32>()>&& func) { socketFactory_ = std::move(func); }
 	void setAccecptCb(AcceptCallbackT&& cb) { acceptCb_ = std::move(cb); }
 
 private:
-    std::pair<boost::asio::ip::tcp::socket*, uint32> defeaultSocketFactory() { return std::make_pair(&socket_, 0); }
+    std::pair<tcp_t::socket*, uint32> defeaultSocketFactory() { return std::make_pair(&socket_, 0); }
 
-	boost::asio::ip::tcp::acceptor acceptor_;
-	boost::asio::ip::tcp::endpoint endpoint_;
-	boost::asio::ip::tcp::socket socket_;
+	tcp_t::acceptor acceptor_;
+	tcp_t::endpoint endpoint_;
+	tcp_t::socket socket_;
     std::atomic<bool> closed_;
-    std::function<std::pair<tcp::socket*, uint32>()> socketFactory_;
+    std::function<std::pair<tcp_t::socket*, uint32>()> socketFactory_;
 	AcceptCallbackT acceptCb_;;
 };
 
