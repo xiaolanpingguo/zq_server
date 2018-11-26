@@ -129,7 +129,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="client\async_session.hpp" />
-    <ClInclude Include="client\coro_session.hpp" />
     <ClInclude Include="client\sync_session.hpp" />
     <ClInclude Include="httpclient_module.h" />
     <ClInclude Include="httpserver_module.h" />
@@ -152,7 +151,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="client\async_session_ssl.hpp" />
-    <ClCompile Include="client\coro_session_ssl.hpp" />
     <ClCompile Include="client\sync_session_ssl.hpp" />
     <ClCompile Include="httpclient_module.cpp" />
     <ClCompile Include="httpserver_module.cpp" />

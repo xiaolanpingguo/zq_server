@@ -73,12 +73,6 @@ public:
 	{
 		if (this != &right)
 		{
-			/*if (_isPrepared != right._isPrepared)
-			{
-				detail::destroyActiveMember(this);
-				_isPrepared = right._isPrepared;
-				detail::constructActiveMember(this);
-			}*/
 			detail::moveFrom(this, std::move(right));
 			_callbacks = std::move(right._callbacks);
 		}
@@ -92,7 +86,7 @@ public:
 
 	QueryCallback&& withCallback(std::function<void(QueryResult)>&& callback)
 	{
-		return withChainingCallback([callback](QueryCallback& /*this*/, QueryResult result) { callback(std::move(result)); });
+		return withChainingCallback([callback](QueryCallback& /*this*/, QueryResult result) { if (callback) callback(std::move(result)); });
 	}
 
 	QueryCallback&& withChainingCallback(std::function<void(QueryCallback&, QueryResult)>&& callback)
@@ -109,8 +103,6 @@ public:
 
 	Status invokeIfReady()
 	{
-		// 先获取一个对象
-		QueryCallbackData& callback = _callbacks.front();
 		auto checkStateAndReturnCompletion = [this]()
 		{
 			// 弹出元素, 析构
@@ -126,19 +118,17 @@ public:
 				return Completed;
 			}
 
-			// abort chain
-			// 代表已经完成
+			// 终止调用, 代表已经完成
 			if (!hasNext)
 				return Completed;
 
-			// 这个断言肯定是成立的啊
-			// 但是目前还不明白为什么会走到这一步
 			return NextStep;
 		};
 
 		// wait:等待异步操作完成,是阻塞的
 		// wait_for是超时等待返回结果，0秒表示立即返回状态
 		// std::future_status::ready就表示异步操作已经完成了
+		QueryCallbackData& callback = _callbacks.front();
 		if (_string.valid() && _string.wait_for(std::chrono::seconds(0)) == std::future_status::ready)
 		{
 			// 这里的_prepared是在之前构造一个查询任务的时候，从promise获得的

@@ -1,8 +1,6 @@
 #include "httpclient_module.h"
 #include "client/async_session.hpp"
 #include "client/async_session_ssl.hpp"
-#include "client/coro_session.hpp"
-#include "client/coro_session_ssl.hpp"
 #include "client/sync_session.hpp"
 #include "client/sync_session_ssl.hpp"
 
@@ -153,33 +151,3 @@ bool HttpClientModule::asyncRequstSSL(C_HTTP_METHOD method, const std::string& h
 	return true;
 }
 
-bool HttpClientModule::coroRequst(C_HTTP_METHOD method, const std::string& host, const std::string& port, const std::string& path,
-	std::string& res)
-{
-	http::verb verb_method = getMethod(method);
-	if (verb_method == http::verb::unknown)
-	{
-		return false;
-	}
-
-	boost::asio::spawn(ioc_,
-		std::bind(&CoroSession::do_session, verb_method, host, port, path, res, 11, std::ref(ioc_), std::placeholders::_1));
-
-	return true;
-}
-
-bool HttpClientModule::coroRequstSSL(C_HTTP_METHOD method, const std::string& host, const std::string& port, const std::string& path,
-	std::string& res)
-{
-	http::verb verb_method = getMethod(method);
-	if (verb_method == http::verb::unknown)
-	{
-		return false;
-	}
-
-	boost::asio::spawn(ioc_,
-		std::bind(&CoroSessionSSL::do_session, verb_method, host, port, path, res,
-			11, std::ref(ioc_), std::ref(ctx_), std::placeholders::_1));
-
-	return true;
-}

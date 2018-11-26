@@ -130,14 +130,12 @@
     <ClCompile Include="mysql_module.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="dbng.hpp" />
+    <ClInclude Include="connection_pool.hpp" />
     <ClInclude Include="mysql.hpp" />
-    <ClInclude Include="mysql_connection.h" />
     <ClInclude Include="mysql_module.h" />
     <ClInclude Include="query_callback.h" />
     <ClInclude Include="query_callback_processor.h" />
     <ClInclude Include="query_result.h" />
-    <ClInclude Include="sql_operation.h" />
     <ClInclude Include="type_mapping.hpp" />
     <ClInclude Include="utility.hpp" />
   </ItemGroup>

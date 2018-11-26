@@ -2,53 +2,67 @@
 
 
 #include <map>
+#include <tuple>
 #include <limits.h> // INT_MIN
 #include "utility.hpp"
 #include "query_callback.h"
 #include "baselib/base_code/producer_consumer_queue.hpp"
 
+#include <errmsg.h>
+#include <mysqld_error.h>
+
 
 namespace zq {
 
 
-class MysqlConnection;
+inline static std::map<std::string, std::string> s_auto_key_map;
+
+
+class Connection;
 class SqlOperation
 {
 public:
-	SqlOperation(std::string_view sql, MysqlConnection* conn)
-		:sql_(sql),
-		conn_(conn)
+	SqlOperation()
+		:conn_(nullptr)
 	{ }
 
 	virtual bool execute() = 0;
+	virtual void setConnection(Connection* con) { conn_ = con; }
 	QueryResultFuture getFuture() const { return resultPromise_->get_future(); }
 
 protected:
 
-	MysqlConnection* conn_;
-	std::string sql_;
+	Connection* conn_;
 	QueryResultPromise* resultPromise_;
 };
 
 template<typename T>
 class OperationTask;
 
+class PingTask;
 
-
-
-class MysqlConnection
+class Connection
 {
 public:
 
-	MysqlConnection():
-		pcqueue_(std::make_unique<ProducerConsumerQueue<SqlOperation*>>()),
-		workerThread_(std::thread(&MysqlConnection::workerThread, this))
+	Connection(bool async, ProducerConsumerQueue<SqlOperation*>* queue = nullptr)
+		:asnyc_(async)
+		,stopWork_(false)
 	{
-		//worker_ = std::make_unique<DatabaseWorker>(pcqueue_.get(), this);
+		if (asnyc_)
+		{
+			pcqueue_ = queue;
+			workerThread_ = std::make_unique<std::thread>(&Connection::workerThread, this);
+		}
 	}
 
-	~MysqlConnection()
+	~Connection()
 	{
+		stopWork_ = true;
+		if (workerThread_)
+		{
+			workerThread_->join();
+		}
 		disconnect();
 	}
 
@@ -56,17 +70,28 @@ public:
 	{
 		while (1)
 		{
+			if (stopWork_)
+			{
+				return;
+			}
+
 			SqlOperation* operation = nullptr;
-
 			pcqueue_->waitAndPop(operation);
+			operation->setConnection(this);
 			operation->execute();
-
 			delete operation;
 		}
 	}
 
 	template<typename... Args>
 	bool connect(Args&&... args) 
+	{
+		int timeout = -1;
+		args_ = std::tuple_cat(get_tp(timeout, std::forward<Args>(args)...), std::make_tuple(0, nullptr, 0));
+		return connectMysql() == 0;
+	}
+
+	uint32 connectMysql()
 	{
 		if (con_ != nullptr)
 		{
@@ -75,25 +100,32 @@ public:
 
 		con_ = mysql_init(nullptr);
 		if (con_ == nullptr)
+		{
 			return false;
+		}
 
+		std::get<0>(args_) = con_;
 		int timeout = -1;
-		auto tp = std::tuple_cat(get_tp(timeout, std::forward<Args>(args)...), std::make_tuple(0, nullptr, 0));
-
 		if (timeout > 0)
 		{
 			if (mysql_options(con_, MYSQL_OPT_CONNECT_TIMEOUT, &timeout) != 0)
-				return false;
+			{
+				return CR_UNKNOWN_ERROR;
+			}
 		}
 
 		char value = 1;
 		mysql_options(con_, MYSQL_OPT_RECONNECT, &value);
 		mysql_options(con_, MYSQL_SET_CHARSET_NAME, "utf8");
 
-		if (std::apply(&mysql_real_connect, tp) == nullptr)
-			return false;
-
-		return true;
+		if (std::apply(&mysql_real_connect, args_) != nullptr)
+		{
+			return 0;
+		}
+		else
+		{
+			return mysql_errno(con_);
+		}
 	}
 
 	bool ping() 
@@ -124,159 +156,215 @@ public:
 		std::string sql = generate_createtb_sql<T>(std::forward<Args>(args)...);
 		if (mysql_query(con_, sql.data())) 
 		{
-			fprintf(stderr, "%s\n", mysql_error(con_));
+			LOG_ERROR << "create_datatable error: sql: " << sql;
 			return false;
 		}
 
 		return true;
 	}
 
-	template<typename T, typename... Args>
-	constexpr int insert(const std::vector<T>& t, Args&&... args) 
+	template<typename T>
+	constexpr int insert(const std::string& sql, const T& t)
 	{
-		auto name = iguana::get_name<T>().data();
-		std::string sql = auto_key_map_[name].empty() ? generate_insert_sql<T>(false) : generate_auto_insert_sql<T>(auto_key_map_, false);
+		bool success = false;
+		do 
+		{
+			stmt_ = mysql_stmt_init(con_);
+			if (!stmt_)
+				break;
 
-		return insert_impl(sql, t, std::forward<Args>(args)...);
+			if (mysql_stmt_prepare(stmt_, sql.c_str(), (int)sql.size()))
+			{
+				break;
+			}
+
+			auto guard = guard_statment(stmt_);
+
+			if (stmt_execute(t) < 0)
+				break;
+
+			success = true;
+		} while (0);
+
+		if (!success)
+		{
+			uint32 lErrno = mysql_errno(con_);
+			LOG_ERROR << "mysql_stmt_bind_result error:  " << lErrno << " errmsg: " << mysql_stmt_error(stmt_);
+
+			// 如果返回成功，代表是重连成功，这里再进行一次查询
+			if (handleMySQLErrno(lErrno))
+				return insert(sql, t);
+			else
+				return 0;
+		}
+
+		return 1;
 	}
 
-	template<typename T, typename... Args>
-	constexpr int update(const std::vector<T>& t, Args&&... args) 
+	template<typename T>
+	constexpr int insertBatch(const std::string& sql, const std::vector<T>& t)
 	{
-		std::string sql = generate_insert_sql<T>(true);
+		stmt_ = mysql_stmt_init(con_);
+		if (!stmt_)
+			return INT_MIN;
 
-		return insert_impl(sql, t, std::forward<Args>(args)...);
+		if (mysql_stmt_prepare(stmt_, sql.c_str(), (int)sql.size()))
+		{
+			return INT_MIN;
+		}
+
+		auto guard = guard_statment(stmt_);
+
+		//transaction
+		bool b = begin();
+		if (!b)
+			return INT_MIN;
+
+		for (auto& item : t)
+		{
+			int r = stmt_execute(item);
+			if (r == INT_MIN)
+			{
+				rollback();
+				return INT_MIN;
+			}
+		}
+		b = commit();
+
+		return b ? (int)t.size() : INT_MIN;
 	}
 
-	template<typename T, typename... Args>
-	constexpr int insert(const T& t, Args&&... args) 
+	template<typename T>
+	constexpr int update(const std::string& sql, const T& t)
 	{
-		//insert into person values(?, ?, ?);
-		auto name = iguana::get_name<T>().data();
-		std::string sql = auto_key_map_[name].empty() ? generate_insert_sql<T>(false) : generate_auto_insert_sql<T>(auto_key_map_, false);
-
-		return insert_impl(sql, t, std::forward<Args>(args)...);
+		return insert(sql, t);
 	}
 
-	template<typename T, typename... Args>
-	constexpr int update(const T& t, Args&&... args) 
+	template<typename T>
+	constexpr int updateBatch(const std::string& sql, const std::vector<T>& t)
 	{
-		std::string sql = generate_insert_sql<T>(true);
-		return insert_impl(sql, t, std::forward<Args>(args)...);
+		return insertBatch(sql, t);
 	}
 
-	template<typename T, typename... Args>
-	constexpr bool delete_records(Args&&... where_conditon) 
+	bool delete_records(std::string_view sql) 
 	{
-		auto sql = generate_delete_sql<T>(std::forward<Args>(where_conditon)...);
 		if (mysql_query(con_, sql.data())) 
 		{
-			fprintf(stderr, "%s\n", mysql_error(con_));
+			LOG_ERROR << "close statment error code: " << mysql_error(con_);
 			return false;
 		}
 
 		return true;
 	}
 
-	//for tuple and string with args...
-	template<typename T, typename... Args>
-	QueryCallback async_query(Args&&... args)
+	template<typename T>
+	constexpr std::enable_if_t<iguana::is_reflection_v<T>, std::vector<T>> query(std::string_view sql)
 	{
-		std::string sql = generate_query_sql<T>(args...);
-		SqlOperation* task = new OperationTask<T>(sql, this);
-		QueryResultFuture result = task->getFuture();
-		pcqueue_->push(task);
-		return QueryCallback(std::move(result));
+		constexpr auto SIZE = iguana::get_value<T>();
+
+		std::vector<T> v;
+		T t{};
+		bool success = false;
+		do 
+		{
+			stmt_ = mysql_stmt_init(con_);
+			if (!stmt_)
+			{
+				break;
+			}
+
+			if (mysql_stmt_prepare(stmt_, sql.data(), (unsigned long)sql.size()))
+			{
+				break;
+			}
+
+			auto guard = guard_statment(stmt_);
+
+			std::array<MYSQL_BIND, SIZE> param_binds = {};
+			std::map<size_t, std::vector<char>> mp;
+
+			iguana::for_each(t, [&](auto item, auto i)
+			{
+				constexpr auto Idx = decltype(i)::value;
+				using U = std::remove_reference_t<decltype(std::declval<T>().*item)>;
+				if constexpr (std::is_arithmetic_v<U>)
+				{
+					param_binds[Idx].buffer_type = (enum_field_types)type_to_id(identity<U>{});
+					param_binds[Idx].buffer = &(t.*item);
+				}
+				else if constexpr (std::is_same_v<std::string, U>)
+				{
+					param_binds[Idx].buffer_type = MYSQL_TYPE_STRING;
+					std::vector<char> tmp(65536, 0);
+					mp.emplace(decltype(i)::value, tmp);
+					param_binds[Idx].buffer = &(mp.rbegin()->second[0]);
+					param_binds[Idx].buffer_length = (unsigned long)tmp.size();
+				}
+				else if constexpr (is_char_array_v<U>)
+				{
+					param_binds[Idx].buffer_type = MYSQL_TYPE_VAR_STRING;
+					std::vector<char> tmp(sizeof(U), 0);
+					mp.emplace(decltype(i)::value, tmp);
+					param_binds[Idx].buffer = &(mp.rbegin()->second[0]);
+					param_binds[Idx].buffer_length = (unsigned long)sizeof(U);
+				}
+			});
+
+			if (mysql_stmt_bind_result(stmt_, &param_binds[0]))
+			{
+				break;
+			}
+
+			if (mysql_stmt_execute(stmt_))
+			{									   
+				break;
+			}
+
+			while (mysql_stmt_fetch(stmt_) == 0)
+			{
+				using TP = decltype(iguana::get(std::declval<T>()));
+
+				iguana::for_each(t, [&mp, &t](auto item, auto i)
+				{
+					using U = std::remove_reference_t<decltype(std::declval<T>().*item)>;
+					if constexpr (std::is_same_v<std::string, U>)
+					{
+						auto& vec = mp[decltype(i)::value];
+						t.*item = std::string(&vec[0], strlen(vec.data()));
+					}
+					else if constexpr (is_char_array_v<U>) {
+						auto& vec = mp[decltype(i)::value];
+						memcpy(t.*item, vec.data(), vec.size());
+					}
+				});
+
+				v.push_back(std::move(t));
+			}
+
+			success = true;
+		} while (0);
+
+		if (!success)
+		{
+			uint32 lErrno = mysql_errno(con_);
+			LOG_ERROR << "mysql_stmt_bind_result error:  " << lErrno << " errmsg: " << mysql_stmt_error(stmt_);
+
+			// 如果返回成功，代表是重连成功，这里再进行一次查询
+			if (handleMySQLErrno(lErrno))
+				return query<T>(sql);
+			else
+				return {};
+		}
+		else
+		{
+			return v;
+		}
 	}
 
 	template<typename T>
 	QueryResult _async_query(std::string_view sql)
 	{
-		constexpr auto SIZE = iguana::get_value<T>();
-
-		stmt_ = mysql_stmt_init(con_);
-		if (!stmt_)
-		{
-			has_error_ = true;
-			return {};
-		}
-
-		if (mysql_stmt_prepare(stmt_, sql.data(), (unsigned long)sql.size()))
-		{
-			has_error_ = true;
-			return {};
-		}
-
-		auto guard = guard_statment(stmt_);
-
-		std::array<MYSQL_BIND, SIZE> param_binds = {};
-		std::map<size_t, std::vector<char>> mp;
-
-		std::vector<T> v;
-		T t{};
-		iguana::for_each(t, [&](auto item, auto i)
-		{
-			constexpr auto Idx = decltype(i)::value;
-			using U = std::remove_reference_t<decltype(std::declval<T>().*item)>;
-			if constexpr (std::is_arithmetic_v<U>)
-			{
-				param_binds[Idx].buffer_type = (enum_field_types)type_to_id(identity<U>{});
-				param_binds[Idx].buffer = &(t.*item);
-			}
-			else if constexpr (std::is_same_v<std::string, U>)
-			{
-				param_binds[Idx].buffer_type = MYSQL_TYPE_STRING;
-				std::vector<char> tmp(65536, 0);
-				mp.emplace(decltype(i)::value, tmp);
-				param_binds[Idx].buffer = &(mp.rbegin()->second[0]);
-				param_binds[Idx].buffer_length = (unsigned long)tmp.size();
-			}
-			else if constexpr (is_char_array_v<U>)
-			{
-				param_binds[Idx].buffer_type = MYSQL_TYPE_VAR_STRING;
-				std::vector<char> tmp(sizeof(U), 0);
-				mp.emplace(decltype(i)::value, tmp);
-				param_binds[Idx].buffer = &(mp.rbegin()->second[0]);
-				param_binds[Idx].buffer_length = (unsigned long)sizeof(U);
-			}
-		});
-
-		if (mysql_stmt_bind_result(stmt_, &param_binds[0]))
-		{
-			// fprintf(stderr, "%s\n", mysql_error(con_));
-			has_error_ = true;
-			return {};
-		}
-
-		if (mysql_stmt_execute(stmt_))
-		{
-			// fprintf(stderr, "%s\n", mysql_error(con_));											   
-			has_error_ = true;
-			return {};
-		}
-
-		while (mysql_stmt_fetch(stmt_) == 0)
-		{
-			using TP = decltype(iguana::get(std::declval<T>()));
-
-			iguana::for_each(t, [&mp, &t](auto item, auto i)
-			{
-				using U = std::remove_reference_t<decltype(std::declval<T>().*item)>;
-				if constexpr (std::is_same_v<std::string, U>)
-				{
-					auto& vec = mp[decltype(i)::value];
-					t.*item = std::string(&vec[0], strlen(vec.data()));
-				}
-				else if constexpr (is_char_array_v<U>) {
-					auto& vec = mp[decltype(i)::value];
-					memcpy(t.*item, vec.data(), vec.size());
-				}
-			});
-
-			v.push_back(std::move(t));
-		}
-
-		return QueryResult(new ResultDerive<T>(std::move(v)));
+		return QueryResult(new ResultDerive<T>(std::move(query<T>(sql))));
 	}
 
 	//for tuple and string with args...
@@ -299,233 +387,153 @@ public:
 			sql = get_sql(sql, std::forward<Args>(args)...);
 		}
 
-		stmt_ = mysql_stmt_init(con_);
-		if (!stmt_) 
-		{
-			has_error_ = true;
-			return {};
-		}
-
-		if (mysql_stmt_prepare(stmt_, sql.c_str(), (int)sql.size())) 
-		{
-			fprintf(stderr, "%s\n", mysql_error(con_));
-			has_error_ = true;
-			return {};
-		}
-
-		auto guard = guard_statment(stmt_);
-
-		std::array<MYSQL_BIND, result_size<T>::value> param_binds = {};
-		std::list<std::vector<char>> mp;
-
 		std::vector<T> v;
 		T tp{};
-
-		size_t index = 0;
-		iguana::for_each(tp, [&param_binds, &mp, &index](auto& item, auto I) 
+		bool success = false;
+		do
 		{
-			using U = std::remove_reference_t<decltype(item)>;
-			if constexpr(std::is_arithmetic_v<U>) 
+			stmt_ = mysql_stmt_init(con_);
+			if (!stmt_)
 			{
-				param_binds[index].buffer_type = (enum_field_types)type_to_id(identity<U>{});
-				param_binds[index].buffer = &item;
-				index++;
+				break;
 			}
-			else if constexpr(std::is_same_v<std::string, U>) 
-			{
-				std::vector<char> tmp(65536, 0);
-				mp.emplace_back(std::move(tmp));
-				param_binds[index].buffer_type = MYSQL_TYPE_STRING;
-				param_binds[index].buffer = &(mp.back()[0]);
-				param_binds[index].buffer_length = 65536;
-				index++;
-			}
-			else if constexpr(iguana::is_reflection_v<U>)
-			{
-				iguana::for_each(item, [&param_binds, &mp, &item, &index](auto& ele, auto i) 
-				{
-					using U = std::remove_reference_t<decltype(std::declval<U>().*ele)>;
-					if constexpr(std::is_arithmetic_v<U>) 
-					{
-						param_binds[index].buffer_type = (enum_field_types)type_to_id(identity<U>{});
-						param_binds[index].buffer = &(item.*ele);
-					}
-					else if constexpr(std::is_same_v<std::string, U>) 
-					{
-						std::vector<char> tmp(65536, 0);
-						mp.emplace_back(std::move(tmp));
-						param_binds[index].buffer_type = MYSQL_TYPE_STRING;
-						param_binds[index].buffer = &(mp.back()[0]);
-						param_binds[index].buffer_length = 65536;
-					}
-					else if constexpr(is_char_array_v<U>) 
-					{
-						std::vector<char> tmp(sizeof(U), 0);
-						mp.emplace_back(std::move(tmp));
-						param_binds[index].buffer_type = MYSQL_TYPE_VAR_STRING;
-						param_binds[index].buffer = &(mp.back()[0]);
-						param_binds[index].buffer_length = (unsigned long)sizeof(U);
-					}
-					index++;
-				});
-			}
-			else if constexpr(is_char_array_v<U>) 
-			{
-				param_binds[index].buffer_type = MYSQL_TYPE_VAR_STRING;
-				std::vector<char> tmp(sizeof(U), 0);
-				mp.emplace_back(std::move(tmp));
-				param_binds[index].buffer = &(mp.back()[0]);
-				param_binds[index].buffer_length = (unsigned long)sizeof(U);
-				index++;
-			}
-			else {
-				std::cout << typeid(U).name() << std::endl;
-			}
-		}, std::make_index_sequence<SIZE>{});
 
-		if (mysql_stmt_bind_result(stmt_, &param_binds[0])) 
-		{
-			// fprintf(stderr, "%s\n", mysql_error(con_));
-			has_error_ = true;
-			return {};
-		}
+			if (mysql_stmt_prepare(stmt_, sql.c_str(), (int)sql.size()))
+			{
+				break;
+			}
 
-		if (mysql_stmt_execute(stmt_)) 
-		{
-			// fprintf(stderr, "%s\n", mysql_error(con_));
-			has_error_ = true;
-			return {};
-		}
+			auto guard = guard_statment(stmt_);
 
-		while (mysql_stmt_fetch(stmt_) == 0) 
-		{
-			auto it = mp.begin();
-			iguana::for_each(tp, [&mp, &it](auto& item, auto i) 
+			std::array<MYSQL_BIND, result_size<T>::value> param_binds = {};
+			std::list<std::vector<char>> mp;
+
+			size_t index = 0;
+			iguana::for_each(tp, [&param_binds, &mp, &index](auto& item, auto I)
 			{
 				using U = std::remove_reference_t<decltype(item)>;
-				if constexpr(std::is_same_v<std::string, U>) 
+				if constexpr (std::is_arithmetic_v<U>)
 				{
-					item = std::string(&(*it)[0], strlen((*it).data()));
-					it++;
+					param_binds[index].buffer_type = (enum_field_types)type_to_id(identity<U>{});
+					param_binds[index].buffer = &item;
+					index++;
 				}
-				else if constexpr(is_char_array_v<U>) 
+				else if constexpr (std::is_same_v<std::string, U>)
 				{
-					memcpy(item, &(*it)[0], sizeof(U));
+					std::vector<char> tmp(65536, 0);
+					mp.emplace_back(std::move(tmp));
+					param_binds[index].buffer_type = MYSQL_TYPE_STRING;
+					param_binds[index].buffer = &(mp.back()[0]);
+					param_binds[index].buffer_length = 65536;
+					index++;
 				}
-				else if constexpr(iguana::is_reflection_v<U>) 
+				else if constexpr (iguana::is_reflection_v<U>)
 				{
-					iguana::for_each(item, [&mp, &it, &item](auto ele, auto i) 
+					iguana::for_each(item, [&param_binds, &mp, &item, &index](auto& ele, auto i)
 					{
-						using V = std::remove_reference_t<decltype(std::declval<U>().*ele)>;
-						if constexpr(std::is_same_v<std::string, V>) 
+						using U = std::remove_reference_t<decltype(std::declval<U>().*ele)>;
+						if constexpr (std::is_arithmetic_v<U>)
 						{
-							item.*ele = std::string(&(*it)[0], strlen((*it).data()));
-							it++;
+							param_binds[index].buffer_type = (enum_field_types)type_to_id(identity<U>{});
+							param_binds[index].buffer = &(item.*ele);
 						}
-						else if constexpr(is_char_array_v<V>) 
+						else if constexpr (std::is_same_v<std::string, U>)
 						{
-							memcpy(item.*ele, &(*it)[0], sizeof(V));
+							std::vector<char> tmp(65536, 0);
+							mp.emplace_back(std::move(tmp));
+							param_binds[index].buffer_type = MYSQL_TYPE_STRING;
+							param_binds[index].buffer = &(mp.back()[0]);
+							param_binds[index].buffer_length = 65536;
 						}
+						else if constexpr (is_char_array_v<U>)
+						{
+							std::vector<char> tmp(sizeof(U), 0);
+							mp.emplace_back(std::move(tmp));
+							param_binds[index].buffer_type = MYSQL_TYPE_VAR_STRING;
+							param_binds[index].buffer = &(mp.back()[0]);
+							param_binds[index].buffer_length = (unsigned long)sizeof(U);
+						}
+						index++;
 					});
+				}
+				else if constexpr (is_char_array_v<U>)
+				{
+					param_binds[index].buffer_type = MYSQL_TYPE_VAR_STRING;
+					std::vector<char> tmp(sizeof(U), 0);
+					mp.emplace_back(std::move(tmp));
+					param_binds[index].buffer = &(mp.back()[0]);
+					param_binds[index].buffer_length = (unsigned long)sizeof(U);
+					index++;
+				}
+				else {
+					std::cout << typeid(U).name() << std::endl;
 				}
 			}, std::make_index_sequence<SIZE>{});
 
-			v.push_back(std::move(tp));
-		}
-
-		return v;
-	}
-
-	//if there is a sql error, how to tell the user? throw exception?
-	template<typename T, typename... Args>
-	constexpr std::enable_if_t<iguana::is_reflection_v<T>, std::vector<T>> query(Args&&... args) 
-	{
-		std::string sql = generate_query_sql<T>(args...);
-		constexpr auto SIZE = iguana::get_value<T>();
-
-		stmt_ = mysql_stmt_init(con_);
-		if (!stmt_) 
-		{
-			has_error_ = true;
-			return {};
-		}
-
-		if (mysql_stmt_prepare(stmt_, sql.c_str(), (unsigned long)sql.size())) 
-		{
-			has_error_ = true;
-			return {};
-		}
-
-		auto guard = guard_statment(stmt_);
-
-		std::array<MYSQL_BIND, SIZE> param_binds = {};
-		std::map<size_t, std::vector<char>> mp;
-
-		std::vector<T> v;
-		T t{};
-		iguana::for_each(t, [&](auto item, auto i) 
-		{
-			constexpr auto Idx = decltype(i)::value;
-			using U = std::remove_reference_t<decltype(std::declval<T>().*item)>;
-			if constexpr(std::is_arithmetic_v<U>) 
+			if (mysql_stmt_bind_result(stmt_, &param_binds[0]))
 			{
-				param_binds[Idx].buffer_type = (enum_field_types)type_to_id(identity<U>{});
-				param_binds[Idx].buffer = &(t.*item);
+				break;
 			}
-			else if constexpr(std::is_same_v<std::string, U>) 
+
+			if (mysql_stmt_execute(stmt_))
 			{
-				param_binds[Idx].buffer_type = MYSQL_TYPE_STRING;
-				std::vector<char> tmp(65536, 0);
-				mp.emplace(decltype(i)::value, tmp);
-				param_binds[Idx].buffer = &(mp.rbegin()->second[0]);
-				param_binds[Idx].buffer_length = (unsigned long)tmp.size();
+				break;
 			}
-			else if constexpr(is_char_array_v<U>)
+
+			while (mysql_stmt_fetch(stmt_) == 0)
 			{
-				param_binds[Idx].buffer_type = MYSQL_TYPE_VAR_STRING;
-				std::vector<char> tmp(sizeof(U), 0);
-				mp.emplace(decltype(i)::value, tmp);
-				param_binds[Idx].buffer = &(mp.rbegin()->second[0]);
-				param_binds[Idx].buffer_length = (unsigned long)sizeof(U);
-			}
-		});
-
-		if (mysql_stmt_bind_result(stmt_, &param_binds[0])) 
-		{
-			// fprintf(stderr, "%s\n", mysql_error(con_));
-			has_error_ = true;
-			return {};
-		}
-
-		if (mysql_stmt_execute(stmt_)) 
-		{
-			// fprintf(stderr, "%s\n", mysql_error(con_));											   
-			has_error_ = true;
-			return {};
-		}
-
-		while (mysql_stmt_fetch(stmt_) == 0) 
-		{
-			using TP = decltype(iguana::get(std::declval<T>()));
-
-			iguana::for_each(t, [&mp, &t](auto item, auto i) 
-			{
-				using U = std::remove_reference_t<decltype(std::declval<T>().*item)>;
-				if constexpr(std::is_same_v<std::string, U>)
+				auto it = mp.begin();
+				iguana::for_each(tp, [&mp, &it](auto& item, auto i)
 				{
-					auto& vec = mp[decltype(i)::value];
-					t.*item = std::string(&vec[0], strlen(vec.data()));
-				}
-				else if constexpr(is_char_array_v<U>) {
-					auto& vec = mp[decltype(i)::value];
-					memcpy(t.*item, vec.data(), vec.size());
-				}
-			});
+					using U = std::remove_reference_t<decltype(item)>;
+					if constexpr (std::is_same_v<std::string, U>)
+					{
+						item = std::string(&(*it)[0], strlen((*it).data()));
+						it++;
+					}
+					else if constexpr (is_char_array_v<U>)
+					{
+						memcpy(item, &(*it)[0], sizeof(U));
+					}
+					else if constexpr (iguana::is_reflection_v<U>)
+					{
+						iguana::for_each(item, [&mp, &it, &item](auto ele, auto i)
+						{
+							using V = std::remove_reference_t<decltype(std::declval<U>().*ele)>;
+							if constexpr (std::is_same_v<std::string, V>)
+							{
+								item.*ele = std::string(&(*it)[0], strlen((*it).data()));
+								it++;
+							}
+							else if constexpr (is_char_array_v<V>)
+							{
+								memcpy(item.*ele, &(*it)[0], sizeof(V));
+							}
+						});
+					}
+				}, std::make_index_sequence<SIZE>{});
 
-			v.push_back(std::move(t));
+				v.push_back(std::move(tp));
+
+				success = true;
+			}
+		} while (0);
+
+		if (!success)
+		{
+			uint32 lErrno = mysql_errno(con_);
+			LOG_ERROR << "occur error, sql: " << sql << ", error: " << lErrno << " errmsg: " << mysql_stmt_error(stmt_);
+
+			// 如果返回成功，代表是重连成功，这里再进行一次查询
+			if (handleMySQLErrno(lErrno))
+				return query<T>(s, std::forward<Args>(args)...);
+			else
+				return {};
 		}
-
-		return v;
+		else
+		{
+			return v;
+		}
 	}
 
 	bool has_error() 
@@ -533,12 +541,17 @@ public:
 		return has_error_;
 	}
 
-	//just support execute string sql without placeholders
 	bool execute(const std::string& sql) 
 	{
 		if (mysql_query(con_, sql.data()) != 0) 
 		{
-			fprintf(stderr, "%s\n", mysql_error(con_));
+			uint32 lErrno = mysql_errno(con_);
+			LOG_ERROR << "mysql_query error, sql: " << sql << ", error: " << lErrno;
+
+			// 如果返回成功，代表是重连成功，这里再进行一次查询
+			if (handleMySQLErrno(lErrno))
+				return execute(sql);
+
 			return false;
 		}
 
@@ -550,7 +563,8 @@ public:
 	{
 		if (mysql_query(con_, "BEGIN")) 
 		{
-			// fprintf(stderr, "%s\n", mysql_error(con_));
+			uint32 lErrno = mysql_errno(con_);
+			LOG_ERROR << "begin error, error: " << lErrno;
 			return false;
 		}
 
@@ -561,7 +575,8 @@ public:
 	{
 		if (mysql_query(con_, "COMMIT")) 
 		{
-			// fprintf(stderr, "%s\n", mysql_error(con_));
+			uint32 lErrno = mysql_errno(con_);
+			LOG_ERROR << "commit error, error: " << lErrno;
 			return false;
 		}
 
@@ -572,14 +587,15 @@ public:
 	{
 		if (mysql_query(con_, "ROLLBACK"))
 		{
-			//  fprintf(stderr, "%s\n", mysql_error(con_));
+			uint32 lErrno = mysql_errno(con_);
+			LOG_ERROR << "rollback error, error: " << lErrno;
 			return false;
 		}
 
 		return true;
 	}
 
-	private:
+private:
 	template<typename T, typename... Args >
 	std::string generate_createtb_sql(Args&&... args) 
 	{
@@ -588,7 +604,7 @@ public:
 		std::string sql = std::string("CREATE TABLE IF NOT EXISTS ") + name.data() + "(";
 		auto arr = iguana::get_array<T>();
 		constexpr auto SIZE = sizeof... (Args);
-		auto_key_map_[name.data()] = "";
+		s_auto_key_map[name.data()] = "";
 
 		//auto_increment_key and key can't exist at the same time
 		using U = std::tuple<std::decay_t <Args>...>;
@@ -643,7 +659,7 @@ public:
 					}
 					append(sql, " AUTO_INCREMENT");
 					append(sql, " PRIMARY KEY");
-					auto_key_map_[name.data()] = item.fields;
+					s_auto_key_map[name.data()] = item.fields;
 					has_add_field = true;
 				}
 				else if constexpr (std::is_same_v<decltype(item), unique_key>)
@@ -703,13 +719,13 @@ public:
 	}
 
 	template<typename T>
-	int stmt_execute(const T& t) 
+	int stmt_execute(const T& t)
 	{
 		std::vector<MYSQL_BIND> param_binds;
-		auto it = auto_key_map_.find(iguana::get_name<T>().data());
-		std::string auto_key = (it == auto_key_map_.end()) ? "" : it->second;
+		auto it = s_auto_key_map.find(iguana::get_name<T>().data());
+		std::string auto_key = (it == s_auto_key_map.end()) ? "" : it->second;
 
-		iguana::for_each(t, [&t, &param_binds, &auto_key, this](const auto& v, auto i) 
+		iguana::for_each(t, [&t, &param_binds, &auto_key, this](const auto& v, auto i)
 		{
 			/*if (!auto_key.empty() && auto_key == iguana::get_name<T>(decltype(i)::value).data())
 				return;*/
@@ -717,25 +733,103 @@ public:
 			set_param_bind(param_binds, t.*v);
 		});
 
-		if (mysql_stmt_bind_param(stmt_, &param_binds[0])) 
+		bool success = false;
+		do
 		{
-			// fprintf(stderr, "%s\n", mysql_error(con_));
-			return INT_MIN;
-		}
+			if (mysql_stmt_bind_param(stmt_, &param_binds[0]))
+			{
+				break;
+			}
 
-		if (mysql_stmt_execute(stmt_)) 
+			if (mysql_stmt_execute(stmt_))
+			{				
+				break;
+			}
+
+			success = true;
+
+		} while (0);
+
+		if (!success)
 		{
-			fprintf(stderr, "%s\n", mysql_error(con_));
+			uint32 lErrno = mysql_errno(con_);
+			LOG_ERROR << "occur error,error: " << lErrno << " errmsg: " << mysql_stmt_error(stmt_);
+
+			// 如果返回成功，代表是重连成功，这里再进行一次查询
+			if (handleMySQLErrno(lErrno))
+				return stmt_execute(t);
+
 			return INT_MIN;
 		}
 
 		int count = (int)mysql_stmt_affected_rows(stmt_);
-		if (count == 0) 
+		if (count == 0)
 		{
 			return INT_MIN;
 		}
 
 		return count;
+	}
+
+	bool handleMySQLErrno(uint32 errNo, uint8 attempts = 5)
+	{
+		switch (errNo)
+		{
+		case CR_SERVER_GONE_ERROR:
+		case CR_SERVER_LOST:
+		case CR_INVALID_CONN_HANDLE:
+		case CR_SERVER_LOST_EXTENDED:
+		case CR_CONN_HOST_ERROR:
+		{
+			LOG_ERROR << "Lost the connection, Attempting to reconnect to the MySQL server...";
+
+			uint32 const lErrno = connectMysql();
+			if (lErrno == 0)
+			{
+				LOG_INFO << "mysql Successfully reconnected, db: " << std::get<4>(args_);
+				return true;
+			}
+
+			if ((--attempts) == 0)
+			{
+				// 彻底连不上了，直接退出吧
+				LOG_ERROR<< "Failed to reconnect to the MySQL server, "
+					"terminating the server to prevent data corruption!";
+
+				std::this_thread::sleep_for(std::chrono::seconds(10));
+				std::abort();
+			}
+			else
+			{
+				// 重连可能会导致2006的错误，这里再试几次，睡眠三秒是防止递归爆栈
+				std::this_thread::sleep_for(std::chrono::seconds(3)); 
+				return handleMySQLErrno(lErrno, attempts); 
+			}
+		}
+
+		case ER_LOCK_DEADLOCK:
+			return false;   
+		// Query related errors - skip query
+		case ER_WRONG_VALUE_COUNT:
+		case ER_DUP_ENTRY:
+			return false;
+
+			// Outdated table or database structure - terminate core
+		case ER_BAD_FIELD_ERROR:
+		case ER_NO_SUCH_TABLE:
+			LOG_ERROR << "Your database structure is error.";
+			std::this_thread::sleep_for(std::chrono::seconds(10));
+			std::abort();
+			return false;
+		case ER_PARSE_ERROR:
+			LOG_ERROR << "Error while parsing SQL. Core fix required.";
+			std::this_thread::sleep_for(std::chrono::seconds(10));
+			std::abort();
+			return false;
+		default:
+			LOG_ERROR << "Unhandled MySQL errno %u. Unexpected behaviour possible, errNo:" << errNo;
+			return false;
+		}
 	}
 
 
@@ -750,62 +844,9 @@ public:
 				status_ = mysql_stmt_close(stmt_);
 
 			if (status_)
-				fprintf(stderr, "close statment error code %d\n", status_);
+				LOG_ERROR << "close statment error code: " << status_;
 		}
 	};
-
-	template<typename T, typename... Args>
-	constexpr int insert_impl(const std::string& sql, const T& t, Args&&... args) 
-	{
-		stmt_ = mysql_stmt_init(con_);
-		if (!stmt_)
-			return INT_MIN;
-
-		if (mysql_stmt_prepare(stmt_, sql.c_str(), (int)sql.size())) 
-		{
-			return INT_MIN;
-		}
-
-		auto guard = guard_statment(stmt_);
-
-		if (stmt_execute(t) < 0)
-			return INT_MIN;
-
-		return 1;
-	}
-
-	template<typename T, typename... Args>
-	constexpr int insert_impl(const std::string& sql, const std::vector<T>& t, Args&&... args) 
-	{
-		stmt_ = mysql_stmt_init(con_);
-		if (!stmt_)
-			return INT_MIN;
-
-		if (mysql_stmt_prepare(stmt_, sql.c_str(), (int)sql.size())) 
-		{
-			return INT_MIN;
-		}
-
-		auto guard = guard_statment(stmt_);
-
-		//transaction
-		bool b = begin();
-		if (!b)
-			return INT_MIN;
-
-		for (auto& item : t) 
-		{
-			int r = stmt_execute(item);
-			if (r == INT_MIN) 
-			{
-				rollback();
-				return INT_MIN;
-			}
-		}
-		b = commit();
-
-		return b ? (int)t.size() : INT_MIN;
-	}
 
 	template<typename... Args>
 	auto get_tp(int& timeout, Args&&... args) 
@@ -823,24 +864,28 @@ public:
 
 private:
 
-	//std::unique_ptr<DatabaseWorker> worker_;
-	std::unique_ptr<ProducerConsumerQueue<SqlOperation*>> pcqueue_;
-	std::thread workerThread_;
+	std::unique_ptr<std::thread> workerThread_;
+	ProducerConsumerQueue<SqlOperation*>* pcqueue_;
+
+	bool asnyc_;
+	std::atomic<bool> stopWork_;
 
 	MYSQL* con_ = nullptr;
 	MYSQL_STMT* stmt_ = nullptr;
 	bool has_error_ = false;
-	inline static std::map<std::string, std::string> auto_key_map_;
+
+	// mysql:ip:user:pwd:db:port:unix_socket:client_flag
+	std::tuple<MYSQL*, const char*, const char*, const char*, const char*, int, const char*, int> args_;
 };
 
 
 
 template <typename T>
-class OperationTask : public SqlOperation
+class QueryTask : public SqlOperation
 {
 public:
-	OperationTask(std::string_view sql, MysqlConnection* conn) 
-		: SqlOperation(sql, conn) 
+	QueryTask(std::string_view sql)
+		:sql_(sql)
 	{
 		resultPromise_ = new QueryResultPromise;
 	}
@@ -849,6 +894,19 @@ public:
 	{
 		QueryResult result = conn_->_async_query<T>(sql_);
 		resultPromise_->set_value(result);
+		return true;
+	}
+
+private:
+	std::string sql_;
+};
+
+class PingTask : public SqlOperation
+{
+public:
+	virtual bool execute()
+	{
+		conn_->ping();
 		return true;
 	}
 };

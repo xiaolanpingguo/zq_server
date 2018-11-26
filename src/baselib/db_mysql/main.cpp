@@ -4,8 +4,7 @@
 
 #include <iostream>
 #include <thread>
-#include "dbng.hpp"
-#include "mysql.hpp"
+#include "connection_pool.hpp"
 #include <iguana/reflection.hpp>
 #pragma comment(lib, "libmysql.lib")	
 #pragma comment(lib, "base_code_d.lib")
@@ -18,9 +17,8 @@ struct person
     int id;
     std::string name;
     int age;
-	int number;
 };
-REFLECTION(person, id, name, age, number)
+REFLECTION(person, id, name, age)
 
 using namespace zq;
 const char* ip = "127.0.0.1"; //your database ip
@@ -33,19 +31,19 @@ struct A
 };
 int main(int argc, char* argv[])
 {
-	person p = { 1, "test1", 100, 200};
+	person p = { 1, "test1", 100};
 	//person p1 = { 2, "test2", 2 };
 	//person p2 = { 3, "test3", 3 };
 	//std::vector<person> v{ p1, p2 };
 
-	dbng<MysqlConnection> mysql;
-	mysql.connect("127.0.0.1", "zq", "8292340", "test_db");
+	ConnectionPool pool;
+	pool.open("127.0.0.1", "zq", "8292340", "test_db");
 
-	////primary_key key{ "id" };
-	////bool b = mysql.create_datatable<person>(key);
+	primary_key key{ "id" };
+	bool b = pool.create_datatable<person>(key);
 
-	//mysql.insert(p);
-	//mysql.insert(v);
+	////mysql.insert(p);
+	////mysql.insert(v);
 	auto f = [](QueryResult result)
 	{
 		if (result == nullptr)
@@ -58,15 +56,25 @@ int main(int argc, char* argv[])
 			std::cout << ele.id << std::endl;
 			std::cout << ele.name << std::endl;
 			std::cout << ele.age << std::endl;
-			std::cout << ele.number << std::endl;
+			//std::cout << ele.number << std::endl;
 		}
 	};
 
-	mysql.async_query<person>(std::move(f));
+	pool.insert<person>(person{100, "200",300});
+	auto v = pool.query<person>();
+	for (const auto& ele : v)
+	{
+		std::cout << ele.id << std::endl;
+		std::cout << ele.name << std::endl;
+		std::cout << ele.age << std::endl;
+		//std::cout << ele.number << std::endl;
+	}
+
+	pool.async_query<person>(std::move(f));
 
 	while (1)
 	{
-		mysql.run();
+		pool.run();
 	}
 
 

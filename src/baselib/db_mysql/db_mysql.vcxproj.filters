@@ -23,9 +23,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="mysql_connection.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="query_callback.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -35,13 +32,7 @@
     <ClInclude Include="query_result.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="sql_operation.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="mysql_module.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="dbng.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="mysql.hpp">
@@ -51,6 +42,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="utility.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="connection_pool.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

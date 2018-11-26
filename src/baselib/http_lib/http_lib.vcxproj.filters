@@ -39,9 +39,6 @@
     <ClInclude Include="client\sync_session.hpp">
       <Filter>client</Filter>
     </ClInclude>
-    <ClInclude Include="client\coro_session.hpp">
-      <Filter>client</Filter>
-    </ClInclude>
     <ClInclude Include="server\asio_fwd.hpp">
       <Filter>server</Filter>
     </ClInclude>
@@ -102,9 +99,6 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="client\async_session_ssl.hpp">
-      <Filter>client</Filter>
-    </ClCompile>
-    <ClCompile Include="client\coro_session_ssl.hpp">
       <Filter>client</Filter>
     </ClCompile>
     <ClCompile Include="client\sync_session_ssl.hpp">
