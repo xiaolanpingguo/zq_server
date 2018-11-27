@@ -1,8 +1,8 @@
 #include "login_cs_module.h"
 
 #include "baselib/base_code/util.h"
-#include "baselib/message/config_define.hpp"
 #include "baselib/message/game_db_account.pb.h"
+#include "config_header/cfg_server.hpp"
 
 #include "midware/cryptography/sha1.h"
 
@@ -26,12 +26,42 @@ bool LoginCSModule::init()
 	classModule_ = libManager_->findModule<IClassModule>();
 	redisModule_ = libManager_->findModule<IRedisModule>();
 	dataAgentModule_ = libManager_->findModule<IDataAgentModule>();
+	classModule_ = libManager_->findModule<IClassModule>();
+	configModule_ = libManager_->findModule<IConfigModule>();
 
 	return true;
 }
 
 bool LoginCSModule::initEnd()
-{	
+{
+	const auto& all_row = configModule_->getCsvRowAll<CSVServer>();
+	for (const auto& ele : *all_row)
+	{
+		int server_type = ele.second.server_type;
+		int server_id = ele.second.server_id;
+		if (server_type == SERVER_TYPES::ST_LOGIN_SERVER && libManager_->getServerID() == server_id)
+		{
+			//int max_conn = ele.second->max_conn;
+			int ext_port = ele.second.external_port;
+			const std::string& ext_ip = ele.second.external_ip;
+
+			if (ext_port != -1)
+			{
+				if (!startNetwork(ext_ip, (uint16)ext_port))
+				{
+					ASSERT(false, "Cannot init login external server net");
+					return false;
+				}
+
+				std::ostringstream strLog;
+				strLog << std::endl;
+				strLog << "-----------login_cs_server is listen on external net-----------" << std::endl;
+				strLog << "listen ext_address: " << ext_ip + ":" + std::to_string(ext_port) << std::endl;
+				std::cout << strLog.str() << std::endl;
+				LOG_INFO << strLog.str();
+			}
+		}
+	}
 
 	return true;
 }

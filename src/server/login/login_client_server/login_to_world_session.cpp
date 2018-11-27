@@ -22,7 +22,7 @@ std::unordered_map<int, LoginToWorldHandler> const s_handlers
 };
 
 LoginToWorldSession::LoginToWorldSession(const std::string& ip, uint16 port, int serverId)
-	:ClientSocket(Asio::getDefaultIoContextObj(), ip, port),
+	:ClientSocket(getDefaultIoContextObj(), ip, port),
 	serverId_(serverId)
 {
 	headerLengthBuffer_.resize(4);

@@ -129,12 +129,14 @@
     <ClCompile Include="redis_lib.cpp" />
     <ClCompile Include="redis_module.cpp" />
     <ClCompile Include="commond.cpp" />
+    <ClCompile Include="redis_socket.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="redis_client.h" />
     <ClInclude Include="redis_commond.h" />
     <ClInclude Include="redis_lib.h" />
     <ClInclude Include="redis_module.h" />
+    <ClInclude Include="redis_socket.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -30,6 +30,9 @@
     <ClCompile Include="commond.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="redis_socket.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="redis_client.h">
@@ -42,6 +45,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="redis_module.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="redis_socket.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

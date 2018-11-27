@@ -1,48 +1,31 @@
 #include "redis_client.h"
 
+
 #if ZQ_PLATFORM == ZQ_PLATFORM_WIN
 #pragma  comment(lib,"hiredis_d.lib")
 #pragma  comment(lib,"Ws2_32.lib")
 #endif
 
+using namespace zq;
 
-namespace zq{
-
-
-static io_context_t s_io_context{ 1 };
 RedisClient::RedisClient(const std::string& ip, int port)
-	: BaseSocket(s_io_context, ip, (uint16)port),
-	ioContext_(s_io_context),
-	ip_(ip),
+	:ip_(ip),
 	port_(port),
 	busy_(false),
 	authed_(false),
-	lastCheckTime_(0)
+	lastCheckTime_(0),
+	redisConnect_(std::make_shared<RedisClientSocket>(ip_, port_))
 {
-	socket_ = std::make_shared<tcp_t::socket>(ioContext_);
-
-	error_code_t ec;
-	remoteAddress_ = asio::ip::make_address(ip, ec);
-	if (!ec)
-	{
-		endpoint_ = tcp_t::endpoint(remoteAddress_, port);
-		remotePort_ = endpoint_.port();
-	}
-	else
-	{
-		LOG_ERROR << "constructor client socket error, ec: " << ec.message();
-	}
-
-	redisReader_ = redisReaderCreate();
 }
 
 RedisClient::~RedisClient()
 {
-	if (redisReader_)
-	{
-		redisReaderFree(redisReader_);
-		redisReader_ = nullptr;
-	}
+
+}
+
+bool RedisClient::enable()
+{
+	return redisConnect_->isConnect();
 }
 
 bool RedisClient::authed()
@@ -57,137 +40,109 @@ bool RedisClient::busy()
 
 void RedisClient::asynConnect()
 {
-	socket_->async_connect(endpoint_, [this](const error_code_t& ec)
-	{
-		if (ec)
-		{
-			error_code_t ec1;
-			this->socket_->close(ec1);
-			LOG_ERROR << "connect faild, ip: " << getIp() << " port: " << getPort() << " err: " << ec.message();
-		}
-		else
-		{
-			this->asyncRead();
-		}
-	});
+	redisConnect_->asynConnect();
 }
 
 void RedisClient::synConnect()
 {
-	while (1)
-	{
-		error_code_t ec;
-		socket_->connect(endpoint_, ec);
-		if (!ec)
-		{
-			break;
-		}
-
-		ioContext_.poll(ec);
-	}
-
-	this->asyncRead();
+	redisConnect_->synConnect();
 }
 
 void RedisClient::reConnect()
 {
-	socket_.reset(new tcp_t::socket(ioContext_));
-	asynConnect();
+	redisConnect_.reset(new RedisClientSocket(ip_, port_));
+	redisConnect_->asynConnect();
 }
 
 bool RedisClient::isConnect()
 {
-	return socket_->is_open();
+	if (redisConnect_)
+	{
+		return redisConnect_->isConnect();
+	}
+
+	return false;
 }
 
 bool RedisClient::run()
 {
-	BaseSocket::update();
-	error_code_t ec;
-	ioContext_.poll(ec);
-	if (ec)
-	{
-		LOG_ERROR << "occerd error, err: " << ec.message();
-		return false;
-	}
-	if (!checkConnect())
-	{
-		return false;
-	}
+    redisConnect_->run();
+	checkConnect();
 
-    return true;
+    return false;
 }
 
-bool RedisClient::checkConnect()
+void RedisClient::checkConnect()
 {
 	static constexpr int CHECK_TIME = 10;
 
 	time_t now = time(nullptr);
 	if (lastCheckTime_ + CHECK_TIME > now)
 	{
-		return true;
+		return;
 	}
 
 	lastCheckTime_ = now;
 
-	if (!isConnect())
+	if (!redisConnect_->isConnect())
 	{
 		reConnect();
-		return false;
 	}
-
-	return true;
-}
-
-void RedisClient::readHandler()
-{
-	feedData();
-}
-
-void RedisClient::feedData()
-{
-	MessageBuffer buffer = getReadBuffer();
-	size_t len = buffer.getActiveSize();
-	if (len > 0)
-	{
-		redisReaderFeed(redisReader_, (const char*)buffer.getReadPointer(), len);
-		buffer.readCompleted(len);
-	}
-
-	asyncRead();
 }
 
 RedisReplyPtr RedisClient::exeCmd(const RedisCommand& cmd)
 {
+	while (busy_)
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
+	}
+
 	if (!isConnect())
 	{
 		reConnect();
 		return nullptr;
 	}
-
-	std::string msg = cmd.serialize();
-	if (msg.empty())
+	else
 	{
-		return nullptr;
+		std::string msg = cmd.serialize();
+		if (msg.empty())
+		{
+			return nullptr;
+		}
+		int nRet = redisConnect_->write(msg.data(), msg.length());
+		if (nRet != 0)
+		{
+			return nullptr;
+		}
 	}
+	
+	busy_ = true;
 
-	BaseSocket::sendData(msg.data(), msg.size());
+	return parseForReply();
+}
 
+RedisReplyPtr RedisClient::parseForReply()
+{
 	struct redisReply* reply = nullptr;
-	while (1)
+	while (true)
 	{
 		// 这里必须要有reply != nullptr， 因为如果buf中没有数据，reply会为空
-		int ret = redisReaderGetReply(redisReader_, (void**)&reply);
+		int ret = redisReaderGetReply(redisConnect_->getRedisReader(), (void**)&reply);
 		if (ret == REDIS_OK && reply != nullptr)
 		{
 			break;
 		}
 
-		if (!run())
+		redisConnect_->run();
+
+		if (!isConnect())
 		{
-			return nullptr;
+			reConnect();
+			break;
 		}
 	}
+
+	busy_ = false;
 
 	if (reply == nullptr)
 	{
@@ -200,7 +155,5 @@ RedisReplyPtr RedisClient::exeCmd(const RedisCommand& cmd)
 		return nullptr;
 	}
 
-	return RedisReplyPtr(reply, [](redisReply* r) { if (r) freeReplyObject(r); });;
-}
-
+	return RedisReplyPtr(reply, [](redisReply* r) { if (r) freeReplyObject(r); });
 }

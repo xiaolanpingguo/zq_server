@@ -12,8 +12,6 @@
 namespace zq {
 
 
-using boost::asio::ip::tcp;
-
 template<class SocketType>
 class NetworkThread
 {
@@ -70,7 +68,7 @@ public:
 
 	int32 getConnectionCount() const { return connections_; }
 
-    tcp::socket* getSocketForAccept() { return &acceptSocket_; }
+    tcp_t::socket* getSocketForAccept() { return &acceptSocket_; }
 
 protected:
     virtual void socketAdded(std::shared_ptr<SocketType> /*sock*/) { }
@@ -99,7 +97,7 @@ protected:
 
     void run()
     {
-        updateTimer_.expires_from_now(boost::posix_time::milliseconds(10));
+        updateTimer_.expires_from_now(std::chrono::milliseconds(10));
         updateTimer_.async_wait(std::bind(&NetworkThread<SocketType>::update, this));
         ioContext_.run();
         newSockets_.clear();
@@ -111,7 +109,7 @@ protected:
         if (stopped_)
             return;
 
-        updateTimer_.expires_from_now(boost::posix_time::milliseconds(10));
+        updateTimer_.expires_from_now(std::chrono::milliseconds(10));
         updateTimer_.async_wait(std::bind(&NetworkThread<SocketType>::update, this));
 
         addNewSockets();
@@ -147,8 +145,8 @@ private:
     SocketContainer newSockets_;
 
     io_context_t ioContext_;
-    tcp::socket acceptSocket_;
-    boost::asio::deadline_timer updateTimer_;
+    tcp_t::socket acceptSocket_;
+    asio::steady_timer updateTimer_;
 };
 
 }

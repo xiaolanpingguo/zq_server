@@ -32,7 +32,7 @@ public:
 					// this-> is required here to fix an segmentation fault in gcc 4.7.2 - reason is lambdas in a templated class
 					std::make_shared<T>(std::move(this->socket_))->start();
 				}
-				catch (boost::system::system_error const& err)
+				catch (const sys_err_t& err)
 				{
 					LOG_ERROR << "Failed to retrieve client's remote address, err: %s" << err.what();
 				}

@@ -168,7 +168,7 @@ class LoginCSSession : public Socket<LoginCSSession>
 
 public:
 
-	LoginCSSession(tcp::socket&& socket);
+	LoginCSSession(tcp_t::socket&& socket);
 
 	void start() override;
 	bool update() override;

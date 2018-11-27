@@ -31,11 +31,6 @@ public:
 	bool asyncRequstSSL(C_HTTP_METHOD method, const std::string& host, const std::string& port, const std::string& path,
 		C_HTTP_RESP_FUNCTOR&& cb = nullptr) override;
 
-	bool coroRequst(C_HTTP_METHOD method, const std::string& host, const std::string& port, const std::string& path,
-		std::string& res) override;
-	bool coroRequstSSL(C_HTTP_METHOD method, const std::string& host, const std::string& port, const std::string& path,
-		std::string& res) override;
-
 private:
 
 	boost::asio::io_service ioc_;

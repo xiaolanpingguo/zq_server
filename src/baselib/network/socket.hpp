@@ -168,7 +168,7 @@ public:
 	void setNoDelay(bool enable)
 	{
 		error_code_t err;
-		socket_.set_option(tcp::no_delay(enable), err);
+		socket_.set_option(tcp_t::no_delay(enable), err);
 	}
 
 	// Marks the socket for closing after write buffer becomes empty

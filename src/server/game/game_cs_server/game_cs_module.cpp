@@ -1,6 +1,5 @@
 #include "game_cs_module.h"
 
-#include "baselib/message/config_define.hpp"
 #include "config_header/cfg_server.hpp"
 
 
@@ -20,13 +19,13 @@ bool GameCSModule::initEnd()
 	const auto& all_row = configModule_->getCsvRowAll<CSVServer>();
 	for (const auto& ele : *all_row)
 	{
-		int server_type = ele.second->server_type;
-		int server_id = ele.second->server_id;
+		int server_type = ele.second.server_type;
+		int server_id = ele.second.server_id;
 		if (server_type == SERVER_TYPES::ST_GAME_SERVER && libManager_->getServerID() == server_id)
 		{
 			//int max_conn = ele.second->max_conn;
-			int ext_port = ele.second->external_port;
-			const std::string& ext_ip = ele.second->external_ip;
+			int ext_port = ele.second.external_port;
+			const std::string& ext_ip = ele.second.external_ip;
 
 			if (ext_port != -1)
 			{

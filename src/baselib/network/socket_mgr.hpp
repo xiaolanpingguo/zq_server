@@ -14,13 +14,13 @@ struct NET_MULTi_THREAD{};
 template<typename SocketType, typename ThreadMod = NET_SINGLE_THREAD>
 class SocketMgr
 {
-	using SocketMapT = std::map<tcp::endpoint, std::shared_ptr<SocketType>>;
+	using SocketMapT = std::map<tcp_t::endpoint, std::shared_ptr<SocketType>>;
 protected:
 	SocketMgr()
 		: acceptor_(nullptr),
 		threads_(nullptr),
 		threadCount_(0),
-		ioContext_(Asio::getDefaultIoContextObj())
+		ioContext_(getDefaultIoContextObj())
 	{
 	}
 
@@ -48,7 +48,7 @@ protected:
 		{
 			acceptor = new AsyncAcceptor(ioContext_, bindIp, port);
 		}
-		catch (boost::system::system_error const& err)
+		catch (const sys_err_t& err)
 		{
 			LOG_ERROR << "Exception caught in SocketMgr.StartNetwork,ip: " << 
 				bindIp.c_str() << " ,port port" << port << " ,errmsg:" << err.what();
@@ -112,7 +112,7 @@ protected:
 				threads_[i].wait();
 	}
 
-	virtual void onSocketOpen(tcp::socket&& sock, uint32 threadIndex)
+	virtual void onSocketOpen(tcp_t::socket&& sock, uint32 threadIndex)
 	{
 		try
 		{
@@ -122,7 +122,7 @@ protected:
 			newSocket->asyncRead();
 			addSocket(ThreadMod(), newSocket, threadIndex);
 		}
-		catch (boost::system::system_error const& err)
+		catch (const sys_err_t& err)
 		{
 			LOG_ERROR << "Failed to retrieve client's remote address: %s" << err.what();
 		}
@@ -139,7 +139,7 @@ protected:
 		return min;
 	}
 
-	std::pair<tcp::socket*, uint32> getSocketForAccept()
+	std::pair<tcp_t::socket*, uint32> getSocketForAccept()
 	{
 		uint32 threadIndex = selectThreadWithMinConnections();
 		return std::make_pair(threads_[threadIndex].getSocketForAccept(), threadIndex);

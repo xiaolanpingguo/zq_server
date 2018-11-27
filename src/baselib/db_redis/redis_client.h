@@ -1,9 +1,23 @@
 ﻿#pragma once 
 
 
+#define GET_NAME(functionName)   (#functionName)
+
+#include <string>
+#include <string>
+#include <vector>
 #include <list>
+#include <map>
+#include <set>
+#include <ctime>
+#include <sstream>
+#include <iostream>
+#include <random>
+#include <thread>
+
 #include "redis_commond.h"
-#include "baselib/network/socket.hpp"
+#include "redis_socket.h"
+
 #include "interface_header/base/IRedislModule.h"
 
 #include <hiredis/hiredis.h>
@@ -11,12 +25,11 @@
 namespace zq {
 
 
-#define GET_NAME(functionName)   (#functionName)
 
 using RedisReplyPtr = std::shared_ptr<redisReply>;
-class RedisClient : public IRedisClient, public Socket<RedisClient>
+using ConnectPtr = std::shared_ptr<RedisClientSocket>;
+class RedisClient : public IRedisClient
 {
-	using BaseSocket = Socket<RedisClient>;
 public:
 	RedisClient(const std::string& ip, int port);
 	~RedisClient() override;
@@ -26,6 +39,7 @@ public:
 	void asynConnect();
 	void synConnect();
 
+	bool enable();
 	bool authed();
 	bool busy();
 
@@ -36,6 +50,7 @@ public:
 	int getPort() { return port_; }
 
 	RedisReplyPtr exeCmd(const RedisCommand& cmd);
+
 
 
 	/////////   key  //////////////
@@ -227,11 +242,10 @@ public:
 
 protected:
 
-	bool checkConnect();
-	void readHandler() override;
-	void feedData();														
+	void checkConnect();
+	RedisReplyPtr parseForReply();
 
-private:					    
+private:
 
 	std::string ip_;
 	int port_;
@@ -241,16 +255,7 @@ private:
 	bool authed_;
 	bool busy_;
 
-	tcp_t::endpoint endpoint_;
-	address_t remoteAddress_;
-	uint16 remotePort_;
-	std::shared_ptr<tcp_t::socket> socket_;
-
-	std::list<RedisCommand> waitList_;
-
-	io_context_t& ioContext_;
-
-	redisReader* redisReader_;
+	ConnectPtr redisConnect_;
 };
 
 }
