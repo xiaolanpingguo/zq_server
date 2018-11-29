@@ -1,7 +1,7 @@
 #include "game_logic_module.h"
 
-#include "server/game/game_cs_server/world_session.h"
-#include "server/game/game_cs_server/world_packet.h"
+#include "server/world_session.h"
+#include "server/world_packet.h"
 #include "baselib/message/config_define.hpp"
 #include "baselib/message/game_db_account.pb.h"
 #include "baselib/base_code/format.h"
@@ -11,9 +11,12 @@
 #include "midware/cryptography/big_number.h"
 #include "midware/cryptography/auth_crypt.h"
 
+#include "common/shared_defines.h"
+#include "common/game_time.h"
+#include "entities/object/object_guid.h"
+
 
 namespace zq {
-
 
 
 struct AuthSession
@@ -59,6 +62,11 @@ bool GameLogicModule::initEnd()
 	addMsgFun(CMSG_PING, std::bind(&GameLogicModule::handlePing, this, _1, _2));
 	addMsgFun(CMSG_KEEP_ALIVE, std::bind(&GameLogicModule::handleKeepLive, this, _1, _2));
 	addMsgFun(CMSG_AUTH_SESSION, std::bind(&GameLogicModule::handleAuthSession, this, _1, _2));
+	addMsgFun(CMSG_READY_FOR_ACCOUNT_DATA_TIMES, std::bind(&GameLogicModule::handleReadyForAccountDataTimes, this, _1, _2));
+	addMsgFun(CMSG_REALM_SPLIT, std::bind(&GameLogicModule::handleRealmSplitOpcode, this, _1, _2));
+	addMsgFun(CMSG_CHAR_ENUM, std::bind(&GameLogicModule::handleCharEnumOpcode, this, _1, _2));
+	addMsgFun(CMSG_CHAR_CREATE, std::bind(&GameLogicModule::handleCharCreateOpcode, this, _1, _2));
+	addMsgFun(CMSG_CHAR_DELETE, std::bind(&GameLogicModule::handleCharDeleteOpcode, this, _1, _2));
 
 	return true;
 }
@@ -145,13 +153,13 @@ bool GameLogicModule::handleAuthSession(WorldSession* session, WorldPacket& recv
 	sha.UpdateBigNumbers(&session_key, nullptr);
 	sha.Finalize();
 
-	if (memcmp(sha.GetDigest(), authSession->Digest, SHA_DIGEST_LENGTH) != 0)
+	/*if (memcmp(sha.GetDigest(), authSession->Digest, SHA_DIGEST_LENGTH) != 0)
 	{
 		sendAuthResponseError(session, AUTH_FAILED);
 		LOG_ERROR << fmt::format("Authentication failed for account: ('%s')", authSession->Account.c_str());
 		session->delayedClose();
 		return true;
-	}
+	}*/
 
 	int64 mutetime = 0;
 	//int64 mutetime = account.MuteTime;
@@ -300,6 +308,90 @@ bool GameLogicModule::handlePing(WorldSession* session, WorldPacket& recvPacket)
 }
 
 bool GameLogicModule::handleKeepLive(WorldSession* session, WorldPacket& recvPacket)
+{
+	return true;
+}
+
+bool GameLogicModule::handleReadyForAccountDataTimes(WorldSession* session, WorldPacket& recvPacket)
+{
+	static const int mask = 0x15;
+	WorldPacket data(SMSG_ACCOUNT_DATA_TIMES, 4 + 1 + 4 + NUM_ACCOUNT_DATA_TYPES * 4);
+	data << uint32(GameTime::GetGameTime());                             // Server time
+	data << uint8(1);
+	data << uint32(mask);                                   // type mask
+	for (uint32 i = 0; i < NUM_ACCOUNT_DATA_TYPES; ++i)
+		if (mask & (1 << i))
+			data << uint32(session->GetAccountData(AccountDataType(i))->Time);// also unix time
+
+	session->sendPacket(data);
+
+	return true;
+}
+
+bool GameLogicModule::handleRealmSplitOpcode(WorldSession* session, WorldPacket& recvPacket)
+{
+	uint32 unk;
+	std::string split_date = "01/01/01";
+	recvPacket >> unk;
+
+	WorldPacket data(SMSG_REALM_SPLIT, 4 + 4 + split_date.size() + 1);
+	data << unk;
+	data << uint32(0x00000000);                             // realm split state
+	// split states:
+	// 0x0 realm normal
+	// 0x1 realm split
+	// 0x2 realm split pending
+	data << split_date;
+	session->sendPacket(data);
+	return true;
+}
+
+bool GameLogicModule::handleCharEnumOpcode(WorldSession* session, WorldPacket& recvPacket)
+{
+	WorldPacket data(SMSG_CHAR_ENUM, 100);                  // we guess size
+	uint8 num = 0;
+	data << num;
+	data.put<uint8>(0, num);
+	session->sendPacket(data);
+
+	return true;
+}
+
+bool GameLogicModule::handleCharCreateOpcode(WorldSession* session, WorldPacket& recvPacket)
+{
+	std::shared_ptr<CharacterCreateInfo> createInfo = std::make_shared<CharacterCreateInfo>();
+
+	recvPacket >> createInfo->Name
+		>> createInfo->Race
+		>> createInfo->Class
+		>> createInfo->Gender
+		>> createInfo->Skin
+		>> createInfo->Face
+		>> createInfo->HairStyle
+		>> createInfo->HairColor
+		>> createInfo->FacialHair
+		>> createInfo->OutfitId;
+
+	uint8 resp_code = CHAR_CREATE_SUCCESS;
+	do 
+	{
+		//// 名字重复
+		//resp_code = CHAR_CREATE_NAME_IN_USE;
+
+		//// 角色限制
+		//resp_code = CHAR_CREATE_NAME_IN_USE;
+		//// 错误
+		//resp_code = CHAR_CREATE_ERROR;
+	} while (0);
+
+	WorldPacket data(SMSG_CHAR_CREATE, 1);
+	data << uint8(resp_code);
+	session->sendPacket(data);
+
+	return true;
+}
+
+bool GameLogicModule::handleCharDeleteOpcode(WorldSession* session, WorldPacket& recvPacket)
 {
 	return true;
 }

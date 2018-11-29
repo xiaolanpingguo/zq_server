@@ -125,7 +125,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="acceptor.hpp" />
-    <ClInclude Include="byte_buffer.hpp" />
     <ClInclude Include="client_socket.hpp" />
     <ClInclude Include="client_socket_mgr.hpp" />
     <ClInclude Include="connector.hpp" />

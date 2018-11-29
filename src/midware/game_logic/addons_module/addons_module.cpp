@@ -1,10 +1,9 @@
 #include "addons_module.h"
 
-#include "server/game/game_cs_server/world_session.h"
-#include "baselib/message/config_define.hpp"
+#include "../server/world_session.h"
 #include "dependencies/zlib/zlib.h"
+#include "config_header/cfg_addones.hpp"
 
-#include "baselib/message/config_define.hpp"
 #include "baselib/base_code/format.h"
 
 
@@ -15,25 +14,19 @@ bool AddonsModule::init()
 {
 	kernelModule_ = libManager_->findModule<IKernelModule>();
 	classModule_ = libManager_->findModule<IClassModule>();
-	gameLogicModule_ = libManager_->findModule<IGameLogicModule> ();
+	gameLogicModule_ = libManager_->findModule<IGameLogicModule>();
+	configModule_ = libManager_->findModule<IConfigModule>();
+	configModule_->create<CSVAddOnes>("cfg_addones.csv");
 	return true;
 }
 
 bool AddonsModule::initEnd()
 {
-	//IClassPtr logic_class = classModule_->getClass(config::Server::this_name());
-	//if (logic_class)
-	//{
-	//	const auto& objs = logic_class->getAllStaticObjs();
-	//	for (const auto& ele : objs)
-	//	{
-	//		IObjectPtr obj = ele.second;
-
-	//		const auto& name = obj->getString(config::Addons::name());
-	//		const auto& crc = obj->getInt(config::Addons::crc());
-	//		m_knownAddons.push_back({ name, (uint32)crc });
-	//	}
-	//}
+	const auto& all_row = configModule_->getCsvRowAll<CSVAddOnes>();
+	for (const auto& ele : *all_row)
+	{
+		m_knownAddons.emplace_back(SavedAddon{ ele.second.name, ele.second.crc });
+	}
 
 	return true;
 }

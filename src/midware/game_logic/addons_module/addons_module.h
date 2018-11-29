@@ -5,7 +5,8 @@
 #include "interface_header/base/IKernelModule.h"
 #include "interface_header/base/IClassModule.h"
 #include "interface_header/base/IRedislModule.h"
-#include "interface_header/logic/IGameLogicModule.h"
+#include "interface_header/logic/IGameLogicModule.h"	
+#include "interface_header/base/IConfigModule.h"
 #include <list>
 
 
@@ -45,6 +46,7 @@ private:
 	IKernelModule* kernelModule_;
 	IClassModule* classModule_;
 	IGameLogicModule* gameLogicModule_;
+	IConfigModule* configModule_;
 };
 
 }

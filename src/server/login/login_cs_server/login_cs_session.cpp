@@ -514,6 +514,8 @@ bool LoginCSSession::HandleLogonProof()
         //stmt->setString(3, _os);
         //stmt->setString(4, _accountInfo.Login);
         //LoginDatabase.DirectExecute(stmt);
+		//std::string ss = "43E8D9410209DE1034F857147241B8A62D11699865A5B055C363D1F8827CF1DD008C8C08E3D7F546";
+		//accountInfo_.set_session_key(ss);
 		accountInfo_.set_session_key(K.AsHexStr());
 		data_agent->setHashData(accountInfo_.account_name(), _KEY_ACCOUNT_ + accountInfo_.account_name(), accountInfo_);
 

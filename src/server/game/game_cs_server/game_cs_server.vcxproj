@@ -125,25 +125,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="world_session.cpp" />
     <ClCompile Include="game_socket.cpp" />
     <ClCompile Include="game_cs_module.cpp" />
     <ClCompile Include="game_cs_server.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="opcodes.cpp" />
-    <ClCompile Include="packet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="world_session.h" />
     <ClInclude Include="game_socket.h" />
     <ClInclude Include="game_cs_module.h" />
     <ClInclude Include="game_cs_server.h" />
-    <ClInclude Include="opcodes.h" />
-    <ClInclude Include="packet.h" />
-    <ClInclude Include="world_packet.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

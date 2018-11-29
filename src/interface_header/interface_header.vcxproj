@@ -54,6 +54,7 @@
     <ClInclude Include="base\singleton.hpp" />
     <ClInclude Include="base\uuid.h" />
     <ClInclude Include="logic\IAddonsModule.h" />
+    <ClInclude Include="logic\IDBCModule.h" />
     <ClInclude Include="logic\IGameLogicModule.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

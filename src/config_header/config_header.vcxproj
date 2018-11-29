@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cfg_addones.hpp" />
     <ClInclude Include="cfg_redis.hpp" />
     <ClInclude Include="cfg_server.hpp" />
     <ClInclude Include="csv_parser.hpp" />

@@ -200,7 +200,14 @@ typedef uint16_t												uint16;
 typedef uint8_t													uint8;
 #endif
 
-typedef int64 ZQSOCK;
+
+#define UI64FMTD "%" PRIu64
+#define UI64LIT(N) UINT64_C(N)
+
+#define SI64FMTD "%" PRId64
+#define SI64LIT(N) INT64_C(N)
+
+#define SZFMTD "%" PRIuPTR
 
 #if ZQ_PLATFORM == ZQ_PLATFORM_WIN
 #define SPRINTF sprintf_s

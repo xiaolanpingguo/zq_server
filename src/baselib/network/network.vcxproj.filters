@@ -56,9 +56,6 @@
     <ClInclude Include="client_socket.hpp">
       <Filter>header</Filter>
     </ClInclude>
-    <ClInclude Include="byte_buffer.hpp">
-      <Filter>header</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />

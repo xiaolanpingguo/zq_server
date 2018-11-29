@@ -82,7 +82,8 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\src\dependencies\boost_1_67_0;$(SolutionDir)\src\dependencies\openssl\include;$(SolutionDir)\src\dependencies\protobuf-all-3.6.1\src;$(SolutionDir)\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\src\dependencies\asio\asio\include;$(SolutionDir)\src\dependencies\g3dlib\include;$(SolutionDir)\src\dependencies\boost_1_67_0;$(SolutionDir)\src\dependencies\openssl\include;$(SolutionDir)\src\dependencies\protobuf-all-3.6.1\src;$(SolutionDir)\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/std:c++17 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -126,13 +127,115 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="addons_module\addons_module.cpp" />
+    <ClCompile Include="common\game_time.cpp" />
+    <ClCompile Include="dbc_stores\dbc_db_loader.cpp" />
+    <ClCompile Include="dbc_stores\dbc_fileloader.cpp" />
+    <ClCompile Include="dbc_stores\dbc_module.cpp" />
+    <ClCompile Include="dbc_stores\dbc_store.cpp" />
+    <ClCompile Include="dbc_stores\dbc_stores.cpp" />
+    <ClCompile Include="entities\corpse\corpse.cpp" />
+    <ClCompile Include="entities\creature\creature.cpp" />
+    <ClCompile Include="entities\creature\creature_groups.cpp" />
+    <ClCompile Include="entities\creature\enuminfo_creature_data.cpp" />
+    <ClCompile Include="entities\creature\gossip_def.cpp" />
+    <ClCompile Include="entities\creature\temporary_summon.cpp" />
+    <ClCompile Include="entities\dynamic_object\dynamic_object.cpp" />
+    <ClCompile Include="entities\game_object\game_object.cpp" />
+    <ClCompile Include="entities\item\bag.cpp" />
+    <ClCompile Include="entities\item\item.cpp" />
+    <ClCompile Include="entities\item\item_enchantment_mgr.cpp" />
+    <ClCompile Include="entities\item\item_template.cpp" />
+    <ClCompile Include="entities\object\object.cpp" />
+    <ClCompile Include="entities\object\object_guid.cpp" />
+    <ClCompile Include="entities\object\object_pos_selector.cpp" />
+    <ClCompile Include="entities\object\position.cpp" />
+    <ClCompile Include="entities\object\update_data.cpp" />
+    <ClCompile Include="entities\pet\pet.cpp" />
+    <ClCompile Include="entities\player\cinematic_mgr.cpp" />
+    <ClCompile Include="entities\player\kill_rewarder.cpp" />
+    <ClCompile Include="entities\player\player.cpp" />
+    <ClCompile Include="entities\player\player_taxi.cpp" />
+    <ClCompile Include="entities\player\social_mgr.cpp" />
+    <ClCompile Include="entities\player\trade_data.cpp" />
+    <ClCompile Include="entities\totem\totem.cpp" />
+    <ClCompile Include="entities\transport\transport.cpp" />
+    <ClCompile Include="entities\unit\enuminfo_unit_defines.cpp" />
+    <ClCompile Include="entities\unit\stat_system.cpp" />
+    <ClCompile Include="entities\unit\unit.cpp" />
+    <ClCompile Include="entities\vehicle\vehicle.cpp" />
     <ClCompile Include="game_logic_lib.cpp" />
     <ClCompile Include="game_logic_module.cpp" />
+    <ClCompile Include="globals\object_accessor.cpp" />
+    <ClCompile Include="globals\object_mgr.cpp" />
+    <ClCompile Include="server\opcodes.cpp" />
+    <ClCompile Include="server\packet.cpp" />
+    <ClCompile Include="server\world_session.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="addons_module\addons_module.h" />
+    <ClInclude Include="common\game_time.h" />
+    <ClInclude Include="common\iterator_pair.h" />
+    <ClInclude Include="common\shared_defines.h" />
+    <ClInclude Include="common\smart_enum.h" />
+    <ClInclude Include="common\timer.h" />
+    <ClInclude Include="dbc_stores\dbc_db_loader.h" />
+    <ClInclude Include="dbc_stores\dbc_enums.h" />
+    <ClInclude Include="dbc_stores\dbc_fileloader.h" />
+    <ClInclude Include="dbc_stores\dbc_fmt.h" />
+    <ClInclude Include="dbc_stores\dbc_module.h" />
+    <ClInclude Include="dbc_stores\dbc_storage_iterator.h" />
+    <ClInclude Include="dbc_stores\dbc_store.h" />
+    <ClInclude Include="dbc_stores\dbc_stores.h" />
+    <ClInclude Include="dbc_stores\dbc_structure.h" />
+    <ClInclude Include="entities\corpse\corpse.h" />
+    <ClInclude Include="entities\creature\creature.h" />
+    <ClInclude Include="entities\creature\creature_data.h" />
+    <ClInclude Include="entities\creature\creature_groups.h" />
+    <ClInclude Include="entities\creature\gossip_def.h" />
+    <ClInclude Include="entities\creature\temporary_summon.h" />
+    <ClInclude Include="entities\dynamic_object\dynamic_object.h" />
+    <ClInclude Include="entities\game_object\game_object.h" />
+    <ClInclude Include="entities\game_object\game_object_data.h" />
+    <ClInclude Include="entities\item\bag.h" />
+    <ClInclude Include="entities\item\item.h" />
+    <ClInclude Include="entities\item\item_defines.h" />
+    <ClInclude Include="entities\item\item_enchantment_mgr.h" />
+    <ClInclude Include="entities\item\item_template.h" />
+    <ClInclude Include="entities\object\g3d_position.hpp" />
+    <ClInclude Include="entities\object\movement_info.h" />
+    <ClInclude Include="entities\object\object.h" />
+    <ClInclude Include="entities\object\object_defines.h" />
+    <ClInclude Include="entities\object\object_guid.h" />
+    <ClInclude Include="entities\object\object_pos_selector.h" />
+    <ClInclude Include="entities\object\position.h" />
+    <ClInclude Include="entities\object\update_data.h" />
+    <ClInclude Include="entities\object\update_fields.h" />
+    <ClInclude Include="entities\object\update_field_flags.h" />
+    <ClInclude Include="entities\object\update_mask.h" />
+    <ClInclude Include="entities\pet\pet.h" />
+    <ClInclude Include="entities\pet\pet_defines.h" />
+    <ClInclude Include="entities\player\cinematic_mgr.h" />
+    <ClInclude Include="entities\player\equipment_set.h" />
+    <ClInclude Include="entities\player\kill_rewarder.h" />
+    <ClInclude Include="entities\player\player.h" />
+    <ClInclude Include="entities\player\player_taxi.h" />
+    <ClInclude Include="entities\player\social_mgr.h" />
+    <ClInclude Include="entities\player\trade_data.h" />
+    <ClInclude Include="entities\totem\totem.h" />
+    <ClInclude Include="entities\transport\transport.h" />
+    <ClInclude Include="entities\unit\unit.h" />
+    <ClInclude Include="entities\unit\unit_defines.h" />
+    <ClInclude Include="entities\vehicle\vehicle.h" />
+    <ClInclude Include="entities\vehicle\vehicle_defines.h" />
     <ClInclude Include="game_logic_lib.h" />
     <ClInclude Include="game_logic_module.h" />
+    <ClInclude Include="globals\object_accessor.h" />
+    <ClInclude Include="globals\object_mgr.h" />
+    <ClInclude Include="server\byte_buffer.hpp" />
+    <ClInclude Include="server\opcodes.h" />
+    <ClInclude Include="server\packet.h" />
+    <ClInclude Include="server\world_packet.h" />
+    <ClInclude Include="server\world_session.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -117,5 +117,8 @@
     <ClInclude Include="logic\IGameLogicModule.h">
       <Filter>logic</Filter>
     </ClInclude>
+    <ClInclude Include="logic\IDBCModule.h">
+      <Filter>logic</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

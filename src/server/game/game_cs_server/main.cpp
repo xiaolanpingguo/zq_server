@@ -11,6 +11,7 @@ using namespace zq;
 #pragma comment(lib, "cryptography_d.lib")
 #pragma comment(lib, "data_agent_d.lib")
 #pragma comment(lib, "zlib_d.lib")
+#pragma comment(lib, "g3dlib_d.lib")
 #pragma comment(lib, "game_client_server_d.lib")
 #pragma comment(lib, "game_logic_d.lib")
 #endif

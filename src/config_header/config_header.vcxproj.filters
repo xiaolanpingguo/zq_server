@@ -4,5 +4,6 @@
     <ClInclude Include="csv_parser.hpp" />
     <ClInclude Include="cfg_redis.hpp" />
     <ClInclude Include="cfg_server.hpp" />
+    <ClInclude Include="cfg_addones.hpp" />
   </ItemGroup>
 </Project>

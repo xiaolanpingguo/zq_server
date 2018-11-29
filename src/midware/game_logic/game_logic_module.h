@@ -36,7 +36,11 @@ public:
 	bool handleAuthSession(WorldSession* session, WorldPacket& recvPacket);
 	bool handlePing(WorldSession* session, WorldPacket& recvPacket);
 	bool handleKeepLive(WorldSession* session, WorldPacket& recvPacket);
-	void handleSendAuthSession();
+	bool handleReadyForAccountDataTimes(WorldSession* session, WorldPacket& recvPacket);
+	bool handleRealmSplitOpcode(WorldSession* session, WorldPacket& recvPacket);
+	bool handleCharEnumOpcode(WorldSession* session, WorldPacket& recvPacket);
+	bool handleCharCreateOpcode(WorldSession* session, WorldPacket& recvPacket);
+	bool handleCharDeleteOpcode(WorldSession* session, WorldPacket& recvPacket);
 
 	void readAddonsInfo(WorldSession* session, ByteBuffer& data);
 

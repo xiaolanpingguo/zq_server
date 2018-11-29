@@ -24,16 +24,7 @@
     <ClCompile Include="game_cs_server.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="opcodes.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="game_socket.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="packet.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="world_session.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,19 +38,7 @@
     <ClInclude Include="game_cs_server.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="opcodes.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="game_socket.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="packet.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="world_packet.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="world_session.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

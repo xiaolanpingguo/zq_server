@@ -1,36 +1,492 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Text Include="CMakeLists.txt" />
+    <Filter Include="src">
+      <UniqueIdentifier>{6b9400da-51f9-44dc-bb70-1879c773073b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{598b52db-1ea7-46b1-8fe0-bde9db6f0b0d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="adler32.c" />
-    <ClCompile Include="compress.c" />
-    <ClCompile Include="crc32.c" />
-    <ClCompile Include="deflate.c" />
-    <ClCompile Include="gzclose.c" />
-    <ClCompile Include="gzlib.c" />
-    <ClCompile Include="gzread.c" />
-    <ClCompile Include="gzwrite.c" />
-    <ClCompile Include="infback.c" />
-    <ClCompile Include="inffast.c" />
-    <ClCompile Include="inflate.c" />
-    <ClCompile Include="inftrees.c" />
-    <ClCompile Include="trees.c" />
-    <ClCompile Include="uncompr.c" />
-    <ClCompile Include="zutil.c" />
+    <ClInclude Include="..\include\G3D\AABox.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Any.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\AreaMemoryManager.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Array.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\AtomicInt32.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\BIN.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\BinaryFormat.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\BinaryInput.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\BinaryOutput.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\BoundsTrait.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Box.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Box2D.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\BumpMapPreprocess.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Capsule.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\CollisionDetection.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Color1.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Color3.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Color4.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Cone.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\constants.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\ConvexPolyhedron.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\CoordinateFrame.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Crypto.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Cylinder.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\debug.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\debugAssert.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\debugPrintf.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\enumclass.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\EqualsTrait.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\FileNotFound.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\FileSystem.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\fileutils.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\filter.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\format.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Frustum.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\G3D.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\G3DAll.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\g3dfnmatch.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\G3DGameUnits.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\g3dmath.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\GMutex.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\GThread.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\GUniqueID.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\HashTrait.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Image1.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Image3.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Image4.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\ImageFormat.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Intersect.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\KDTree.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Line.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\LineSegment.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Log.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Map2D.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Matrix.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Matrix2.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Matrix3.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Matrix4.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\MemoryManager.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\MeshAlg.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\MeshBuilder.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\NetAddress.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\netheaders.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\NetworkDevice.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\networkHelpers.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\ParseError.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\PhysicsFrame.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\PhysicsFrameSpline.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Plane.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\platform.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Pointer.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\PointHashGrid.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\PointKDTree.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\PositionTrait.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\PrecomputedRandom.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\prompt.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Quat.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Queue.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Random.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Ray.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Rect2D.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\ReferenceCount.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\RegistryUtil.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\serialize.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Set.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\SmallArray.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\SpawnBehavior.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Sphere.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Spline.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\SplineExtrapolationMode.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\splinefunc.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Stopwatch.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\stringutils.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\System.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Table.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\TextInput.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\TextOutput.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\ThreadSet.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Triangle.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\uint128.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\units.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\unorm8.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\unorm16.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\UprightFrame.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Vector2.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Vector2int16.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Vector2int32.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Vector2unorm16.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Vector3.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Vector3int16.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Vector3int32.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Vector4.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Vector4int8.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\vectorMath.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\WeakCache.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\Welder.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\WrapMode.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\G3D\XML.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="crc32.h" />
-    <ClInclude Include="deflate.h" />
-    <ClInclude Include="gzguts.h" />
-    <ClInclude Include="inffast.h" />
-    <ClInclude Include="inffixed.h" />
-    <ClInclude Include="inflate.h" />
-    <ClInclude Include="inftrees.h" />
-    <ClInclude Include="trees.h" />
-    <ClInclude Include="zconf.h" />
-    <ClInclude Include="zlib.h" />
-    <ClInclude Include="zutil.h" />
+    <ClCompile Include="..\source\AABox.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Any.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\AnyTableReader.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\BinaryFormat.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\BinaryInput.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\BinaryOutput.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Box.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Capsule.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\CollisionDetection.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Crypto.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Cylinder.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\debugAssert.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\FileSystem.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\fileutils.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\format.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\g3dfnmatch.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\g3dmath.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\GThread.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Line.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\LineSegment.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Log.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Matrix3.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Matrix4.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\MemoryManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\PhysicsFrame.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Plane.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Quat.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Random.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Ray.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\RegistryUtil.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Sphere.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\stringutils.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\System.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\TextInput.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\TextOutput.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Triangle.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\uint128.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\UprightFrame.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Vector2.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Vector3.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Vector4.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

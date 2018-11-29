@@ -63,6 +63,36 @@
     <ClInclude Include="random.h">
       <Filter>header</Filter>
     </ClInclude>
+    <ClInclude Include="factory_holder.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="linked_list.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="object_registry.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="ref_manager.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="reference.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="type_list.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="containers.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="format.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="lib.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="parse.hpp">
+      <Filter>header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="format.cpp">
