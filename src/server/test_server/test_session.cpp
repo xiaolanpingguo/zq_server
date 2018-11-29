@@ -4,9 +4,6 @@
 #include <iostream>
 #include "interface_header/base/IRedislModule.h"
 
-#if ZQ_PLATFORM == ZQ_PLATFORM_UNIX
-#include <libgo/coroutine.h>
-#endif
 
 using namespace std;
 
@@ -25,7 +22,7 @@ void foo(TestSession* session)
 	cout << "i: " << i << endl;
 }
 
-TestSession::TestSession(tcp::socket&& socket)
+TestSession::TestSession(tcp_t::socket&& socket)
 	:InternalSocket(std::move(socket))
 {
 

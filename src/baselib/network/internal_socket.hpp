@@ -15,7 +15,7 @@ using InternalSocketPtr = std::shared_ptr<InternalSocket>;
 class InternalSocket : public Socket<InternalSocket>
 {
 public:
-	InternalSocket(tcp::socket&& socket)
+	InternalSocket(tcp_t::socket&& socket)
 		:Socket(std::move(socket))
 	{
 		headerLengthBuffer_.resize(INT_HEADER_LENTH);

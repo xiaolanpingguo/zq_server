@@ -17,7 +17,7 @@ class TestSession : public InternalSocket
 {
 public:
 
-	TestSession(tcp::socket&& socket);
+	TestSession(tcp_t::socket&& socket);
 	~TestSession();
 
 	void start() override;
