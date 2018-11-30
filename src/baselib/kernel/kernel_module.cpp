@@ -45,7 +45,6 @@ void KernelModule::initRandom()
 bool KernelModule::init()
 {
     classModule_ = libManager_->findModule<IClassModule>();
-    logModule_ = libManager_->findModule<ILogModule>();
 
 	initRandom();
 

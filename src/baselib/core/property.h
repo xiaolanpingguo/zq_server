@@ -1,5 +1,6 @@
 #pragma once
 
+
 #include <list>
 #include "data_list.hpp"
 #include "interface_header/base/platform.h"
@@ -17,6 +18,7 @@ using ArrayPropertyEventFunT = std::function<void(const std::string&, const Vari
 
 class Property
 {
+	//using VariantData = std::variant<int64, double, std::string, Guid>;
 	using VecPropertyCbT = std::vector<PropertyEventFunT>;
 public:
 	Property(const std::string& strPropertyName, const EN_DATA_TYPE varType)
@@ -25,9 +27,131 @@ public:
 	{
 	}
 
+	Property(EN_DATA_TYPE varType = TDATA_UNKNOWN): dataType_(varType) {}
+	Property(const Property& prop) : dataType_(prop.dataType_), vData_(prop.vData_) {}
+	Property(Property&& prop) : dataType_(prop.dataType_), vData_(std::move(prop.vData_)){}
+
+	Property& operator=(const Property& right)
+	{
+		if (this != &right)
+		{
+			dataType_ = right.dataType_;
+			vData_ = right.vData_;
+		}
+
+		return *this;
+	}
+
+	Property& operator=(Property&& right)
+	{
+		if (this != &right)
+		{
+			dataType_ = right.dataType_;
+			vData_ = std::move(right.vData_);
+		}
+
+		return *this;
+	}
+
+	bool operator==(const Property& right)
+	{
+		if (right.dataType_ == this->dataType_)
+		{
+			return vData_ == vData_;
+		}
+
+		return false;
+	}
+
 	virtual ~Property() = default;
 
 	template <typename T>
+	void setValue(const T& v)
+	{
+		if constexpr (std::is_integral_v<T>)
+		{
+			VariantData	vd(TDATA_INT64);
+			vd.variantData_ = (int64)v;
+			setData(std::move(vd));
+		}
+		else if constexpr (std::is_floating_point_v<T>)
+		{
+			VariantData	vd(TDATA_DOUBLE);
+			vd.variantData_ = (double)v;
+			setData(std::move(vd));
+		}
+		else if constexpr (std::is_same_v<std::string, T>)
+		{
+			VariantData	vd(TDATA_STRING);
+			vd.variantData_ = (std::string)(v);
+			setData(std::move(vd));
+		}
+		else if constexpr (std::is_same_v<Guid, T>)
+		{
+			VariantData	vd(TDATA_GUID);
+			vd.variantData_ = (Guid)v;
+			setData(std::move(vd));
+		}
+		else
+		{
+			static_assert(false, "property: unsupport type!");
+		}
+	}
+
+	//template <typename T>
+	//decltype(auto) getValue()
+	//{
+	//	if constexpr (std::is_integral_v<T>)
+	//	{
+	//		if (isIntegralType(getType()))
+	//			return vData_.variantData_.get<int64>();
+	//		
+	//		printError(getType());
+	//		return VALID_INT;
+	//	}
+	//	else if constexpr (std::is_floating_point_v<T>)
+	//	{
+	//		if (isFloatingType(getType()))
+	//			return vData_.variantData_.get<double>();
+
+	//		printError(getType());
+	//		return VALID_FLOAT;
+	//	}
+	//	else if constexpr (std::is_same_v<std::string, T>)
+	//	{
+	//		if (isStringType(getType()))
+	//			return vData_.variantData_.get<std::string>();
+
+	//		printError(getType());
+	//		return NULL_STR;
+	//	}
+	//	else if constexpr (std::is_same_v<Guid, T>)
+	//	{
+	//		if (isGuidType(getType()))
+	//			return vData_.variantData_.get<Guid>();
+
+	//		printError(getType());
+	//		return NULL_GUID;
+	//	}
+	//	else
+	//	{
+	//		static_assert(false, "property: unsupport type!");
+	//	}
+	//}
+
+	void printError(EN_DATA_TYPE type)
+	{
+		LOG_ERROR << fmt::format("type error, type: {}", dataType2Str(type));
+	}
+
+
+
+
+
+
+
+
+	/*template <typename T>
 	typename std::enable_if<std::is_integral<T>::value>::type setValue(const T& v)
 	{
 		VariantData	vd(TDATA_INT64);
@@ -70,58 +194,46 @@ public:
 		VariantData	vd(TDATA_OBJECT);
 		vd.variantData_ = (Guid)v;
 		setData(std::move(vd));
-	}
+	}*/
 
 	template <typename T>
 	typename std::enable_if<std::is_integral<T>::value, T>::type getValue()
 	{
 		if (isIntegralType(getType()))
-		{
-			return (T)vData_.variantData_.get<int64>();
-		}
-		else
-		{
-			return VALID_INT;
-		}
+			return std::get<int64>(vData_.variantData_);
+
+		printError(getType());
+		return VALID_INT;
 	}
 
 	template <typename T>
 	typename std::enable_if<std::is_floating_point<T>::value, T>::type getValue()
 	{
 		if (isFloatingType(getType()))
-		{
-			return (T)vData_.variantData_.get<double>();
-		}
-		else
-		{
-			return VALID_FLOAT;
-		}
+			return std::get<double>(vData_.variantData_);
+
+		printError(getType());
+		return VALID_FLOAT;
 	}
 
 	template <typename T>
 	typename std::enable_if<std::is_same<std::string, T>::value, T>::type getValue()
 	{
 		if (isStringType(getType()))
-		{
-			return (T)vData_.variantData_.get<std::string>();
-		}
-		else
-		{
-			return NULL_STR;
-		}
+			return std::get<std::string>(vData_.variantData_);
+
+		printError(getType());
+		return NULL_STR;
 	}
 
 	template <typename T>
 	typename std::enable_if<std::is_same<Guid, T>::value, T>::type getValue()
 	{
-		if (isStringType(getType()))
-		{
-			return (T)vData_.variantData_.get<Guid>();
-		}
-		else
-		{
-			return NULL_GUID;
-		}
+		if (isGuidType(getType()))
+			return std::get<Guid>(vData_.variantData_);
+
+		printError(getType());
+		return NULL_GUID;
 	}
 
 	virtual const EN_DATA_TYPE getType() const { return dataType_; }

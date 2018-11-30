@@ -1,7 +1,6 @@
 #include <algorithm>
 #include "redis_client.h"
 #include "redis_module.h"
-#include "baselib/message/config_define.hpp"
 #include "config_header/cfg_redis.hpp"
 
 
@@ -20,10 +19,7 @@ RedisModule::~RedisModule()
 
 bool RedisModule::init()
 {
-	classModule_ = libManager_->findModule<IClassModule>();
-	logModule_ = libManager_->findModule<ILogModule>();
 	configModule_ = libManager_->findModule<IConfigModule>();
-
 	configModule_->create<CSVRedis>("cfg_redis.csv");
 
 	return true;

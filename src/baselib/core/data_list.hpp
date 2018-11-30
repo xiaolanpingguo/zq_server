@@ -4,7 +4,7 @@
 #include "memory_counter.hpp"
 #include "interface_header/base/uuid.h"
 #include "interface_header/base/platform.h"
-#include "baselib/base_code/variant.hpp"
+#include <variant>
 #include <limits>
 
 namespace zq{
@@ -22,6 +22,23 @@ enum EN_DATA_TYPE
     TDATA_MAX,
 };
 
+inline std::string dataType2Str(EN_DATA_TYPE type)
+{
+	switch (type)
+	{
+	case TDATA_UNKNOWN:	return "data_unknown";
+	case TDATA_INT64: return "data_int64";
+	case TDATA_DOUBLE:	return "data_double";
+	case TDATA_STRING:	return "data_string";
+	case TDATA_GUID:  return "data_guid";
+	case TDATA_VECTOR2:	 return "data_vector2";
+	case TDATA_VECTOR3:	return "data_vector3";
+	case TDATA_OBJECT:	return "data_object";
+	case TDATA_MAX:	 return "data_max";
+	default:	return "data_null";
+	}
+}
+
 inline bool invalidDataType(EN_DATA_TYPE type)
 {
 	if (type <= TDATA_UNKNOWN || type >= TDATA_MAX)
@@ -34,35 +51,22 @@ inline bool invalidDataType(EN_DATA_TYPE type)
 
 inline bool isIntegralType(EN_DATA_TYPE type)
 {
-	switch (type)
-	{
-	case TDATA_INT64:
-		return true;
-	}
-
-	return false;
+	return type == TDATA_INT64;
 }
 
 inline bool isFloatingType(EN_DATA_TYPE type)
 {
-	switch (type)
-	{
-	case TDATA_DOUBLE:
-		return true;
-	}
-
-	return false;
+	return type == TDATA_DOUBLE;
 }
 
 inline bool isStringType(EN_DATA_TYPE type)
 {
-	switch (type)
-	{
-	case TDATA_STRING:
-		return true;
-	}
+	return type == TDATA_STRING;
+}
 
-	return false;
+inline bool isGuidType(EN_DATA_TYPE type)
+{
+	return type == TDATA_GUID;
 }
 
 const static std::string NULL_STR = "";
@@ -78,19 +82,19 @@ struct VariantData
 		type_ = eType;
 		if (isIntegralType(type_))
 		{
-			variantData_.set<int64>(VALID_INT);
+			variantData_ = VALID_INT;
 		}
 		else if (isFloatingType(type_))
 		{
-			variantData_.set<double>(VALID_FLOAT);
+			variantData_ = VALID_FLOAT;
 		}
 		else if (isStringType(type_))
 		{
-			variantData_.set<std::string>(NULL_STR);
+			variantData_ = NULL_STR;
 		}
 		else if (type_ == TDATA_GUID)
 		{
-			variantData_.set<Guid>(NULL_GUID);
+			variantData_ = NULL_GUID;
 		}
 	}
 
@@ -147,7 +151,7 @@ struct VariantData
 	}
 
 	EN_DATA_TYPE type_;
-	mapbox::util::variant<int64, double, std::string, Guid> variantData_;
+	std::variant<int64, double, std::string, Guid> variantData_;
 };
 
 //class DataList :public MemoryCounter<DataList>

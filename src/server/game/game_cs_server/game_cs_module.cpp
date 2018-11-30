@@ -40,7 +40,7 @@ bool GameCSModule::initEnd()
 				strLog << "-----------game_cs_server is listen on external net-----------" << std::endl;
 				strLog << "listen ext_address: " << ext_ip + ":" + std::to_string(ext_port) << std::endl;
 				std::cout << strLog.str() << std::endl;
-				LOG_INFO << strLog.str();
+				LOG_INFO << strLog.str(); 
 			}
 		}
 	}

@@ -4,7 +4,6 @@
 #include "baselib/core/IObject.h"
 #include "baselib/core/data_list.hpp"
 #include "interface_header/base/uuid.h"
-#include "interface_header/base/ILogModule.h"
 #include "interface_header/base/IKernelModule.h"
 #include "interface_header/base/IClassModule.h"
 
@@ -45,7 +44,6 @@ private:
 	Guid curExeObject_;
 	uint64 lastActTime_;
 
-	ILogModule* logModule_;
 	IClassModule* classModule_;
 };
 

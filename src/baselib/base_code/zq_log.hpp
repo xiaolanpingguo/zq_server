@@ -12,6 +12,7 @@
 #include <fstream>
 #include <sstream> // std::ostringstream
 #include <iomanip> // std::put_time
+#include "format.hpp"
 
 #if defined(_WIN32) || defined(_WIN64)
 	#pragma warning(disable: 4996)	// std::localtime
@@ -737,7 +738,6 @@ private:
 
 
 
-//»’÷æ
 class LogSingle
 {
 public:

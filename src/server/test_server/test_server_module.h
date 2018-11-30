@@ -2,7 +2,6 @@
 
 #include "interface_header/base/IKernelModule.h"
 #include "interface_header/base/IClassModule.h"
-#include "interface_header/base/ILogModule.h"
 #include "interface_header/base/ITestServerModule.h"
 #include "interface_header/base/IEventModule.h"
 #include "interface_header/base/IHttpServerModule.h"
@@ -45,7 +44,6 @@ private:
 
 	IKernelModule* kernelModule_;
 	IClassModule* classModule_;
-	ILogModule* logModule_;
 	IHttpServerModule* httpServerModule_;
 	IHttpClientModule* httpClientModule_;
 	IMessageDispatcherModule* messageDispatcherModule_;

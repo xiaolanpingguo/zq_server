@@ -82,6 +82,7 @@
       <SDLCheck>false</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)\src;$(SolutionDir)\src\dependencies\rapidjson-1.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/std:c++17 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -124,17 +125,14 @@
     <ClInclude Include="base64.h" />
     <ClInclude Include="containers.hpp" />
     <ClInclude Include="factory_holder.hpp" />
-    <ClInclude Include="format.h" />
     <ClInclude Include="format.hpp" />
     <ClInclude Include="function_message_bus.hpp" />
     <ClInclude Include="function_traits.hpp" />
     <ClInclude Include="lexical_cast.hpp" />
-    <ClInclude Include="lib.hpp" />
     <ClInclude Include="linked_list.hpp" />
     <ClInclude Include="modules.hpp" />
     <ClInclude Include="object_registry.hpp" />
     <ClInclude Include="optional.hpp" />
-    <ClInclude Include="parse.hpp" />
     <ClInclude Include="producer_consumer_queue.hpp" />
     <ClInclude Include="random.h" />
     <ClInclude Include="rapidjson_parse.hpp" />
@@ -144,13 +142,10 @@
     <ClInclude Include="type_list.hpp" />
     <ClInclude Include="util.h" />
     <ClInclude Include="type_name.hpp" />
-    <ClInclude Include="variant.h" />
-    <ClInclude Include="variant.hpp" />
     <ClInclude Include="zq_log.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="base64.cpp" />
-    <ClCompile Include="format.cpp" />
     <ClCompile Include="random.cpp" />
     <ClCompile Include="sha1.cpp" />
     <ClCompile Include="util.cpp" />

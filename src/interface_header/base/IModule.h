@@ -4,7 +4,6 @@
 #include <string_view>
 #include "ILibManager.h"
 #include "baselib/core/map_ex.hpp"
-#include "baselib/core/data_list.hpp"
 
 
 namespace zq {

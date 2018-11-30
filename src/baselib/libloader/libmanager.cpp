@@ -6,7 +6,6 @@
 #include "interface_header/base/ILib.h"
 #include "self_register_factory.hpp"
 #include "interface_header/base/IClassModule.h"
-#include "interface_header/base/ILogModule.h"
 #include "interface_header/base/IConsoleCommandModule.h"
 #include "baselib/base_code/util.h"
 #include "baselib/message/config_define.hpp"

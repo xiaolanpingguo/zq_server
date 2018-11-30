@@ -1,6 +1,4 @@
 #include "proto_json_module.h"
-
-#include "baselib/base_code/format.h"
 #include <google/protobuf/message.h>
 #include <rapidjson/writer.h>
 #include <rapidjson/reader.h>

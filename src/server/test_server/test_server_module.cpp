@@ -13,7 +13,6 @@ bool TestServerModule::init()
 {
 	kernelModule_ = libManager_->findModule<IKernelModule>();
 	classModule_ = libManager_->findModule<IClassModule>();
-	logModule_ = libManager_->findModule<ILogModule>();
 	httpServerModule_ = libManager_->findModule<IHttpServerModule>();
 	httpClientModule_ = libManager_->findModule<IHttpClientModule>();
 	messageDispatcherModule_ = libManager_->findModule<IMessageDispatcherModule>();

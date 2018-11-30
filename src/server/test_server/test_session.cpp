@@ -1,6 +1,6 @@
 #include "test_session.h"
 #include "baselib/libloader/libmanager.h"
-#include "baselib/base_code/format.h"
+
 #include <iostream>
 #include "interface_header/base/IRedislModule.h"
 

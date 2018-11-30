@@ -4,7 +4,7 @@
 #include "server/world_packet.h"
 #include "baselib/message/config_define.hpp"
 #include "baselib/message/game_db_account.pb.h"
-#include "baselib/base_code/format.h"
+
 #include "baselib/base_code/random.h"
 #include "dependencies/zlib/zlib.h"
 #include "midware/cryptography/sha1.h"

@@ -1,10 +1,7 @@
 #pragma once
 
-#include "interface_header/base/IClassModule.h"
-#include "interface_header/base/ILogModule.h"
-#include "interface_header/base/IElementModule.h"
 
-#include "database_worker_pool.h"
+#include "interface_header/base/IClassModule.h"
 #include "query_callback.h"
 
 namespace zq {

@@ -1,6 +1,8 @@
 #include "redis_lib.h"
 #include "redis_module.h"
-using namespace zq;
+
+
+namespace zq{
 
 #ifdef ZQ_DYNAMIC_PLUGIN
 
@@ -36,4 +38,6 @@ void RedisLib::install()
 void RedisLib::uninstall()
 {
 	UNREGISTER_MODULE(libManager_, IRedisModule, RedisModule)
+}
+
 }

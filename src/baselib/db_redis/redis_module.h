@@ -1,7 +1,6 @@
 #pragma once
 
-#include "interface_header/base/IClassModule.h"
-#include "interface_header/base/ILogModule.h"
+
 #include "interface_header/base/IRedislModule.h"
 #include "interface_header/base/IConfigModule.h"
 
@@ -32,10 +31,8 @@ public:
 
 protected:
 
-	IClassModule* classModule_;
-	ILogModule* logModule_;
-	IConfigModule* configModule_;
 
+	IConfigModule* configModule_;
 	RedisServerMapT serverMap_;
 };
 
