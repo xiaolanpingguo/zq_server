@@ -475,6 +475,7 @@ bool LibManager::createBackThread()
 
 bool LibManager::init()
 {
+	veclibName_.push_back("test_dll");
 	// ÓÃÓÚ¶¯Ì¬¿â
 	for (auto it = veclibName_.begin(); it != veclibName_.end(); ++it)
 	{

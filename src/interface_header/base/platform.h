@@ -113,7 +113,7 @@
 #endif
 
 
-#define USE_STATIC_LIB	1
+#define USE_STATIC_LIB	0
 #if USE_STATIC_LIB == 1
 // Linux compilers don't have symbol import/export directives.
 #       define ZQ_EXPORT
