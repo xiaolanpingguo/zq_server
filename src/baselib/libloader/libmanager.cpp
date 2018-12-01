@@ -11,6 +11,7 @@
 #include "baselib/message/config_define.hpp"
 #include "signal_handler.h"
 #include <future>
+#include "baselib/libloader/dynlib.h"
 
 #if ZQ_PLATFORM == ZQ_PLATFORM_WIN
 #include <windows.h>
@@ -22,7 +23,7 @@
 
 
 
-#ifndef ZQ_DYNAMIC_PLUGIN
+//#ifndef ZQ_DYNAMIC_PLUGIN
 
 #include "baselib/kernel/kernel.h"
 #include "baselib/network/network.h"
@@ -46,7 +47,7 @@
 #pragma comment(lib, "http_lib_d.lib")
 #endif
 
-#endif
+//#endif
 
 using namespace zq;
 
@@ -227,6 +228,10 @@ void LibManager::threadFunc()
 		{
 			LibManager::get_instance().processConsoleCmd(s);
 		}
+		else if (s.find("reload_dll=") != std::string::npos)
+		{
+			LibManager::get_instance().processConsoleCmd(s);
+		}
 	}
 }
 
@@ -289,6 +294,9 @@ bool LibManager::launch(std::initializer_list<ILib*>& libs, SERVER_TYPES server_
 
 	// 注册相关库
 	registerCommLib();
+
+	// 添加DLL
+	registerDll();
 
 	for (const auto& ref : libs)
 	{
@@ -475,18 +483,22 @@ bool LibManager::createBackThread()
 
 bool LibManager::init()
 {
-	veclibName_.push_back("test_dll");
 	// 用于动态库
 	for (auto it = veclibName_.begin(); it != veclibName_.end(); ++it)
 	{
-#ifdef ZQ_DYNAMIC_PLUGIN
+//#ifdef ZQ_DYNAMIC_PLUGIN
 		loadDynLibrary(*it);
-#endif
+//#endif
 	}
 
 	for (auto it = libInstanceMap_.begin(); it != libInstanceMap_.end(); ++it)
 	{
 		it->second->init();
+	}
+
+	for (auto& it : dllLibMap_)
+	{
+		it.second->getLib()->init();
 	}
 
 	return true;
@@ -520,11 +532,11 @@ void LibManager::unRegisterLib(ILib* lib)
 
 bool LibManager::reLoadDynLib(const std::string & lib_name)
 {
-	auto itInstance = libInstanceMap_.find(lib_name);
-	if (itInstance == libInstanceMap_.end())
-	{
-		return false;
-	}
+	//auto itInstance = libInstanceMap_.find(lib_name);
+	//if (itInstance == libInstanceMap_.end())
+	//{
+	//	return false;
+	//}
 
 	//ILib* pLib = itInstance->second;
 	//IModule* pModule = pLib->first();
@@ -537,29 +549,30 @@ bool LibManager::reLoadDynLib(const std::string & lib_name)
 	//	pModule = pLib->next();
 	//}
 
-	auto it = libMap_.find(lib_name);
-	if (it != libMap_.end())
+	auto it = dllLibMap_.find(lib_name);
+	if (it != dllLibMap_.end())
 	{
 		DynLib* pLib = it->second;
 		DLL_STOP_FUNC pFunc = (DLL_STOP_FUNC)pLib->getSymbol("dllStop");
 
 		if (pFunc)
 		{
-			pFunc(this);
+			
+			pFunc(this,it->second->getName());
 		}
 
 		pLib->unLoad();
 
 		delete pLib;
 		pLib = NULL;
-		libMap_.erase(it);
+		dllLibMap_.erase(it);
 	}
 
 	DynLib* pLib = new DynLib(lib_name);
 	bool bLoad = pLib->load();
 	if (bLoad)
 	{
-		libMap_.insert(std::make_pair(lib_name, pLib));
+		dllLibMap_.insert(std::make_pair(lib_name, pLib));
 
 		DLL_START_FUNC pFunc = (DLL_START_FUNC)pLib->getSymbol("dllStart");
 		if (!pFunc)
@@ -569,7 +582,9 @@ bool LibManager::reLoadDynLib(const std::string & lib_name)
 			return false;
 		}
 
-		pFunc(this);
+		pFunc(this,pLib);
+
+		pLib->getLib()->init();
 	}
 	else
 	{
@@ -590,14 +605,14 @@ bool LibManager::reLoadDynLib(const std::string & lib_name)
 #endif 
 	}
 
-	auto itReloadInstance = libInstanceMap_.begin();
-	for (; itReloadInstance != libInstanceMap_.end(); itReloadInstance++)
-	{
-		if (lib_name != itReloadInstance->first)
-		{
-			itReloadInstance->second->onReload();
-		}
-	}
+	//auto itReloadInstance = libInstanceMap_.begin();
+	//for (; itReloadInstance != libInstanceMap_.end(); itReloadInstance++)
+	//{
+	//	if (lib_name != itReloadInstance->first)
+	//	{
+	//		itReloadInstance->second->onReload();
+	//	}
+	//}
 	return true;
 }
 
@@ -610,6 +625,38 @@ ILib* LibManager::findLib(const std::string& lib_name)
     }
 
     return nullptr;
+}
+
+void zq::LibManager::registerDynLib(ILib * ilib,DynLib* dynLib)
+{
+	std::string name = dynLib->getName();
+	auto idx = name.find_last_of("_d.dll");
+	if (findDynLib(name.substr(0,idx)))
+		return;
+	dynLib->setLib(ilib);
+	ilib->install();
+
+	return;
+}
+
+void zq::LibManager::unRegisterDynLib(DynLib* dynLib)
+{
+	if (dynLib != nullptr)
+	{
+		dynLib->getLib()->uninstall();
+		delete dynLib->getLib();
+		dynLib->setLib(nullptr);
+	}
+}
+
+DynLib* zq::LibManager::findDynLib(const std::string& lib_name)
+{
+	auto idx = lib_name.find("_d.dll");
+	auto it = dllLibMap_.find(lib_name.substr(0, idx));
+	if (it != dllLibMap_.end())
+		return it->second;
+	else
+		return nullptr;
 }
 
 bool LibManager::run()
@@ -756,15 +803,15 @@ bool LibManager::finalize()
 
 bool LibManager::loadDynLibrary(const std::string& lib_name)
 {
-    auto it = libMap_.find(lib_name);
-    if (it == libMap_.end())
+    auto it = dllLibMap_.find(lib_name);
+    if (it == dllLibMap_.end())
     {
         DynLib* pLib = new DynLib(lib_name);
         bool bLoad = pLib->load();
 
         if (bLoad)
         {
-            libMap_.insert(std::make_pair(lib_name, pLib));
+            dllLibMap_.insert(std::make_pair(lib_name, pLib));
 
             DLL_START_FUNC pFunc = (DLL_START_FUNC)pLib->getSymbol("dllStart");
             if (!pFunc)
@@ -774,7 +821,7 @@ bool LibManager::loadDynLibrary(const std::string& lib_name)
                 return false;
             }
 
-            pFunc(this);
+            pFunc(this,pLib);
 
             return true;
         }
@@ -803,22 +850,22 @@ bool LibManager::loadDynLibrary(const std::string& lib_name)
 
 bool LibManager::unLoadDynLibrary(const std::string& lib_name)
 {
-    auto it = libMap_.find(lib_name);
-    if (it != libMap_.end())
+    auto it = dllLibMap_.find(lib_name);
+    if (it != dllLibMap_.end())
     {
         DynLib* pLib = it->second;
         DLL_STOP_FUNC pFunc = (DLL_STOP_FUNC)pLib->getSymbol("dllStop");
 
         if (pFunc)
         {
-            pFunc(this);
+            pFunc(this,it->second->getName());
         }
 
         pLib->unLoad();
 
         delete pLib;
         pLib = nullptr;
-        libMap_.erase(it);
+        dllLibMap_.erase(it);
 
         return true;
     }
@@ -885,3 +932,8 @@ void LibManager::processConsoleCmd(const std::string& cmd)
 //{
 //	coroutineMgr_.go(std::move(fun));
 //}
+
+void LibManager::registerDll()
+{
+	veclibName_.push_back("test_dll");
+}

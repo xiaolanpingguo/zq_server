@@ -124,12 +124,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="console_command_module.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="test_server.cpp" />
     <ClCompile Include="test_server_module.cpp" />
     <ClCompile Include="test_session.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="console_command_module.h" />
     <ClInclude Include="test_server.h" />
     <ClInclude Include="test_server_module.h" />
     <ClInclude Include="test_session.h" />

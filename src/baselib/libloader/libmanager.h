@@ -4,13 +4,15 @@
 #include <map>
 #include <time.h>
 #include <unordered_map>
-#include "DynLib.h"
 #include "coroutine_manager.h"
 #include "interface_header/base/IModule.h"
 #include "interface_header/base/ILibManager.h"
 #include "interface_header/base/singleton.hpp"
 
+
+
 namespace zq {
+class DynLib;
 
 class LibManager : public ILibManager, public Singleton<LibManager>
 {
@@ -43,6 +45,11 @@ public:
 	void registerLib(ILib* ilib) override;
 	void unRegisterLib(ILib* ilib) override;
 	ILib* findLib(const std::string& lib_name) override;
+
+	// dynlib相关
+	void registerDynLib(ILib* ilib, DynLib* dynLib) override;
+	void unRegisterDynLib(DynLib* dynLib) override;
+	DynLib* findDynLib(const std::string& lib_name) override;
 
 	// 模块相关
 	void addModule(const std::string& strModuleName, IModule* pModule) override;
@@ -81,6 +88,9 @@ protected:
 
 	// 加载公共lib
 	void registerCommLib();
+
+	// 加载DLL
+	void registerDll();
 
 	// 处理后台命令
 	void processConsoleCmd(const std::string& cmd);
@@ -127,11 +137,11 @@ private:
 	using DynLibMap = std::map<std::string, DynLib*>;
 	using LibInstanceMap = std::map<std::string, ILib*>;
 	using ModuleInstanceMap = std::map<std::string, IModule*>;
-	using DLL_START_FUNC = void(*)(ILibManager* p);
-	using DLL_STOP_FUNC = void(*)(ILibManager* p);
+	using DLL_START_FUNC = void(*)(ILibManager* p,DynLib* dynLib);
+	using DLL_STOP_FUNC = void(*)(ILibManager* p,std::string dynName);
 
 	VecLibName veclibName_;
-	DynLibMap libMap_;
+	DynLibMap dllLibMap_;
 	LibInstanceMap libInstanceMap_;
 	ModuleInstanceMap moduleInstanceMap_;
 };

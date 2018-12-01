@@ -30,7 +30,7 @@ typedef struct HINSTANCE__* hInstance;
 #endif
 
 namespace zq {
-
+	class ILib;
 class DynLib
 {
 
@@ -39,6 +39,7 @@ public:
 	DynLib(const std::string& strName)
 	{
 		mbMain = false;
+		mLib = nullptr;
 		mstrName = strName;
 #ifdef ZQ_DEBUG_MODE
 		mstrName.append("_d");
@@ -76,12 +77,20 @@ public:
 
 	void* getSymbol(const char* szProcName);
 
+	bool setLib(ILib* plib);
+
+	ILib* getLib()
+	{
+		return mLib;
+	}
+
 protected:
 
 	std::string mstrName;
 	bool mbMain;
 
 	DYNLIB_HANDLE mInst;
+	ILib* mLib;
 };
 
 }
