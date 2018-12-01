@@ -568,7 +568,7 @@ bool LibManager::reLoadDynLib(const std::string & lib_name)
 		dllLibMap_.erase(it);
 	}
 
-	DynLib* pLib = new DynLib(lib_name);
+	DynLib* pLib = new DynLib(lib_name + "1");
 	bool bLoad = pLib->load();
 	if (bLoad)
 	{
