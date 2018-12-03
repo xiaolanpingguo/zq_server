@@ -228,7 +228,7 @@ void LibManager::threadFunc()
 		{
 			LibManager::get_instance().processConsoleCmd(s);
 		}
-		else if (s.find("reload_dll=") != std::string::npos)
+		else if (s.find("cmd=") != std::string::npos)
 		{
 			LibManager::get_instance().processConsoleCmd(s);
 		}
@@ -919,7 +919,7 @@ void LibManager::registerCommLib()
 	CREATE_LIB(this, LogLib);
 	CREATE_LIB(this, NetworkLib);
 	CREATE_LIB(this, MessageLib);
-	CREATE_LIB(this, RedisLib);
+//	CREATE_LIB(this, RedisLib);
 	CREATE_LIB(this, HttpLib);
 }
 

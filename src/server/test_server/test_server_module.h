@@ -9,6 +9,7 @@
 #include "interface_header/base/IMessageDispatcherModule.h"
 #include "interface_header/base/IRedislModule.h"
 #include "interface_header/base/ILogModule.h"
+#include <memory>
 
 
 namespace zq {
