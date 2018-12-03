@@ -24,6 +24,10 @@ namespace zq{
 
 #define DESTROY_LIB(pManager, className) pManager->unRegisterLib( pManager->findLib((#className)) );
 
+#define CREATE_DYN_LIB(pManager, className, dynLib)  ILib* pCreatePlugin##className = new className(pManager); pManager->registerDynLib( pCreatePlugin##className,(dynLib) );
+
+#define DESTROY_DYN_LIB(pManager, dllName) pManager->unRegisterDynLib( pManager->findDynLib((dllName)) );
+
 
 class ILibManager;
 class ILib : public IModule

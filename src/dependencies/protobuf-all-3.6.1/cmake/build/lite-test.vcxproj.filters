@@ -1,57 +1,57 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\lite_unittest.cc">
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\lite_unittest.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\arena_test_util.cc">
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\arena_test_util.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\map_lite_test_util.cc">
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\map_lite_test_util.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\test_util_lite.cc">
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\test_util_lite.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\map_lite_unittest.pb.cc">
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\map_lite_unittest.pb.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_lite.pb.cc">
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_lite.pb.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_public_lite.pb.cc">
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_public_lite.pb.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_lite.pb.cc">
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_lite.pb.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_no_arena_lite.pb.cc">
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_no_arena_lite.pb.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\7b4c67c08c51852eb88e57a92b955919\map_lite_unittest.pb.cc.rule">
+    <CustomBuild Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\e4c7abbe7a83c5f7f71cf427964d498c\map_lite_unittest.pb.cc.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\7b4c67c08c51852eb88e57a92b955919\unittest_import_lite.pb.cc.rule">
+    <CustomBuild Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\e4c7abbe7a83c5f7f71cf427964d498c\unittest_import_lite.pb.cc.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\7b4c67c08c51852eb88e57a92b955919\unittest_import_public_lite.pb.cc.rule">
+    <CustomBuild Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\e4c7abbe7a83c5f7f71cf427964d498c\unittest_import_public_lite.pb.cc.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\7b4c67c08c51852eb88e57a92b955919\unittest_lite.pb.cc.rule">
+    <CustomBuild Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\e4c7abbe7a83c5f7f71cf427964d498c\unittest_lite.pb.cc.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\7b4c67c08c51852eb88e57a92b955919\unittest_no_arena_lite.pb.cc.rule">
+    <CustomBuild Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\e4c7abbe7a83c5f7f71cf427964d498c\unittest_no_arena_lite.pb.cc.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{A6244DD2-D475-3C8C-A922-9BF5D77AB80D}</UniqueIdentifier>
+      <UniqueIdentifier>{538BE579-4DC8-3F20-B6D5-EA9B356B2CAB}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{0505E5F1-6F3F-35D2-B3EF-DD79A878064A}</UniqueIdentifier>
+      <UniqueIdentifier>{E6D2A2D0-1D24-3DFF-BC77-7FDFB10E5490}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

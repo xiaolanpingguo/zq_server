@@ -113,15 +113,15 @@
 #endif
 
 
-#define USE_STATIC_LIB	1
+#define USE_STATIC_LIB	0
 #if USE_STATIC_LIB == 1
 // Linux compilers don't have symbol import/export directives.
 #       define ZQ_EXPORT
 #       define ZQ_IMPORT
 #else 
 #  if ZQ_COMPILER == COMPILER_MICROSOFT
-#    define ZQ_EXPORT __declspec(dllexport)
-#    define ZQ_IMPORT __declspec(dllimport)
+#    define ZQ_EXPORT extern "C" __declspec(dllexport)
+#    define ZQ_IMPORT extern "C" __declspec(dllimport)
 #  elif ZQ_COMPILER == COMPILER_GNU
 #    define ZQ_EXPORT __attribute__((visibility("default")))
 #    define ZQ_IMPORT

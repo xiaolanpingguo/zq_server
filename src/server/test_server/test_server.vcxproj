@@ -81,6 +81,7 @@
       <SDLCheck>false</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)\src\dependencies\boost_1_67_0;$(SolutionDir)\src\dependencies\asio\asio\include;$(SolutionDir)\src\dependencies\openssl\include;$(SolutionDir)\src\dependencies\rapidjson-1.1.0\include;$(SolutionDir)\src;$(SolutionDir)\src\dependencies\protobuf-all-3.6.1\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/std:c++17 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)\bin\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -123,12 +124,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="console_command_module.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="test_server.cpp" />
     <ClCompile Include="test_server_module.cpp" />
     <ClCompile Include="test_session.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="console_command_module.h" />
     <ClInclude Include="test_server.h" />
     <ClInclude Include="test_server_module.h" />
     <ClInclude Include="test_session.h" />

@@ -1,4 +1,5 @@
-#include "DynLib.h"
+#include "dynlib.h"
+#include "interface_header/base/ILib.h"
 #if ZQ_PLATFORM == ZQ_PLATFORM_WIN
 #include <windows.h>
 #endif
@@ -23,4 +24,10 @@ bool DynLib::unLoad()
 void* DynLib::getSymbol(const char* szProcName)
 {
     return (DYNLIB_HANDLE)DYNLIB_GETSYM(mInst, szProcName);
+}
+
+bool DynLib::setLib(ILib* pLib)
+{
+	mLib = pLib;
+	return true;
 }

@@ -1,48 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug|x64">
+    <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
-      <Platform>x64</Platform>
+      <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|x64">
+    <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
-      <Platform>x64</Platform>
+      <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="MinSizeRel|x64">
+    <ProjectConfiguration Include="MinSizeRel|Win32">
       <Configuration>MinSizeRel</Configuration>
-      <Platform>x64</Platform>
+      <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="RelWithDebInfo|x64">
+    <ProjectConfiguration Include="RelWithDebInfo|Win32">
       <Configuration>RelWithDebInfo</Configuration>
-      <Platform>x64</Platform>
+      <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{F70F7AC6-8EC0-386B-A5F7-B004C18C108D}</ProjectGuid>
+    <ProjectGuid>{586875FC-49DB-3EAB-B845-3F0B73031809}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
-    <Platform>x64</Platform>
+    <Platform>Win32</Platform>
     <ProjectName>libprotoc</ProjectName>
     <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
@@ -56,26 +56,26 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\Debug\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">libprotoc.dir\Debug\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">libprotocd</TargetName>
-    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\Release\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">libprotoc.dir\Release\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">libprotoc</TargetName>
-    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\MinSizeRel\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">libprotoc.dir\MinSizeRel\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">libprotoc</TargetName>
-    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\RelWithDebInfo\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">libprotoc.dir\RelWithDebInfo\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">libprotoc</TargetName>
-    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">libprotoc.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">libprotocd</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">libprotoc.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">libprotoc</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">libprotoc.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">libprotoc</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">libprotoc.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">libprotoc</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.lib</TargetExt>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest\include;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest\include;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
       <AssemblerListingLocation>Debug/</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -95,10 +95,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;LIBPROTOC_EXPORTS;GOOGLE_PROTOBUF_CMAKE_BUILD;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest\include;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest\include;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest\include;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest\include;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -109,9 +109,9 @@
       <AdditionalOptions>%(AdditionalOptions) /ignore:4221</AdditionalOptions>
     </Lib>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest\include;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest\include;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
       <AssemblerListingLocation>Release/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
@@ -131,10 +131,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;LIBPROTOC_EXPORTS;GOOGLE_PROTOBUF_CMAKE_BUILD;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest\include;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest\include;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest\include;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest\include;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -145,9 +145,9 @@
       <AdditionalOptions>%(AdditionalOptions) /ignore:4221</AdditionalOptions>
     </Lib>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest\include;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest\include;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
       <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
@@ -167,10 +167,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;LIBPROTOC_EXPORTS;GOOGLE_PROTOBUF_CMAKE_BUILD;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest\include;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest\include;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest\include;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest\include;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -181,9 +181,9 @@
       <AdditionalOptions>%(AdditionalOptions) /ignore:4221</AdditionalOptions>
     </Lib>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest\include;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest\include;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
       <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
@@ -202,10 +202,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;LIBPROTOC_EXPORTS;GOOGLE_PROTOBUF_CMAKE_BUILD;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest\include;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest\include;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest\include;F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest\include;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -217,171 +217,171 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\code_generator.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\command_line_interface.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_enum.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_enum_field.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_extension.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_field.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_file.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_generator.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_helpers.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_map_field.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_message.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_message_field.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_padding_optimizer.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_primitive_field.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_service.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_string_field.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_doc_comment.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_enum.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_enum_field.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_field_base.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_generator.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_helpers.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_map_field.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_message.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_message_field.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_primitive_field.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_reflection_class.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_repeated_enum_field.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_repeated_message_field.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_repeated_primitive_field.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_source_generator_base.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_wrapper_field.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_context.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_doc_comment.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_enum.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_enum_field.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_enum_field_lite.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_enum_lite.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_extension.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_extension_lite.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_field.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_file.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_generator.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_generator_factory.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_helpers.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_lazy_message_field.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_lazy_message_field_lite.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_map_field.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_map_field_lite.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_message.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_message_builder.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_message_builder_lite.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_message_field.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_message_field_lite.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_message_lite.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_name_resolver.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_primitive_field.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_primitive_field_lite.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_service.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_shared_code_generator.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_string_field.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_string_field_lite.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\js\js_generator.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\js\well_known_types_embed.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_enum.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_enum_field.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_extension.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_field.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_file.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_generator.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_helpers.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_map_field.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_message.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_message_field.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_oneof.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_primitive_field.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\php\php_generator.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\plugin.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\plugin.pb.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\python\python_generator.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\ruby\ruby_generator.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\subprocess.cc" />
-    <ClCompile Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\zip_writer.cc" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_enum.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_enum_field.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_extension.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_field.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_file.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_helpers.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_map_field.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_message.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_message_field.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_message_layout_helper.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_options.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_padding_optimizer.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_primitive_field.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_service.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_string_field.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_doc_comment.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_enum.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_enum_field.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_field_base.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_helpers.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_map_field.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_message.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_message_field.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_options.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_primitive_field.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_reflection_class.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_repeated_enum_field.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_repeated_message_field.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_repeated_primitive_field.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_source_generator_base.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_wrapper_field.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_context.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_doc_comment.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_enum.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_enum_field.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_enum_field_lite.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_enum_lite.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_extension.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_extension_lite.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_field.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_file.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_generator_factory.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_helpers.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_lazy_message_field.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_lazy_message_field_lite.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_map_field.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_map_field_lite.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_message.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_message_builder.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_message_builder_lite.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_message_field.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_message_field_lite.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_message_lite.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_name_resolver.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_options.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_primitive_field.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_primitive_field_lite.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_service.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_shared_code_generator.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_string_field.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_string_field_lite.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_enum.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_enum_field.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_extension.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_field.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_file.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_helpers.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_map_field.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_message.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_message_field.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_oneof.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_primitive_field.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\subprocess.h" />
-    <ClInclude Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\zip_writer.h" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\code_generator.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\command_line_interface.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_enum.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_enum_field.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_extension.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_field.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_file.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_generator.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_helpers.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_map_field.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_message.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_message_field.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_padding_optimizer.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_primitive_field.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_service.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_string_field.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_doc_comment.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_enum.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_enum_field.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_field_base.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_generator.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_helpers.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_map_field.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_message.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_message_field.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_primitive_field.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_reflection_class.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_repeated_enum_field.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_repeated_message_field.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_repeated_primitive_field.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_source_generator_base.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_wrapper_field.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_context.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_doc_comment.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_enum.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_enum_field.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_enum_field_lite.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_enum_lite.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_extension.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_extension_lite.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_field.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_file.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_generator.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_generator_factory.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_helpers.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_lazy_message_field.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_lazy_message_field_lite.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_map_field.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_map_field_lite.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_message.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_message_builder.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_message_builder_lite.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_message_field.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_message_field_lite.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_message_lite.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_name_resolver.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_primitive_field.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_primitive_field_lite.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_service.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_shared_code_generator.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_string_field.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_string_field_lite.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\js\js_generator.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\js\well_known_types_embed.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_enum.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_enum_field.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_extension.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_field.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_file.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_generator.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_helpers.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_map_field.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_message.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_message_field.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_oneof.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_primitive_field.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\php\php_generator.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\plugin.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\plugin.pb.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\python\python_generator.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\ruby\ruby_generator.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\subprocess.cc" />
+    <ClCompile Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\zip_writer.cc" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_enum.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_enum_field.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_extension.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_field.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_file.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_helpers.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_map_field.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_message.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_message_field.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_message_layout_helper.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_options.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_padding_optimizer.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_primitive_field.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_service.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\cpp\cpp_string_field.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_doc_comment.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_enum.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_enum_field.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_field_base.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_helpers.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_map_field.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_message.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_message_field.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_options.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_primitive_field.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_reflection_class.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_repeated_enum_field.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_repeated_message_field.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_repeated_primitive_field.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_source_generator_base.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\csharp\csharp_wrapper_field.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_context.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_doc_comment.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_enum.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_enum_field.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_enum_field_lite.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_enum_lite.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_extension.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_extension_lite.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_field.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_file.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_generator_factory.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_helpers.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_lazy_message_field.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_lazy_message_field_lite.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_map_field.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_map_field_lite.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_message.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_message_builder.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_message_builder_lite.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_message_field.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_message_field_lite.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_message_lite.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_name_resolver.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_options.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_primitive_field.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_primitive_field_lite.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_service.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_shared_code_generator.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_string_field.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\java\java_string_field_lite.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_enum.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_enum_field.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_extension.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_field.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_file.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_helpers.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_map_field.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_message.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_message_field.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_oneof.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\objectivec\objectivec_primitive_field.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\subprocess.h" />
+    <ClInclude Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\compiler\zip_writer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\ZERO_CHECK.vcxproj">
-      <Project>{68C48B2B-4CB9-3224-AB5C-93C0E67AC657}</Project>
+    <ProjectReference Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\ZERO_CHECK.vcxproj">
+      <Project>{E212503B-9CD7-3B0A-802F-F5026CF5DF3F}</Project>
       <Name>ZERO_CHECK</Name>
     </ProjectReference>
-    <ProjectReference Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\libprotobuf.vcxproj">
-      <Project>{215C78AE-CE37-3921-97A6-EC3FA12D82A0}</Project>
+    <ProjectReference Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\libprotobuf.vcxproj">
+      <Project>{96230D4B-6DA7-35DC-BAB3-E427161C3B64}</Project>
       <Name>libprotobuf</Name>
     </ProjectReference>
   </ItemGroup>

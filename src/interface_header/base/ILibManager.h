@@ -6,7 +6,7 @@
 
 
 namespace zq {
-
+class DynLib;
 
 
 enum SERVER_TYPES : int
@@ -185,6 +185,14 @@ public:
 	virtual uint64 getNowTime() const = 0;
 
 	virtual bool getFileContent(const std::string &strFileName, std::string &strContent) = 0;
+
+	virtual bool reLoadDynLib(const std::string& lib_name) = 0;
+	virtual bool loadDynLibrary(const std::string& lib_name) = 0;
+	virtual bool unLoadDynLibrary(const std::string& lib_name) = 0;
+
+	virtual void registerDynLib(ILib* ilib,DynLib* dynLib) = 0;
+	virtual void unRegisterDynLib(DynLib* dynLib) = 0;
+	virtual DynLib* findDynLib(const std::string& lib_name) = 0;
 };
 
 }

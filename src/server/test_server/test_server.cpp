@@ -1,6 +1,6 @@
 #include "test_server.h"
 #include "test_server_module.h"
-
+#include "console_command_module.h"
 
 namespace zq {
 
@@ -36,11 +36,13 @@ const std::string TestServerLib::getLibName()
 void TestServerLib::install()
 {
     REGISTER_MODULE(libManager_, ITestServerModule, TestServerModule)
+	REGISTER_MODULE(libManager_, IConsoleCommandModule, ConsoleCommandModule)
 }
 
 void TestServerLib::uninstall()
 {
 	UNREGISTER_MODULE(libManager_, ITestServerModule, TestServerModule)
+	UNREGISTER_MODULE(libManager_, IConsoleCommandModule, ConsoleCommandModule)
 }
 
 }

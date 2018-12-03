@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\2aa9d4752bdc1e3d34100729e8c27a1d\check.rule">
+    <CustomBuild Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\e125554d31f8895b660fa53131556b55\check.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <None Include="F:\program\OSP\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\check" />
+    <None Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\check" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{A6244DD2-D475-3C8C-A922-9BF5D77AB80D}</UniqueIdentifier>
+      <UniqueIdentifier>{538BE579-4DC8-3F20-B6D5-EA9B356B2CAB}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

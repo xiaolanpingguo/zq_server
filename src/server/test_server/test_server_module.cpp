@@ -17,6 +17,7 @@ bool TestServerModule::init()
 	httpClientModule_ = libManager_->findModule<IHttpClientModule>();
 	messageDispatcherModule_ = libManager_->findModule<IMessageDispatcherModule>();
 	redisModule_ = libManager_->findModule<IRedisModule>();
+	logModule_ = libManager_->findModule<ILogModule>();
 
 	return true;
 }
