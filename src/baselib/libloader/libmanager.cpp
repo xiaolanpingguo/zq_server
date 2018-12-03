@@ -484,14 +484,14 @@ bool LibManager::createBackThread()
 bool LibManager::init()
 {
 	// ÓÃÓÚ¶¯Ì¬¿â
-	for (auto it = veclibName_.begin(); it != veclibName_.end(); ++it)
+	for (auto it = vecDllName_.begin(); it != vecDllName_.end(); ++it)
 	{
 //#ifdef ZQ_DYNAMIC_PLUGIN
 		loadDynLibrary(*it);
 //#endif
 	}
 
-	for (auto it = libInstanceMap_.begin(); it != libInstanceMap_.end(); ++it)
+	for (auto it = staticLibInstanceMap_.begin(); it != staticLibInstanceMap_.end(); ++it)
 	{
 		it->second->init();
 	}
@@ -509,7 +509,7 @@ void LibManager::registerLib(ILib* ilib)
     std::string lib_name = ilib->getLibName();
     if (!findLib(lib_name))
 	{
-		libInstanceMap_.insert(std::make_pair(lib_name, ilib));
+		staticLibInstanceMap_.insert(std::make_pair(lib_name, ilib));
 		ilib->install();
     }
 	else
@@ -520,13 +520,13 @@ void LibManager::registerLib(ILib* ilib)
 
 void LibManager::unRegisterLib(ILib* lib)
 {
-    auto it = libInstanceMap_.find(lib->getLibName());
-    if (it != libInstanceMap_.end())
+    auto it = staticLibInstanceMap_.find(lib->getLibName());
+    if (it != staticLibInstanceMap_.end())
     {
         it->second->uninstall();
         delete it->second;
         it->second = NULL;
-        libInstanceMap_.erase(it);
+        staticLibInstanceMap_.erase(it);
     }
 }
 
@@ -618,8 +618,8 @@ bool LibManager::reLoadDynLib(const std::string & lib_name)
 
 ILib* LibManager::findLib(const std::string& lib_name)
 {
-    auto it = libInstanceMap_.find(lib_name);
-    if (it != libInstanceMap_.end())
+    auto it = staticLibInstanceMap_.find(lib_name);
+    if (it != staticLibInstanceMap_.end())
     {
         return it->second;
     }
@@ -665,7 +665,7 @@ bool LibManager::run()
 
     bool bRet = true;
 
-    for (auto it = libInstanceMap_.begin(); it != libInstanceMap_.end(); ++it)
+    for (auto it = staticLibInstanceMap_.begin(); it != staticLibInstanceMap_.end(); ++it)
     {
         bool tembRet = it->second->run();
         bRet = bRet && tembRet;
@@ -738,8 +738,8 @@ IModule* LibManager::_findModule(const std::string& strModuleName)
 
 bool LibManager::initEnd()
 {
-    auto itAfterInstance = libInstanceMap_.begin();
-    for (; itAfterInstance != libInstanceMap_.end(); itAfterInstance++)
+    auto itAfterInstance = staticLibInstanceMap_.begin();
+    for (; itAfterInstance != staticLibInstanceMap_.end(); itAfterInstance++)
     {
         itAfterInstance->second->initEnd();
     }
@@ -749,8 +749,8 @@ bool LibManager::initEnd()
 
 bool LibManager::checkConfig()
 {
-    auto itCheckInstance = libInstanceMap_.begin();
-    for (; itCheckInstance != libInstanceMap_.end(); itCheckInstance++)
+    auto itCheckInstance = staticLibInstanceMap_.begin();
+    for (; itCheckInstance != staticLibInstanceMap_.end(); itCheckInstance++)
     {
         itCheckInstance->second->checkConfig();
     }
@@ -760,8 +760,8 @@ bool LibManager::checkConfig()
 
 bool LibManager::beforeShut()
 {
-    auto itBeforeInstance = libInstanceMap_.begin();
-    for (; itBeforeInstance != libInstanceMap_.end(); itBeforeInstance++)
+    auto itBeforeInstance = staticLibInstanceMap_.begin();
+    for (; itBeforeInstance != staticLibInstanceMap_.end(); itBeforeInstance++)
     {
         itBeforeInstance->second->beforeShut();
     }
@@ -771,8 +771,8 @@ bool LibManager::beforeShut()
 
 bool LibManager::shut()
 {
-	auto itInstance = libInstanceMap_.begin();
-    for (; itInstance != libInstanceMap_.end(); ++itInstance)
+	auto itInstance = staticLibInstanceMap_.begin();
+    for (; itInstance != staticLibInstanceMap_.end(); ++itInstance)
     {
         itInstance->second->shut();
     }
@@ -782,21 +782,21 @@ bool LibManager::shut()
 
 bool LibManager::finalize()
 {
-	for (auto it = libInstanceMap_.begin(); it != libInstanceMap_.end(); it++)
+	for (auto it = staticLibInstanceMap_.begin(); it != staticLibInstanceMap_.end(); it++)
 	{
 		it->second->finalize();
 		delete it->second;
 	}
 
-	for (auto it = veclibName_.begin(); it != veclibName_.end(); it++)
+	for (auto it = vecDllName_.begin(); it != vecDllName_.end(); it++)
 	{
 #ifdef ZQ_DYNAMIC_PLUGIN
 		unLoadDynLibrary(*it);
 #endif
 	}
 
-	libInstanceMap_.clear();
-	veclibName_.clear();
+	staticLibInstanceMap_.clear();
+	vecDllName_.clear();
 
 	return true;
 }
@@ -919,7 +919,7 @@ void LibManager::registerCommLib()
 	CREATE_LIB(this, LogLib);
 	CREATE_LIB(this, NetworkLib);
 	CREATE_LIB(this, MessageLib);
-//	CREATE_LIB(this, RedisLib);
+	CREATE_LIB(this, RedisLib);
 	CREATE_LIB(this, HttpLib);
 }
 
@@ -935,5 +935,5 @@ void LibManager::processConsoleCmd(const std::string& cmd)
 
 void LibManager::registerDll()
 {
-	veclibName_.push_back("test_dll");
+	vecDllName_.push_back("test_dll");
 }

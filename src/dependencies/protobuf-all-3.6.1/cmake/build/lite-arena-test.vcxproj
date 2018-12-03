@@ -1,48 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug|Win32">
+    <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
-      <Platform>Win32</Platform>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|Win32">
+    <ProjectConfiguration Include="Release|x64">
       <Configuration>Release</Configuration>
-      <Platform>Win32</Platform>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="MinSizeRel|Win32">
+    <ProjectConfiguration Include="MinSizeRel|x64">
       <Configuration>MinSizeRel</Configuration>
-      <Platform>Win32</Platform>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="RelWithDebInfo|Win32">
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
       <Configuration>RelWithDebInfo</Configuration>
-      <Platform>Win32</Platform>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F5CD57FA-463C-3CFF-A135-62E51273E578}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
-    <Platform>Win32</Platform>
+    <Platform>x64</Platform>
     <ProjectName>lite-arena-test</ProjectName>
     <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>MultiByte</CharacterSet>
     <PlatformToolset>v141</PlatformToolset>
@@ -56,32 +56,32 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\Debug\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">lite-arena-test.dir\Debug\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">lite-arena-test</TargetName>
-    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.exe</TargetExt>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
-    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\Release\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">lite-arena-test.dir\Release\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">lite-arena-test</TargetName>
-    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.exe</TargetExt>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
-    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\MinSizeRel\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">lite-arena-test.dir\MinSizeRel\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">lite-arena-test</TargetName>
-    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.exe</TargetExt>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
-    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\RelWithDebInfo\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">lite-arena-test.dir\RelWithDebInfo\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">lite-arena-test</TargetName>
-    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.exe</TargetExt>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</LinkIncremental>
-    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">lite-arena-test.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">lite-arena-test</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">lite-arena-test.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">lite-arena-test</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">lite-arena-test.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">lite-arena-test</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">lite-arena-test.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">lite-arena-test</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest\include;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
@@ -116,7 +116,7 @@
     <Link>
       <AdditionalDependencies>Debug\libprotobuf-lited.lib;Debug\gmock_main.lib;Debug\gmock.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/Debug/lite-arena-test.lib</ImportLibrary>
@@ -127,7 +127,7 @@
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
     </ProjectReference>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest\include;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
@@ -162,7 +162,7 @@
     <Link>
       <AdditionalDependencies>Release\libprotobuf-lite.lib;Release\gmock_main.lib;Release\gmock.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/Release/lite-arena-test.lib</ImportLibrary>
@@ -173,7 +173,7 @@
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
     </ProjectReference>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest\include;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
@@ -208,7 +208,7 @@
     <Link>
       <AdditionalDependencies>MinSizeRel\libprotobuf-lite.lib;MinSizeRel\gmock_main.lib;MinSizeRel\gmock.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/MinSizeRel/lite-arena-test.lib</ImportLibrary>
@@ -219,7 +219,7 @@
       <LinkLibraryDependencies>false</LinkLibraryDependencies>
     </ProjectReference>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googletest\include;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\third_party\googletest\googlemock\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /bigobj</AdditionalOptions>
@@ -253,7 +253,7 @@
     <Link>
       <AdditionalDependencies>RelWithDebInfo\libprotobuf-lite.lib;RelWithDebInfo\gmock_main.lib;RelWithDebInfo\gmock.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/RelWithDebInfo/lite-arena-test.lib</ImportLibrary>
@@ -266,8 +266,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <CustomBuild Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\e4c7abbe7a83c5f7f71cf427964d498c\map_lite_unittest.pb.cc.rule">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/map_lite_unittest.pb.cc</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/map_lite_unittest.pb.cc</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
 Debug\protoc.exe E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/map_lite_unittest.proto --proto_path=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src --cpp_out=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
@@ -276,11 +276,11 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/map_lite_unittest.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\Debug\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\map_lite_unittest.proto;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\map_lite_unittest.pb.cc</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/map_lite_unittest.pb.cc</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/map_lite_unittest.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\Debug\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\map_lite_unittest.proto;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\map_lite_unittest.pb.cc</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/map_lite_unittest.pb.cc</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
 Release\protoc.exe E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/map_lite_unittest.proto --proto_path=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src --cpp_out=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
@@ -289,11 +289,11 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/map_lite_unittest.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\Release\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\map_lite_unittest.proto;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\map_lite_unittest.pb.cc</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/map_lite_unittest.pb.cc</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/map_lite_unittest.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\Release\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\map_lite_unittest.proto;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\map_lite_unittest.pb.cc</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/map_lite_unittest.pb.cc</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
 MinSizeRel\protoc.exe E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/map_lite_unittest.proto --proto_path=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src --cpp_out=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
@@ -302,11 +302,11 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/map_lite_unittest.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\MinSizeRel\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\map_lite_unittest.proto;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\map_lite_unittest.pb.cc</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/map_lite_unittest.pb.cc</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/map_lite_unittest.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\MinSizeRel\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\map_lite_unittest.proto;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\map_lite_unittest.pb.cc</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/map_lite_unittest.pb.cc</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
 RelWithDebInfo\protoc.exe E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/map_lite_unittest.proto --proto_path=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src --cpp_out=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
@@ -315,15 +315,15 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/map_lite_unittest.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\RelWithDebInfo\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\map_lite_unittest.proto;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\map_lite_unittest.pb.cc</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/map_lite_unittest.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\RelWithDebInfo\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\map_lite_unittest.proto;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\map_lite_unittest.pb.cc</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\e4c7abbe7a83c5f7f71cf427964d498c\unittest_import_lite.pb.cc.rule">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_import_lite.pb.cc</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_import_lite.pb.cc</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
 Debug\protoc.exe E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_import_lite.proto --proto_path=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src --cpp_out=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
@@ -332,11 +332,11 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_import_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\Debug\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_lite.proto;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_lite.pb.cc</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_import_lite.pb.cc</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_import_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\Debug\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_lite.proto;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_lite.pb.cc</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_import_lite.pb.cc</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
 Release\protoc.exe E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_import_lite.proto --proto_path=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src --cpp_out=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
@@ -345,11 +345,11 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_import_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\Release\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_lite.proto;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_lite.pb.cc</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_import_lite.pb.cc</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_import_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\Release\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_lite.proto;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_lite.pb.cc</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_import_lite.pb.cc</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
 MinSizeRel\protoc.exe E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_import_lite.proto --proto_path=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src --cpp_out=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
@@ -358,11 +358,11 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_import_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\MinSizeRel\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_lite.proto;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_lite.pb.cc</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_import_lite.pb.cc</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_import_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\MinSizeRel\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_lite.proto;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_lite.pb.cc</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_import_lite.pb.cc</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
 RelWithDebInfo\protoc.exe E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_import_lite.proto --proto_path=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src --cpp_out=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
@@ -371,15 +371,15 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_import_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\RelWithDebInfo\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_lite.proto;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_lite.pb.cc</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_import_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\RelWithDebInfo\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_lite.proto;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_lite.pb.cc</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\e4c7abbe7a83c5f7f71cf427964d498c\unittest_import_public_lite.pb.cc.rule">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_import_public_lite.pb.cc</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_import_public_lite.pb.cc</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
 Debug\protoc.exe E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_import_public_lite.proto --proto_path=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src --cpp_out=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
@@ -388,11 +388,11 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_import_public_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\Debug\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_public_lite.proto;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_public_lite.pb.cc</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_import_public_lite.pb.cc</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_import_public_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\Debug\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_public_lite.proto;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_public_lite.pb.cc</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_import_public_lite.pb.cc</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
 Release\protoc.exe E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_import_public_lite.proto --proto_path=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src --cpp_out=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
@@ -401,11 +401,11 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_import_public_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\Release\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_public_lite.proto;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_public_lite.pb.cc</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_import_public_lite.pb.cc</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_import_public_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\Release\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_public_lite.proto;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_public_lite.pb.cc</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_import_public_lite.pb.cc</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
 MinSizeRel\protoc.exe E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_import_public_lite.proto --proto_path=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src --cpp_out=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
@@ -414,11 +414,11 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_import_public_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\MinSizeRel\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_public_lite.proto;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_public_lite.pb.cc</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_import_public_lite.pb.cc</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_import_public_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\MinSizeRel\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_public_lite.proto;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_public_lite.pb.cc</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_import_public_lite.pb.cc</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
 RelWithDebInfo\protoc.exe E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_import_public_lite.proto --proto_path=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src --cpp_out=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
@@ -427,15 +427,15 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_import_public_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\RelWithDebInfo\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_public_lite.proto;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_public_lite.pb.cc</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_import_public_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\RelWithDebInfo\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_public_lite.proto;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_import_public_lite.pb.cc</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\e4c7abbe7a83c5f7f71cf427964d498c\unittest_lite.pb.cc.rule">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_lite.pb.cc</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_lite.pb.cc</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
 Debug\protoc.exe E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_lite.proto --proto_path=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src --cpp_out=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
@@ -444,11 +444,11 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\Debug\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_lite.proto;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_lite.pb.cc</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_lite.pb.cc</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\Debug\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_lite.proto;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_lite.pb.cc</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_lite.pb.cc</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
 Release\protoc.exe E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_lite.proto --proto_path=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src --cpp_out=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
@@ -457,11 +457,11 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\Release\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_lite.proto;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_lite.pb.cc</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_lite.pb.cc</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\Release\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_lite.proto;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_lite.pb.cc</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_lite.pb.cc</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
 MinSizeRel\protoc.exe E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_lite.proto --proto_path=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src --cpp_out=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
@@ -470,11 +470,11 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\MinSizeRel\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_lite.proto;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_lite.pb.cc</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_lite.pb.cc</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\MinSizeRel\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_lite.proto;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_lite.pb.cc</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_lite.pb.cc</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
 RelWithDebInfo\protoc.exe E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_lite.proto --proto_path=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src --cpp_out=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
@@ -483,15 +483,15 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\RelWithDebInfo\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_lite.proto;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_lite.pb.cc</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\RelWithDebInfo\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_lite.proto;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_lite.pb.cc</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\e4c7abbe7a83c5f7f71cf427964d498c\unittest_no_arena_lite.pb.cc.rule">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_no_arena_lite.pb.cc</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_no_arena_lite.pb.cc</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
 Debug\protoc.exe E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_no_arena_lite.proto --proto_path=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src --cpp_out=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
@@ -500,11 +500,11 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_no_arena_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\Debug\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_no_arena_lite.proto;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_no_arena_lite.pb.cc</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_no_arena_lite.pb.cc</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_no_arena_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\Debug\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_no_arena_lite.proto;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_no_arena_lite.pb.cc</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_no_arena_lite.pb.cc</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
 Release\protoc.exe E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_no_arena_lite.proto --proto_path=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src --cpp_out=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
@@ -513,11 +513,11 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_no_arena_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\Release\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_no_arena_lite.proto;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_no_arena_lite.pb.cc</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_no_arena_lite.pb.cc</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_no_arena_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\Release\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_no_arena_lite.proto;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_no_arena_lite.pb.cc</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_no_arena_lite.pb.cc</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
 MinSizeRel\protoc.exe E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_no_arena_lite.proto --proto_path=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src --cpp_out=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
@@ -526,11 +526,11 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_no_arena_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\MinSizeRel\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_no_arena_lite.proto;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_no_arena_lite.pb.cc</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_no_arena_lite.pb.cc</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_no_arena_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\MinSizeRel\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_no_arena_lite.proto;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_no_arena_lite.pb.cc</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Generating E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_no_arena_lite.pb.cc</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
 RelWithDebInfo\protoc.exe E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src/google/protobuf/unittest_no_arena_lite.proto --proto_path=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src --cpp_out=E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/src
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
@@ -539,9 +539,9 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_no_arena_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\RelWithDebInfo\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_no_arena_lite.proto;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_no_arena_lite.pb.cc</Outputs>
-      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/e4c7abbe7a83c5f7f71cf427964d498c/unittest_no_arena_lite.pb.cc.rule;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\RelWithDebInfo\protoc.exe;E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_no_arena_lite.proto;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\src\google\protobuf\unittest_no_arena_lite.pb.cc</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

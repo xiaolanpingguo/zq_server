@@ -9,7 +9,6 @@
 #include "interface_header/base/IMessageDispatcherModule.h"
 #include "interface_header/base/IRedislModule.h"
 #include "interface_header/base/ILogModule.h"
-#include <memory>
 
 
 namespace zq {
@@ -31,7 +30,7 @@ public:
 
 protected:
 
-	int onPropertyCallBackEvent(const uuid& self, const std::string& strProperty, const VariantData& oldVar, const VariantData& newVar);
+//	int onPropertyCallBackEvent(const uuid& self, const std::string& strProperty, const VariantData& oldVar, const VariantData& newVar);
 
 	int onClassCallBackEvent(const uuid& self, const std::string& strClassName, const CLASS_OBJECT_EVENT event);
 

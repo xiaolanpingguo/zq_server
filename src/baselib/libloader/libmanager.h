@@ -133,16 +133,16 @@ private:
 
 	std::vector<std::string> staticLibVec_;
 
-	using VecLibName = std::vector<std::string>;
+	using VecDllName = std::vector<std::string>;
 	using DynLibMap = std::map<std::string, DynLib*>;
-	using LibInstanceMap = std::map<std::string, ILib*>;
+	using StaticLibInstanceMap = std::map<std::string, ILib*>;
 	using ModuleInstanceMap = std::map<std::string, IModule*>;
 	using DLL_START_FUNC = void(*)(ILibManager* p,DynLib* dynLib);
 	using DLL_STOP_FUNC = void(*)(ILibManager* p,std::string dynName);
 
-	VecLibName veclibName_;
+	VecDllName vecDllName_;
 	DynLibMap dllLibMap_;
-	LibInstanceMap libInstanceMap_;
+	StaticLibInstanceMap staticLibInstanceMap_;
 	ModuleInstanceMap moduleInstanceMap_;
 };
 

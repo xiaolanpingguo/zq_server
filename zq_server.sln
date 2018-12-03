@@ -232,6 +232,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "g3dlib", "src\dependencies\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test_dll", "src\midware\test_dll\test_dll.vcxproj", "{781BA740-E627-4F86-AC7B-6AF8812CCF35}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ALL_BUILD", "src\dependencies\protobuf-all-3.6.1\cmake\build\ALL_BUILD.vcxproj", "{ABBAA60A-1924-3E65-93C8-8C8D0E8B0E93}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -896,6 +898,22 @@ Global
 		{781BA740-E627-4F86-AC7B-6AF8812CCF35}.RelWithDebInfo|x64.Build.0 = Release|x64
 		{781BA740-E627-4F86-AC7B-6AF8812CCF35}.RelWithDebInfo|x86.ActiveCfg = Release|Win32
 		{781BA740-E627-4F86-AC7B-6AF8812CCF35}.RelWithDebInfo|x86.Build.0 = Release|Win32
+		{ABBAA60A-1924-3E65-93C8-8C8D0E8B0E93}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{ABBAA60A-1924-3E65-93C8-8C8D0E8B0E93}.Debug|x64.ActiveCfg = Debug|x64
+		{ABBAA60A-1924-3E65-93C8-8C8D0E8B0E93}.Debug|x64.Build.0 = Debug|x64
+		{ABBAA60A-1924-3E65-93C8-8C8D0E8B0E93}.Debug|x86.ActiveCfg = Debug|x64
+		{ABBAA60A-1924-3E65-93C8-8C8D0E8B0E93}.MinSizeRel|Any CPU.ActiveCfg = MinSizeRel|x64
+		{ABBAA60A-1924-3E65-93C8-8C8D0E8B0E93}.MinSizeRel|x64.ActiveCfg = MinSizeRel|x64
+		{ABBAA60A-1924-3E65-93C8-8C8D0E8B0E93}.MinSizeRel|x64.Build.0 = MinSizeRel|x64
+		{ABBAA60A-1924-3E65-93C8-8C8D0E8B0E93}.MinSizeRel|x86.ActiveCfg = MinSizeRel|x64
+		{ABBAA60A-1924-3E65-93C8-8C8D0E8B0E93}.Release|Any CPU.ActiveCfg = Release|x64
+		{ABBAA60A-1924-3E65-93C8-8C8D0E8B0E93}.Release|x64.ActiveCfg = Release|x64
+		{ABBAA60A-1924-3E65-93C8-8C8D0E8B0E93}.Release|x64.Build.0 = Release|x64
+		{ABBAA60A-1924-3E65-93C8-8C8D0E8B0E93}.Release|x86.ActiveCfg = Release|x64
+		{ABBAA60A-1924-3E65-93C8-8C8D0E8B0E93}.RelWithDebInfo|Any CPU.ActiveCfg = RelWithDebInfo|x64
+		{ABBAA60A-1924-3E65-93C8-8C8D0E8B0E93}.RelWithDebInfo|x64.ActiveCfg = RelWithDebInfo|x64
+		{ABBAA60A-1924-3E65-93C8-8C8D0E8B0E93}.RelWithDebInfo|x64.Build.0 = RelWithDebInfo|x64
+		{ABBAA60A-1924-3E65-93C8-8C8D0E8B0E93}.RelWithDebInfo|x86.ActiveCfg = RelWithDebInfo|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -938,6 +956,7 @@ Global
 		{C4E40BF2-2CFB-4FBF-9F3E-39758D30C63B} = {09730B86-8C02-48EE-968F-3D828BCFCC89}
 		{ABAB6151-14C6-4C5A-892C-A11B59475412} = {C1428ED5-49B0-402B-B2A7-33AB7272EEC0}
 		{781BA740-E627-4F86-AC7B-6AF8812CCF35} = {FF4D9D0C-B0DE-4D3D-B33E-F467D78004CA}
+		{ABBAA60A-1924-3E65-93C8-8C8D0E8B0E93} = {C1428ED5-49B0-402B-B2A7-33AB7272EEC0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {467E2710-F87C-4D12-877D-363FFAF6E4FE}
