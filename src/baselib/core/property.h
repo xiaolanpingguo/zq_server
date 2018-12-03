@@ -2,453 +2,375 @@
 
 
 #include <list>
-#include "data_list.hpp"
+#include <variant>
 #include "interface_header/base/platform.h"
+#include "interface_header/base/uuid.h"
 
 namespace zq {
 
-class Property;
-class PropertyArray;
 
-using PropertyPtr = std::shared_ptr<Property>;
-using PropertyArrayPtr = std::shared_ptr<PropertyArray>;
 
-using PropertyEventFunT = std::function<void(const std::string&, const VariantData&, const VariantData&)>;
-using ArrayPropertyEventFunT = std::function<void(const std::string&, const VariantData&, const VariantData&, size_t pos)>;
-
-class Property
+enum class VR_DATA_TYPE
 {
-	//using VariantData = std::variant<int64, double, std::string, Guid>;
-	using VecPropertyCbT = std::vector<PropertyEventFunT>;
+	CHAR, INT32, UINT32, INT64, UINT64,
+	FLOAT, DOUBLE, STRING, UUID,
+};
+
+
+static const int8 NULL_CHAR = std::numeric_limits<int8>::min();
+static const int32 NULL_INT32 = 0;
+static const uint32 NULL_UINT32 = 0;
+static const int64 NULL_INT64 = 0;
+static const uint64 NULL_UINT64 = 0;
+static const float NULL_FLOAT = 0.0f;
+static const double NULL_DOUBLE = 0.0;
+static const std::string NULL_STRING = "";
+static const uuid NULL_UUID = uuid();
+
+class IProperty;
+class PropertyArray;
+using IPropertyPtr = std::shared_ptr<IProperty>;
+using PropertyArrayPtr = std::shared_ptr<PropertyArray>;
+class IProperty
+{
 public:
-	Property(const std::string& strPropertyName, const EN_DATA_TYPE varType)
-		:propertyName_(strPropertyName),
-		dataType_(varType) 
-	{
-	}
 
-	Property(EN_DATA_TYPE varType = TDATA_UNKNOWN): dataType_(varType) {}
-	Property(const Property& prop) : dataType_(prop.dataType_), vData_(prop.vData_) {}
-	Property(Property&& prop) : dataType_(prop.dataType_), vData_(std::move(prop.vData_)){}
-
-	Property& operator=(const Property& right)
-	{
-		if (this != &right)
-		{
-			dataType_ = right.dataType_;
-			vData_ = right.vData_;
-		}
-
-		return *this;
-	}
-
-	Property& operator=(Property&& right)
-	{
-		if (this != &right)
-		{
-			dataType_ = right.dataType_;
-			vData_ = std::move(right.vData_);
-		}
-
-		return *this;
-	}
-
-	bool operator==(const Property& right)
-	{
-		if (right.dataType_ == this->dataType_)
-		{
-			return vData_ == vData_;
-		}
-
-		return false;
-	}
-
-	virtual ~Property() = default;
+	VR_DATA_TYPE getType()const { return type_; }
+	const std::string& getName() const { return name_; }
+protected:
 
 	template <typename T>
-	void setValue(const T& v)
+	struct EventHandler
 	{
-		if constexpr (std::is_integral_v<T>)
+		using EventFun = std::function<void(const std::string&, const T&, const T&)>;
+		using VecFun = std::vector<EventFun>;
+		void registerCallback(EventFun&& cb)
 		{
-			VariantData	vd(TDATA_INT64);
-			vd.variantData_ = (int64)v;
-			setData(std::move(vd));
+			propertyCb_.emplace_back(std::move(cb));
 		}
-		else if constexpr (std::is_floating_point_v<T>)
+
+		void onEventHandler(const std::string& name, const T& oldVar, const T& newVar)
 		{
-			VariantData	vd(TDATA_DOUBLE);
-			vd.variantData_ = (double)v;
-			setData(std::move(vd));
+			for (auto it = propertyCb_.begin(); it != propertyCb_.end(); ++it)
+			{
+				(*it)(name, oldVar, newVar);
+			}
 		}
-		else if constexpr (std::is_same_v<std::string, T>)
+
+		VecFun propertyCb_;
+	};
+
+	IProperty(std::string_view name, VR_DATA_TYPE type) : name_(name), type_(type) {}
+	virtual ~IProperty() = default;
+
+	VR_DATA_TYPE type_;
+	std::string name_;
+	std::variant<int8, int32, uint32, int64, uint64, float, double, std::string, uuid> data_;
+};
+
+
+template<typename T> struct Property;
+
+template<> struct Property<int8> : public IProperty
+{
+	Property(std::string_view name, int8 v) : IProperty(name, VR_DATA_TYPE::CHAR) { data_ = v; }
+	const int8& getValue() { return std::get<int8>(data_); }
+
+	void setValue(int8 v)
+	{
+		int8 old_v = getValue();
+		if (old_v != v)
 		{
-			VariantData	vd(TDATA_STRING);
-			vd.variantData_ = (std::string)(v);
-			setData(std::move(vd));
-		}
-		else if constexpr (std::is_same_v<Guid, T>)
-		{
-			VariantData	vd(TDATA_GUID);
-			vd.variantData_ = (Guid)v;
-			setData(std::move(vd));
-		}
-		else
-		{
-			static_assert(false, "property: unsupport type!");
+			data_ = v;
+			eventHandler_.onEventHandler(name_, old_v, v);
 		}
 	}
 
-	//template <typename T>
-	//decltype(auto) getValue()
-	//{
-	//	if constexpr (std::is_integral_v<T>)
-	//	{
-	//		if (isIntegralType(getType()))
-	//			return vData_.variantData_.get<int64>();
-	//		
-	//		printError(getType());
-	//		return VALID_INT;
-	//	}
-	//	else if constexpr (std::is_floating_point_v<T>)
-	//	{
-	//		if (isFloatingType(getType()))
-	//			return vData_.variantData_.get<double>();
-
-	//		printError(getType());
-	//		return VALID_FLOAT;
-	//	}
-	//	else if constexpr (std::is_same_v<std::string, T>)
-	//	{
-	//		if (isStringType(getType()))
-	//			return vData_.variantData_.get<std::string>();
-
-	//		printError(getType());
-	//		return NULL_STR;
-	//	}
-	//	else if constexpr (std::is_same_v<Guid, T>)
-	//	{
-	//		if (isGuidType(getType()))
-	//			return vData_.variantData_.get<Guid>();
-
-	//		printError(getType());
-	//		return NULL_GUID;
-	//	}
-	//	else
-	//	{
-	//		static_assert(false, "property: unsupport type!");
-	//	}
-	//}
-
-	void printError(EN_DATA_TYPE type)
+	void registerCallback(EventHandler<int8>::EventFun&& cb)
 	{
-		LOG_ERROR << fmt::format("type error, type: {}", dataType2Str(type));
-	}
-
-
-
-
-
-
-
-
-	/*template <typename T>
-	typename std::enable_if<std::is_integral<T>::value>::type setValue(const T& v)
-	{
-		VariantData	vd(TDATA_INT64);
-		vd.variantData_ = (int64)v;
-		setData(std::move(vd));
-	}
-
-	template <typename T>
-	typename std::enable_if<std::is_floating_point<T>::value>::type setValue(const T& v)
-	{
-		VariantData	vd(TDATA_DOUBLE);
-		vd.variantData_ = (double)v;
-		setData(std::move(vd));
-	}
-
-	template <typename T>
-	typename std::enable_if<std::is_same<T, const char*>::value>::type setValue(const T& v)
-	{
-		if (v)
-		{
-			VariantData	vd(TDATA_STRING);
-			vd.variantData_ = std::string(v);
-			setData(std::move(vd));
-		}
-
-		return nullptr;
-	}
-
-	template <typename T>
-	typename std::enable_if<std::is_same<T, std::string>::value>::type setValue(const T& v)
-	{
-		VariantData	vd(TDATA_STRING);
-		vd.variantData_ = (std::string)(v);
-		setData(std::move(vd));
-	}
-
-	template <typename T>
-	typename std::enable_if<std::is_same<T, Guid>::value>::type setValue(const T& v)
-	{
-		VariantData	vd(TDATA_OBJECT);
-		vd.variantData_ = (Guid)v;
-		setData(std::move(vd));
-	}*/
-
-	template <typename T>
-	typename std::enable_if<std::is_integral<T>::value, T>::type getValue()
-	{
-		if (isIntegralType(getType()))
-			return std::get<int64>(vData_.variantData_);
-
-		printError(getType());
-		return VALID_INT;
-	}
-
-	template <typename T>
-	typename std::enable_if<std::is_floating_point<T>::value, T>::type getValue()
-	{
-		if (isFloatingType(getType()))
-			return std::get<double>(vData_.variantData_);
-
-		printError(getType());
-		return VALID_FLOAT;
-	}
-
-	template <typename T>
-	typename std::enable_if<std::is_same<std::string, T>::value, T>::type getValue()
-	{
-		if (isStringType(getType()))
-			return std::get<std::string>(vData_.variantData_);
-
-		printError(getType());
-		return NULL_STR;
-	}
-
-	template <typename T>
-	typename std::enable_if<std::is_same<Guid, T>::value, T>::type getValue()
-	{
-		if (isGuidType(getType()))
-			return std::get<Guid>(vData_.variantData_);
-
-		printError(getType());
-		return NULL_GUID;
-	}
-
-	virtual const EN_DATA_TYPE getType() const { return dataType_; }
-	virtual const std::string& getName() const { return propertyName_; }
-
-	void registerCallback(PropertyEventFunT&& cb)
-	{
-		propertyCb_.emplace_back(std::move(cb));
+		eventHandler_.registerCallback(std::move(cb));
 	}
 
 protected:
+	EventHandler<int8> eventHandler_;
+};
 
-	void setData(VariantData&& vdata)
+
+template<> struct Property<int32> : public IProperty
+{
+	Property(std::string_view name, int32 v) : IProperty(name, VR_DATA_TYPE::INT32) { data_ = v; }
+	const int32& getValue() { return std::get<int32>(data_); }
+
+	void setValue(int32 v)
 	{
-		if (invalidDataType(vdata.type_))
+		int32 old_v = getValue();
+		if (old_v != v)
 		{
-			return;
-		}
-
-		// 前后设置的类型要一致
-		if (dataType_ != TDATA_UNKNOWN && dataType_ != vdata.type_)
-		{
-			return;
-		}
-
-		dataType_ = vdata.type_;
-
-		if (propertyCb_.empty())
-		{
-			vData_ = std::move(vdata);
-		}
-		else
-		{
-			// 值变化了，回调事件
-			VariantData oldValue;
-			oldValue = vData_;
-			vData_ = std::move(vdata);
-
-			onEventHandler(oldValue, vData_);
+			data_ = v;
+			eventHandler_.onEventHandler(name_, old_v, v);
 		}
 	}
 
-	void onEventHandler(const VariantData& oldVar, const VariantData& newVar)
+	void registerCallback(EventHandler<int32>::EventFun&& cb)
 	{
-		for (auto it = propertyCb_.begin(); it != propertyCb_.end(); ++it)
+		eventHandler_.registerCallback(std::move(cb));
+	}
+
+protected:
+	EventHandler<int32> eventHandler_;
+};
+
+template<> struct Property<uint32> : public IProperty
+{
+	Property(std::string_view name, uint32 v) : IProperty(name, VR_DATA_TYPE::UINT32) { data_ = v; }
+	const uint32& getValue() { return std::get<uint32>(data_); }
+
+	void setValue(uint32 v)
+	{
+		uint32 old_v = getValue();
+		if (old_v != v)
 		{
-			(*it)(propertyName_, oldVar, newVar);
+			data_ = v;
+			eventHandler_.onEventHandler(name_, old_v, v);
 		}
 	}
 
-private:
+	void registerCallback(EventHandler<uint32>::EventFun&& cb)
+	{
+		eventHandler_.registerCallback(std::move(cb));
+	}
 
-	std::string propertyName_;
-	EN_DATA_TYPE dataType_;
-	VecPropertyCbT propertyCb_;
+protected:
+	EventHandler<uint32> eventHandler_;
+};
 
-	VariantData vData_;
+template<> struct Property<int64> : public IProperty
+{
+	Property(std::string_view name, int64 v) : IProperty(name, VR_DATA_TYPE::INT64) { data_ = v; }
+	const int64& getValue() { return std::get<int64>(data_); }
+
+	void setValue(int64 v)
+	{
+		int64 old_v = getValue();
+		if (old_v != v)
+		{
+			data_ = v;
+			eventHandler_.onEventHandler(name_, old_v, v);
+		}
+	}
+
+	void registerCallback(EventHandler<int64>::EventFun&& cb)
+	{
+		eventHandler_.registerCallback(std::move(cb));
+	}
+
+protected:
+	EventHandler<int64> eventHandler_;
+};
+
+template<> struct Property<uint64> : public IProperty
+{
+	Property(std::string_view name, uint64 v) : IProperty(name, VR_DATA_TYPE::UINT64) { data_ = v; }
+	const uint64& getValue() { return std::get<uint64>(data_); }
+
+	void setValue(uint64 v)
+	{
+		uint64 old_v = getValue();
+		if (old_v != v)
+		{
+			data_ = v;
+			eventHandler_.onEventHandler(name_, old_v, v);
+		}
+	}
+
+	void registerCallback(EventHandler<uint64>::EventFun&& cb)
+	{
+		eventHandler_.registerCallback(std::move(cb));
+	}
+
+protected:
+	EventHandler<uint64> eventHandler_;
+};
+
+template<> struct Property<float> : public IProperty
+{
+	Property(std::string_view name, float v) : IProperty(name, VR_DATA_TYPE::FLOAT) { data_ = v; }
+	const float& getValue() { return std::get<float>(data_); }
+
+	void setValue(float v)
+	{
+		float old_v = getValue();
+		if (old_v != v)
+		{
+			data_ = v;
+			eventHandler_.onEventHandler(name_, old_v, v);
+		}
+	}
+
+	void registerCallback(EventHandler<float>::EventFun&& cb)
+	{
+		eventHandler_.registerCallback(std::move(cb));
+	}
+
+protected:
+	EventHandler<float> eventHandler_;
+};
+
+template<> struct Property<double> : public IProperty
+{
+	Property(std::string_view name, double v) : IProperty(name, VR_DATA_TYPE::DOUBLE) { data_ = v; }
+	const double& getValue() { return std::get<double>(data_); }
+
+	void setValue(double v)
+	{
+		double old_v = getValue();
+		if (old_v != v)
+		{
+			data_ = v;
+			eventHandler_.onEventHandler(name_, old_v, v);
+		}
+	}
+
+	void registerCallback(EventHandler<double>::EventFun&& cb)
+	{
+		eventHandler_.registerCallback(std::move(cb));
+	}
+
+protected:
+	EventHandler<double> eventHandler_;
+};
+
+template<> struct Property<std::string> : public IProperty
+{
+	Property(std::string_view name, const std::string& v) : IProperty(name, VR_DATA_TYPE::STRING) { data_ = v; }
+	const std::string& getValue() { return std::get<std::string>(data_); }
+
+	void setValue(const std::string& v)
+	{
+		std::string old_v = getValue();
+		if (old_v != v)
+		{
+			data_ = v;
+			eventHandler_.onEventHandler(name_, old_v, v);
+		}
+	}
+
+	void registerCallback(EventHandler<std::string>::EventFun&& cb)
+	{
+		eventHandler_.registerCallback(std::move(cb));
+	}
+
+protected:
+	EventHandler<std::string> eventHandler_;
+};
+
+template<> struct Property<uuid> : public IProperty
+{
+	Property(std::string_view name, const uuid& v) : IProperty(name, VR_DATA_TYPE::UUID) { data_ = v; }
+	const uuid& getValue() { return std::get<uuid>(data_); }
+
+	void setValue(const uuid& v)
+	{
+		uuid old_v = getValue();
+		if (old_v != v)
+		{
+			data_ = v;
+			eventHandler_.onEventHandler(name_, old_v, v);
+		}
+	}
+
+	void registerCallback(EventHandler<uuid>::EventFun&& cb)
+	{
+		eventHandler_.registerCallback(std::move(cb));
+	}
+
+protected:
+	EventHandler<uuid> eventHandler_;
 };
 
 
 class PropertyArray
 {
-	using VecPropertyCbT = std::vector<PropertyEventFunT>;
-	using VecArrayPropertyCbT = std::vector<ArrayPropertyEventFunT>;
+	using EventFun = std::function<void(std::string_view name, IPropertyPtr old_prop, IPropertyPtr new_prop)>;
 public:
-	PropertyArray(const std::string& strPropertyName)
-		:propertyName_(strPropertyName)
+	PropertyArray(std::string_view name)
+		:name_(name)
 	{
 	}
 
 	virtual ~PropertyArray() = default;
 
-	template <typename T>
-	typename std::enable_if<std::is_integral<T>::value>::type appenValue(const T& v)
-	{
-		VariantData	vd(TDATA_INT64);
-		vd.variantData_ = (int64)v;
-		appendData(std::move(vd));
-	}
+	//void setProperty(IPropertyPtr prop, size_t pos)
+	//{
+	//	if (prop == nullptr || pos < 0 || pos >= vecVData_.size())
+	//	{
+	//		return;
+	//	}
 
-	template <typename T>
-	typename std::enable_if<std::is_floating_point<T>::value>::type appenValue(const T& v)
-	{
-		VariantData	vd(TDATA_DOUBLE);
-		vd.variantData_ = (double)v;
-		appendData(std::move(vd));
-	}
+	//	//if ()
+	//}
 
-	template <typename T>
-	typename std::enable_if<std::is_same<T, const char*>::value>::type appenValue(const T& v)
+	void appenProperty(IPropertyPtr prop)
 	{
-		if (v)
+		if (prop != nullptr)
 		{
-			VariantData	vd(TDATA_STRING);
-			vd.variantData_ = std::string(v);
-			appendData(std::move(vd));
+			vecVData_.emplace_back(prop);
 		}
-
-		return nullptr;
 	}
 
-	template <typename T>
-	typename std::enable_if<std::is_same<T, std::string>::value>::type appenValue(const T& v)
-	{
-		VariantData	vd(TDATA_STRING);
-		vd.variantData_ = (std::string)(v);
-		appendData(std::move(vd));
-	}
-
-	template <typename T>
-	typename std::enable_if<std::is_same<T, Guid>::value>::type appenValue(const T& v)
-	{
-		VariantData	vd(TDATA_OBJECT);
-		vd.variantData_ = (Guid)v;
-		appendData(std::move(vd));
-	}
-
-	template <typename T>
-	typename std::enable_if<std::is_integral<T>::value>::type setValue(const T& v, size_t pos)
-	{
-		VariantData	vd(TDATA_INT64);
-		vd.variantData_ = (int64)v;
-		setData(std::move(vd), pos);
-	}
-
-	template <typename T>
-	typename std::enable_if<std::is_floating_point<T>::value>::type setValue(const T& v, size_t pos)
-	{
-		VariantData	vd(TDATA_DOUBLE);
-		vd.variantData_ = (double)v;
-		setData(std::move(vd), pos);
-	}
-
-	template <typename T>
-	typename std::enable_if<std::is_same<T, const char*>::value>::type setValue(const T& v, size_t pos)
-	{
-		if (v)
+	IPropertyPtr operator[](size_t pos) 
+	{ 
+		if (getSize() <= pos)
 		{
-			VariantData	vd(TDATA_STRING);
-			vd.variantData_ = std::string(v);
-			setData(std::move(vd), pos);
+			return nullptr;
 		}
-
-		return nullptr;
+		
+		return vecVData_[pos]; 
 	}
 
-	template <typename T>
-	typename std::enable_if<std::is_same<T, std::string>::value>::type setValue(const T& v, size_t pos)
-	{
-		VariantData	vd(TDATA_STRING);
-		vd.variantData_ = (std::string)(v);
-		setData(std::move(vd), pos);
-	}
-
-	template <typename T>
-	typename std::enable_if<std::is_same<T, Guid>::value>::type setValue(const T& v, size_t pos)
-	{
-		VariantData	vd(TDATA_OBJECT);
-		vd.variantData_ = (Guid)v;
-		setData(std::move(vd), pos);
-	}
-
-	const std::string& getName() const { return propertyName_; }
-	const std::vector<VariantData>& getVecData() const { return vecVData_; }
+	const std::string& getName() const { return name_; }
+	size_t getSize() const { return vecVData_.size(); }
+	//const std::vector<VariantData>& getData() const { return vecVData_; }
 
 protected:
 
-	void appendData(VariantData&& vdata)
-	{
-		// 类型检查
-		if (invalidDataType(vdata.type_))
-		{
-			return;
-		}
 
-		vecVData_.emplace_back(std::move(vdata));
-	}
-
-	void setData(VariantData&& vdata, size_t pos)
-	{
-		// 类型检查
-		if (invalidDataType(vdata.type_))
-		{
-			return;
-		}
-
-		// pos检查, 这里pos是从0开始
-		if (pos >= vecVData_.size())
-		{
-			return;
-		}
-
-		// 这里不检查前后的类型
-		if (vecVData_[0] != vdata)
-		{
-			VariantData old_data = vecVData_[0];
-			vecVData_[0] = std::move(vdata);
-			onEventHandler(old_data, vecVData_[0], pos);
-		}
-	}
-
-	void onEventHandler(const VariantData& oldVar, const VariantData& newVar, size_t pos)
-	{
-		for (auto it = propertyCb_.begin(); it != propertyCb_.end(); ++it)
-		{
-			(*it)(propertyName_, oldVar, newVar, pos);
-		}
-	}
-
+//	void setData(VariantData&& vdata, size_t pos)
+//	{
+//		// 类型检查
+//		if (invalidDataType(vdata.type_))
+//		{
+//			return;
+//		}
+//
+//		// pos检查, 这里pos是从0开始
+//		if (pos >= vecVData_.size())
+//		{
+//			return;
+//		}
+//
+//		// 这里不检查前后的类型
+//		if (vecVData_[0] != vdata)
+//		{
+//			VariantData old_data = vecVData_[0];
+//			vecVData_[0] = std::move(vdata);
+//			onEventHandler(old_data, vecVData_[0], pos);
+//		}
+//	}
+//
+//	void onEventHandler(const VariantData& oldVar, const VariantData& newVar, size_t pos)
+//	{
+//		for (auto it = propertyCb_.begin(); it != propertyCb_.end(); ++it)
+//		{
+//			(*it)(propertyName_, oldVar, newVar, pos);
+//		}
+//	}
+//
 private:
 
-	std::string propertyName_;
-
-	VecArrayPropertyCbT propertyCb_;
-	std::vector<VariantData> vecVData_;
+	std::string name_;
+	//VecArrayPropertyCbT propertyCb_;
+	std::vector<IPropertyPtr> vecVData_;
 };
 
 }

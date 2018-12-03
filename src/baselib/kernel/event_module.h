@@ -32,17 +32,17 @@
 //	virtual bool removeEventCallBack(const EnEventDefine nEventID);
 //
 //	//////////////////////////////////////////////////////////
-//	virtual bool doEvent(const Guid self, const EnEventDefine nEventID, const DataList& valueList);
+//	virtual bool doEvent(const uuid self, const EnEventDefine nEventID, const DataList& valueList);
 //
-//	virtual bool existEventCallBack(const Guid self, const EnEventDefine nEventID);
+//	virtual bool existEventCallBack(const uuid self, const EnEventDefine nEventID);
 //
-//	virtual bool removeEventCallBack(const Guid self, const EnEventDefine nEventID);
-//	virtual bool removeEventCallBack(const Guid self);
+//	virtual bool removeEventCallBack(const uuid self, const EnEventDefine nEventID);
+//	virtual bool removeEventCallBack(const uuid self);
 //
 //protected:
 //
 //	virtual bool addEventCallBack(const EnEventDefine nEventID, const MODULE_EVENT_FUNCTOR_PTR cb);
-//	virtual bool addEventCallBack(const Guid self, const EnEventDefine nEventID, const OBJECT_EVENT_FUNCTOR_PTR cb);
+//	virtual bool addEventCallBack(const uuid self, const EnEventDefine nEventID, const OBJECT_EVENT_FUNCTOR_PTR cb);
 //
 //private:
 //
@@ -54,8 +54,8 @@
 //	MapEx<EnEventDefine, List<MODULE_EVENT_FUNCTOR_PTR>> mModuleEventInfoMapEx;
 //
 //	//for object
-//	List<Guid> mObjectRemoveListEx;
-//	MapEx<Guid, MapEx<EnEventDefine, List<OBJECT_EVENT_FUNCTOR_PTR>>> mObjectEventInfoMapEx;
+//	List<uuid> mObjectRemoveListEx;
+//	MapEx<uuid, MapEx<EnEventDefine, List<OBJECT_EVENT_FUNCTOR_PTR>>> mObjectEventInfoMapEx;
 //};
 //
 //}

@@ -12,13 +12,7 @@ namespace zq{
 
 KernelModule::KernelModule(ILibManager* p)
 {
-    guidIndex_ = 0;
-    randomPos_ = 0;
-    lastActTime_ = 0;
-
     libManager_ = p;
-
-    lastActTime_ = libManager_->getNowTime();
 }
 
 KernelModule::~KernelModule()
@@ -29,14 +23,13 @@ void KernelModule::initRandom()
 {
     vecRandom_.clear();
 
-    int nRandomMax = 100000;
-    randomPos_ = 0;
+	static constexpr int random_max = 100000;
 
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_real_distribution<> dis(0, 1.0f);
 
-    for (int i = 0; i < nRandomMax; i++)
+    for (int i = 0; i < random_max; i++)
     {
         vecRandom_.push_back((float) dis(gen));
     }
@@ -45,7 +38,7 @@ void KernelModule::initRandom()
 bool KernelModule::init()
 {
     classModule_ = libManager_->findModule<IClassModule>();
-
+	randomEngine_.seed(getMSTime());
 	initRandom();
 
     return true;
@@ -55,14 +48,11 @@ bool KernelModule::initEnd()
 {
 	using namespace std::placeholders;
 
-
 	return true;
 }
 
-
 bool KernelModule::shut()
 {
-	destroyAll();
 	vecRandom_.clear();
 
     return true;
@@ -73,113 +63,40 @@ bool KernelModule::run()
     return true;
 }
 
-std::shared_ptr<IObject> KernelModule::createObject(const std::string& class_name)
+uuid KernelModule::gen_uuid()
 {
-	using namespace std::placeholders;
+	static uint64 tv = (uint64)(time(nullptr));
+	uint64 now = (uint64)(time(nullptr));
 
-	//// 这里应该不可能存在，不然这个函数就出大问题了
- //   Guid ident = createGUID();
- //   if (existObject(ident))
- //   {
- //       LOG_ERROR << "The object has Exists, id: " << ident.toString();
- //       return nullptr;
- //   }
-	//  
-	//IObjectPtr pObject = std::make_shared<CObject>();
-	//objs_[ident] = pObject;
-	//
+	static uint16 lastNum = 0;
 
- //   return pObject;
-
-	return nullptr;
-}
-
-bool KernelModule::destroyObject(const Guid& self)
-{
-    return false;
-}
-
-Guid KernelModule::createGUID()
-{
-    int64 value = 0;   
-    uint64 time = getTimestampMs();
-
-    
-    //value = time << 16;
-    value = time * 1000000;
-
-    
-    //value |= guidIndex_++;
-    value += guidIndex_++;
-
-    //if (sequence_ == 0x7FFF)
-    if (guidIndex_ == 999999)
-    {
-        guidIndex_ = 0;
-    }
-
-    Guid xID;
-    xID.nHead64 = libManager_->getServerID();
-    xID.nData64 = value;
-
-    return xID;
-}
-
-int KernelModule::onPropertyCommonEvent(const Guid& self, const std::string& strPropertyName, const VariantData& oldVar, const VariantData& newVar)
-{
-	/*std::shared_ptr<IObject> xObject = getElement(self);
-	if (xObject)
+	if (now != tv)
 	{
-		if (xObject->getState() >= CLASS_OBJECT_EVENT::COE_CREATE_HASDATA)
+		tv = now;
+		lastNum = 0;
+	}
+
+	// 32位     16位                16位
+	// 时间戳	serverid的后16位	每次自增的数
+	// 需要保证在一秒类不能连续调用超过65536次
+	int32 server_id = libManager_->getServerID();
+	if (server_id <= 0)
+	{
+		static uint32 rnd = 0;
+		if (rnd == 0)
 		{
-			for (auto it = mtCommonPropertyCallBackList.begin(); it != mtCommonPropertyCallBackList.end(); ++it)
-			{
-				(*it)(self, strPropertyName, oldVar, newVar);
-			}
-
-			const std::string& strClassName = xObject->getPropertyString(config::Object::class_name());
-			auto itClass = mtClassPropertyCallBackList.find(strClassName);
-			if (itClass != mtClassPropertyCallBackList.end())
-			{
-				for (auto itList = itClass->second.begin(); itList != itClass->second.end(); itList++)
-				{
-					(*itList)(self, strPropertyName, oldVar, newVar);
-				}
-			}
+			rnd = (uint32)(randomEngine_() << 16);
 		}
-	}*/
-	
-    return 0;
-}
 
-std::shared_ptr<IObject> KernelModule::getObject(const Guid& ident)
-{	
-	//auto it = objs_.find(ident);
-	//if (it == objs_.end())
-	//{
-	//	return nullptr;
-	//}
-
- //   return it->second;
-
-	return nullptr;
-}
-
-bool KernelModule::existObject(const Guid & ident)
-{
-	//auto it = objs_.find(ident);
-	//if (it == objs_.end())
-	//{
-	//	return false;
-	//}
-
-	return true;
-}
-
-bool KernelModule::destroyAll()
-{
-
-    return true;
+		assert(lastNum < 65535 && "gen_uuid(): overflow!");
+		return (tv << 32) | rnd | lastNum++;
+	}
+	else
+	{
+		static uint32 sections = server_id << 16;
+		assert(lastNum < 65535 && "gen_uuid(): overflow!");
+		return (tv << 32) | sections | lastNum++;
+	}
 }
 
 

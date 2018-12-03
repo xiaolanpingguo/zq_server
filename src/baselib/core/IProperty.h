@@ -5,7 +5,7 @@
 ////
 ////namespace zq {
 ////
-////using PropertyEventFunT = std::function<int(const Guid&, const std::string&, const VariantData&, const VariantData&)>;
+////using PropertyEventFunT = std::function<int(const uuid&, const std::string&, const VariantData&, const VariantData&)>;
 ////class IProperty :public MemoryCounter<IProperty>
 ////{
 ////public:
@@ -21,12 +21,12 @@
 ////	virtual bool setInt(const int64 value) = 0;
 ////	virtual bool setDouble(const double value) = 0;
 ////	virtual bool setString(const std::string& value) = 0;
-////	virtual bool setObject(const Guid& value) = 0;
+////	virtual bool setObject(const uuid& value) = 0;
 ////
 ////	virtual int64 getInt() const = 0;
 ////	virtual double getDouble() const = 0;
 ////	virtual const std::string& getString() const = 0;
-////	virtual const Guid& getObject() const = 0;
+////	virtual const uuid& getObject() const = 0;
 ////
 ////	virtual const EN_DATA_TYPE getType() const = 0;
 ////	virtual const bool getUsed() const = 0;

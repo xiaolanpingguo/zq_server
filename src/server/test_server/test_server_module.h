@@ -29,9 +29,9 @@ public:
 
 protected:
 
-	int onPropertyCallBackEvent(const Guid& self, const std::string& strProperty, const VariantData& oldVar, const VariantData& newVar);
+	int onPropertyCallBackEvent(const uuid& self, const std::string& strProperty, const VariantData& oldVar, const VariantData& newVar);
 
-	int onClassCallBackEvent(const Guid& self, const std::string& strClassName, const CLASS_OBJECT_EVENT event);
+	int onClassCallBackEvent(const uuid& self, const std::string& strClassName, const CLASS_OBJECT_EVENT event);
 
 	void processMessage(IChannel* channel, const char* data, size_t len, int msgid);
 

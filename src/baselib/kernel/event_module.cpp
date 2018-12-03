@@ -44,7 +44,7 @@
 //	//////
 //	if (mObjectRemoveListEx.count() > 0)
 //	{
-//		Guid xObject;
+//		uuid xObject;
 //		bool bRet = mObjectRemoveListEx.first(xObject);
 //		while (bRet)
 //		{
@@ -91,7 +91,7 @@
 //	return mModuleEventInfoMapEx.removeElement(nEventID);
 //}
 //
-//bool EventModule::doEvent(const Guid self, const EnEventDefine nEventID, const DataList & valueList)
+//bool EventModule::doEvent(const uuid self, const EnEventDefine nEventID, const DataList & valueList)
 //{
 //	bool bRet = false;
 //
@@ -125,7 +125,7 @@
 //	return bRet;
 //}
 //
-//bool EventModule::existEventCallBack(const Guid self, const EnEventDefine nEventID)
+//bool EventModule::existEventCallBack(const uuid self, const EnEventDefine nEventID)
 //{
 //	std::shared_ptr<MapEx<EnEventDefine, List<OBJECT_EVENT_FUNCTOR_PTR>>> xEventMapPtr = mObjectEventInfoMapEx.getElement(self);
 //	if (!xEventMapPtr)
@@ -136,7 +136,7 @@
 //	return xEventMapPtr->existElement(nEventID);
 //}
 //
-//bool EventModule::removeEventCallBack(const Guid self, const EnEventDefine nEventID)
+//bool EventModule::removeEventCallBack(const uuid self, const EnEventDefine nEventID)
 //{
 //	std::shared_ptr<MapEx<EnEventDefine, List<OBJECT_EVENT_FUNCTOR_PTR>>> xEventMapPtr = mObjectEventInfoMapEx.getElement(self);
 //	if (!xEventMapPtr)
@@ -147,7 +147,7 @@
 //	return xEventMapPtr->removeElement(nEventID);
 //}
 //
-//bool EventModule::removeEventCallBack(const Guid self)
+//bool EventModule::removeEventCallBack(const uuid self)
 //{
 //	return mObjectEventInfoMapEx.removeElement(self);
 //}
@@ -166,7 +166,7 @@
 //	return false;
 //}
 //
-//bool EventModule::addEventCallBack(const Guid self, const EnEventDefine nEventID, const OBJECT_EVENT_FUNCTOR_PTR cb)
+//bool EventModule::addEventCallBack(const uuid self, const EnEventDefine nEventID, const OBJECT_EVENT_FUNCTOR_PTR cb)
 //{
 //	//if (!m_pKernelodule->existObject(self))
 //	//{

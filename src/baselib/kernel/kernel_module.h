@@ -1,13 +1,11 @@
 #pragma once
 
 
-#include "baselib/core/IObject.h"
-#include "baselib/core/data_list.hpp"
-#include "interface_header/base/uuid.h"
+
 #include "interface_header/base/IKernelModule.h"
 #include "interface_header/base/IClassModule.h"
-
 #include <unordered_map>
+#include <random>
 
 namespace zq {
 
@@ -23,26 +21,16 @@ public:
 	bool shut() override;
 	bool run() override;
 
-	Guid createGUID() override;
-	bool existObject(const Guid& ident) override;
-	std::shared_ptr<IObject> getObject(const Guid& ident) override;
-	std::shared_ptr<IObject> createObject(const std::string& class_name) override;
-	bool destroyObject(const Guid& self) override;
-
 protected:
 
-	bool destroyAll();
-
+	uuid gen_uuid();
 	void initRandom();
-	int onPropertyCommonEvent(const Guid& self, const std::string& strPropertyName, const VariantData& oldVar, const VariantData& newVar);
 
 private:
-	std::vector<float> vecRandom_;
-	int guidIndex_;
-	int randomPos_;
 
-	Guid curExeObject_;
-	uint64 lastActTime_;
+	std::default_random_engine randomEngine_;
+	std::vector<float> vecRandom_;
+	decltype(vecRandom_.cbegin()) randomIter_;
 
 	IClassModule* classModule_;
 };

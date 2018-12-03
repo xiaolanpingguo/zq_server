@@ -39,7 +39,7 @@
 //public:
 //protected:
 //
-//	typedef std::function<int(const Guid&, const EnEventDefine, const DataList&)> OBJECT_EVENT_FUNCTOR;
+//	typedef std::function<int(const uuid&, const EnEventDefine, const DataList&)> OBJECT_EVENT_FUNCTOR;
 //	typedef std::function<int(const EnEventDefine, const DataList&)> MODULE_EVENT_FUNCTOR;
 //
 //	typedef std::shared_ptr<OBJECT_EVENT_FUNCTOR> OBJECT_EVENT_FUNCTOR_PTR;//EVENT
@@ -61,15 +61,15 @@
 //		return addEventCallBack(nEventID, functorPtr);
 //	}
 //
-//	virtual bool doEvent(const Guid self, const EnEventDefine nEventID, const DataList& valueList) = 0;
+//	virtual bool doEvent(const uuid self, const EnEventDefine nEventID, const DataList& valueList) = 0;
 //
-//	virtual bool existEventCallBack(const Guid self, const EnEventDefine nEventID) = 0;
+//	virtual bool existEventCallBack(const uuid self, const EnEventDefine nEventID) = 0;
 //
-//	virtual bool removeEventCallBack(const Guid self, const EnEventDefine nEventID) = 0;
-//	virtual bool removeEventCallBack(const Guid self) = 0;
+//	virtual bool removeEventCallBack(const uuid self, const EnEventDefine nEventID) = 0;
+//	virtual bool removeEventCallBack(const uuid self) = 0;
 //
 //	template<typename BaseType>
-//	bool addEventCallBack(const Guid& self, const EnEventDefine nEventID, BaseType* pBase, int (BaseType::*handler)(const Guid&, const EnEventDefine, const DataList&))
+//	bool addEventCallBack(const uuid& self, const EnEventDefine nEventID, BaseType* pBase, int (BaseType::*handler)(const uuid&, const EnEventDefine, const DataList&))
 //	{
 //		OBJECT_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 //		OBJECT_EVENT_FUNCTOR_PTR functorPtr(new OBJECT_EVENT_FUNCTOR(functor));
@@ -79,7 +79,7 @@
 //protected:
 //
 //	virtual bool addEventCallBack(const EnEventDefine nEventID, const MODULE_EVENT_FUNCTOR_PTR cb) = 0;
-//	virtual bool addEventCallBack(const Guid self, const EnEventDefine nEventID, const OBJECT_EVENT_FUNCTOR_PTR cb) = 0;
+//	virtual bool addEventCallBack(const uuid self, const EnEventDefine nEventID, const OBJECT_EVENT_FUNCTOR_PTR cb) = 0;
 //
 //};
 //

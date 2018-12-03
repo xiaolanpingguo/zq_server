@@ -7,114 +7,47 @@
 
 namespace zq{
 
-struct Guid
+struct uuid
 {
-    int64 nData64;
-    int64 nHead64;
+	constexpr uuid(uint64 id = 0) : data_(id){}
+	uuid(const uuid& that)
+	{
+		if (this != &that)
+		{
+			this->data_ = that.data_;
+		}
+	}
+	uuid& operator=(const uuid& that)
+	{
+		if (this != &that)
+		{
+			this->data_ = that.data_;
+		}
 
-    Guid()
+		return *this;
+	}
+
+	operator uint64()
+	{
+		return data_;
+	}
+
+    bool operator == (const uuid& id) const
     {
-        nData64 = 0;
-        nHead64 = 0;
+        return this->data_ == id.data_;
     }
 
-    Guid(int64 nHeadData, int64 nData)
+    bool operator != (const uuid& id) const
     {
-        nHead64 = nHeadData;
-        nData64 = nData;
+        return this->data_ != id.data_;
     }
 
-    Guid(const Guid& xData)
+    bool operator < (const uuid& id) const
     {
-        nHead64 = xData.nHead64;
-        nData64 = xData.nData64;
+        return this->data_ < id.data_;
     }
 
-    Guid& operator=(const Guid& xData)
-    {
-        nHead64 = xData.nHead64;
-        nData64 = xData.nData64;
-
-        return *this;
-    }
-
-    const int64 getData() const
-    {
-        return nData64;
-    }
-
-    const int64 getHead() const
-    {
-        return nHead64;
-    }
-
-    void setData(const int64 nData)
-    {
-        nData64 = nData;
-    }
-
-    void setHead(const int64 nData)
-    {
-        nHead64 = nData;
-    }
-
-    bool isNull() const
-    {
-        return 0 == nData64 && 0 == nHead64;
-    }
-
-    bool operator == (const Guid& id) const
-    {
-        return this->nData64 == id.nData64 && this->nHead64 == id.nHead64;
-    }
-
-    bool operator != (const Guid& id) const
-    {
-        return this->nData64 != id.nData64 || this->nHead64 != id.nHead64;
-    }
-
-    bool operator < (const Guid& id) const
-    {
-        if (this->nHead64 == id.nHead64)
-        {
-            return this->nData64 < id.nData64;
-        }
-
-        return this->nHead64 < id.nHead64;
-    }
-
-    std::string toString() const
-    {
-        return std::to_string(nHead64) + "-" + std::to_string(nData64);
-    }
-
-    bool fromString(const std::string& strID)
-    {
-        size_t nStrLength = strID.length();
-        size_t nPos = strID.find('-');
-        if (nPos == std::string::npos)
-        {
-            return false;
-        }
-
-        std::string strHead = strID.substr(0, nPos);
-        std::string strData = "";
-        if (nPos + 1 < nStrLength)
-        {
-            strData = strID.substr(nPos + 1, nStrLength - nPos);
-        }
-
-        try
-        {
-            nHead64 = lexical_cast<int64>(strHead);
-            nData64 = lexical_cast<int64>(strData);
-            return true;
-        }
-        catch (...)
-        {
-            return false;
-        }
-    }
+	int64 data_;
 };
 
 }

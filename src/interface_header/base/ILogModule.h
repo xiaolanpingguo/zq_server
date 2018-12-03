@@ -20,15 +20,15 @@ public:
 		NLL_FATAL_NORMAL,
 	};
 
-	virtual bool logElement(const EN_LOG_LEVEL nll, const Guid ident, const std::string& strElement, const std::string& strDesc, const char* func = "", int line = 0) = 0;
-	virtual bool logProperty(const EN_LOG_LEVEL nll, const Guid ident, const std::string& strProperty, const std::string& strDesc, const char* func = "", int line = 0) = 0;
-	virtual bool logObject(const EN_LOG_LEVEL nll, const Guid ident, const std::string& strDesc, const char* func = "", int line = 0) = 0;
-	virtual bool logRecord(const EN_LOG_LEVEL nll, const Guid ident, const std::string& strRecord, const std::string& strDesc, const int nRow, const int nCol, const char* func = "", int line = 0) = 0;
-	virtual bool logRecord(const EN_LOG_LEVEL nll, const Guid ident, const std::string& strRecord, const std::string& strDesc, const char* func = "", int line = 0) = 0;
+	virtual bool logElement(const EN_LOG_LEVEL nll, const uuid ident, const std::string& strElement, const std::string& strDesc, const char* func = "", int line = 0) = 0;
+	virtual bool logProperty(const EN_LOG_LEVEL nll, const uuid ident, const std::string& strProperty, const std::string& strDesc, const char* func = "", int line = 0) = 0;
+	virtual bool logObject(const EN_LOG_LEVEL nll, const uuid ident, const std::string& strDesc, const char* func = "", int line = 0) = 0;
+	virtual bool logRecord(const EN_LOG_LEVEL nll, const uuid ident, const std::string& strRecord, const std::string& strDesc, const int nRow, const int nCol, const char* func = "", int line = 0) = 0;
+	virtual bool logRecord(const EN_LOG_LEVEL nll, const uuid ident, const std::string& strRecord, const std::string& strDesc, const char* func = "", int line = 0) = 0;
 
-	virtual bool normal(const EN_LOG_LEVEL nll, const Guid ident, const std::string& strInfo, const int64 nDesc, const char* func = "", int line = 0) = 0;
-	virtual bool normal(const EN_LOG_LEVEL nll, const Guid ident, const std::string& strInfo, const std::string& strDesc, const  char* func = "", int line = 0) = 0;
-	virtual bool normal(const EN_LOG_LEVEL nll, const Guid ident, const std::ostringstream& stream, const char* func = "", int line = 0) = 0;
+	virtual bool normal(const EN_LOG_LEVEL nll, const uuid ident, const std::string& strInfo, const int64 nDesc, const char* func = "", int line = 0) = 0;
+	virtual bool normal(const EN_LOG_LEVEL nll, const uuid ident, const std::string& strInfo, const std::string& strDesc, const  char* func = "", int line = 0) = 0;
+	virtual bool normal(const EN_LOG_LEVEL nll, const uuid ident, const std::ostringstream& stream, const char* func = "", int line = 0) = 0;
 
 	virtual bool debug(const std::string& strLog, const char* func = "", int line = 0) = 0;
 	virtual bool info(const std::string& strLog, const  char* func = "", int line = 0) = 0;
@@ -42,17 +42,17 @@ public:
 	virtual bool error(const std::ostringstream& stream, const char* func = "", int line = 0) = 0;
 	virtual bool fatal(const std::ostringstream& stream, const char* func = "", int line = 0) = 0;
 
-	virtual bool debug(const Guid ident, const std::string& strLog, const char* func = "", int line = 0) = 0;
-	virtual bool info(const Guid ident, const std::string& strLog, const  char* func = "", int line = 0) = 0;
-	virtual bool warning(const Guid ident, const std::string& strLog, const char* func = "", int line = 0) = 0;
-	virtual bool error(const Guid ident, const std::string& strLog, const char* func = "", int line = 0) = 0;
-	virtual bool fatal(const Guid ident, const std::string& strLog, const char* func = "", int line = 0) = 0;
+	virtual bool debug(const uuid ident, const std::string& strLog, const char* func = "", int line = 0) = 0;
+	virtual bool info(const uuid ident, const std::string& strLog, const  char* func = "", int line = 0) = 0;
+	virtual bool warning(const uuid ident, const std::string& strLog, const char* func = "", int line = 0) = 0;
+	virtual bool error(const uuid ident, const std::string& strLog, const char* func = "", int line = 0) = 0;
+	virtual bool fatal(const uuid ident, const std::string& strLog, const char* func = "", int line = 0) = 0;
 
-	virtual bool debug(const Guid ident, const std::ostringstream& stream, const char* func = "", int line = 0) = 0;
-	virtual bool info(const Guid ident, const std::ostringstream& stream, const  char* func = "", int line = 0) = 0;
-	virtual bool warning(const Guid ident, const std::ostringstream& stream, const char* func = "", int line = 0) = 0;
-	virtual bool error(const Guid ident, const std::ostringstream& stream, const char* func = "", int line = 0) = 0;
-	virtual bool fatal(const Guid ident, const std::ostringstream& stream, const char* func = "", int line = 0) = 0;
+	virtual bool debug(const uuid ident, const std::ostringstream& stream, const char* func = "", int line = 0) = 0;
+	virtual bool info(const uuid ident, const std::ostringstream& stream, const  char* func = "", int line = 0) = 0;
+	virtual bool warning(const uuid ident, const std::ostringstream& stream, const char* func = "", int line = 0) = 0;
+	virtual bool error(const uuid ident, const std::ostringstream& stream, const char* func = "", int line = 0) = 0;
+	virtual bool fatal(const uuid ident, const std::ostringstream& stream, const char* func = "", int line = 0) = 0;
 };
 
 }

@@ -26,33 +26,26 @@ enum CLASS_OBJECT_EVENT
 
 class IObject;
 using IObjectPtr = std::shared_ptr<IObject>;
-class IObject :public MemoryCounter<IObject>
+class IObject : public MemoryCounter<IObject>
 {
 public:
 	IObject() : MemoryCounter(GET_CLASS_NAME(IObject))
 	{
 	}
 
-	virtual ~IObject()
-	{
-	}
+	virtual ~IObject() = default;
 
-	virtual const Guid& getGuid() = 0;
+	virtual const uuid& getGuid() = 0;
 	virtual const std::string& getObjName() = 0;
 	virtual const std::string& getClassName() = 0;
 
 	virtual bool exsitProperty(const std::string& strPropertyName) = 0;
+	virtual IPropertyPtr getProperty(const std::string& strPropertyName) = 0;
+	virtual bool addProperty(IPropertyPtr prop) = 0;
 
-	virtual bool setValue(const std::string& strPropertyName, const int64 nValue) = 0;
-	virtual bool setValue(const std::string& strPropertyName, const double dwValue) = 0;
-	virtual bool setValue(const std::string& strPropertyName, const std::string& strValue) = 0;
-	virtual bool setValue(const std::string& strPropertyName, const Guid& obj) = 0;
-
-	virtual int64 getInt(const std::string& strPropertyName) = 0;
-	virtual double getDouble(const std::string& strPropertyName) = 0;
-	virtual std::string getString(const std::string& strPropertyName) = 0;
-
-	virtual bool addPropertyCallBack(const std::string& name, PropertyEventFunT&& cb) = 0;
+	//virtual bool exsitArrayProperty(const std::string& strPropertyName) = 0;
+	//virtual PropertyArrayPtr getArrayProperty(const std::string& strPropertyName) = 0;
+	//virtual bool addArrayProperty(PropertyArrayPtr prop) = 0;
 };
 
 }

@@ -13,7 +13,8 @@ struct fmt
 	template <typename... Args>
 	static std::string format(const std::string& format, Args&&... args)
 	{
-		if (sizeof...(args) == 0)
+		size_t tp_size = sizeof...(args);
+		if (tp_size <= 0)
 		{
 			return format;
 		}
@@ -22,6 +23,7 @@ struct fmt
 		size_t start = 0;
 		size_t pos = 0;
 		std::ostringstream ss;
+		int i = 0;
 		while (1)
 		{
 			pos = format.find('{', start);
@@ -47,7 +49,30 @@ struct fmt
 				break;
 			}
 
-			formatImpl(ss, format.substr(start, pos - start), tp);
+			// 没有手动指定位置，默认按照从参数左到右进行格式
+			int index = 0;
+			std::string sub_str = format.substr(start, pos - start);
+			if (sub_str.empty())
+			{
+				index = i;
+				i++;
+			}
+			else
+			{
+				// 手动指定了位置, 如果超出了范围，就默认按第一个参数解析
+				char* endptr = nullptr;
+				index = strtol(sub_str.c_str(), &endptr, 10);
+				if (index < 0 || index >= tp_size)
+				{
+					index = 0;
+				}
+			}
+
+			visit(index, tp, [&](auto& item)
+			{
+				ss << item;
+			}, std::make_index_sequence<sizeof...(args)>{});
+
 			start = pos + 1;
 		}
 
@@ -72,45 +97,6 @@ private:
 	static void visit(std::size_t i, Tuple& t, F&& f, std::index_sequence<Idx...>)
 	{
 		((i == Idx && ((std::forward<F>(f)(std::get<Idx>(t))), false)), ...);
-	}
-
-	template <typename... Args>
-	static void formatImpl(std::ostringstream& ss, const std::string& item, std::tuple<Args...>& tp)
-	{
-		int index = 0;
-		int alignment = 0;
-		std::string fmt;
-		std::size_t tp_size = std::tuple_size_v<std::tuple<Args...>>;
-
-		char* endptr = nullptr;
-		index = strtol(&item[0], &endptr, 10);
-		if (index < 0 || index >= tp_size)
-		{
-			return;
-		}
-
-		if (*endptr == ',')
-		{
-			alignment = strtol(endptr + 1, &endptr, 10);
-			if (alignment > 0)
-			{
-				ss << std::right << std::setw(alignment);
-			}
-			else if (alignment < 0)
-			{
-				ss << std::left << std::setw(-alignment);
-			}
-		}
-
-		if (*endptr == ':')
-		{
-			fmt = endptr + 1;
-		}
-
-		visit(index, tp, [&](auto& item)
-		{
-			ss << item;
-		}, std::make_index_sequence<std::tuple_size_v<std::tuple<Args...>>>{});
 	}
 };
 }

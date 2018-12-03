@@ -12,13 +12,13 @@
 //	force_ = false;
 //	upload_ = false;
 //
-//	self_ = Guid();
+//	self_ = uuid();
 //	dataType_ = TDATA_UNKNOWN;
 //
 //	propertyName_ = "";
 //}
 //
-//Property::Property(const Guid& self, const std::string& strPropertyName, const EN_DATA_TYPE varType)
+//Property::Property(const uuid& self, const std::string& strPropertyName, const EN_DATA_TYPE varType)
 //{
 //	public_ = false;
 //	private_ = false;
@@ -131,7 +131,7 @@
 //	return variantData_->getString();
 //}
 //
-//const Guid& Property::getObject() const
+//const uuid& Property::getObject() const
 //{
 //	if (!variantData_)
 //	{
@@ -284,7 +284,7 @@
 //	return true;
 //}
 //
-//bool Property::setObject(const Guid& value)
+//bool Property::setObject(const uuid& value)
 //{
 //	if (dataType_ != TDATA_OBJECT)
 //	{
@@ -300,7 +300,7 @@
 //		}
 //
 //		variantData_ = std::shared_ptr<VariantData>(new VariantData(TDATA_OBJECT));
-//		variantData_->setObject(Guid());
+//		variantData_->setObject(uuid());
 //	}
 //
 //	if (value == variantData_->getObject())
@@ -391,7 +391,7 @@
 //
 //		case TDATA_OBJECT:
 //		{
-//			Guid xID;
+//			uuid xID;
 //			xID.fromString(strData);
 //			setObject(xID);
 //		}
