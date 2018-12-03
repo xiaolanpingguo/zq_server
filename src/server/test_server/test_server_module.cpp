@@ -4,6 +4,7 @@
 #include "baselib/message/game_ss.pb.h"
 
 #include "baselib/core/object.h"
+#include "interface_header/logic/ITestDllModule.h"
 
 using namespace zq;
 using namespace std;
@@ -16,7 +17,7 @@ bool TestServerModule::init()
 	httpServerModule_ = libManager_->findModule<IHttpServerModule>();
 	httpClientModule_ = libManager_->findModule<IHttpClientModule>();
 	messageDispatcherModule_ = libManager_->findModule<IMessageDispatcherModule>();
-	redisModule_ = libManager_->findModule<IRedisModule>();
+//	redisModule_ = libManager_->findModule<IRedisModule>();
 	logModule_ = libManager_->findModule<ILogModule>();
 
 	return true;
@@ -28,9 +29,14 @@ bool TestServerModule::initEnd()
 
 	auto before = getMSTime();
 	std::string out;
-	redisModule_->getClientBySuitConsistent()->GET(std::to_string(i++), out);
+//	redisModule_->getClientBySuitConsistent()->GET(std::to_string(i++), out);
 	//redisModule_->getClientBySuitConsistent()->GET(std::to_string(i++), out);
 
+	auto testModule = libManager_->findModule<ITestDllModule>();
+	httpServerModule_->setHandler(http_method::GET, "print", [testModule](request&, response&) {
+		std::cout << "Hello!!!!!" << std::endl;
+		testModule->print();
+	});
 	cout << "time: " << GetMSTimeDiffToNow(before) << endl;
 	return true;
 }
