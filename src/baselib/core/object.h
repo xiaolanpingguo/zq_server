@@ -3,6 +3,7 @@
 
 #include "property_manager.h"
 #include "IObject.h"
+#include <array>
 
 namespace zq {
 
@@ -81,6 +82,17 @@ public:
 	double getArrayValueDouble(const std::string& name, size_t pos);
 	const std::string& getArrayValueStr(const std::string& name, size_t pos);
 	const uuid& getArrayValueUUID(const std::string& name, size_t pos);
+
+	void initValue(PROERTY_TYPE type, size_t count);
+	void setValueChar(size_t index, int8 value);
+	void setValueInt32(size_t index, int32 value);
+	void setValueUint32(size_t index, uint32 value);
+	void setValueInt64(size_t index, int64 value);
+	void setValueUint64(size_t index, uint64 value);
+	void setValueFloat(size_t index, float value);
+	void setValueDouble(size_t index, double value);
+	void setValueStr(size_t index, const std::string& value);
+	void setValueUUID(size_t index, const uuid& value);
 
 	void setObjName(const std::string& v) { name_ = v; }
 	const std::string& getObjName() override { return name_; }
@@ -258,6 +270,15 @@ private:
 
 	uuid self_;
 	std::string name_;
+
+	std::unique_ptr<uint8[]> propertyInt8_;
+	std::unique_ptr<int32[]> propertyInt32_;
+	std::unique_ptr<uint32[]> propertyUint32_;
+	std::unique_ptr<int64[]> propertyInt64_;
+	std::unique_ptr<uint64[]> propertyUint64_;
+	std::unique_ptr<float[]> propertyFloat_;
+	std::unique_ptr<double[]> propertyDouble_;
+	std::unique_ptr<std::string[]> propertyString_;
 
 	std::unordered_map<std::string, IPropertyPtr> propertys_;   // 基本类型
 	std::unordered_map<std::string, PropertyArrayPtr> propertyArray_;  // 数组类型

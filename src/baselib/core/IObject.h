@@ -24,6 +24,12 @@ enum CLASS_OBJECT_EVENT
 	COE_DESTROY,
 };
 
+enum class PROERTY_TYPE
+{
+	UINT8, INT32, UINT32, INT64, UINT64,
+	FLOAT, DOUBLE, STRING, UUID,
+};
+
 class IObject;
 using IObjectPtr = std::shared_ptr<IObject>;
 class IObject : public MemoryCounter<IObject>

@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package DBObject;
+
+
+message DBPropertyInt32
+{
+	map<int32, int32> map_int32 = 1;
+}
+
+message DBPropertyInt64
+{
+	map<int32, int64> map_int64 = 1;
+}
+
+message DBPropertyUint64
+{
+	map<int32, uint64> map_uint64 = 1;
+}
+
+message DBPropertyFloat
+{
+	map<int32, float> map_float = 1;
+}
+
+message DBPropertyDouble
+{
+	map<int32, double> map_double = 1;
+}
+
+message DBPropertyString
+{
+	map<int32, string> map_string = 1;
+}
+
+
+message DBObjectInfo
+{
+	DBPropertyInt32 property_int32 = 1;
+	DBPropertyInt64 property_int64 = 2;
+	DBPropertyUint64 property_uint64 = 3;
+	DBPropertyFloat property_float = 4;
+	DBPropertyDouble property_double = 5;
+	DBPropertyString property_string = 6;				
+}
+
+
+

@@ -103,6 +103,8 @@ public:
 	void setAuthed(bool v) { isAuth_ = v; }
 
 	uint64 getAccountId() { return accountId_; }
+	void setAccoutName(const std::string& v) { accountName_ = v; }
+	const std::string& getAccoutName() { return accountName_; }
 
 	AuthCrypt& getAuthCrypt() { return authCrypt_; }
 
@@ -119,6 +121,8 @@ private:
 	std::shared_ptr<GameSocket> m_Socket;
 
 	uint64 accountId_;
+	std::string accountName_;
+
 	bool isAuth_;
 	uint32 authSeed_;
 	AuthCrypt authCrypt_;

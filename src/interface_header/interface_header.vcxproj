@@ -56,6 +56,9 @@
     <ClInclude Include="logic\IAddonsModule.h" />
     <ClInclude Include="logic\IDBCModule.h" />
     <ClInclude Include="logic\IGameLogicModule.h" />
+    <ClInclude Include="logic\IObjectGuid.h" />
+    <ClInclude Include="logic\IObjectMgrModule.h" />
+    <ClInclude Include="logic\IPlayerMgrModule.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

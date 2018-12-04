@@ -120,5 +120,14 @@
     <ClInclude Include="logic\IDBCModule.h">
       <Filter>logic</Filter>
     </ClInclude>
+    <ClInclude Include="logic\IObjectMgrModule.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\IPlayerMgrModule.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\IObjectGuid.h">
+      <Filter>logic</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

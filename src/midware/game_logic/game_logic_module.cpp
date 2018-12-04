@@ -2,8 +2,8 @@
 
 #include "server/world_session.h"
 #include "server/world_packet.h"
-#include "baselib/message/config_define.hpp"
 #include "baselib/message/game_db_account.pb.h"
+#include "baselib/message/game_db_object.pb.h"
 
 #include "baselib/base_code/random.h"
 #include "dependencies/zlib/zlib.h"
@@ -11,9 +11,8 @@
 #include "midware/cryptography/big_number.h"
 #include "midware/cryptography/auth_crypt.h"
 
-#include "common/shared_defines.h"
+#include "entities/player/player.h"
 #include "common/game_time.h"
-#include "entities/object/object_guid.h"
 
 
 namespace zq {
@@ -52,6 +51,8 @@ bool GameLogicModule::init()
 	redisModule_ = libManager_->findModule<IRedisModule>();
 	dataAgentModule_ = libManager_->findModule<IDataAgentModule>();
 	addonsModule_ = libManager_->findModule<IAddonsModule>();
+	objectMgrModule_ = libManager_->findModule<IObjectMgrModule>();
+	playerMgrModule_ = libManager_->findModule<IPlayerMgrModule>();
 
 	return true;
 }
@@ -184,6 +185,8 @@ bool GameLogicModule::handleAuthSession(WorldSession* session, WorldPacket& recv
 	LOG_INFO << fmt::format("Client '%s' authenticated successfully.", authSession->Account.c_str());
 
 	session->setAuthed(true);
+	session->setAccoutName(authSession->Account);
+
 	int32 Expansion = 2;
 	static uint64 account_id = 0;
 	int8 Locale = 4;
@@ -372,16 +375,27 @@ bool GameLogicModule::handleCharCreateOpcode(WorldSession* session, WorldPacket&
 		>> createInfo->FacialHair
 		>> createInfo->OutfitId;
 
+
 	uint8 resp_code = CHAR_CREATE_SUCCESS;
 	do 
 	{
-		//// 名字重复
-		//resp_code = CHAR_CREATE_NAME_IN_USE;
+		ObjectGuid guid = objectMgrModule_->createGuid(HighGuid::Player, 0);
+		Player player(session);
+		player.setValueInt32(EPlayerFieldInt32::PLAYER_RACE, createInfo->Race);
+		player.setValueInt32(EPlayerFieldInt32::PLAYER_CLASS, createInfo->Class);
+		player.setValueInt32(EPlayerFieldInt32::PLAYER_GENDER, createInfo->Gender);
+		player.setValueInt32(EPlayerFieldInt32::PLAYER_SKIN, createInfo->Skin);
+		player.setValueInt32(EPlayerFieldInt32::PLAYER_FACE, createInfo->Face);
+		player.setValueInt32(EPlayerFieldInt32::PLAYER_HAIR_STYLE, createInfo->HairStyle);
+		player.setValueInt32(EPlayerFieldInt32::PLAYER_HAIR_COLOR, createInfo->HairColor);
+		player.setValueInt32(EPlayerFieldInt32::PLAYER_FACIA_HAIR, createInfo->FacialHair);
+		player.setValueInt32(EPlayerFieldInt32::PLAYER_OUT_FIT_ID, createInfo->OutfitId);
+		player.setValueString(EPlayerFieldString::PLAYER_NAME, createInfo->Name);
+		player.setValueGuid(EPlayerFieldUint64::PLAYER_GUID, guid);
 
-		//// 角色限制
-		//resp_code = CHAR_CREATE_NAME_IN_USE;
-		//// 错误
-		//resp_code = CHAR_CREATE_ERROR;
+		DBObject::DBObjectInfo db_obj;
+		player.saveDb(db_obj);
+		dataAgentModule_->setHashData(session->getAccoutName(), std::to_string(1), db_obj);
 	} while (0);
 
 	WorldPacket data(SMSG_CHAR_CREATE, 1);

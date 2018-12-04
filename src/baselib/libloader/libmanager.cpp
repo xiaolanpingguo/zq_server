@@ -292,7 +292,7 @@ bool LibManager::launch(std::initializer_list<ILib*>& libs, SERVER_TYPES server_
 	// 打印相关信息
 	printInfo();
 
-	// 注册相关库
+	// 注册公共库
 	registerCommLib();
 
 	// 添加DLL

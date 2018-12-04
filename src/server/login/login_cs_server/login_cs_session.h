@@ -2,7 +2,6 @@
 
 #include "midware/cryptography/big_number.h"
 #include "baselib/network/socket.hpp"
-#include "baselib/network/byte_buffer.hpp"
 
 #include "baselib/message/game_db_account.pb.h"
 
@@ -162,6 +161,8 @@ using GameSvrListT = std::vector<GameSvrInfoPtr>;
 // A, B 临时公开值(Public ephemeral values)
 // x 私钥(由p和s生成)
 // v 口令校验值
+
+class ByteBuffer;
 class LoginCSSession : public Socket<LoginCSSession>
 {
 	typedef Socket<LoginCSSession> BaseSocket;

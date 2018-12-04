@@ -19,59 +19,11 @@
     <Filter Include="entities">
       <UniqueIdentifier>{4867e740-43b3-4386-b009-6b0073e04862}</UniqueIdentifier>
     </Filter>
-    <Filter Include="globals">
-      <UniqueIdentifier>{18c43f9f-43ed-4b17-b4df-bcef09edb419}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="entities\corpse">
-      <UniqueIdentifier>{8bc8d75c-1b8d-4f61-b555-b375309ed8d7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="entities\creature">
-      <UniqueIdentifier>{a4ab322d-e065-4f27-a253-de8630eca127}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="entities\dynamic_object">
-      <UniqueIdentifier>{dd922bce-7559-42fb-b3f7-8c81c4df8a98}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="entities\game_object">
-      <UniqueIdentifier>{959af7e5-27c7-4ac1-b436-a24a56ec5101}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="entities\item">
-      <UniqueIdentifier>{c6398614-8efb-4258-afab-68f51032bfa4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="entities\object">
       <UniqueIdentifier>{ae47096d-56b1-4b3c-936d-c91623336887}</UniqueIdentifier>
     </Filter>
-    <Filter Include="entities\pet">
-      <UniqueIdentifier>{dec848e9-70db-4525-863c-ff440450067a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="entities\player">
       <UniqueIdentifier>{e2793fdf-389c-4566-8348-b0306cce63b5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="entities\totem">
-      <UniqueIdentifier>{520a8084-d930-448b-af2e-b007f3f884af}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="entities\transport">
-      <UniqueIdentifier>{80181fca-d24d-4414-9b9e-4cb310669eb1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="entities\unit">
-      <UniqueIdentifier>{ca06a0a1-6c40-4353-bdf7-be7ec57819db}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="entities\vehicle">
-      <UniqueIdentifier>{19423771-abb7-4899-a951-14d253c013e1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="grids">
-      <UniqueIdentifier>{183c35ed-24a3-45f6-9d20-1e1b6c1c69ec}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="maps">
-      <UniqueIdentifier>{eea4c1a4-2f0a-404b-b383-482588c144a0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="instances">
-      <UniqueIdentifier>{6dcc1c52-a298-4e19-a6a4-1caa145b95f9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="groups">
-      <UniqueIdentifier>{451fd97a-5c55-422d-a6d8-4450807e9d14}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="loot">
-      <UniqueIdentifier>{7fda9837-104e-4afd-9b53-21ae40534975}</UniqueIdentifier>
     </Filter>
     <Filter Include="server">
       <UniqueIdentifier>{32f273c3-06ec-4d68-a308-1c984b3aef7c}</UniqueIdentifier>
@@ -98,98 +50,14 @@
     <ClCompile Include="dbc_stores\dbc_module.cpp">
       <Filter>dbc_stores</Filter>
     </ClCompile>
-    <ClCompile Include="globals\object_accessor.cpp">
-      <Filter>globals</Filter>
-    </ClCompile>
-    <ClCompile Include="globals\object_mgr.cpp">
-      <Filter>globals</Filter>
-    </ClCompile>
-    <ClCompile Include="entities\corpse\corpse.cpp">
-      <Filter>entities\corpse</Filter>
-    </ClCompile>
-    <ClCompile Include="entities\creature\creature.cpp">
-      <Filter>entities\creature</Filter>
-    </ClCompile>
-    <ClCompile Include="entities\creature\creature_groups.cpp">
-      <Filter>entities\creature</Filter>
-    </ClCompile>
-    <ClCompile Include="entities\creature\enuminfo_creature_data.cpp">
-      <Filter>entities\creature</Filter>
-    </ClCompile>
-    <ClCompile Include="entities\creature\gossip_def.cpp">
-      <Filter>entities\creature</Filter>
-    </ClCompile>
-    <ClCompile Include="entities\creature\temporary_summon.cpp">
-      <Filter>entities\creature</Filter>
-    </ClCompile>
-    <ClCompile Include="entities\dynamic_object\dynamic_object.cpp">
-      <Filter>entities\dynamic_object</Filter>
-    </ClCompile>
-    <ClCompile Include="entities\game_object\game_object.cpp">
-      <Filter>entities\game_object</Filter>
-    </ClCompile>
-    <ClCompile Include="entities\item\item.cpp">
-      <Filter>entities\item</Filter>
-    </ClCompile>
-    <ClCompile Include="entities\item\item_enchantment_mgr.cpp">
-      <Filter>entities\item</Filter>
-    </ClCompile>
-    <ClCompile Include="entities\item\item_template.cpp">
-      <Filter>entities\item</Filter>
-    </ClCompile>
-    <ClCompile Include="entities\item\bag.cpp">
-      <Filter>entities\item</Filter>
-    </ClCompile>
-    <ClCompile Include="entities\vehicle\vehicle.cpp">
-      <Filter>entities\vehicle</Filter>
-    </ClCompile>
-    <ClCompile Include="entities\unit\enuminfo_unit_defines.cpp">
-      <Filter>entities\unit</Filter>
-    </ClCompile>
-    <ClCompile Include="entities\unit\stat_system.cpp">
-      <Filter>entities\unit</Filter>
-    </ClCompile>
-    <ClCompile Include="entities\unit\unit.cpp">
-      <Filter>entities\unit</Filter>
-    </ClCompile>
-    <ClCompile Include="entities\player\cinematic_mgr.cpp">
-      <Filter>entities\player</Filter>
-    </ClCompile>
-    <ClCompile Include="entities\player\kill_rewarder.cpp">
-      <Filter>entities\player</Filter>
-    </ClCompile>
     <ClCompile Include="entities\player\player.cpp">
       <Filter>entities\player</Filter>
-    </ClCompile>
-    <ClCompile Include="entities\player\player_taxi.cpp">
-      <Filter>entities\player</Filter>
-    </ClCompile>
-    <ClCompile Include="entities\player\social_mgr.cpp">
-      <Filter>entities\player</Filter>
-    </ClCompile>
-    <ClCompile Include="entities\player\trade_data.cpp">
-      <Filter>entities\player</Filter>
-    </ClCompile>
-    <ClCompile Include="entities\totem\totem.cpp">
-      <Filter>entities\totem</Filter>
-    </ClCompile>
-    <ClCompile Include="entities\transport\transport.cpp">
-      <Filter>entities\transport</Filter>
     </ClCompile>
     <ClCompile Include="entities\object\object.cpp">
       <Filter>entities\object</Filter>
     </ClCompile>
     <ClCompile Include="entities\object\object_guid.cpp">
       <Filter>entities\object</Filter>
-    </ClCompile>
-    <ClCompile Include="entities\object\object_pos_selector.cpp">
-      <Filter>entities\object</Filter>
-    </ClCompile>
-    <ClCompile Include="entities\object\position.cpp">
-      <Filter>entities\object</Filter>
-    </ClCompile>
-    <ClCompile Include="entities\pet\pet.cpp">
-      <Filter>entities\pet</Filter>
     </ClCompile>
     <ClCompile Include="server\opcodes.cpp">
       <Filter>server</Filter>
@@ -203,7 +71,10 @@
     <ClCompile Include="common\game_time.cpp">
       <Filter>common</Filter>
     </ClCompile>
-    <ClCompile Include="entities\object\update_data.cpp">
+    <ClCompile Include="entities\player\player_mgr_module.cpp">
+      <Filter>entities\player</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\object\object_mgr_module.cpp">
       <Filter>entities\object</Filter>
     </ClCompile>
   </ItemGroup>
@@ -243,98 +114,8 @@
     <ClInclude Include="common\shared_defines.h">
       <Filter>common</Filter>
     </ClInclude>
-    <ClInclude Include="globals\object_accessor.h">
-      <Filter>globals</Filter>
-    </ClInclude>
-    <ClInclude Include="globals\object_mgr.h">
-      <Filter>globals</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\corpse\corpse.h">
-      <Filter>entities\corpse</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\creature\creature.h">
-      <Filter>entities\creature</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\creature\creature_data.h">
-      <Filter>entities\creature</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\creature\creature_groups.h">
-      <Filter>entities\creature</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\creature\gossip_def.h">
-      <Filter>entities\creature</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\creature\temporary_summon.h">
-      <Filter>entities\creature</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\dynamic_object\dynamic_object.h">
-      <Filter>entities\dynamic_object</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\game_object\game_object.h">
-      <Filter>entities\game_object</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\game_object\game_object_data.h">
-      <Filter>entities\game_object</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\item\item.h">
-      <Filter>entities\item</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\item\item_defines.h">
-      <Filter>entities\item</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\item\item_enchantment_mgr.h">
-      <Filter>entities\item</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\item\item_template.h">
-      <Filter>entities\item</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\item\bag.h">
-      <Filter>entities\item</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\vehicle\vehicle.h">
-      <Filter>entities\vehicle</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\vehicle\vehicle_defines.h">
-      <Filter>entities\vehicle</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\unit\unit.h">
-      <Filter>entities\unit</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\unit\unit_defines.h">
-      <Filter>entities\unit</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\player\cinematic_mgr.h">
-      <Filter>entities\player</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\player\equipment_set.h">
-      <Filter>entities\player</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\player\kill_rewarder.h">
-      <Filter>entities\player</Filter>
-    </ClInclude>
     <ClInclude Include="entities\player\player.h">
       <Filter>entities\player</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\player\player_taxi.h">
-      <Filter>entities\player</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\player\social_mgr.h">
-      <Filter>entities\player</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\player\trade_data.h">
-      <Filter>entities\player</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\totem\totem.h">
-      <Filter>entities\totem</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\transport\transport.h">
-      <Filter>entities\transport</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\object\g3d_position.hpp">
-      <Filter>entities\object</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\object\movement_info.h">
-      <Filter>entities\object</Filter>
     </ClInclude>
     <ClInclude Include="entities\object\object.h">
       <Filter>entities\object</Filter>
@@ -344,18 +125,6 @@
     </ClInclude>
     <ClInclude Include="entities\object\object_guid.h">
       <Filter>entities\object</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\object\object_pos_selector.h">
-      <Filter>entities\object</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\object\position.h">
-      <Filter>entities\object</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\pet\pet.h">
-      <Filter>entities\pet</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\pet\pet_defines.h">
-      <Filter>entities\pet</Filter>
     </ClInclude>
     <ClInclude Include="server\opcodes.h">
       <Filter>server</Filter>
@@ -381,20 +150,14 @@
     <ClInclude Include="common\iterator_pair.h">
       <Filter>common</Filter>
     </ClInclude>
-    <ClInclude Include="entities\object\update_data.h">
-      <Filter>entities\object</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\object\update_field_flags.h">
-      <Filter>entities\object</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\object\update_fields.h">
-      <Filter>entities\object</Filter>
-    </ClInclude>
-    <ClInclude Include="entities\object\update_mask.h">
-      <Filter>entities\object</Filter>
-    </ClInclude>
     <ClInclude Include="server\byte_buffer.hpp">
       <Filter>server</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\player\player_mgr_module.h">
+      <Filter>entities\player</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\object\object_mgr_module.h">
+      <Filter>entities\object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

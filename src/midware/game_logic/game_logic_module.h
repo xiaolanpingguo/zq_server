@@ -7,6 +7,8 @@
 #include "interface_header/base/IRedislModule.h"
 #include "interface_header/base/IDataAgentModule.h"
 #include "interface_header/logic/IAddonsModule.h"
+#include "interface_header/logic/IObjectMgrModule.h"
+#include "interface_header/logic/IPlayerMgrModule.h"
 #include <unordered_map>
 
 
@@ -62,6 +64,8 @@ private:
 	IRedisModule* redisModule_;
 	IDataAgentModule* dataAgentModule_;
 	IAddonsModule* addonsModule_;
+	IObjectMgrModule* objectMgrModule_;
+	IPlayerMgrModule* playerMgrModule_;
 };
 
 }

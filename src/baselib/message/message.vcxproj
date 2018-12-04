@@ -20,12 +20,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game_db_account.pb.cc" />
+    <ClCompile Include="game_db_object.pb.cc" />
     <ClCompile Include="game_ss.pb.cc" />
     <ClCompile Include="message_lib.cpp" />
     <ClCompile Include="proto_json_module.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game_db_account.pb.h" />
+    <ClInclude Include="game_db_object.pb.h" />
     <ClInclude Include="game_ss.pb.h" />
     <ClInclude Include="json_protocol_define.hpp" />
     <ClInclude Include="message_lib.h" />
@@ -35,6 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="game_db_account.proto" />
+    <None Include="game_db_object.proto" />
     <None Include="game_ss.proto" />
     <None Include="gen_proto.bat" />
   </ItemGroup>

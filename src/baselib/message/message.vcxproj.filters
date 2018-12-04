@@ -27,6 +27,9 @@
     <ClCompile Include="game_db_account.pb.cc">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="game_db_object.pb.cc">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="message_lib.h">
@@ -50,6 +53,9 @@
     <ClInclude Include="game_db_account.pb.h">
       <Filter>header</Filter>
     </ClInclude>
+    <ClInclude Include="game_db_object.pb.h">
+      <Filter>header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="gen_proto.bat">
@@ -57,6 +63,7 @@
     </None>
     <None Include="game_ss.proto" />
     <None Include="game_db_account.proto" />
+    <None Include="game_db_object.proto" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="CMakeLists.txt" />
