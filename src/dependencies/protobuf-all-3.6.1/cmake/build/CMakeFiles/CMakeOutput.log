@@ -9,7 +9,7 @@ The output was:
 ���� .NET Framework �� Microsoft (R) ��������汾 15.9.20+g88f5fadfbe
 ��Ȩ����(C) Microsoft Corporation����������Ȩ����
 
-��������ʱ��Ϊ 2018/11/30 14:50:18��
+��������ʱ��Ϊ 2018/12/3 11:31:10��
 �ڵ� 1 �ϵ���Ŀ��E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\3.12.1\CompilerIdC\CompilerIdC.vcxproj��(Ĭ��Ŀ��)��
 PrepareForBuild:
   ���ڴ���Ŀ¼��Debug\����
@@ -17,15 +17,15 @@ PrepareForBuild:
 InitializeBuildStatus:
   ���ڴ�����Debug\CompilerIdC.tlog\unsuccessfulbuild������Ϊ��ָ����AlwaysCreate����
 ClCompile:
-  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /nologo /W0 /WX- /diagnostics:classic /Od /Oy- /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue CMakeCCompilerId.c
+  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x64\CL.exe /c /nologo /W0 /WX- /diagnostics:classic /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TC /FC /errorReport:queue CMakeCCompilerId.c
   CMakeCCompilerId.c
 Link:
-  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:".\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\CompilerIdC.lib" /MACHINE:X86 /SAFESEH Debug\CMakeCCompilerId.obj
+  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x64\link.exe /ERRORREPORT:QUEUE /OUT:".\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\CompilerIdC.lib" /MACHINE:X64 Debug\CMakeCCompilerId.obj
   CompilerIdC.vcxproj -> E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\3.12.1\CompilerIdC\.\CompilerIdC.exe
 PostBuildEvent:
   for %%i in (cl.exe) do @echo CMAKE_C_COMPILER=%%~$PATH:i
   :VCEnd
-  CMAKE_C_COMPILER=D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\Hostx86\x86\cl.exe
+  CMAKE_C_COMPILER=D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\Hostx86\x64\cl.exe
 FinalizeBuildStatus:
   ����ɾ���ļ���Debug\CompilerIdC.tlog\unsuccessfulbuild����
   ���ڶԡ�Debug\CompilerIdC.tlog\CompilerIdC.lastbuildstate��ִ�� Touch ����
@@ -35,7 +35,7 @@ FinalizeBuildStatus:
     0 ������
     0 ������
 
-����ʱ�� 00:00:01.59
+����ʱ�� 00:00:00.69
 
 
 Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
@@ -54,7 +54,7 @@ The output was:
 ���� .NET Framework �� Microsoft (R) ��������汾 15.9.20+g88f5fadfbe
 ��Ȩ����(C) Microsoft Corporation����������Ȩ����
 
-��������ʱ��Ϊ 2018/11/30 14:50:20��
+��������ʱ��Ϊ 2018/12/3 11:31:10��
 �ڵ� 1 �ϵ���Ŀ��E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\3.12.1\CompilerIdCXX\CompilerIdCXX.vcxproj��(Ĭ��Ŀ��)��
 PrepareForBuild:
   ���ڴ���Ŀ¼��Debug\����
@@ -62,15 +62,15 @@ PrepareForBuild:
 InitializeBuildStatus:
   ���ڴ�����Debug\CompilerIdCXX.tlog\unsuccessfulbuild������Ϊ��ָ����AlwaysCreate����
 ClCompile:
-  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /nologo /W0 /WX- /diagnostics:classic /Od /Oy- /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:queue CMakeCXXCompilerId.cpp
+  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x64\CL.exe /c /nologo /W0 /WX- /diagnostics:classic /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc141.pdb" /Gd /TP /FC /errorReport:queue CMakeCXXCompilerId.cpp
   CMakeCXXCompilerId.cpp
 Link:
-  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:".\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\CompilerIdCXX.lib" /MACHINE:X86 /SAFESEH Debug\CMakeCXXCompilerId.obj
+  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x64\link.exe /ERRORREPORT:QUEUE /OUT:".\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\CompilerIdCXX.lib" /MACHINE:X64 Debug\CMakeCXXCompilerId.obj
   CompilerIdCXX.vcxproj -> E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\3.12.1\CompilerIdCXX\.\CompilerIdCXX.exe
 PostBuildEvent:
   for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
   :VCEnd
-  CMAKE_CXX_COMPILER=D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\Hostx86\x86\cl.exe
+  CMAKE_CXX_COMPILER=D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\Hostx86\x64\cl.exe
 FinalizeBuildStatus:
   ����ɾ���ļ���Debug\CompilerIdCXX.tlog\unsuccessfulbuild����
   ���ڶԡ�Debug\CompilerIdCXX.tlog\CompilerIdCXX.lastbuildstate��ִ�� Touch ����
@@ -80,7 +80,7 @@ FinalizeBuildStatus:
     0 ������
     0 ������
 
-����ʱ�� 00:00:01.07
+����ʱ�� 00:00:00.54
 
 
 Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
@@ -92,77 +92,77 @@ The CXX compiler identification is MSVC, found in "E:/work/wx_php/213/zq_server/
 Determining if the C compiler works passed with the following output:
 Change Dir: E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"D:/vs2017/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_c139a.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+Run Build Command:"D:/vs2017/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_a266c.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
 用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.9.20+g88f5fadfbe
 版权所有(C) Microsoft Corporation。保留所有权利。
 
-生成启动时间为 2018/11/30 14:50:21。
-节点 1 上的项目“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\cmTC_c139a.vcxproj”(默认目标)。
+生成启动时间为 2018/12/3 11:31:11。
+节点 1 上的项目“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\cmTC_a266c.vcxproj”(默认目标)。
 PrepareForBuild:
-  正在创建目录“cmTC_c139a.dir\Debug\”。
+  正在创建目录“cmTC_a266c.dir\Debug\”。
   正在创建目录“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\”。
-  正在创建目录“cmTC_c139a.dir\Debug\cmTC_c139a.tlog\”。
+  正在创建目录“cmTC_a266c.dir\Debug\cmTC_a266c.tlog\”。
 InitializeBuildStatus:
-  正在创建“cmTC_c139a.dir\Debug\cmTC_c139a.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+  正在创建“cmTC_a266c.dir\Debug\cmTC_a266c.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
 ClCompile:
-  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_c139a.dir\Debug\\" /Fd"cmTC_c139a.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\testCCompiler.c"
-  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.16.27024.1 版
+  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x64\CL.exe /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_a266c.dir\Debug\\" /Fd"cmTC_a266c.dir\Debug\vc141.pdb" /Gd /TC /FC /errorReport:queue "E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\testCCompiler.c"
+  用于 x64 的 Microsoft (R) C/C++ 优化编译器 19.16.27024.1 版
   版权所有(C) Microsoft Corporation。保留所有权利。
   
+  cl /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_a266c.dir\Debug\\" /Fd"cmTC_a266c.dir\Debug\vc141.pdb" /Gd /TC /FC /errorReport:queue "E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\testCCompiler.c"
   testCCompiler.c
-  cl /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_c139a.dir\Debug\\" /Fd"cmTC_c139a.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\testCCompiler.c"
   
 Link:
-  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\cmTC_c139a.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp/Debug/cmTC_c139a.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp/Debug/cmTC_c139a.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_c139a.dir\Debug\testCCompiler.obj
-  cmTC_c139a.vcxproj -> E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\cmTC_c139a.exe
+  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x64\link.exe /ERRORREPORT:QUEUE /OUT:"E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\cmTC_a266c.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp/Debug/cmTC_a266c.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp/Debug/cmTC_a266c.lib" /MACHINE:X64  /machine:x64 cmTC_a266c.dir\Debug\testCCompiler.obj
+  cmTC_a266c.vcxproj -> E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\cmTC_a266c.exe
 FinalizeBuildStatus:
-  正在删除文件“cmTC_c139a.dir\Debug\cmTC_c139a.tlog\unsuccessfulbuild”。
-  正在对“cmTC_c139a.dir\Debug\cmTC_c139a.tlog\cmTC_c139a.lastbuildstate”执行 Touch 任务。
-已完成生成项目“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\cmTC_c139a.vcxproj”(默认目标)的操作。
+  正在删除文件“cmTC_a266c.dir\Debug\cmTC_a266c.tlog\unsuccessfulbuild”。
+  正在对“cmTC_a266c.dir\Debug\cmTC_a266c.tlog\cmTC_a266c.lastbuildstate”执行 Touch 任务。
+已完成生成项目“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\cmTC_a266c.vcxproj”(默认目标)的操作。
 
 已成功生成。
     0 个警告
     0 个错误
 
-已用时间 00:00:01.12
+已用时间 00:00:00.59
 
 
 Detecting C compiler ABI info compiled with the following output:
 Change Dir: E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"D:/vs2017/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_6c1e4.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+Run Build Command:"D:/vs2017/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_9b0bf.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
 用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.9.20+g88f5fadfbe
 版权所有(C) Microsoft Corporation。保留所有权利。
 
-生成启动时间为 2018/11/30 14:50:23。
-节点 1 上的项目“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\cmTC_6c1e4.vcxproj”(默认目标)。
+生成启动时间为 2018/12/3 11:31:12。
+节点 1 上的项目“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\cmTC_9b0bf.vcxproj”(默认目标)。
 PrepareForBuild:
-  正在创建目录“cmTC_6c1e4.dir\Debug\”。
+  正在创建目录“cmTC_9b0bf.dir\Debug\”。
   正在创建目录“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\”。
-  正在创建目录“cmTC_6c1e4.dir\Debug\cmTC_6c1e4.tlog\”。
+  正在创建目录“cmTC_9b0bf.dir\Debug\cmTC_9b0bf.tlog\”。
 InitializeBuildStatus:
-  正在创建“cmTC_6c1e4.dir\Debug\cmTC_6c1e4.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+  正在创建“cmTC_9b0bf.dir\Debug\cmTC_9b0bf.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
 ClCompile:
-  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_6c1e4.dir\Debug\\" /Fd"cmTC_6c1e4.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "C:\Program Files\CMake\share\cmake-3.12\Modules\CMakeCCompilerABI.c"
-  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.16.27024.1 版
+  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x64\CL.exe /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_9b0bf.dir\Debug\\" /Fd"cmTC_9b0bf.dir\Debug\vc141.pdb" /Gd /TC /FC /errorReport:queue "C:\Program Files\CMake\share\cmake-3.12\Modules\CMakeCCompilerABI.c"
+  用于 x64 的 Microsoft (R) C/C++ 优化编译器 19.16.27024.1 版
   版权所有(C) Microsoft Corporation。保留所有权利。
   
+  cl /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_9b0bf.dir\Debug\\" /Fd"cmTC_9b0bf.dir\Debug\vc141.pdb" /Gd /TC /FC /errorReport:queue "C:\Program Files\CMake\share\cmake-3.12\Modules\CMakeCCompilerABI.c"
   CMakeCCompilerABI.c
-  cl /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_6c1e4.dir\Debug\\" /Fd"cmTC_6c1e4.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "C:\Program Files\CMake\share\cmake-3.12\Modules\CMakeCCompilerABI.c"
   
 Link:
-  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\cmTC_6c1e4.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp/Debug/cmTC_6c1e4.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp/Debug/cmTC_6c1e4.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_6c1e4.dir\Debug\CMakeCCompilerABI.obj
-  cmTC_6c1e4.vcxproj -> E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\cmTC_6c1e4.exe
+  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x64\link.exe /ERRORREPORT:QUEUE /OUT:"E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\cmTC_9b0bf.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp/Debug/cmTC_9b0bf.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp/Debug/cmTC_9b0bf.lib" /MACHINE:X64  /machine:x64 cmTC_9b0bf.dir\Debug\CMakeCCompilerABI.obj
+  cmTC_9b0bf.vcxproj -> E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\cmTC_9b0bf.exe
 FinalizeBuildStatus:
-  正在删除文件“cmTC_6c1e4.dir\Debug\cmTC_6c1e4.tlog\unsuccessfulbuild”。
-  正在对“cmTC_6c1e4.dir\Debug\cmTC_6c1e4.tlog\cmTC_6c1e4.lastbuildstate”执行 Touch 任务。
-已完成生成项目“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\cmTC_6c1e4.vcxproj”(默认目标)的操作。
+  正在删除文件“cmTC_9b0bf.dir\Debug\cmTC_9b0bf.tlog\unsuccessfulbuild”。
+  正在对“cmTC_9b0bf.dir\Debug\cmTC_9b0bf.tlog\cmTC_9b0bf.lastbuildstate”执行 Touch 任务。
+已完成生成项目“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\cmTC_9b0bf.vcxproj”(默认目标)的操作。
 
 已成功生成。
     0 个警告
     0 个错误
 
-已用时间 00:00:01.14
+已用时间 00:00:00.62
 
 
 
@@ -170,39 +170,39 @@ FinalizeBuildStatus:
 Detecting C [] compiler features compiled with the following output:
 Change Dir: E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"D:/vs2017/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_89c67.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+Run Build Command:"D:/vs2017/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_6dcc4.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
 用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.9.20+g88f5fadfbe
 版权所有(C) Microsoft Corporation。保留所有权利。
 
-生成启动时间为 2018/11/30 14:50:24。
-节点 1 上的项目“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\cmTC_89c67.vcxproj”(默认目标)。
+生成启动时间为 2018/12/3 11:31:13。
+节点 1 上的项目“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\cmTC_6dcc4.vcxproj”(默认目标)。
 PrepareForBuild:
-  正在创建目录“cmTC_89c67.dir\Debug\”。
+  正在创建目录“cmTC_6dcc4.dir\Debug\”。
   正在创建目录“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\”。
-  正在创建目录“cmTC_89c67.dir\Debug\cmTC_89c67.tlog\”。
+  正在创建目录“cmTC_6dcc4.dir\Debug\cmTC_6dcc4.tlog\”。
 InitializeBuildStatus:
-  正在创建“cmTC_89c67.dir\Debug\cmTC_89c67.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+  正在创建“cmTC_6dcc4.dir\Debug\cmTC_6dcc4.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
 ClCompile:
-  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_89c67.dir\Debug\\" /Fd"cmTC_89c67.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\feature_tests.c"
-  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.16.27024.1 版
+  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x64\CL.exe /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_6dcc4.dir\Debug\\" /Fd"cmTC_6dcc4.dir\Debug\vc141.pdb" /Gd /TC /FC /errorReport:queue "E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\feature_tests.c"
+  用于 x64 的 Microsoft (R) C/C++ 优化编译器 19.16.27024.1 版
   版权所有(C) Microsoft Corporation。保留所有权利。
   
+  cl /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_6dcc4.dir\Debug\\" /Fd"cmTC_6dcc4.dir\Debug\vc141.pdb" /Gd /TC /FC /errorReport:queue "E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\feature_tests.c"
   feature_tests.c
-  cl /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_89c67.dir\Debug\\" /Fd"cmTC_89c67.dir\Debug\vc141.pdb" /Gd /TC /analyze- /FC /errorReport:queue "E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\feature_tests.c"
   
 Link:
-  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\cmTC_89c67.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp/Debug/cmTC_89c67.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp/Debug/cmTC_89c67.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_89c67.dir\Debug\feature_tests.obj
-  cmTC_89c67.vcxproj -> E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\cmTC_89c67.exe
+  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x64\link.exe /ERRORREPORT:QUEUE /OUT:"E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\cmTC_6dcc4.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp/Debug/cmTC_6dcc4.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp/Debug/cmTC_6dcc4.lib" /MACHINE:X64  /machine:x64 cmTC_6dcc4.dir\Debug\feature_tests.obj
+  cmTC_6dcc4.vcxproj -> E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\cmTC_6dcc4.exe
 FinalizeBuildStatus:
-  正在删除文件“cmTC_89c67.dir\Debug\cmTC_89c67.tlog\unsuccessfulbuild”。
-  正在对“cmTC_89c67.dir\Debug\cmTC_89c67.tlog\cmTC_89c67.lastbuildstate”执行 Touch 任务。
-已完成生成项目“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\cmTC_89c67.vcxproj”(默认目标)的操作。
+  正在删除文件“cmTC_6dcc4.dir\Debug\cmTC_6dcc4.tlog\unsuccessfulbuild”。
+  正在对“cmTC_6dcc4.dir\Debug\cmTC_6dcc4.tlog\cmTC_6dcc4.lastbuildstate”执行 Touch 任务。
+已完成生成项目“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\cmTC_6dcc4.vcxproj”(默认目标)的操作。
 
 已成功生成。
     0 个警告
     0 个错误
 
-已用时间 00:00:01.14
+已用时间 00:00:00.58
 
 
     Feature record: C_FEATURE:1c_function_prototypes
@@ -210,77 +210,77 @@ FinalizeBuildStatus:
 Determining if the CXX compiler works passed with the following output:
 Change Dir: E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"D:/vs2017/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_062e0.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+Run Build Command:"D:/vs2017/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_a43d7.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
 用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.9.20+g88f5fadfbe
 版权所有(C) Microsoft Corporation。保留所有权利。
 
-生成启动时间为 2018/11/30 14:50:26。
-节点 1 上的项目“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\cmTC_062e0.vcxproj”(默认目标)。
+生成启动时间为 2018/12/3 11:31:14。
+节点 1 上的项目“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\cmTC_a43d7.vcxproj”(默认目标)。
 PrepareForBuild:
-  正在创建目录“cmTC_062e0.dir\Debug\”。
+  正在创建目录“cmTC_a43d7.dir\Debug\”。
   正在创建目录“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\”。
-  正在创建目录“cmTC_062e0.dir\Debug\cmTC_062e0.tlog\”。
+  正在创建目录“cmTC_a43d7.dir\Debug\cmTC_a43d7.tlog\”。
 InitializeBuildStatus:
-  正在创建“cmTC_062e0.dir\Debug\cmTC_062e0.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+  正在创建“cmTC_a43d7.dir\Debug\cmTC_a43d7.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
 ClCompile:
-  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_062e0.dir\Debug\\" /Fd"cmTC_062e0.dir\Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:queue "E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\testCXXCompiler.cxx"
-  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.16.27024.1 版
+  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x64\CL.exe /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_a43d7.dir\Debug\\" /Fd"cmTC_a43d7.dir\Debug\vc141.pdb" /Gd /TP /FC /errorReport:queue "E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\testCXXCompiler.cxx"
+  用于 x64 的 Microsoft (R) C/C++ 优化编译器 19.16.27024.1 版
   版权所有(C) Microsoft Corporation。保留所有权利。
   
+  cl /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_a43d7.dir\Debug\\" /Fd"cmTC_a43d7.dir\Debug\vc141.pdb" /Gd /TP /FC /errorReport:queue "E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\testCXXCompiler.cxx"
   testCXXCompiler.cxx
-  cl /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_062e0.dir\Debug\\" /Fd"cmTC_062e0.dir\Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:queue "E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\testCXXCompiler.cxx"
   
 Link:
-  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\cmTC_062e0.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp/Debug/cmTC_062e0.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp/Debug/cmTC_062e0.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_062e0.dir\Debug\testCXXCompiler.obj
-  cmTC_062e0.vcxproj -> E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\cmTC_062e0.exe
+  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x64\link.exe /ERRORREPORT:QUEUE /OUT:"E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\cmTC_a43d7.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp/Debug/cmTC_a43d7.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp/Debug/cmTC_a43d7.lib" /MACHINE:X64  /machine:x64 cmTC_a43d7.dir\Debug\testCXXCompiler.obj
+  cmTC_a43d7.vcxproj -> E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\cmTC_a43d7.exe
 FinalizeBuildStatus:
-  正在删除文件“cmTC_062e0.dir\Debug\cmTC_062e0.tlog\unsuccessfulbuild”。
-  正在对“cmTC_062e0.dir\Debug\cmTC_062e0.tlog\cmTC_062e0.lastbuildstate”执行 Touch 任务。
-已完成生成项目“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\cmTC_062e0.vcxproj”(默认目标)的操作。
+  正在删除文件“cmTC_a43d7.dir\Debug\cmTC_a43d7.tlog\unsuccessfulbuild”。
+  正在对“cmTC_a43d7.dir\Debug\cmTC_a43d7.tlog\cmTC_a43d7.lastbuildstate”执行 Touch 任务。
+已完成生成项目“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\cmTC_a43d7.vcxproj”(默认目标)的操作。
 
 已成功生成。
     0 个警告
     0 个错误
 
-已用时间 00:00:01.17
+已用时间 00:00:00.59
 
 
 Detecting CXX compiler ABI info compiled with the following output:
 Change Dir: E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"D:/vs2017/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_43960.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+Run Build Command:"D:/vs2017/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_46765.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
 用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.9.20+g88f5fadfbe
 版权所有(C) Microsoft Corporation。保留所有权利。
 
-生成启动时间为 2018/11/30 14:50:27。
-节点 1 上的项目“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\cmTC_43960.vcxproj”(默认目标)。
+生成启动时间为 2018/12/3 11:31:14。
+节点 1 上的项目“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\cmTC_46765.vcxproj”(默认目标)。
 PrepareForBuild:
-  正在创建目录“cmTC_43960.dir\Debug\”。
+  正在创建目录“cmTC_46765.dir\Debug\”。
   正在创建目录“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\”。
-  正在创建目录“cmTC_43960.dir\Debug\cmTC_43960.tlog\”。
+  正在创建目录“cmTC_46765.dir\Debug\cmTC_46765.tlog\”。
 InitializeBuildStatus:
-  正在创建“cmTC_43960.dir\Debug\cmTC_43960.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+  正在创建“cmTC_46765.dir\Debug\cmTC_46765.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
 ClCompile:
-  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_43960.dir\Debug\\" /Fd"cmTC_43960.dir\Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:queue "C:\Program Files\CMake\share\cmake-3.12\Modules\CMakeCXXCompilerABI.cpp"
-  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.16.27024.1 版
+  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x64\CL.exe /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_46765.dir\Debug\\" /Fd"cmTC_46765.dir\Debug\vc141.pdb" /Gd /TP /FC /errorReport:queue "C:\Program Files\CMake\share\cmake-3.12\Modules\CMakeCXXCompilerABI.cpp"
+  用于 x64 的 Microsoft (R) C/C++ 优化编译器 19.16.27024.1 版
   版权所有(C) Microsoft Corporation。保留所有权利。
   
+  cl /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_46765.dir\Debug\\" /Fd"cmTC_46765.dir\Debug\vc141.pdb" /Gd /TP /FC /errorReport:queue "C:\Program Files\CMake\share\cmake-3.12\Modules\CMakeCXXCompilerABI.cpp"
   CMakeCXXCompilerABI.cpp
-  cl /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_43960.dir\Debug\\" /Fd"cmTC_43960.dir\Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:queue "C:\Program Files\CMake\share\cmake-3.12\Modules\CMakeCXXCompilerABI.cpp"
   
 Link:
-  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\cmTC_43960.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp/Debug/cmTC_43960.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp/Debug/cmTC_43960.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_43960.dir\Debug\CMakeCXXCompilerABI.obj
-  cmTC_43960.vcxproj -> E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\cmTC_43960.exe
+  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x64\link.exe /ERRORREPORT:QUEUE /OUT:"E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\cmTC_46765.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp/Debug/cmTC_46765.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp/Debug/cmTC_46765.lib" /MACHINE:X64  /machine:x64 cmTC_46765.dir\Debug\CMakeCXXCompilerABI.obj
+  cmTC_46765.vcxproj -> E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\cmTC_46765.exe
 FinalizeBuildStatus:
-  正在删除文件“cmTC_43960.dir\Debug\cmTC_43960.tlog\unsuccessfulbuild”。
-  正在对“cmTC_43960.dir\Debug\cmTC_43960.tlog\cmTC_43960.lastbuildstate”执行 Touch 任务。
-已完成生成项目“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\cmTC_43960.vcxproj”(默认目标)的操作。
+  正在删除文件“cmTC_46765.dir\Debug\cmTC_46765.tlog\unsuccessfulbuild”。
+  正在对“cmTC_46765.dir\Debug\cmTC_46765.tlog\cmTC_46765.lastbuildstate”执行 Touch 任务。
+已完成生成项目“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\cmTC_46765.vcxproj”(默认目标)的操作。
 
 已成功生成。
     0 个警告
     0 个错误
 
-已用时间 00:00:01.15
+已用时间 00:00:00.63
 
 
 
@@ -288,39 +288,39 @@ FinalizeBuildStatus:
 Detecting CXX [] compiler features compiled with the following output:
 Change Dir: E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"D:/vs2017/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_58e06.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
+Run Build Command:"D:/vs2017/MSBuild/15.0/Bin/MSBuild.exe" "cmTC_a513d.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=15.0"
 用于 .NET Framework 的 Microsoft (R) 生成引擎版本 15.9.20+g88f5fadfbe
 版权所有(C) Microsoft Corporation。保留所有权利。
 
-生成启动时间为 2018/11/30 14:50:29。
-节点 1 上的项目“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\cmTC_58e06.vcxproj”(默认目标)。
+生成启动时间为 2018/12/3 11:31:15。
+节点 1 上的项目“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\cmTC_a513d.vcxproj”(默认目标)。
 PrepareForBuild:
-  正在创建目录“cmTC_58e06.dir\Debug\”。
+  正在创建目录“cmTC_a513d.dir\Debug\”。
   正在创建目录“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\”。
-  正在创建目录“cmTC_58e06.dir\Debug\cmTC_58e06.tlog\”。
+  正在创建目录“cmTC_a513d.dir\Debug\cmTC_a513d.tlog\”。
 InitializeBuildStatus:
-  正在创建“cmTC_58e06.dir\Debug\cmTC_58e06.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+  正在创建“cmTC_a513d.dir\Debug\cmTC_a513d.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
 ClCompile:
-  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\CL.exe /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_58e06.dir\Debug\\" /Fd"cmTC_58e06.dir\Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:queue "E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\feature_tests.cxx"
-  用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.16.27024.1 版
+  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x64\CL.exe /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_a513d.dir\Debug\\" /Fd"cmTC_a513d.dir\Debug\vc141.pdb" /Gd /TP /FC /errorReport:queue "E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\feature_tests.cxx"
+  用于 x64 的 Microsoft (R) C/C++ 优化编译器 19.16.27024.1 版
   版权所有(C) Microsoft Corporation。保留所有权利。
   
+  cl /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_a513d.dir\Debug\\" /Fd"cmTC_a513d.dir\Debug\vc141.pdb" /Gd /TP /FC /errorReport:queue "E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\feature_tests.cxx"
   feature_tests.cxx
-  cl /c /Zi /W3 /WX- /diagnostics:classic /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_58e06.dir\Debug\\" /Fd"cmTC_58e06.dir\Debug\vc141.pdb" /Gd /TP /analyze- /FC /errorReport:queue "E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\feature_tests.cxx"
   
 Link:
-  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x86\link.exe /ERRORREPORT:QUEUE /OUT:"E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\cmTC_58e06.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp/Debug/cmTC_58e06.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp/Debug/cmTC_58e06.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_58e06.dir\Debug\feature_tests.obj
-  cmTC_58e06.vcxproj -> E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\cmTC_58e06.exe
+  D:\vs2017\VC\Tools\MSVC\14.16.27023\bin\HostX86\x64\link.exe /ERRORREPORT:QUEUE /OUT:"E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\cmTC_a513d.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp/Debug/cmTC_a513d.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:/work/wx_php/213/zq_server/src/dependencies/protobuf-all-3.6.1/cmake/build/CMakeFiles/CMakeTmp/Debug/cmTC_a513d.lib" /MACHINE:X64  /machine:x64 cmTC_a513d.dir\Debug\feature_tests.obj
+  cmTC_a513d.vcxproj -> E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\Debug\cmTC_a513d.exe
 FinalizeBuildStatus:
-  正在删除文件“cmTC_58e06.dir\Debug\cmTC_58e06.tlog\unsuccessfulbuild”。
-  正在对“cmTC_58e06.dir\Debug\cmTC_58e06.tlog\cmTC_58e06.lastbuildstate”执行 Touch 任务。
-已完成生成项目“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\cmTC_58e06.vcxproj”(默认目标)的操作。
+  正在删除文件“cmTC_a513d.dir\Debug\cmTC_a513d.tlog\unsuccessfulbuild”。
+  正在对“cmTC_a513d.dir\Debug\cmTC_a513d.tlog\cmTC_a513d.lastbuildstate”执行 Touch 任务。
+已完成生成项目“E:\work\wx_php\213\zq_server\src\dependencies\protobuf-all-3.6.1\cmake\build\CMakeFiles\CMakeTmp\cmTC_a513d.vcxproj”(默认目标)的操作。
 
 已成功生成。
     0 个警告
     0 个错误
 
-已用时间 00:00:01.14
+已用时间 00:00:00.62
 
 
     Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers

@@ -17,7 +17,7 @@ bool TestServerModule::init()
 	httpServerModule_ = libManager_->findModule<IHttpServerModule>();
 	httpClientModule_ = libManager_->findModule<IHttpClientModule>();
 	messageDispatcherModule_ = libManager_->findModule<IMessageDispatcherModule>();
-//	redisModule_ = libManager_->findModule<IRedisModule>();
+	redisModule_ = libManager_->findModule<IRedisModule>();
 	logModule_ = libManager_->findModule<ILogModule>();
 
 	return true;
@@ -29,7 +29,7 @@ bool TestServerModule::initEnd()
 
 	auto before = getMSTime();
 	std::string out;
-//	redisModule_->getClientBySuitConsistent()->GET(std::to_string(i++), out);
+	redisModule_->getClientBySuitConsistent()->GET(std::to_string(i++), out);
 	//redisModule_->getClientBySuitConsistent()->GET(std::to_string(i++), out);
 
 	auto testModule = libManager_->findModule<ITestDllModule>();
