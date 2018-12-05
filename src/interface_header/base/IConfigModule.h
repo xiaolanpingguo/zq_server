@@ -71,7 +71,8 @@ public:
 
 	// 获得指定的某行
 	template<class T>
-	const std::shared_ptr<T> getCsvRow(const int id)
+//	const std::shared_ptr<T> getCsvRow(const int id)
+	const T* getCsvRow(const int id)
 	{
 		const std::shared_ptr<TCsvFile<T>> pCsvFile = getCsv<T>();
 		if (pCsvFile == nullptr)

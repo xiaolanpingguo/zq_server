@@ -5,14 +5,14 @@
 
 namespace zq {
 
-
+	class response;
+	class request;
 
 class ITestDllModule : public IModule
 {
 public:
 
-	virtual void print() = 0;
-	virtual void setValue(int value) = 0;
+	virtual void print(request& req, response& res) = 0;
 };
 
 }

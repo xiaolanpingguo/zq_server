@@ -4,6 +4,7 @@
 #include <map>
 #include <time.h>
 #include <unordered_map>
+#include <mutex>
 #include "coroutine_manager.h"
 #include "interface_header/base/IModule.h"
 #include "interface_header/base/ILibManager.h"
@@ -144,6 +145,8 @@ private:
 	DynLibMap dllLibMap_;
 	StaticLibInstanceMap staticLibInstanceMap_;
 	ModuleInstanceMap moduleInstanceMap_;
+
+	std::mutex dllMutex_;
 };
 
 }

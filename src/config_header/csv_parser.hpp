@@ -245,14 +245,15 @@ public:
 
 	const CsvRowsMap* getCsvRowAll() const { return &m_mapData; }
 
-	const std::shared_ptr<T> getCsvRow(const int id)
+//	const std::shared_ptr<T> getCsvRow(const int id)
+	const T* getCsvRow(const int id)
 	{
 		auto it = m_mapData.find(id);
 		if(it == m_mapData.end())
 		{
 			return nullptr;
 		}
-		return it->second;
+		return &it->second;
 	}
 
 	const int getCsvRowNum()

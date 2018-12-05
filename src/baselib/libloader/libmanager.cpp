@@ -532,11 +532,6 @@ void LibManager::unRegisterLib(ILib* lib)
 
 bool LibManager::reLoadDynLib(const std::string & lib_name)
 {
-	//auto itInstance = libInstanceMap_.find(lib_name);
-	//if (itInstance == libInstanceMap_.end())
-	//{
-	//	return false;
-	//}
 
 	//ILib* pLib = itInstance->second;
 	//IModule* pModule = pLib->first();
@@ -549,42 +544,43 @@ bool LibManager::reLoadDynLib(const std::string & lib_name)
 	//	pModule = pLib->next();
 	//}
 
+	std::unique_lock<std::mutex> lock(dllMutex_);
 	auto it = dllLibMap_.find(lib_name);
 	if (it != dllLibMap_.end())
 	{
-		DynLib* pLib = it->second;
-		DLL_STOP_FUNC pFunc = (DLL_STOP_FUNC)pLib->getSymbol("dllStop");
+		DynLib* pDynLib = it->second;
+		DLL_STOP_FUNC pFunc = (DLL_STOP_FUNC)pDynLib->getSymbol("dllStop");
 
 		if (pFunc)
-		{
-			
+		{			
 			pFunc(this,it->second->getName());
 		}
 
-		pLib->unLoad();
+		pDynLib->unLoad();
 
-		delete pLib;
-		pLib = NULL;
+		delete pDynLib;
+		pDynLib = NULL;
 		dllLibMap_.erase(it);
 	}
 
-	DynLib* pLib = new DynLib(lib_name + "1");
-	bool bLoad = pLib->load();
+	DynLib* pNewDynLib = new DynLib(lib_name + "1");
+	bool bLoad = pNewDynLib->load();
 	if (bLoad)
 	{
-		dllLibMap_.insert(std::make_pair(lib_name, pLib));
+		dllLibMap_.insert(std::make_pair(lib_name, pNewDynLib));
 
-		DLL_START_FUNC pFunc = (DLL_START_FUNC)pLib->getSymbol("dllStart");
+		DLL_START_FUNC pFunc = (DLL_START_FUNC)pNewDynLib->getSymbol("dllStart");
 		if (!pFunc)
 		{
-			std::cout << "Reload find function dllStart Failed in [" << pLib->getName() << "]" << std::endl;
+			std::cout << "Reload find function dllStart Failed in [" << pNewDynLib->getName() << "]" << std::endl;
 			assert(0);
 			return false;
 		}
 
-		pFunc(this,pLib);
+		pFunc(this, pNewDynLib);
 
-		pLib->getLib()->init();
+		pNewDynLib->getLib()->init();
+		pNewDynLib->getLib()->initEnd();
 	}
 	else
 	{
@@ -598,8 +594,8 @@ bool LibManager::reLoadDynLib(const std::string & lib_name)
 			return false;
 		}
 #elif ZQ_PLATFORM == ZQ_PLATFORM_WIN
-		std::cout << stderr << " Reload DLL[" << pLib->getName() << "] failed, ErrorNo. = [" << GetLastError() << "]" << std::endl;
-		std::cout << "Reload [" << pLib->getName() << "] failed" << std::endl;
+		std::cout << stderr << " Reload DLL[" << pNewDynLib->getName() << "] failed, ErrorNo. = [" << GetLastError() << "]" << std::endl;
+		std::cout << "Reload [" << pNewDynLib->getName() << "] failed" << std::endl;
 		assert(0);
 		return false;
 #endif 
@@ -613,6 +609,7 @@ bool LibManager::reLoadDynLib(const std::string & lib_name)
 	//		itReloadInstance->second->onReload();
 	//	}
 	//}
+	
 	return true;
 }
 
@@ -670,6 +667,15 @@ bool LibManager::run()
         bool tembRet = it->second->run();
         bRet = bRet && tembRet;
     }
+
+	{
+		std::unique_lock<std::mutex> lock(dllMutex_);
+		for (auto& it : dllLibMap_)
+		{
+			bool tembRet = it.second->getLib()->run();
+			bRet = bRet && tembRet;
+		}
+	}
 
     return bRet;
 }
@@ -743,6 +749,11 @@ bool LibManager::initEnd()
     {
         itAfterInstance->second->initEnd();
     }
+
+	for (auto& dllLibItem : dllLibMap_)
+	{
+		dllLibItem.second->getLib()->initEnd();
+	}
 
     return true;
 }

@@ -30,7 +30,8 @@ typedef struct HINSTANCE__* hInstance;
 #endif
 
 namespace zq {
-	class ILib;
+class ILib;
+
 class DynLib
 {
 

@@ -30,13 +30,7 @@ bool TestServerModule::initEnd()
 	auto before = getMSTime();
 	std::string out;
 	redisModule_->getClientBySuitConsistent()->GET(std::to_string(i++), out);
-	//redisModule_->getClientBySuitConsistent()->GET(std::to_string(i++), out);
 
-	auto testModule = libManager_->findModule<ITestDllModule>();
-	httpServerModule_->setHandler(http_method::GET, "print", [testModule](request&, response&) {
-		std::cout << "Hello!!!!!" << std::endl;
-		testModule->print();
-	});
 	cout << "time: " << GetMSTimeDiffToNow(before) << endl;
 	return true;
 }

@@ -1,4 +1,7 @@
 #include "test_dll_module.h"
+#include "interface_header/base/IHttpServerModule.h"
+#include "interface_header/base/IConfigModule.h"
+#include "config_header/cfg_server.hpp"
 
 #if ZQ_PLATFORM == ZQ_PLATFORM_WIN
 #endif
@@ -8,7 +11,6 @@ using namespace zq;
 TestDllModule::TestDllModule(ILibManager* p)
 {
     libManager_ = p;
-	v = 0;
 }
 
 TestDllModule::~TestDllModule()
@@ -22,6 +24,14 @@ bool zq::TestDllModule::init()
 
 bool TestDllModule::initEnd()
 {
+	auto httpServerModule = libManager_->findModule<IHttpServerModule>();
+	httpServerModule->setHandler(http_method::POST, "/print", [this](request& req, response& res) {
+		this->print(req,res);
+	});
+
+	auto configModule = libManager_->findModule<IConfigModule>();
+	auto csvServer = configModule->getCsvRow<CSVServer>(9);
+	httpServerModule->startServer(csvServer->http_port);
 	return true;
 }
 
@@ -35,13 +45,19 @@ bool TestDllModule::shut()
 	return true;
 }
 
-void zq::TestDllModule::print()
+void zq::TestDllModule::print(request& req,response& res)
 {
-	std::cout << 7654321 << std::endl;
-	std::cout << v << std::endl;
-}
-
-void zq::TestDllModule::setValue(int value)
-{
-	v = value;
+	if (req.has_body())
+	{
+		auto reqBody = req.body();
+		int baseNum = std::stoi(reqBody);
+		
+		res.set_status_and_content(status_type::ok, std::move(std::to_string(baseNum * 4)));
+	}
+	else
+	{
+		res.set_status_and_content(status_type::bad_request,std::move(""));
+	}
+	
+	return;
 }

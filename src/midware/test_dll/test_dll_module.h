@@ -16,11 +16,9 @@ public:
 	bool initEnd() override;
 	bool run() override;
 	bool shut() override;
-	void print() override;
-	void setValue(int value) override;
+	void print(request& req, response& res) override;
 
 private:
-	int v;
 };
 
 }
