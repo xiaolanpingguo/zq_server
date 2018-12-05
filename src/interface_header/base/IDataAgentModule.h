@@ -36,9 +36,12 @@ public:
 		return setRedisHashData(key, field_key, data);
 	}
 
+	virtual bool hexists(const std::string& user_id, const std::string& field_key) = 0;
+
+protected:
+
 	virtual bool setRedisHashData(const std::string& key, const std::string& field_key, const std::string& data) = 0;
 	virtual bool getRedisHashData(const std::string& key, const std::string& field_key, std::string& data) = 0;
-	virtual bool hexists(const std::string& user_id, const std::string& field_key) = 0;
 };
 
 }

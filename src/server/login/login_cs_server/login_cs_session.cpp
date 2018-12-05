@@ -1,6 +1,6 @@
 #include "login_cs_session.h"
 #include "baselib/base_code/util.h"
-#include "baselib/network/byte_buffer.hpp"
+#include "midware/game_logic/server/byte_buffer.hpp"
 #include "baselib/message/game_db_account.pb.h"
 #include "midware/cryptography/sha1.h"
 #include "midware/cryptography/totp.h"

@@ -11,7 +11,6 @@ CObject::CObject(uuid id, const std::string& name)
 
 CObject::~CObject()
 {
-
 }
 
 bool CObject::exsitProperty(const std::string& strPropertyName)
@@ -281,6 +280,104 @@ IPropertyPtr CObject::setArrayValueStr(const std::string& name, const std::strin
 IPropertyPtr CObject::setArrayValueUUID(const std::string& name, const uuid& value, size_t pos)
 {
 	return setValuePos(name, value, pos);
+}
+
+void CObject::initValue(PROERTY_TYPE type, size_t count)
+{
+	if (count <= 0)
+		return;
+
+	switch (type)
+	{
+	case PROERTY_TYPE::UINT8:
+		propertyInt8_ = std::make_unique<uint8[]>(count);
+		memset(propertyInt8_.get(), 0, sizeof(uint8) * count);
+		break;
+	case PROERTY_TYPE::INT32:
+		propertyInt32_ = std::make_unique<int32[]>(count);
+		memset(propertyInt32_.get(), 0, sizeof(int32) * count);
+		break;
+	case PROERTY_TYPE::UINT32:
+		propertyUint32_ = std::make_unique<uint32[]>(count);
+		memset(propertyUint32_.get(), 0, sizeof(uint32) * count);
+		break;
+	case PROERTY_TYPE::INT64:
+		propertyInt64_ = std::make_unique<int64[]>(count);
+		memset(propertyInt64_.get(), 0, sizeof(int64) * count);
+		break;
+	case PROERTY_TYPE::UINT64:
+		propertyUint64_ = std::make_unique<uint64[]>(count);
+		memset(propertyUint64_.get(), 0, sizeof(uint64) * count);
+		break;
+	case PROERTY_TYPE::FLOAT:
+		propertyFloat_ = std::make_unique<float[]>(count);
+		memset(propertyFloat_.get(), 0, sizeof(float) * count);
+		break;
+	case PROERTY_TYPE::DOUBLE:
+		propertyDouble_ = std::make_unique<double[]>(count);
+		memset(propertyDouble_.get(), 0, sizeof(double) * count);
+		break;
+	case PROERTY_TYPE::STRING:
+		propertyString_ = std::make_unique<std::string[]>(count);
+		break;
+	case PROERTY_TYPE::UUID:
+		break;
+	default:
+		break;
+	}
+}
+
+void CObject::setValueChar(size_t index, int8 value)
+{
+	if (propertyInt8_) 		
+		propertyInt8_[index] = value;
+}
+
+void CObject::setValueInt32(size_t index, int32 value)
+{
+	if (propertyInt32_)
+		propertyInt32_[index] = value;
+}
+
+void CObject::setValueUint32(size_t index, uint32 value)
+{
+	if (propertyUint32_)
+		propertyUint32_[index] = value;
+}
+
+void CObject::setValueInt64(size_t index, int64 value)
+{
+	if (propertyInt64_)
+		propertyInt64_[index] = value;
+}
+
+void CObject::setValueUint64(size_t index, uint64 value)
+{
+	if (propertyUint64_)
+		propertyUint64_[index] = value;
+}
+
+void CObject::setValueFloat(size_t index, float value)
+{
+	if (propertyFloat_)
+		propertyFloat_[index] = value;
+}
+
+void CObject::setValueDouble(size_t index, double value)
+{
+	if (propertyDouble_)
+		propertyDouble_[index] = value;
+}
+
+void CObject::setValueStr(size_t index, const std::string& value)
+{
+	if (propertyString_)
+		propertyString_[index] = value;
+}
+
+void CObject::setValueUUID(size_t index, const uuid& value)
+{
+
 }
 
 
