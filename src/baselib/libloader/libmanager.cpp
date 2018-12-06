@@ -549,6 +549,9 @@ bool LibManager::reLoadDynLib(const std::string & lib_name)
 	if (it != dllLibMap_.end())
 	{
 		DynLib* pDynLib = it->second;
+		ILib* pLib = pDynLib->getLib();
+		pLib->shut();
+
 		DLL_STOP_FUNC pFunc = (DLL_STOP_FUNC)pDynLib->getSymbol("dllStop");
 
 		if (pFunc)

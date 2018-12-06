@@ -42,6 +42,8 @@ bool TestDllModule::run()
 
 bool TestDllModule::shut()
 {
+	auto httpServerModule = libManager_->findModule<IHttpServerModule>();
+	httpServerModule->setHandler(http_method::POST, "/print", HttpServerHandler());
 	return true;
 }
 
@@ -52,7 +54,7 @@ void zq::TestDllModule::print(request& req,response& res)
 		auto reqBody = req.body();
 		int baseNum = std::stoi(reqBody);
 		
-		res.set_status_and_content(status_type::ok, std::move(std::to_string(baseNum * 4)));
+		res.set_status_and_content(status_type::ok, std::move(std::to_string(baseNum * 5)));
 	}
 	else
 	{
