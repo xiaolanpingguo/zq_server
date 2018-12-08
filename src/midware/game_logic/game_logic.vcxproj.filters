@@ -28,6 +28,9 @@
     <Filter Include="server">
       <UniqueIdentifier>{32f273c3-06ec-4d68-a308-1c984b3aef7c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="entities\item">
+      <UniqueIdentifier>{5ee76b40-e226-4820-a4e6-0d2dc95b61e0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game_logic_lib.cpp" />
@@ -111,9 +114,6 @@
     <ClInclude Include="dbc_stores\dbc_module.h">
       <Filter>dbc_stores</Filter>
     </ClInclude>
-    <ClInclude Include="common\shared_defines.h">
-      <Filter>common</Filter>
-    </ClInclude>
     <ClInclude Include="entities\player\player.h">
       <Filter>entities\player</Filter>
     </ClInclude>
@@ -158,6 +158,12 @@
     </ClInclude>
     <ClInclude Include="entities\object\object_mgr_module.h">
       <Filter>entities\object</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\item\item_template.h">
+      <Filter>entities\item</Filter>
+    </ClInclude>
+    <ClInclude Include="common\common_defines.h">
+      <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

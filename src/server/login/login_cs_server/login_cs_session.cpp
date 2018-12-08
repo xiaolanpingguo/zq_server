@@ -262,9 +262,9 @@ bool LoginCSSession::HandleLogonChallenge()
 	std::string login_name((char const*)challenge->I, challenge->I_len);
 
 	// 去数据库查找帐号信息
-	std::string field_key = _KEY_ACCOUNT_ + login_name;
+	std::string hash_key = _KEY_ACCOUNT_ + login_name;
 	IDataAgentModule* data_agent = LibManager::get_instance().findModule<IDataAgentModule>();
-	if (!data_agent->getHashData(login_name, field_key, accountInfo_))
+	if (!data_agent->getHashData(hash_key, login_name, accountInfo_))
 	{
 		LOG_ERROR << "login faild, name: " << login_name;
 		error_code = WOW_FAIL_UNKNOWN_ACCOUNT;
@@ -329,7 +329,7 @@ bool LoginCSSession::HandleLogonChallenge()
 		accountInfo_.set_s(s.AsHexStr());
 
 		// 这里保存下
-		data_agent->setHashData(login_name, field_key, accountInfo_);
+		data_agent->setHashData(hash_key, login_name, accountInfo_);
 	}
 	else
 	{
@@ -506,18 +506,8 @@ bool LoginCSSession::HandleLogonProof()
 
 		// 更新sessionkey, last_ip, last login，然后保存一下 
 		IDataAgentModule* data_agent = LibManager::get_instance().findModule<IDataAgentModule>();
-		//data_agent->
-        //PreparedStatement *stmt = LoginDatabase.GetPreparedStatement(LOGIN_UPD_LOGONPROOF);
-        //stmt->setString(0, K.AsHexStr());
-        //stmt->setString(1, GetRemoteIpAddress().to_string());
-        //stmt->setUInt32(2, GetLocaleByName(_localizationName));
-        //stmt->setString(3, _os);
-        //stmt->setString(4, _accountInfo.Login);
-        //LoginDatabase.DirectExecute(stmt);
-		//std::string ss = "43E8D9410209DE1034F857147241B8A62D11699865A5B055C363D1F8827CF1DD008C8C08E3D7F546";
-		//accountInfo_.set_session_key(ss);
 		accountInfo_.set_session_key(K.AsHexStr());
-		data_agent->setHashData(accountInfo_.account_name(), _KEY_ACCOUNT_ + accountInfo_.account_name(), accountInfo_);
+		data_agent->setHashData(_KEY_ACCOUNT_ + accountInfo_.account_name(), accountInfo_.account_name(), accountInfo_);
 
         // Finish SRP6 and send the final result to the client
         sha.Initialize();
@@ -574,7 +564,7 @@ bool LoginCSSession::HandleReconnectChallenge()
     if (challenge->size - (sizeof(sAuthLogonChallenge_C) - AUTH_LOGON_CHALLENGE_INITIAL_SIZE - 1) != challenge->I_len)
         return false;
 
-    std::string login((char const*)challenge->I, challenge->I_len);
+    std::string login_name((char const*)challenge->I, challenge->I_len);
 
     _build = challenge->build;
     _expversion = uint8(IsPostBCAcceptedClientBuild(_build) ? POST_BC_EXP_FLAG : 
@@ -593,11 +583,11 @@ bool LoginCSSession::HandleReconnectChallenge()
 	pkt << uint8(AUTH_RECONNECT_CHALLENGE);
 
 	// 查询数据库
-	std::string field_key = _KEY_ACCOUNT_ + login;
+	std::string hash_key = _KEY_ACCOUNT_ + login_name;
 	IDataAgentModule* data_agent = LibManager::get_instance().findModule<IDataAgentModule>();
-	if (!data_agent->getHashData(login, field_key, accountInfo_))
+	if (!data_agent->getHashData(hash_key, login_name, accountInfo_))
 	{
-		LOG_ERROR << "login faild, name: " << login;
+		LOG_ERROR << "login faild, name: " << login_name;
 		pkt << uint8(WOW_FAIL_UNKNOWN_ACCOUNT);
 		SendPacket(pkt);
 		return true;

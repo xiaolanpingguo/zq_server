@@ -39,6 +39,14 @@ public:
 	void setValueString(size_t index, const std::string& value);
 	void setValueGuid(size_t index, const ObjectGuid& value);
 
+	int32 getValueInt32(size_t index);
+	int64 getValueInt64(size_t index);
+	uint64 getValueUint64(size_t index);
+	float getValueFloat(size_t index);
+	double getValueDouble(size_t index);
+	const std::string& getValueString(size_t index);
+	ObjectGuid getValueGuid(size_t index);
+
 	virtual void loadFromDb(DBObject::DBObjectInfo& db_object);
 	virtual void saveDb(DBObject::DBObjectInfo& db_object);
 

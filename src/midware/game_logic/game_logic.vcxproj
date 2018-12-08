@@ -148,7 +148,7 @@
     <ClInclude Include="addons_module\addons_module.h" />
     <ClInclude Include="common\game_time.h" />
     <ClInclude Include="common\iterator_pair.h" />
-    <ClInclude Include="common\shared_defines.h" />
+    <ClInclude Include="common\common_defines.h" />
     <ClInclude Include="common\smart_enum.h" />
     <ClInclude Include="common\timer.h" />
     <ClInclude Include="dbc_stores\dbc_db_loader.h" />
@@ -160,6 +160,7 @@
     <ClInclude Include="dbc_stores\dbc_store.h" />
     <ClInclude Include="dbc_stores\dbc_stores.h" />
     <ClInclude Include="dbc_stores\dbc_structure.h" />
+    <ClInclude Include="entities\item\item_template.h" />
     <ClInclude Include="entities\object\object.h" />
     <ClInclude Include="entities\object\object_defines.h" />
     <ClInclude Include="entities\object\object_guid.h" />

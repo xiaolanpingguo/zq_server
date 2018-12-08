@@ -9,6 +9,7 @@
 #include "interface_header/logic/IAddonsModule.h"
 #include "interface_header/logic/IObjectMgrModule.h"
 #include "interface_header/logic/IPlayerMgrModule.h"
+#include "interface_header/base/IConfigModule.h"
 #include <unordered_map>
 
 
@@ -17,7 +18,7 @@ namespace zq{
 
 class WorldSession;
 class WorldPacket;
-class AuthCrypt;
+class CSVPlayerCreateInfo;
 class GameLogicModule : public IGameLogicModule
 {
 	using MsgFunMap = std::unordered_map<int32, MsgCallBackFun>;
@@ -50,10 +51,18 @@ public:
 
 	void onWorldSessionInit(WorldSession* session);
 
+public:
+
+	CSVPlayerCreateInfo* getPlayerCreateInfo(int race_id, int class_id);
+
 protected:
 
 	bool addMsgFun(int32 msgid, MsgCallBackFun&& fun) override;
 	void call(int32 msgid, WorldSession* session, WorldPacket& recvPacket) override;
+
+private:
+
+	CSVPlayerCreateInfo* playerCreateInfo_[MAX_RACES][MAX_CLASSES];
 
 private:
 
@@ -66,6 +75,7 @@ private:
 	IAddonsModule* addonsModule_;
 	IObjectMgrModule* objectMgrModule_;
 	IPlayerMgrModule* playerMgrModule_;
+	IConfigModule* configModule_;
 };
 
 }

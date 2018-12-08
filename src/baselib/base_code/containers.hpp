@@ -8,32 +8,20 @@
 
 namespace zq{
 
-template<class T>
-constexpr inline T* AddressOrSelf(T* ptr)
-{
-    return ptr;
-}
-
-template<class T>
-constexpr inline T* AddressOrSelf(T& not_ptr)
-{
-    return std::addressof(not_ptr);
-}
 
 namespace Containers
 {
-    // replace with std::size in C++17
-    template<class C>
-    constexpr inline std::size_t Size(C const& container)
-    {
-        return container.size();
-    }
+	template<class T>
+	constexpr inline T* AddressOrSelf(T* ptr)
+	{
+		return ptr;
+	}
 
-    template<class T, std::size_t size>
-    constexpr inline std::size_t Size(T const(&)[size]) noexcept
-    {
-        return size;
-    }
+	template<class T>
+	constexpr inline T* AddressOrSelf(T& not_ptr)
+	{
+		return std::addressof(not_ptr);
+	}
 
     // resizes <container> to have at most <requestedSize> elements
     // if it has more than <requestedSize> elements, the elements to keep are selected randomly
@@ -41,10 +29,11 @@ namespace Containers
     void RandomResize(C& container, std::size_t requestedSize)
     {
         static_assert(std::is_base_of<std::forward_iterator_tag, typename std::iterator_traits<typename C::iterator>::iterator_category>::value, "Invalid container passed to Trinity::Containers::RandomResize");
-        if (Size(container) <= requestedSize)
+        if (std::size(container) <= requestedSize)
             return;
+
         auto keepIt = std::begin(container), curIt = std::begin(container);
-        uint32 elementsToKeep = requestedSize, elementsToProcess = Size(container);
+        uint32 elementsToKeep = requestedSize, elementsToProcess = std::size(container);
         while (elementsToProcess)
         {
             // this element has chance (elementsToKeep / elementsToProcess) of being kept
@@ -83,7 +72,7 @@ namespace Containers
     inline auto SelectRandomContainerElement(C const& container) -> typename std::add_const<decltype(*std::begin(container))>::type&
     {
         auto it = std::begin(container);
-        std::advance(it, urand(0, uint32(Size(container)) - 1));
+        std::advance(it, urand(0, uint32(std::size(container)) - 1));
         return *it;
     }
 
@@ -116,7 +105,7 @@ namespace Containers
     auto SelectRandomWeightedContainerElement(C const& container, Fn weightExtractor) -> decltype(std::begin(container))
     {
         std::vector<double> weights;
-        weights.reserve(Size(container));
+        weights.reserve(std::size(container));
         double weightSum = 0.0;
         for (auto& val : container)
         {
@@ -125,7 +114,7 @@ namespace Containers
             weightSum += weight;
         }
         if (weightSum <= 0.0)
-            weights.assign(Size(container), 1.0);
+            weights.assign(std::size(container), 1.0);
 
         return SelectRandomWeightedContainerElement(container, weights);
     }

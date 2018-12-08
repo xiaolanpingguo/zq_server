@@ -41,7 +41,7 @@ namespace protobuf_game_5fdb_5fobject_2eproto {
 struct TableStruct {
   static const ::google::protobuf::internal::ParseTableField entries[];
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[];
-  static const ::google::protobuf::internal::ParseTable schema[13];
+  static const ::google::protobuf::internal::ParseTable schema[16];
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
   static const ::google::protobuf::uint32 offsets[];
@@ -88,6 +88,15 @@ extern DBPropertyUint64DefaultTypeInternal _DBPropertyUint64_default_instance_;
 class DBPropertyUint64_MapUint64Entry_DoNotUse;
 class DBPropertyUint64_MapUint64Entry_DoNotUseDefaultTypeInternal;
 extern DBPropertyUint64_MapUint64Entry_DoNotUseDefaultTypeInternal _DBPropertyUint64_MapUint64Entry_DoNotUse_default_instance_;
+class DBRoleInfo;
+class DBRoleInfoDefaultTypeInternal;
+extern DBRoleInfoDefaultTypeInternal _DBRoleInfo_default_instance_;
+class DBRoleList;
+class DBRoleListDefaultTypeInternal;
+extern DBRoleListDefaultTypeInternal _DBRoleList_default_instance_;
+class DBRoleList_RoleMapEntry_DoNotUse;
+class DBRoleList_RoleMapEntry_DoNotUseDefaultTypeInternal;
+extern DBRoleList_RoleMapEntry_DoNotUseDefaultTypeInternal _DBRoleList_RoleMapEntry_DoNotUse_default_instance_;
 }  // namespace DBObject
 namespace google {
 namespace protobuf {
@@ -104,6 +113,9 @@ template<> ::DBObject::DBPropertyString* Arena::CreateMaybeMessage<::DBObject::D
 template<> ::DBObject::DBPropertyString_MapStringEntry_DoNotUse* Arena::CreateMaybeMessage<::DBObject::DBPropertyString_MapStringEntry_DoNotUse>(Arena*);
 template<> ::DBObject::DBPropertyUint64* Arena::CreateMaybeMessage<::DBObject::DBPropertyUint64>(Arena*);
 template<> ::DBObject::DBPropertyUint64_MapUint64Entry_DoNotUse* Arena::CreateMaybeMessage<::DBObject::DBPropertyUint64_MapUint64Entry_DoNotUse>(Arena*);
+template<> ::DBObject::DBRoleInfo* Arena::CreateMaybeMessage<::DBObject::DBRoleInfo>(Arena*);
+template<> ::DBObject::DBRoleList* Arena::CreateMaybeMessage<::DBObject::DBRoleList>(Arena*);
+template<> ::DBObject::DBRoleList_RoleMapEntry_DoNotUse* Arena::CreateMaybeMessage<::DBObject::DBRoleList_RoleMapEntry_DoNotUse>(Arena*);
 }  // namespace protobuf
 }  // namespace google
 namespace DBObject {
@@ -1080,6 +1092,250 @@ class DBObjectInfo : public ::google::protobuf::Message /* @@protoc_insertion_po
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   friend struct ::protobuf_game_5fdb_5fobject_2eproto::TableStruct;
 };
+// -------------------------------------------------------------------
+
+class DBRoleInfo : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:DBObject.DBRoleInfo) */ {
+ public:
+  DBRoleInfo();
+  virtual ~DBRoleInfo();
+
+  DBRoleInfo(const DBRoleInfo& from);
+
+  inline DBRoleInfo& operator=(const DBRoleInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  DBRoleInfo(DBRoleInfo&& from) noexcept
+    : DBRoleInfo() {
+    *this = ::std::move(from);
+  }
+
+  inline DBRoleInfo& operator=(DBRoleInfo&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const DBRoleInfo& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const DBRoleInfo* internal_default_instance() {
+    return reinterpret_cast<const DBRoleInfo*>(
+               &_DBRoleInfo_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    13;
+
+  void Swap(DBRoleInfo* other);
+  friend void swap(DBRoleInfo& a, DBRoleInfo& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline DBRoleInfo* New() const final {
+    return CreateMaybeMessage<DBRoleInfo>(NULL);
+  }
+
+  DBRoleInfo* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<DBRoleInfo>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const DBRoleInfo& from);
+  void MergeFrom(const DBRoleInfo& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(DBRoleInfo* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // string role_name = 1;
+  void clear_role_name();
+  static const int kRoleNameFieldNumber = 1;
+  const ::std::string& role_name() const;
+  void set_role_name(const ::std::string& value);
+  #if LANG_CXX11
+  void set_role_name(::std::string&& value);
+  #endif
+  void set_role_name(const char* value);
+  void set_role_name(const char* value, size_t size);
+  ::std::string* mutable_role_name();
+  ::std::string* release_role_name();
+  void set_allocated_role_name(::std::string* role_name);
+
+  // @@protoc_insertion_point(class_scope:DBObject.DBRoleInfo)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr role_name_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_game_5fdb_5fobject_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class DBRoleList_RoleMapEntry_DoNotUse : public ::google::protobuf::internal::MapEntry<DBRoleList_RoleMapEntry_DoNotUse, 
+    ::std::string, ::DBObject::DBRoleInfo,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
+    0 > {
+public:
+  typedef ::google::protobuf::internal::MapEntry<DBRoleList_RoleMapEntry_DoNotUse, 
+    ::std::string, ::DBObject::DBRoleInfo,
+    ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+    ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
+    0 > SuperType;
+  DBRoleList_RoleMapEntry_DoNotUse();
+  DBRoleList_RoleMapEntry_DoNotUse(::google::protobuf::Arena* arena);
+  void MergeFrom(const DBRoleList_RoleMapEntry_DoNotUse& other);
+  static const DBRoleList_RoleMapEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const DBRoleList_RoleMapEntry_DoNotUse*>(&_DBRoleList_RoleMapEntry_DoNotUse_default_instance_); }
+  void MergeFrom(const ::google::protobuf::Message& other) final;
+  ::google::protobuf::Metadata GetMetadata() const;
+};
+
+// -------------------------------------------------------------------
+
+class DBRoleList : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:DBObject.DBRoleList) */ {
+ public:
+  DBRoleList();
+  virtual ~DBRoleList();
+
+  DBRoleList(const DBRoleList& from);
+
+  inline DBRoleList& operator=(const DBRoleList& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  DBRoleList(DBRoleList&& from) noexcept
+    : DBRoleList() {
+    *this = ::std::move(from);
+  }
+
+  inline DBRoleList& operator=(DBRoleList&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const DBRoleList& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const DBRoleList* internal_default_instance() {
+    return reinterpret_cast<const DBRoleList*>(
+               &_DBRoleList_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    15;
+
+  void Swap(DBRoleList* other);
+  friend void swap(DBRoleList& a, DBRoleList& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline DBRoleList* New() const final {
+    return CreateMaybeMessage<DBRoleList>(NULL);
+  }
+
+  DBRoleList* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<DBRoleList>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const DBRoleList& from);
+  void MergeFrom(const DBRoleList& from);
+  void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(DBRoleList* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+
+  // accessors -------------------------------------------------------
+
+  // map<string, .DBObject.DBRoleInfo> role_map = 1;
+  int role_map_size() const;
+  void clear_role_map();
+  static const int kRoleMapFieldNumber = 1;
+  const ::google::protobuf::Map< ::std::string, ::DBObject::DBRoleInfo >&
+      role_map() const;
+  ::google::protobuf::Map< ::std::string, ::DBObject::DBRoleInfo >*
+      mutable_role_map();
+
+  // @@protoc_insertion_point(class_scope:DBObject.DBRoleList)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::MapField<
+      DBRoleList_RoleMapEntry_DoNotUse,
+      ::std::string, ::DBObject::DBRoleInfo,
+      ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+      ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE,
+      0 > role_map_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  friend struct ::protobuf_game_5fdb_5fobject_2eproto::TableStruct;
+};
 // ===================================================================
 
 
@@ -1559,9 +1815,96 @@ inline void DBObjectInfo::set_allocated_property_string(::DBObject::DBPropertySt
   // @@protoc_insertion_point(field_set_allocated:DBObject.DBObjectInfo.property_string)
 }
 
+// -------------------------------------------------------------------
+
+// DBRoleInfo
+
+// string role_name = 1;
+inline void DBRoleInfo::clear_role_name() {
+  role_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& DBRoleInfo::role_name() const {
+  // @@protoc_insertion_point(field_get:DBObject.DBRoleInfo.role_name)
+  return role_name_.GetNoArena();
+}
+inline void DBRoleInfo::set_role_name(const ::std::string& value) {
+  
+  role_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:DBObject.DBRoleInfo.role_name)
+}
+#if LANG_CXX11
+inline void DBRoleInfo::set_role_name(::std::string&& value) {
+  
+  role_name_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:DBObject.DBRoleInfo.role_name)
+}
+#endif
+inline void DBRoleInfo::set_role_name(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  role_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:DBObject.DBRoleInfo.role_name)
+}
+inline void DBRoleInfo::set_role_name(const char* value, size_t size) {
+  
+  role_name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:DBObject.DBRoleInfo.role_name)
+}
+inline ::std::string* DBRoleInfo::mutable_role_name() {
+  
+  // @@protoc_insertion_point(field_mutable:DBObject.DBRoleInfo.role_name)
+  return role_name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* DBRoleInfo::release_role_name() {
+  // @@protoc_insertion_point(field_release:DBObject.DBRoleInfo.role_name)
+  
+  return role_name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void DBRoleInfo::set_allocated_role_name(::std::string* role_name) {
+  if (role_name != NULL) {
+    
+  } else {
+    
+  }
+  role_name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), role_name);
+  // @@protoc_insertion_point(field_set_allocated:DBObject.DBRoleInfo.role_name)
+}
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// DBRoleList
+
+// map<string, .DBObject.DBRoleInfo> role_map = 1;
+inline int DBRoleList::role_map_size() const {
+  return role_map_.size();
+}
+inline void DBRoleList::clear_role_map() {
+  role_map_.Clear();
+}
+inline const ::google::protobuf::Map< ::std::string, ::DBObject::DBRoleInfo >&
+DBRoleList::role_map() const {
+  // @@protoc_insertion_point(field_map:DBObject.DBRoleList.role_map)
+  return role_map_.GetMap();
+}
+inline ::google::protobuf::Map< ::std::string, ::DBObject::DBRoleInfo >*
+DBRoleList::mutable_role_map() {
+  // @@protoc_insertion_point(field_mutable_map:DBObject.DBRoleList.role_map)
+  return role_map_.MutableMap();
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

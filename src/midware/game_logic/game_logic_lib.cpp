@@ -2,6 +2,8 @@
 #include "game_logic_module.h"
 #include "addons_module/addons_module.h"
 #include "dbc_stores/dbc_module.h"
+#include "entities/object/object_mgr_module.h"
+#include "entities/player/player_mgr_module.h"
 
 
 namespace zq {
@@ -37,12 +39,17 @@ void GameLogicLib::install()
 	REGISTER_MODULE(libManager_, IGameLogicModule, GameLogicModule)
 	REGISTER_MODULE(libManager_, IAddonsModule, AddonsModule)
 	REGISTER_MODULE(libManager_, IDBCModule, DBCModule)
+	REGISTER_MODULE(libManager_, IObjectMgrModule, ObjectMgrModule)
+	REGISTER_MODULE(libManager_, IPlayerMgrModule, PlayerMgrModule)
 }
 
 void GameLogicLib::uninstall()
 {
 	UNREGISTER_MODULE(libManager_, IGameLogicModule, GameLogicModule)
+	UNREGISTER_MODULE(libManager_, IAddonsModule, AddonsModule)
 	UNREGISTER_MODULE(libManager_, IDBCModule, DBCModule)
+	UNREGISTER_MODULE(libManager_, IObjectMgrModule, ObjectMgrModule)
+	UNREGISTER_MODULE(libManager_, IPlayerMgrModule, PlayerMgrModule)
 }
 
 }

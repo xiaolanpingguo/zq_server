@@ -94,6 +94,48 @@ void Object::setValueGuid(size_t index, const ObjectGuid& value)
 	propertyUint64_[index] = value;
 }
 
+int32 Object::getValueInt32(size_t index)
+{
+	ASSERT(index < propertyInt32_.size());
+	return propertyInt32_[index];
+}
+
+int64 Object::getValueInt64(size_t index)
+{
+	ASSERT(index < propertyInt64_.size());
+	return propertyInt64_[index];
+}
+
+uint64 Object::getValueUint64(size_t index)
+{
+	ASSERT(index < propertyUint64_.size());
+	return propertyUint64_[index];
+}
+
+float Object::getValueFloat(size_t index)
+{
+	ASSERT(index < propertyFloat_.size());
+	return propertyFloat_[index];
+}
+
+double Object::getValueDouble(size_t index)
+{
+	ASSERT(index < propertyDouble_.size());
+	return propertyDouble_[index];
+}
+
+const std::string& Object::getValueString(size_t index)
+{
+	ASSERT(index < propertyString_.size());
+	return propertyString_[index];
+}
+
+ObjectGuid Object::getValueGuid(size_t index)
+{
+	ASSERT(index < propertyUint64_.size());
+	return ObjectGuid(propertyUint64_[index]);
+}
+
 void Object::loadFromDb(DBObject::DBObjectInfo& db_object)
 {
 	// int32

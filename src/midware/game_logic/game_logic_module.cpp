@@ -2,10 +2,12 @@
 
 #include "server/world_session.h"
 #include "server/world_packet.h"
+
 #include "baselib/message/game_db_account.pb.h"
 #include "baselib/message/game_db_object.pb.h"
-
 #include "baselib/base_code/random.h"
+#include "baselib/kernel/config_module.h"
+
 #include "dependencies/zlib/zlib.h"
 #include "midware/cryptography/sha1.h"
 #include "midware/cryptography/big_number.h"
@@ -13,6 +15,10 @@
 
 #include "entities/player/player.h"
 #include "common/game_time.h"
+#include "dbc_stores//dbc_stores.h"
+
+#include "config_header/cfg_playercreateinfo.hpp"
+#include "config_header/cfg_item_template.hpp"
 
 
 namespace zq {
@@ -53,6 +59,16 @@ bool GameLogicModule::init()
 	addonsModule_ = libManager_->findModule<IAddonsModule>();
 	objectMgrModule_ = libManager_->findModule<IObjectMgrModule>();
 	playerMgrModule_ = libManager_->findModule<IPlayerMgrModule>();
+	configModule_ = libManager_->findModule<IConfigModule>();
+
+	configModule_->create<CSVItemTemplate>("cfg_item_template.csv");
+	configModule_->create<CSVPlayerCreateInfo>("cfg_playercreateinfo.csv");
+
+	const auto& all_row = configModule_->getCsvRowAll<CSVPlayerCreateInfo>();
+	for (auto& ele : *all_row)
+	{
+		playerCreateInfo_[ele.second.race_id][ele.second.class_id] = (CSVPlayerCreateInfo*)&ele.second;
+	}
 
 	return true;
 }
@@ -128,9 +144,9 @@ bool GameLogicModule::handleAuthSession(WorldSession* session, WorldPacket& recv
 	authSession->AddonInfo.append(recvPacket.contents() + recvPacket.rpos(), recvPacket.size() - recvPacket.rpos());
 
 	// 去数据库查找帐号信息
-	std::string field_key = _KEY_ACCOUNT_ + authSession->Account;
+	std::string hash_key = _KEY_ACCOUNT_ + authSession->Account;
 	DBAccount::DBUserAccount account;
-	if (!dataAgentModule_->getHashData(authSession->Account, field_key, account))
+	if (!dataAgentModule_->getHashData(hash_key, authSession->Account, account))
 	{
 		sendAuthResponseError(session, AUTH_UNKNOWN_ACCOUNT);
 		session->delayedClose();
@@ -154,13 +170,13 @@ bool GameLogicModule::handleAuthSession(WorldSession* session, WorldPacket& recv
 	sha.UpdateBigNumbers(&session_key, nullptr);
 	sha.Finalize();
 
-	/*if (memcmp(sha.GetDigest(), authSession->Digest, SHA_DIGEST_LENGTH) != 0)
+	if (memcmp(sha.GetDigest(), authSession->Digest, SHA_DIGEST_LENGTH) != 0)
 	{
 		sendAuthResponseError(session, AUTH_FAILED);
 		LOG_ERROR << fmt::format("Authentication failed for account: ('%s')", authSession->Account.c_str());
 		session->delayedClose();
 		return true;
-	}*/
+	}
 
 	int64 mutetime = 0;
 	//int64 mutetime = account.MuteTime;
@@ -351,10 +367,130 @@ bool GameLogicModule::handleRealmSplitOpcode(WorldSession* session, WorldPacket&
 
 bool GameLogicModule::handleCharEnumOpcode(WorldSession* session, WorldPacket& recvPacket)
 {
+	const std::string& account_name = session->getAccoutName();
+	auto redis_client = redisModule_->getClientBySuitConsistent();
+	if (redis_client == nullptr)
+	{
+		return false;
+	}
+
 	WorldPacket data(SMSG_CHAR_ENUM, 100);                  // we guess size
-	uint8 num = 0;
-	data << num;
-	data.put<uint8>(0, num);
+	std::vector<string_pair> values;
+	redis_client->HGETALL(_KEY_PLAYER_ + account_name, values);
+
+	data << (uint8)values.size();
+	for (const auto& ele : values)
+	{
+		DBObject::DBObjectInfo db_obj;
+		if (!db_obj.ParseFromString(ele.second))
+		{
+			continue;
+		}
+
+		Player player(session);
+		player.loadFromDb(db_obj);
+
+		data << ObjectGuid(player.getValueGuid(EPlayerFieldUint64::PLAYER_GUID));
+		data << player.getValueString(EPlayerFieldString::PLAYER_NAME);                         // name
+		data << uint8(player.getValueInt32(EPlayerFieldInt32::PLAYER_RACE));                                // race
+		data << uint8(player.getValueInt32(EPlayerFieldInt32::PLAYER_CLASS));                               // class
+		data << uint8(player.getValueInt32(EPlayerFieldInt32::PLAYER_GENDER));    // gender
+		data << uint8(player.getValueInt32(EPlayerFieldInt32::PLAYER_SKIN));
+		data << uint8(player.getValueInt32(EPlayerFieldInt32::PLAYER_FACE));
+		data << uint8(player.getValueInt32(EPlayerFieldInt32::PLAYER_HAIR_STYLE));
+		data << uint8(player.getValueInt32(EPlayerFieldInt32::PLAYER_HAIR_COLOR));
+		data << uint8(player.getValueInt32(EPlayerFieldInt32::PLAYER_FACIA_HAIR));
+		data << uint8(player.getValueInt32(EPlayerFieldInt32::PLAYER_LEVEL));                   // level
+		data << uint32(player.getValueInt32(EPlayerFieldInt32::PLAYER_ZONE_ID));                 // zone
+		data << uint32(player.getValueInt32(EPlayerFieldInt32::PLAYER_MAP_ID));                 // map
+		data << player.getValueFloat(EPlayerFieldFloat::PLAYER_POSITION_X);
+		data << player.getValueFloat(EPlayerFieldFloat::PLAYER_POSITION_Y);
+		data << player.getValueFloat(EPlayerFieldFloat::PLAYER_POSITION_Z);
+		data << uint32(player.getValueInt32(EPlayerFieldInt32::PLAYER_TRANSPOAT_ID));                // transport guild id
+
+		uint32 charFlags = 0;
+		uint16 atLoginFlags = 0;
+		//uint16 atLoginFlags = fields[18].GetUInt16();
+		/*uint32 playerFlags = fields[17].GetUInt32();
+		if (atLoginFlags & AT_LOGIN_RESURRECT)
+			playerFlags &= ~PLAYER_FLAGS_GHOST;
+		if (playerFlags & PLAYER_FLAGS_HIDE_HELM)
+			charFlags |= CHARACTER_FLAG_HIDE_HELM;
+		if (playerFlags & PLAYER_FLAGS_HIDE_CLOAK)
+			charFlags |= CHARACTER_FLAG_HIDE_CLOAK;
+		if (playerFlags & PLAYER_FLAGS_GHOST)
+			charFlags |= CHARACTER_FLAG_GHOST;
+		if (atLoginFlags & AT_LOGIN_RENAME)
+			charFlags |= CHARACTER_FLAG_RENAME;
+		if (fields[23].GetUInt32())
+			charFlags |= CHARACTER_FLAG_LOCKED_BY_BILLING;
+		if (sWorld->getBoolConfig(CONFIG_DECLINED_NAMES_USED))
+		{
+			if (!fields[24].GetString().empty())
+				charFlags |= CHARACTER_FLAG_DECLINED;
+		}
+		else*/
+		charFlags |= CHARACTER_FLAG_DECLINED;
+
+		data << uint32(charFlags);                             // character flags
+
+		// character customize flags
+		//if (atLoginFlags & AT_LOGIN_CUSTOMIZE)
+		//	data << uint32(CHAR_CUSTOMIZE_FLAG_CUSTOMIZE);
+		//else if (atLoginFlags & AT_LOGIN_CHANGE_FACTION)
+		//	data << uint32(CHAR_CUSTOMIZE_FLAG_FACTION);
+		//else if (atLoginFlags & AT_LOGIN_CHANGE_RACE)
+		//	data << uint32(CHAR_CUSTOMIZE_FLAG_RACE);
+		//else
+		data << uint32(CHAR_CUSTOMIZE_FLAG_NONE);
+
+		// First login
+		data << uint8(atLoginFlags & AT_LOGIN_FIRST ? 1 : 0);
+
+		// Pets info
+		uint32 petDisplayId = 0;
+		uint32 petLevel = 0;
+		CreatureFamily petFamily = CREATURE_FAMILY_NONE;
+		data << uint32(petDisplayId);
+		data << uint32(petLevel);
+		data << uint32(petFamily);
+
+		//Tokenizer equipment(fields[22].GetString(), ' ');
+		for (uint8 slot = 0; slot < INVENTORY_SLOT_BAG_END; ++slot)
+		{
+			//uint32 visualBase = slot * 2;
+			//uint32 itemId = GetUInt32ValueFromArray(equipment, visualBase);
+			//ItemTemplate const* proto = sObjectMgr->GetItemTemplate(itemId);
+			//if (!proto)
+			//{
+			data << uint32(0);
+			data << uint8(0);
+			data << uint32(0);
+			//continue;
+		//}
+
+		//SpellItemEnchantmentEntry const* enchant = nullptr;
+
+		//uint32 enchants = GetUInt32ValueFromArray(equipment, visualBase + 1);
+		//for (uint8 enchantSlot = PERM_ENCHANTMENT_SLOT; enchantSlot <= TEMP_ENCHANTMENT_SLOT; ++enchantSlot)
+		//{
+		//	// values stored in 2 uint16
+		//	uint32 enchantId = 0x0000FFFF & (enchants >> enchantSlot * 16);
+		//	if (!enchantId)
+		//		continue;
+
+		//	enchant = sSpellItemEnchantmentStore.LookupEntry(enchantId);
+		//	if (enchant)
+		//		break;
+		//}
+
+		//data << uint32(proto->DisplayInfoID);
+		//data << uint8(proto->InventoryType);
+		//data << uint32(enchant ? enchant->aura_id : 0);
+		//data << uint32(0);
+		}
+	}
+
 	session->sendPacket(data);
 
 	return true;
@@ -362,40 +498,95 @@ bool GameLogicModule::handleCharEnumOpcode(WorldSession* session, WorldPacket& r
 
 bool GameLogicModule::handleCharCreateOpcode(WorldSession* session, WorldPacket& recvPacket)
 {
-	std::shared_ptr<CharacterCreateInfo> createInfo = std::make_shared<CharacterCreateInfo>();
+	auto finiteAlways = [](float f) { return std::isfinite(f) ? f : 0.0f; };
 
-	recvPacket >> createInfo->Name
-		>> createInfo->Race
-		>> createInfo->Class
-		>> createInfo->Gender
-		>> createInfo->Skin
-		>> createInfo->Face
-		>> createInfo->HairStyle
-		>> createInfo->HairColor
-		>> createInfo->FacialHair
-		>> createInfo->OutfitId;
+	CharacterCreateInfo createInfo;
 
+	recvPacket >> createInfo.Name
+		>> createInfo.Race
+		>> createInfo.Class
+		>> createInfo.Gender
+		>> createInfo.Skin
+		>> createInfo.Face
+		>> createInfo.HairStyle
+		>> createInfo.HairColor
+		>> createInfo.FacialHair
+		>> createInfo.OutfitId;
+
+	CSVPlayerCreateInfo const* info = getPlayerCreateInfo(createInfo.Race, createInfo.Class);
+	if (!info)
+	{
+		LOG_ERROR << fmt::format("Player::Create: Possible hacking attempt: Account tried to create a character named {} with an invalid race/class pair ({}/{}) - refusing to do so.",
+			session->getAccoutName(), createInfo.Race, createInfo.Class);
+		return false;
+	}
 
 	uint8 resp_code = CHAR_CREATE_SUCCESS;
 	do 
 	{
 		ObjectGuid guid = objectMgrModule_->createGuid(HighGuid::Player, 0);
 		Player player(session);
-		player.setValueInt32(EPlayerFieldInt32::PLAYER_RACE, createInfo->Race);
-		player.setValueInt32(EPlayerFieldInt32::PLAYER_CLASS, createInfo->Class);
-		player.setValueInt32(EPlayerFieldInt32::PLAYER_GENDER, createInfo->Gender);
-		player.setValueInt32(EPlayerFieldInt32::PLAYER_SKIN, createInfo->Skin);
-		player.setValueInt32(EPlayerFieldInt32::PLAYER_FACE, createInfo->Face);
-		player.setValueInt32(EPlayerFieldInt32::PLAYER_HAIR_STYLE, createInfo->HairStyle);
-		player.setValueInt32(EPlayerFieldInt32::PLAYER_HAIR_COLOR, createInfo->HairColor);
-		player.setValueInt32(EPlayerFieldInt32::PLAYER_FACIA_HAIR, createInfo->FacialHair);
-		player.setValueInt32(EPlayerFieldInt32::PLAYER_OUT_FIT_ID, createInfo->OutfitId);
-		player.setValueString(EPlayerFieldString::PLAYER_NAME, createInfo->Name);
+		player.setValueInt32(EPlayerFieldInt32::PLAYER_RACE, createInfo.Race);
+		player.setValueInt32(EPlayerFieldInt32::PLAYER_CLASS, createInfo.Class);
+		player.setValueInt32(EPlayerFieldInt32::PLAYER_GENDER, createInfo.Gender);
+		player.setValueInt32(EPlayerFieldInt32::PLAYER_SKIN, createInfo.Skin);
+		player.setValueInt32(EPlayerFieldInt32::PLAYER_FACE, createInfo.Face);
+		player.setValueInt32(EPlayerFieldInt32::PLAYER_HAIR_STYLE, createInfo.HairStyle);
+		player.setValueInt32(EPlayerFieldInt32::PLAYER_HAIR_COLOR, createInfo.HairColor);
+		player.setValueInt32(EPlayerFieldInt32::PLAYER_FACIA_HAIR, createInfo.FacialHair);
+		player.setValueInt32(EPlayerFieldInt32::PLAYER_OUT_FIT_ID, createInfo.OutfitId);
+		player.setValueString(EPlayerFieldString::PLAYER_NAME, createInfo.Name);
 		player.setValueGuid(EPlayerFieldUint64::PLAYER_GUID, guid);
 
+		player.setValueInt32(EPlayerFieldInt32::PLAYER_LEVEL, info->level);
+		player.setValueInt32(EPlayerFieldInt32::PLAYER_ZONE_ID, info->zone_id);
+		player.setValueInt32(EPlayerFieldInt32::PLAYER_MAP_ID, info->map_id);
+		player.setValueInt32(EPlayerFieldInt32::PLAYER_TRANSPOAT_ID, 0);
+
+		player.setValueFloat(EPlayerFieldFloat::PLAYER_POSITION_X, info->position_x);
+		player.setValueFloat(EPlayerFieldFloat::PLAYER_POSITION_Y, info->position_y);
+		player.setValueFloat(EPlayerFieldFloat::PLAYER_POSITION_Z, info->position_z);
+
+		if (CharStartOutfitEntry const* oEntry = GetCharStartOutfitEntry(createInfo.Race, createInfo.Class, createInfo.Gender))
+		{
+			for (int j = 0; j < MAX_OUTFIT_ITEMS; ++j)
+			{
+				//uint32 itemId = oEntry->ItemId[j];
+
+				//if (itemId <= 0)
+				//	continue;
+
+				//ItemTemplate const* iProto = objectMgrModule_->(itemId);
+				//if (!iProto)
+				//	continue;
+
+				//// BuyCount by default
+				//uint32 count = iProto->BuyCount;
+
+				//// special amount for food/drink
+				//if (iProto->Class == ITEM_CLASS_CONSUMABLE && iProto->SubClass == ITEM_SUBCLASS_FOOD)
+				//{
+				//	switch (iProto->Spells[0].SpellCategory)
+				//	{
+				//	case SPELL_CATEGORY_FOOD:                                // food
+				//		count = getClass() == CLASS_DEATH_KNIGHT ? 10 : 4;
+				//		break;
+				//	case SPELL_CATEGORY_DRINK:                                // drink
+				//		count = 2;
+				//		break;
+				//	}
+				//	if (iProto->GetMaxStackSize() < count)
+				//		count = iProto->GetMaxStackSize();
+				//}
+				//StoreNewItemInBestSlots(itemId, count);
+			}
+		}
+
+		uint64 player_gid = kernelModule_->gen_uuid();
 		DBObject::DBObjectInfo db_obj;
 		player.saveDb(db_obj);
-		dataAgentModule_->setHashData(session->getAccoutName(), std::to_string(1), db_obj);
+		dataAgentModule_->setHashData(_KEY_PLAYER_ + session->getAccoutName(), std::to_string(player_gid), db_obj);
+
 	} while (0);
 
 	WorldPacket data(SMSG_CHAR_CREATE, 1);
@@ -422,6 +613,17 @@ void GameLogicModule::onWorldSessionInit(WorldSession* session)
 {
 
 }
+
+CSVPlayerCreateInfo* GameLogicModule::getPlayerCreateInfo(int race_id, int class_id)
+{
+	if (race_id >= MAX_RACES || race_id <= 0)
+		return nullptr;
+	if (class_id >= MAX_CLASSES || class_id <= 0)
+		return nullptr;
+
+	return playerCreateInfo_[race_id][class_id];
+}
+
 
 
 }

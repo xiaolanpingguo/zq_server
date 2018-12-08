@@ -1,5 +1,5 @@
 #include "object_mgr_module.h"																		
-
+#include "baselib/base_code/containers.hpp"
 
 namespace zq {
 
@@ -60,6 +60,11 @@ ObjectGuidGeneratorBase& ObjectMgrModule::getGuidSequenceGenerator(HighGuid type
 		itr = _guidGenerators.insert(std::make_pair(type, std::unique_ptr<ObjectGuidGenerator>(new ObjectGuidGenerator()))).first;
 
 	return *itr->second;
+}
+
+const ItemTemplate* ObjectMgrModule::getItemTemplate(uint32 entry) const
+{
+	return Containers::MapGetValuePtr(itemTemplateStore_, entry);
 }
 
 }

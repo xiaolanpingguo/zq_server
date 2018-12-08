@@ -79,8 +79,8 @@ bool LoginCSModule::createAccount(const std::string& account_name, const std::st
 	util::utf8ToUpperOnlyLatin(account);
 	util::utf8ToUpperOnlyLatin(password);
 
-	std::string field_key = _KEY_ACCOUNT_ + account;
-	if (dataAgentModule_->hexists(account, field_key))
+	std::string hash_key = _KEY_ACCOUNT_ + account;
+	if (dataAgentModule_->hexists(hash_key, account))
 	{
 		return false;
 	}
@@ -90,7 +90,7 @@ bool LoginCSModule::createAccount(const std::string& account_name, const std::st
 	account_info.set_account_name(account);
 	account_info.set_password(password);
 	account_info.set_password_hash(calculateShaPassHash(account, password));
-	dataAgentModule_->setHashData(account, field_key, account_info);
+	dataAgentModule_->setHashData(hash_key, account, account_info);
 
 	return true;
 }

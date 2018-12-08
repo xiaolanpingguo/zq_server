@@ -5,9 +5,10 @@
 namespace zq {
 
 
-static constexpr const char* _KEY_USER_ = "_user@";  // 玩家的hash key
+
 
 static constexpr const char* _KEY_ACCOUNT_ = "account@";  // 帐号信息key
+static constexpr const char* _KEY_PLAYER_ = "player@";  // 玩家角色列表key
 
 
 class IDataAgentModule : public IModule
@@ -15,11 +16,10 @@ class IDataAgentModule : public IModule
 public:
 
 	template <typename T>
-	bool getHashData(const std::string& user_id, const std::string& field_key, T& obj)
+	bool getHashData(const std::string& hash_key, const std::string& field_key, T& obj)
 	{
-		std::string key = _KEY_USER_ + user_id;
 		std::string data;
-		if (getRedisHashData(key, field_key, data))
+		if (getRedisHashData(hash_key, field_key, data))
 		{
 			return obj.ParseFromString(data);
 		}
@@ -28,20 +28,19 @@ public:
 	}
 
 	template <typename T>
-	bool setHashData(const std::string& user_id, const std::string& field_key, T& obj)
+	bool setHashData(const std::string& hash_key, const std::string& field_key, T& obj)
 	{
-		std::string key = _KEY_USER_ + user_id;
 		std::string data;
 		obj.SerializeToString(&data);
-		return setRedisHashData(key, field_key, data);
+		return setRedisHashData(hash_key, field_key, data);
 	}
 
-	virtual bool hexists(const std::string& user_id, const std::string& field_key) = 0;
+	virtual bool hexists(const std::string& hash_key, const std::string& field_key) = 0;
 
 protected:
 
-	virtual bool setRedisHashData(const std::string& key, const std::string& field_key, const std::string& data) = 0;
-	virtual bool getRedisHashData(const std::string& key, const std::string& field_key, std::string& data) = 0;
+	virtual bool setRedisHashData(const std::string& hash_key, const std::string& field_key, const std::string& data) = 0;
+	virtual bool getRedisHashData(const std::string& hash_key, const std::string& field_key, std::string& data) = 0;
 };
 
 }
