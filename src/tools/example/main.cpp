@@ -5,7 +5,6 @@
 #include <map>
 #include "test_format.hpp"
 #include "interface_header/base/platform.h"
-#include "baselib/message/game_db_logic.pb.h"
 #include "baselib/base_code/reflection/json.hpp"
 #pragma comment(lib, "libprotobuf_d.lib")	
 
