@@ -27,7 +27,6 @@
 
 #include "baselib/kernel/kernel.h"
 #include "baselib/network/network.h"
-#include "baselib/log_lib/log_lib.h"
 #include "baselib/message/message_lib.h"
 #include "baselib/db_redis/redis_lib.h"
 #include "baselib/http_lib/http_lib.h"
@@ -40,7 +39,6 @@
 #pragma comment(lib, "kernel_d.lib")
 #pragma comment(lib, "core_d.lib")
 #pragma comment(lib, "network_d.lib")
-#pragma comment(lib, "log_lib_d.lib")
 #pragma comment(lib, "message_d.lib")
 #pragma comment(lib, "db_redis_d.lib")
 #pragma comment(lib, "db_mysql_d.lib")
@@ -930,7 +928,6 @@ bool LibManager::reload(const std::string& cfg_name)
 void LibManager::registerCommLib()
 {
 	CREATE_LIB(this, KernelLib);
-	CREATE_LIB(this, LogLib);
 	CREATE_LIB(this, NetworkLib);
 	CREATE_LIB(this, MessageLib);
 	CREATE_LIB(this, RedisLib);
